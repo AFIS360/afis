@@ -961,6 +961,64 @@ namespace AFIS360
         }
 
 
+        public List<AuditLog> getAuditLogs()
+        {
+            string connStr = getConnectionStringByName("MySQL_AFIS_conn");
+            MySqlConnection conn = new MySqlConnection(connStr);
+            MySqlCommand cmd;
+            List<AuditLog> auditLogs;
+            DataTable ds;
+            conn.Open();
+
+            try
+            {
+                cmd = conn.CreateCommand();
+                cmd.CommandText = "SELECT * FROM afis.audit_log WHERE DATE(login_date_time) = CURDATE()";
+
+                MySqlDataAdapter da = new MySqlDataAdapter(cmd);
+                ds = new DataTable();
+                da.Fill(ds);
+                IEnumerator rows = ds.Rows.GetEnumerator();
+                Int32 i = 0;
+                auditLogs = new List<AuditLog>();
+
+                while (rows.MoveNext())
+                {
+
+                    string userId = (string)ds.Rows[i]["user_id"];
+                    string username = (string)ds.Rows[i]["user_name"];
+                    DateTime loginDateTime = (DateTime)ds.Rows[i]["login_date_time"];
+/*
+                    if(ds.Rows[i]["logout_date_time"] != null)
+                    {
+                        logoutDateTime = (DateTime)ds.Rows[i]["logout_date_time"];
+                    }
+*/
+                    AuditLog auditLog = new AuditLog();
+                    auditLog.setUserId(userId);
+                    auditLog.setUsername(username);
+                    auditLog.setLoginDateTime(loginDateTime);
+//                    auditLog.setLogoutDateTime(logoutDateTime);
+                    auditLogs.Add(auditLog);
+
+                    i = i + 1;
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+            finally
+            {
+                if (conn.State == System.Data.ConnectionState.Open)
+                {
+                    conn.Close();
+                }
+            }
+            return auditLogs;
+        }
+
+
         private string Encrypt(string clearText)
         {
             string EncryptionKey = "MAKV2SPBNI99212";

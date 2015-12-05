@@ -9,6 +9,8 @@ using System.Windows.Forms;
 using SourceAFIS.Simple;
 using System.Windows.Media.Imaging;
 using System.IO;
+using iTextSharp.text;
+using iTextSharp.text.pdf;
 
 namespace AFIS360
 {
@@ -48,7 +50,7 @@ namespace AFIS360
             if (picMatch.Image == null)
             {
                 string imagePath = Path.Combine(Path.Combine("..", ".."), "images\\utilImage\\selectFpLarge.bmp");
-                picMatch.Image = Image.FromFile(imagePath);
+                picMatch.Image = System.Drawing.Image.FromFile(imagePath);
             }
         }
 
@@ -71,7 +73,7 @@ namespace AFIS360
             string workPhoneNbr = txtEnrollWorkPNbr.Text;
             string homePhoneNbr = txtEnrollHomePNbr.Text;
             string email = txtEnrollEmail.Text;
-            Image passportPhoto = picEnrollPassportPhoto.Image;
+            System.Drawing.Image passportPhoto = picEnrollPassportPhoto.Image;
             string status = null;
 
             try
@@ -249,7 +251,7 @@ namespace AFIS360
             if (ofd.ShowDialog() == DialogResult.OK)
             {
                 picRTImagePath = ofd.FileName;
-                picEnrollRT.Image = Image.FromFile(ofd.FileName);
+                picEnrollRT.Image = System.Drawing.Image.FromFile(ofd.FileName);
                 picEnrollRT.SizeMode = PictureBoxSizeMode.StretchImage;
             }
         }
@@ -261,7 +263,7 @@ namespace AFIS360
             if (ofd.ShowDialog() == DialogResult.OK)
             {
                 picRIImagePath = ofd.FileName;
-                picEnrollRI.Image = Image.FromFile(ofd.FileName);
+                picEnrollRI.Image = System.Drawing.Image.FromFile(ofd.FileName);
                 picEnrollRI.SizeMode = PictureBoxSizeMode.StretchImage;
             }
         }
@@ -273,7 +275,7 @@ namespace AFIS360
             if (ofd.ShowDialog() == DialogResult.OK)
             {
                 picRMImagePath = ofd.FileName;
-                picEnrollRM.Image = Image.FromFile(ofd.FileName);
+                picEnrollRM.Image = System.Drawing.Image.FromFile(ofd.FileName);
                 picEnrollRM.SizeMode = PictureBoxSizeMode.StretchImage;
             }
         }
@@ -285,7 +287,7 @@ namespace AFIS360
             if (ofd.ShowDialog() == DialogResult.OK)
             {
                 picRRImagePath = ofd.FileName;
-                picEnrollRR.Image = Image.FromFile(ofd.FileName);
+                picEnrollRR.Image = System.Drawing.Image.FromFile(ofd.FileName);
                 picEnrollRR.SizeMode = PictureBoxSizeMode.StretchImage;
             }
         }
@@ -297,7 +299,7 @@ namespace AFIS360
             if (ofd.ShowDialog() == DialogResult.OK)
             {
                 picRLImagePath = ofd.FileName;
-                picEnrollRL.Image = Image.FromFile(ofd.FileName);
+                picEnrollRL.Image = System.Drawing.Image.FromFile(ofd.FileName);
                 picEnrollRL.SizeMode = PictureBoxSizeMode.StretchImage;
             }
         }
@@ -309,7 +311,7 @@ namespace AFIS360
             if (ofd.ShowDialog() == DialogResult.OK)
             {
                 picLTImagePath = ofd.FileName;
-                picEnrollLT.Image = Image.FromFile(ofd.FileName);
+                picEnrollLT.Image = System.Drawing.Image.FromFile(ofd.FileName);
                 picEnrollLT.SizeMode = PictureBoxSizeMode.StretchImage;
             }
 
@@ -322,7 +324,7 @@ namespace AFIS360
             if (ofd.ShowDialog() == DialogResult.OK)
             {
                 picLIImagePath = ofd.FileName;
-                picEnrollLI.Image = Image.FromFile(ofd.FileName);
+                picEnrollLI.Image = System.Drawing.Image.FromFile(ofd.FileName);
                 picEnrollLI.SizeMode = PictureBoxSizeMode.StretchImage;
             }
         }
@@ -334,7 +336,7 @@ namespace AFIS360
             if (ofd.ShowDialog() == DialogResult.OK)
             {
                 picLMImagePath = ofd.FileName;
-                picEnrollLM.Image = Image.FromFile(ofd.FileName);
+                picEnrollLM.Image = System.Drawing.Image.FromFile(ofd.FileName);
                 picEnrollLM.SizeMode = PictureBoxSizeMode.StretchImage;
             }
         }
@@ -346,7 +348,7 @@ namespace AFIS360
             if (ofd.ShowDialog() == DialogResult.OK)
             {
                 picLRImagePath = ofd.FileName;
-                picEnrollLR.Image = Image.FromFile(ofd.FileName);
+                picEnrollLR.Image = System.Drawing.Image.FromFile(ofd.FileName);
                 picEnrollLR.SizeMode = PictureBoxSizeMode.StretchImage;
             }
         }
@@ -358,7 +360,7 @@ namespace AFIS360
             if (ofd.ShowDialog() == DialogResult.OK)
             {
                 picLLImagePath = ofd.FileName;
-                picEnrollLL.Image = Image.FromFile(ofd.FileName);
+                picEnrollLL.Image = System.Drawing.Image.FromFile(ofd.FileName);
                 picEnrollLL.SizeMode = PictureBoxSizeMode.StretchImage;
 
             }
@@ -387,7 +389,7 @@ namespace AFIS360
             if (ofd.ShowDialog() == DialogResult.OK)
             {
                 picMatchImagePath = ofd.FileName;
-                picMatch.Image = Image.FromFile(ofd.FileName);
+                picMatch.Image = System.Drawing.Image.FromFile(ofd.FileName);
                 picMatch.SizeMode = PictureBoxSizeMode.StretchImage;
             }
 
@@ -535,7 +537,7 @@ namespace AFIS360
             {
                 picMatch.Image.Dispose();
                 string imagePath = Path.Combine(Path.Combine("..", ".."), "images\\utilImage\\selectFpLarge.bmp");
-                picMatch.Image = Image.FromFile(imagePath);
+                picMatch.Image = System.Drawing.Image.FromFile(imagePath);
             }
             if (picMatchRT.Image != null)
             {
@@ -851,7 +853,7 @@ namespace AFIS360
             ofd.Filter = "Image Files|*.jpg;*.jpeg;*.png;*.gif;*.bmp;*.tif;...";
             if (ofd.ShowDialog() == DialogResult.OK)
             {
-                picEnrollPassportPhoto.Image = Image.FromFile(ofd.FileName);
+                picEnrollPassportPhoto.Image = System.Drawing.Image.FromFile(ofd.FileName);
                 picEnrollPassportPhoto.SizeMode = PictureBoxSizeMode.StretchImage;
             }
 
@@ -1074,6 +1076,76 @@ namespace AFIS360
         private void AFISMain_Load(object sender, EventArgs e)
         {
             Console.WriteLine("####-->> Closing the Window");
+        }
+
+        private void btnUserAccessReportDaily_Click(object sender, EventArgs e)
+        {
+            Document doc = new Document(iTextSharp.text.PageSize.LETTER, 10, 10, 42, 35);
+            PdfWriter pdfWriter = PdfWriter.GetInstance(doc, new FileStream("..\\..\\reports\\UserAccessReport.pdf", FileMode.Create));
+            doc.Open();
+
+            //add title
+            doc.AddTitle("User Access Report");
+            doc.AddHeader("Daily Report", "User Access Report");
+
+            Paragraph paragraphCompanyInfo = new Paragraph("RAB (Rapid Action Battalion)\n");
+            paragraphCompanyInfo.Add("Station: " + user.getStationId() + ", " + user.getStationedCity() + "\n");
+            paragraphCompanyInfo.Add(user.getStationedCountry() + "\n");
+            paragraphCompanyInfo.Alignment = Element.ALIGN_LEFT;
+
+            iTextSharp.text.Font contentFont = iTextSharp.text.FontFactory.GetFont("Webdings", 20, iTextSharp.text.Font.BOLD);
+            Paragraph paragraphReportTitle = new Paragraph("Login Access Report\n", contentFont);
+            paragraphReportTitle.Alignment = Element.ALIGN_CENTER;
+
+            Paragraph paragraphReportSubTitle = new Paragraph();
+            paragraphReportSubTitle.Add("By: " + user.getFirstName() + " " + user.getLastName() + ", ID: " + user.getPersonId() + "\n");
+            paragraphReportSubTitle.Add("At: " + DateTime.Now.ToString() + "\n\n");
+            paragraphReportSubTitle.Alignment = Element.ALIGN_CENTER;
+
+            doc.Add(paragraphCompanyInfo);
+            doc.Add(paragraphReportTitle);
+            doc.Add(paragraphReportSubTitle);
+
+            PdfPTable accessReportTable = new PdfPTable(3);
+            PdfPCell headerCellID = new PdfPCell(new Phrase("ID"));
+            PdfPCell headerCellName = new PdfPCell(new Phrase("Name"));
+            PdfPCell headerCellLoginDateTime = new PdfPCell(new Phrase("Login Date time"));
+//            PdfPCell headerCellLogoutDateTime = new PdfPCell(new Phrase("Logout Date time"));
+
+            //Add Headers to the table
+            accessReportTable.AddCell(headerCellID);
+            accessReportTable.AddCell(headerCellName);
+            accessReportTable.AddCell(headerCellLoginDateTime);
+//            accessReportTable.AddCell(headerCellLogoutDateTime);
+
+            List<AuditLog> auditLogs = new DataAccess().getAuditLogs();
+            Int32 auditLogsCount = auditLogs.Count;
+            Console.WriteLine("# of AuditLog = " + auditLogsCount);
+
+            for (int i = 0; i < auditLogsCount; i++)
+            {
+                /*
+                                PdfPCell cell = new PdfPCell(new Phrase(String.Format("Cell # {0}", i)));
+                                cell.FixedHeight = 30.0f;
+                                cell.HorizontalAlignment = Element.ALIGN_LEFT;
+                                cell.VerticalAlignment = Element.ALIGN_MIDDLE;
+                */
+                AuditLog auditLog = (AuditLog)auditLogs.ElementAt(i);
+                PdfPCell userIdCell = new PdfPCell(new Phrase(auditLog.getUserId()));
+                PdfPCell usernameIdCell = new PdfPCell(new Phrase(auditLog.getUsername()));
+                PdfPCell loginDateTimeCell = new PdfPCell(new Phrase(auditLog.getLoginDateTime().ToString()));
+
+                accessReportTable.AddCell(userIdCell);
+                accessReportTable.AddCell(usernameIdCell);
+                accessReportTable.AddCell(loginDateTimeCell);
+            }
+
+            doc.Add(accessReportTable);
+
+
+            doc.Close();
+            Console.WriteLine("PDF Generated successfully...");
+
         }
     }
 }

@@ -189,8 +189,7 @@
             this.lblUserMgmtPassword = new System.Windows.Forms.Label();
             this.lblUserMgmtCR = new System.Windows.Forms.Label();
             this.tabAuditReport = new System.Windows.Forms.TabPage();
-            this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
-            this.btnAuditReportDaily = new System.Windows.Forms.Button();
+            this.btnUserAccessReportDaily = new System.Windows.Forms.Button();
             this.menuStrip = new System.Windows.Forms.MenuStrip();
             this.toolStripMenuItemMain = new System.Windows.Forms.ToolStripMenuItem();
             this.changePasswordToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -1913,8 +1912,7 @@
             // 
             // tabAuditReport
             // 
-            this.tabAuditReport.Controls.Add(this.tableLayoutPanel1);
-            this.tabAuditReport.Controls.Add(this.btnAuditReportDaily);
+            this.tabAuditReport.Controls.Add(this.btnUserAccessReportDaily);
             this.tabAuditReport.Location = new System.Drawing.Point(4, 22);
             this.tabAuditReport.Name = "tabAuditReport";
             this.tabAuditReport.Size = new System.Drawing.Size(1136, 737);
@@ -1922,28 +1920,16 @@
             this.tabAuditReport.Text = "Audit/Report";
             this.tabAuditReport.UseVisualStyleBackColor = true;
             // 
-            // tableLayoutPanel1
+            // btnUserAccessReportDaily
             // 
-            this.tableLayoutPanel1.ColumnCount = 2;
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel1.Location = new System.Drawing.Point(245, 45);
-            this.tableLayoutPanel1.Name = "tableLayoutPanel1";
-            this.tableLayoutPanel1.RowCount = 2;
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(531, 337);
-            this.tableLayoutPanel1.TabIndex = 2;
-            // 
-            // btnAuditReportDaily
-            // 
-            this.btnAuditReportDaily.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnAuditReportDaily.Location = new System.Drawing.Point(27, 45);
-            this.btnAuditReportDaily.Name = "btnAuditReportDaily";
-            this.btnAuditReportDaily.Size = new System.Drawing.Size(143, 33);
-            this.btnAuditReportDaily.TabIndex = 1;
-            this.btnAuditReportDaily.Text = "Daily Report";
-            this.btnAuditReportDaily.UseVisualStyleBackColor = true;
+            this.btnUserAccessReportDaily.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnUserAccessReportDaily.Location = new System.Drawing.Point(27, 45);
+            this.btnUserAccessReportDaily.Name = "btnUserAccessReportDaily";
+            this.btnUserAccessReportDaily.Size = new System.Drawing.Size(213, 33);
+            this.btnUserAccessReportDaily.TabIndex = 1;
+            this.btnUserAccessReportDaily.Text = "Daily Access Report";
+            this.btnUserAccessReportDaily.UseVisualStyleBackColor = true;
+            this.btnUserAccessReportDaily.Click += new System.EventHandler(this.btnUserAccessReportDaily_Click);
             // 
             // menuStrip
             // 
@@ -2225,7 +2211,6 @@
         private System.Windows.Forms.Button btnUserMgmtUpdate;
         private System.Windows.Forms.ToolStripMenuItem changePasswordToolStripMenuItem;
         private System.Windows.Forms.Button btnUserMgmtResetPass;
-        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
-        private System.Windows.Forms.Button btnAuditReportDaily;
+        private System.Windows.Forms.Button btnUserAccessReportDaily;
     }
 }
