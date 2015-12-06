@@ -122,13 +122,13 @@ namespace AFIS360
                     Program.enrollPerson(person);
                     status = "Enrollment of " + fname + " (Id = " + id + ") completed successfully.";
                     lblEnrollStatusMsg.ForeColor = System.Drawing.Color.Green;
-                    activityLog.setActivityLog(status);
+                    activityLog.setActivity(status);
                 }
             }
             catch (Exception exp)
             {
                 status = "Enrollment of " + fname + " (Id = " + id + ") is unsuccessful. Reason is - " + exp.Message + ".";
-                activityLog.setActivityLog(status);
+                activityLog.setActivity(status);
                 lblEnrollStatusMsg.ForeColor = System.Drawing.Color.Red;
                 throw exp;
             }
@@ -232,7 +232,7 @@ namespace AFIS360
                 message = "Match found. Matching score " + match.getScore();
                 lblMatchStatusText.ForeColor = System.Drawing.Color.Green;
                 //adding the activity log
-                activityLog.setActivityLog("Match Activity: " + message);
+                activityLog.setActivity("Match Activity: " + message);
             }
             else
             {
@@ -666,7 +666,7 @@ namespace AFIS360
 
                 //Create the activity log
                 activityLog = new ActivityLog();
-
+                activityLog.setActivity("Successful login.");
             }
             else
             {
@@ -739,6 +739,13 @@ namespace AFIS360
 
         private void logOutToolStripMenuItem_Click(object sender, EventArgs e)
         {
+/*
+            if(sender is ToolStripMenuItem)
+            {
+                string menuItemName = ((ToolStripMenuItem)sender).Name;
+                Console.WriteLine("####--->> event from = " + menuItemName);
+            }
+*/
             tabControlAFIS.TabPages.Add(tabLogin);
             tabControlAFIS.TabPages.Remove(tabEnroll);
             tabControlAFIS.TabPages.Remove(tabMatch);
@@ -751,6 +758,8 @@ namespace AFIS360
             menuStrip.Visible = true;
             cachedUser = user;
 
+            //Audit message for properly Logging out
+            activityLog.setActivity("Gracefully logged out."); 
             //Audit log the logout time
             DataAccess dataAccess = new DataAccess();
             Status status = dataAccess.updateUserAuditLog(user, DateTime.Now, 0, activityLog);
@@ -1079,7 +1088,7 @@ namespace AFIS360
         }
 
         private void btnUserAccessReportDaily_Click(object sender, EventArgs e)
-        {
+        {   
             Document doc = new Document(iTextSharp.text.PageSize.LETTER, 10, 10, 42, 35);
             PdfWriter pdfWriter = PdfWriter.GetInstance(doc, new FileStream("..\\..\\reports\\UserAccessReport.pdf", FileMode.Create));
             doc.Open();
@@ -1106,17 +1115,20 @@ namespace AFIS360
             doc.Add(paragraphReportTitle);
             doc.Add(paragraphReportSubTitle);
 
-            PdfPTable accessReportTable = new PdfPTable(3);
+            PdfPTable accessReportTable = new PdfPTable(5);
             PdfPCell headerCellID = new PdfPCell(new Phrase("ID"));
             PdfPCell headerCellName = new PdfPCell(new Phrase("Name"));
             PdfPCell headerCellLoginDateTime = new PdfPCell(new Phrase("Login Date time"));
-//            PdfPCell headerCellLogoutDateTime = new PdfPCell(new Phrase("Logout Date time"));
+            PdfPCell headerCellLogoutDateTime = new PdfPCell(new Phrase("Logout Date time"));
+            PdfPCell headerCellActivityLog = new PdfPCell(new Phrase("Login Activity"));
+
 
             //Add Headers to the table
             accessReportTable.AddCell(headerCellID);
             accessReportTable.AddCell(headerCellName);
             accessReportTable.AddCell(headerCellLoginDateTime);
-//            accessReportTable.AddCell(headerCellLogoutDateTime);
+            accessReportTable.AddCell(headerCellLogoutDateTime);
+            accessReportTable.AddCell(headerCellActivityLog);
 
             List<AuditLog> auditLogs = new DataAccess().getAuditLogs();
             Int32 auditLogsCount = auditLogs.Count;
@@ -1124,20 +1136,48 @@ namespace AFIS360
 
             for (int i = 0; i < auditLogsCount; i++)
             {
-                /*
-                                PdfPCell cell = new PdfPCell(new Phrase(String.Format("Cell # {0}", i)));
-                                cell.FixedHeight = 30.0f;
-                                cell.HorizontalAlignment = Element.ALIGN_LEFT;
-                                cell.VerticalAlignment = Element.ALIGN_MIDDLE;
-                */
                 AuditLog auditLog = (AuditLog)auditLogs.ElementAt(i);
                 PdfPCell userIdCell = new PdfPCell(new Phrase(auditLog.getUserId()));
                 PdfPCell usernameIdCell = new PdfPCell(new Phrase(auditLog.getUsername()));
                 PdfPCell loginDateTimeCell = new PdfPCell(new Phrase(auditLog.getLoginDateTime().ToString()));
 
+                //Add logout DateTime to the cell
+                DateTime? logoutDateTime = auditLog.getLogoutDateTime();
+                string logoutDateTimeStr;
+                if (logoutDateTime == null)
+                {
+                    logoutDateTimeStr = "N/A";
+                } else
+                {
+                    logoutDateTimeStr = logoutDateTime.ToString();
+                }
+                PdfPCell logoutDateTimeCell = new PdfPCell(new Phrase(logoutDateTimeStr));
+
+                //Add ActivityLog to the cell
+                ActivityLog activityLog = auditLog.getActivityLog();
+                Console.WriteLine("####-->>Activity Log = " + activityLog);
+                StringBuilder strBuilder = new StringBuilder();
+
+                if (activityLog != null)
+                {
+                    List<string> actvities = activityLog.getActivity();
+                    List<string>.Enumerator activitiesEnum = actvities.GetEnumerator();
+                    
+                    while (activitiesEnum.MoveNext())
+                    {
+                        string activity = activitiesEnum.Current;
+                        Console.WriteLine("####-->> Activity = " + activity);
+                        strBuilder.AppendLine(activity);
+                    }
+                }
+                PdfPCell activityLogCell = new PdfPCell(new Phrase(strBuilder.ToString()));
+
+                //Adding cells to the table
                 accessReportTable.AddCell(userIdCell);
                 accessReportTable.AddCell(usernameIdCell);
                 accessReportTable.AddCell(loginDateTimeCell);
+                accessReportTable.AddCell(logoutDateTimeCell);
+                accessReportTable.AddCell(activityLogCell);
             }
 
             doc.Add(accessReportTable);
@@ -1146,6 +1186,125 @@ namespace AFIS360
             doc.Close();
             Console.WriteLine("PDF Generated successfully...");
 
+        }
+
+        private void AFISMain_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            activityLog.setActivity("Gacefully closed the AFIS.");
+            //Audit log the logout time
+            DataAccess dataAccess = new DataAccess();
+            Status status = dataAccess.updateUserAuditLog(user, DateTime.Now, 0, activityLog);
+            Console.WriteLine("####-->> Status code = " + status.getStatusCode());
+        }
+
+        private void btnAuditReportCustReport_Click(object sender, EventArgs e)
+        {
+
+            string userId = txtAuditReportUserId.Text;
+            DateTime startDate = dtpAuditReportStartDate.Value;
+            DateTime endDate = dtpAuditReportEndDate.Value;
+
+            List<AuditLog> auditLogs = new DataAccess().getAuditLogs(userId, startDate, endDate);
+            Console.WriteLine("# of AuditLog = " + auditLogs.Count());
+
+            Document doc = new Document(iTextSharp.text.PageSize.LETTER, 10, 10, 42, 35);
+            string datetimePref = DateTime.Now.ToString("yyyy-MM-dd-HH-mm-ss");
+            PdfWriter pdfWriter = PdfWriter.GetInstance(doc, new FileStream("..\\..\\reports\\UserAccessReport-" + datetimePref + ".pdf", FileMode.Create));
+            doc.Open();
+
+            //add title
+            doc.AddTitle("User Access Report");
+            doc.AddHeader("Daily Report", "User Access Report");
+
+            Paragraph paragraphCompanyInfo = new Paragraph("RAB (Rapid Action Battalion)\n");
+            paragraphCompanyInfo.Add("Station: " + user.getStationId() + ", " + user.getStationedCity() + "\n");
+            paragraphCompanyInfo.Add(user.getStationedCountry() + "\n");
+            paragraphCompanyInfo.Alignment = Element.ALIGN_LEFT;
+
+            iTextSharp.text.Font contentFont = iTextSharp.text.FontFactory.GetFont("Webdings", 20, iTextSharp.text.Font.BOLD);
+            Paragraph paragraphReportTitle = new Paragraph("Login Access Report\n", contentFont);
+            paragraphReportTitle.Alignment = Element.ALIGN_CENTER;
+
+            Paragraph paragraphReportSubTitle = new Paragraph();
+            paragraphReportSubTitle.Add("By: " + user.getFirstName() + " " + user.getLastName() + ", ID: " + user.getPersonId() + "\n");
+            paragraphReportSubTitle.Add("At: " + DateTime.Now.ToString() + "\n\n");
+            paragraphReportSubTitle.Alignment = Element.ALIGN_CENTER;
+
+            doc.Add(paragraphCompanyInfo);
+            doc.Add(paragraphReportTitle);
+            doc.Add(paragraphReportSubTitle);
+
+            PdfPTable accessReportTable = new PdfPTable(6);
+            PdfPCell headerCellRecNo = new PdfPCell(new Phrase("RecNo"));
+            PdfPCell headerCellID = new PdfPCell(new Phrase("ID"));
+            PdfPCell headerCellName = new PdfPCell(new Phrase("Name"));
+            PdfPCell headerCellLoginDateTime = new PdfPCell(new Phrase("Login Date time"));
+            PdfPCell headerCellLogoutDateTime = new PdfPCell(new Phrase("Logout Date time"));
+            PdfPCell headerCellActivityLog = new PdfPCell(new Phrase("Login Activity"));
+
+
+            //Add Headers to the table
+            accessReportTable.AddCell(headerCellRecNo);
+            accessReportTable.AddCell(headerCellID);
+            accessReportTable.AddCell(headerCellName);
+            accessReportTable.AddCell(headerCellLoginDateTime);
+            accessReportTable.AddCell(headerCellLogoutDateTime);
+            accessReportTable.AddCell(headerCellActivityLog);
+
+
+            for (int i = 0; i < auditLogs.Count(); i++)
+            {
+                AuditLog auditLog = (AuditLog)auditLogs.ElementAt(i);
+                PdfPCell userIdRecNo = new PdfPCell(new Phrase(Convert.ToString(i+1)));
+                PdfPCell userIdCell = new PdfPCell(new Phrase(auditLog.getUserId()));
+                PdfPCell usernameIdCell = new PdfPCell(new Phrase(auditLog.getUsername()));
+                PdfPCell loginDateTimeCell = new PdfPCell(new Phrase(auditLog.getLoginDateTime().ToString()));
+
+                //Add logout DateTime to the cell
+                DateTime? logoutDateTime = auditLog.getLogoutDateTime();
+                string logoutDateTimeStr;
+                if (logoutDateTime == null)
+                {
+                    logoutDateTimeStr = "N/A";
+                }
+                else
+                {
+                    logoutDateTimeStr = logoutDateTime.ToString();
+                }
+                PdfPCell logoutDateTimeCell = new PdfPCell(new Phrase(logoutDateTimeStr));
+
+                //Add ActivityLog to the cell
+                ActivityLog activityLog = auditLog.getActivityLog();
+                Console.WriteLine("####-->>Activity Log = " + activityLog);
+                StringBuilder strBuilder = new StringBuilder();
+
+                if (activityLog != null)
+                {
+                    List<string> actvities = activityLog.getActivity();
+                    List<string>.Enumerator activitiesEnum = actvities.GetEnumerator();
+
+                    while (activitiesEnum.MoveNext())
+                    {
+                        string activity = activitiesEnum.Current;
+                        Console.WriteLine("####-->> Activity = " + activity);
+                        strBuilder.AppendLine(activity);
+                    }
+                }
+                PdfPCell activityLogCell = new PdfPCell(new Phrase(strBuilder.ToString()));
+
+                //Adding cells to the table
+                accessReportTable.AddCell(userIdRecNo);
+                accessReportTable.AddCell(userIdCell);
+                accessReportTable.AddCell(usernameIdCell);
+                accessReportTable.AddCell(loginDateTimeCell);
+                accessReportTable.AddCell(logoutDateTimeCell);
+                accessReportTable.AddCell(activityLogCell);
+            }
+
+            doc.Add(accessReportTable);
+
+            doc.Close();
+            Console.WriteLine("PDF Generated successfully...");
         }
     }
 }

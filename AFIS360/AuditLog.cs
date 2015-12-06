@@ -11,7 +11,8 @@ namespace AFIS360
         private string userId;
         private string username;
         private DateTime loginDateTime;
-        private DateTime logoutDateTime;
+        private DateTime? logoutDateTime;
+        private ActivityLog activityLog;
 
         public void setUserId(string userId)
         {
@@ -43,14 +44,24 @@ namespace AFIS360
             return this.loginDateTime;
         }
 
-        public void setLogoutDateTime(DateTime logoutDateTime)
+        public void setLogoutDateTime(DateTime? logoutDateTime)
         {
             this.logoutDateTime = logoutDateTime;
         }
 
-        public DateTime getLogoutDateTime()
+        public DateTime? getLogoutDateTime()
         {
             return this.logoutDateTime;
+        }
+
+        public void setActivityLog(ActivityLog activityLog)
+        {
+            this.activityLog = activityLog;
+        }
+
+        public ActivityLog getActivityLog()
+        {
+            return this.activityLog;
         }
 
     }

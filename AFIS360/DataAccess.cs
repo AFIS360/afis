@@ -988,25 +988,142 @@ namespace AFIS360
                     string userId = (string)ds.Rows[i]["user_id"];
                     string username = (string)ds.Rows[i]["user_name"];
                     DateTime loginDateTime = (DateTime)ds.Rows[i]["login_date_time"];
-/*
-                    if(ds.Rows[i]["logout_date_time"] != null)
+
+                    //Handle nullable DateTime
+                    DateTime? logoutDateTime;
+
+                    if (ds.Rows[i]["logout_date_time"] == DBNull.Value)
                     {
-                        logoutDateTime = (DateTime)ds.Rows[i]["logout_date_time"];
+                        logoutDateTime = null;
                     }
-*/
+                    else
+                    {
+                        logoutDateTime = (DateTime?)ds.Rows[i]["logout_date_time"];
+                    }
+
+                    //Get login activities
+                    ActivityLog activityLog = null;
+                    if (ds.Rows[i]["login_activity"] != DBNull.Value)
+                    {
+                        using (MemoryStream oStr = new MemoryStream((byte[])ds.Rows[i]["login_activity"]))
+                        {
+                            BinaryFormatter oBFormatter = new BinaryFormatter();
+                            oStr.Position = 0;
+                            activityLog = (ActivityLog)oBFormatter.Deserialize(oStr);
+                        }
+                    }
+
                     AuditLog auditLog = new AuditLog();
                     auditLog.setUserId(userId);
                     auditLog.setUsername(username);
                     auditLog.setLoginDateTime(loginDateTime);
-//                    auditLog.setLogoutDateTime(logoutDateTime);
+                    auditLog.setLogoutDateTime(logoutDateTime);
+                    auditLog.setActivityLog(activityLog);
                     auditLogs.Add(auditLog);
 
                     i = i + 1;
                 }
             }
-            catch (Exception)
+            catch (Exception e)
             {
-                throw;
+                Console.WriteLine(e.StackTrace);
+                throw e;
+            }
+            finally
+            {
+                if (conn.State == System.Data.ConnectionState.Open)
+                {
+                    conn.Close();
+                }
+            }
+            return auditLogs;
+        }
+
+
+        public List<AuditLog> getAuditLogs(string id, DateTime startDate, DateTime endDate)
+        {
+            string connStr = getConnectionStringByName("MySQL_AFIS_conn");
+            MySqlConnection conn = new MySqlConnection(connStr);
+            MySqlCommand cmd;
+            List<AuditLog> auditLogs;
+            DataTable ds;
+            conn.Open();
+
+            try
+            {
+                cmd = conn.CreateCommand();
+                string startDateStr = startDate.ToString("yyyy-MM-dd");
+                string endDateStr = endDate.ToString("yyyy-MM-dd");
+
+                if (id == null || id.Length == 0)  //get audit logs for all users
+                {
+                    cmd.CommandText = "SELECT * FROM afis.audit_log WHERE " +
+                                       "DATE(login_date_time) BETWEEN @startDateStr AND  @endDateStr";
+                    cmd.Parameters.AddWithValue("@startDateStr", startDateStr);
+                    cmd.Parameters.AddWithValue("@endDateStr", endDateStr);
+                } else //get the audit logs for certail users
+                {
+                    cmd.CommandText = "SELECT * FROM afis.audit_log WHERE " +
+                                      "user_id = @user_id and " +
+                                      "DATE(login_date_time) BETWEEN @startDateStr AND  @endDateStr";
+                    cmd.Parameters.AddWithValue("@user_id", id);
+                    cmd.Parameters.AddWithValue("@startDateStr", startDateStr);
+                    cmd.Parameters.AddWithValue("@endDateStr", endDateStr);
+                }
+
+                MySqlDataAdapter da = new MySqlDataAdapter(cmd);
+                ds = new DataTable();
+                da.Fill(ds);
+                IEnumerator rows = ds.Rows.GetEnumerator();
+                Int32 i = 0;
+                auditLogs = new List<AuditLog>();
+
+                while (rows.MoveNext())
+                {
+
+                    string userId = (string)ds.Rows[i]["user_id"];
+                    string username = (string)ds.Rows[i]["user_name"];
+                    DateTime loginDateTime = (DateTime)ds.Rows[i]["login_date_time"];
+
+                    //Handle nullable DateTime
+                    DateTime? logoutDateTime;
+
+                    if (ds.Rows[i]["logout_date_time"] == DBNull.Value)
+                    {
+                        logoutDateTime = null;
+                    }
+                    else
+                    {
+                        logoutDateTime = (DateTime?)ds.Rows[i]["logout_date_time"];
+                    }
+
+                    //Get login activities
+                    ActivityLog activityLog = null;
+                    if (ds.Rows[i]["login_activity"] != DBNull.Value)
+                    {
+                        using (MemoryStream oStr = new MemoryStream((byte[])ds.Rows[i]["login_activity"]))
+                        {
+                            BinaryFormatter oBFormatter = new BinaryFormatter();
+                            oStr.Position = 0;
+                            activityLog = (ActivityLog)oBFormatter.Deserialize(oStr);
+                        }
+                    }
+
+                    AuditLog auditLog = new AuditLog();
+                    auditLog.setUserId(userId);
+                    auditLog.setUsername(username);
+                    auditLog.setLoginDateTime(loginDateTime);
+                    auditLog.setLogoutDateTime(logoutDateTime);
+                    auditLog.setActivityLog(activityLog);
+                    auditLogs.Add(auditLog);
+
+                    i = i + 1;
+                }
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.StackTrace);
+                throw e;
             }
             finally
             {

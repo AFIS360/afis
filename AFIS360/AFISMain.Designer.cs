@@ -196,6 +196,13 @@
             this.logOutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.directorySearcher1 = new System.DirectoryServices.DirectorySearcher();
+            this.txtAuditReportUserId = new System.Windows.Forms.TextBox();
+            this.lblUserAccessReportUserId = new System.Windows.Forms.Label();
+            this.lblAuditReportRptStartDate = new System.Windows.Forms.Label();
+            this.lblAuditReportRptEndDate = new System.Windows.Forms.Label();
+            this.dtpAuditReportStartDate = new System.Windows.Forms.DateTimePicker();
+            this.dtpAuditReportEndDate = new System.Windows.Forms.DateTimePicker();
+            this.btnAuditReportCustReport = new System.Windows.Forms.Button();
             this.tabControlAFIS.SuspendLayout();
             this.tabLogin.SuspendLayout();
             this.grpLogin.SuspendLayout();
@@ -1912,6 +1919,13 @@
             // 
             // tabAuditReport
             // 
+            this.tabAuditReport.Controls.Add(this.btnAuditReportCustReport);
+            this.tabAuditReport.Controls.Add(this.dtpAuditReportEndDate);
+            this.tabAuditReport.Controls.Add(this.dtpAuditReportStartDate);
+            this.tabAuditReport.Controls.Add(this.lblAuditReportRptEndDate);
+            this.tabAuditReport.Controls.Add(this.lblAuditReportRptStartDate);
+            this.tabAuditReport.Controls.Add(this.lblUserAccessReportUserId);
+            this.tabAuditReport.Controls.Add(this.txtAuditReportUserId);
             this.tabAuditReport.Controls.Add(this.btnUserAccessReportDaily);
             this.tabAuditReport.Location = new System.Drawing.Point(4, 22);
             this.tabAuditReport.Name = "tabAuditReport";
@@ -1923,11 +1937,11 @@
             // btnUserAccessReportDaily
             // 
             this.btnUserAccessReportDaily.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnUserAccessReportDaily.Location = new System.Drawing.Point(27, 45);
+            this.btnUserAccessReportDaily.Location = new System.Drawing.Point(31, 242);
             this.btnUserAccessReportDaily.Name = "btnUserAccessReportDaily";
-            this.btnUserAccessReportDaily.Size = new System.Drawing.Size(213, 33);
+            this.btnUserAccessReportDaily.Size = new System.Drawing.Size(304, 33);
             this.btnUserAccessReportDaily.TabIndex = 1;
-            this.btnUserAccessReportDaily.Text = "Daily Access Report";
+            this.btnUserAccessReportDaily.Text = "Generate Daily Access Report";
             this.btnUserAccessReportDaily.UseVisualStyleBackColor = true;
             this.btnUserAccessReportDaily.Click += new System.EventHandler(this.btnUserAccessReportDaily_Click);
             // 
@@ -1978,6 +1992,72 @@
             this.directorySearcher1.ServerPageTimeLimit = System.TimeSpan.Parse("-00:00:01");
             this.directorySearcher1.ServerTimeLimit = System.TimeSpan.Parse("-00:00:01");
             // 
+            // txtAuditReportUserId
+            // 
+            this.txtAuditReportUserId.Location = new System.Drawing.Point(191, 69);
+            this.txtAuditReportUserId.Name = "txtAuditReportUserId";
+            this.txtAuditReportUserId.Size = new System.Drawing.Size(177, 20);
+            this.txtAuditReportUserId.TabIndex = 2;
+            // 
+            // lblUserAccessReportUserId
+            // 
+            this.lblUserAccessReportUserId.AutoSize = true;
+            this.lblUserAccessReportUserId.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblUserAccessReportUserId.Location = new System.Drawing.Point(27, 69);
+            this.lblUserAccessReportUserId.Name = "lblUserAccessReportUserId";
+            this.lblUserAccessReportUserId.Size = new System.Drawing.Size(76, 20);
+            this.lblUserAccessReportUserId.TabIndex = 3;
+            this.lblUserAccessReportUserId.Text = "User ID:";
+            // 
+            // lblAuditReportRptStartDate
+            // 
+            this.lblAuditReportRptStartDate.AutoSize = true;
+            this.lblAuditReportRptStartDate.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblAuditReportRptStartDate.Location = new System.Drawing.Point(27, 109);
+            this.lblAuditReportRptStartDate.Name = "lblAuditReportRptStartDate";
+            this.lblAuditReportRptStartDate.Size = new System.Drawing.Size(158, 20);
+            this.lblAuditReportRptStartDate.TabIndex = 4;
+            this.lblAuditReportRptStartDate.Text = "Report Start Date:";
+            // 
+            // lblAuditReportRptEndDate
+            // 
+            this.lblAuditReportRptEndDate.AutoSize = true;
+            this.lblAuditReportRptEndDate.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblAuditReportRptEndDate.Location = new System.Drawing.Point(27, 145);
+            this.lblAuditReportRptEndDate.Name = "lblAuditReportRptEndDate";
+            this.lblAuditReportRptEndDate.Size = new System.Drawing.Size(150, 20);
+            this.lblAuditReportRptEndDate.TabIndex = 5;
+            this.lblAuditReportRptEndDate.Text = "Report End Date:";
+            // 
+            // dtpAuditReportStartDate
+            // 
+            this.dtpAuditReportStartDate.CalendarFont = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.dtpAuditReportStartDate.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.dtpAuditReportStartDate.Location = new System.Drawing.Point(191, 107);
+            this.dtpAuditReportStartDate.Name = "dtpAuditReportStartDate";
+            this.dtpAuditReportStartDate.Size = new System.Drawing.Size(275, 22);
+            this.dtpAuditReportStartDate.TabIndex = 13;
+            // 
+            // dtpAuditReportEndDate
+            // 
+            this.dtpAuditReportEndDate.CalendarFont = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.dtpAuditReportEndDate.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.dtpAuditReportEndDate.Location = new System.Drawing.Point(191, 143);
+            this.dtpAuditReportEndDate.Name = "dtpAuditReportEndDate";
+            this.dtpAuditReportEndDate.Size = new System.Drawing.Size(275, 22);
+            this.dtpAuditReportEndDate.TabIndex = 14;
+            // 
+            // btnAuditReportCustReport
+            // 
+            this.btnAuditReportCustReport.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnAuditReportCustReport.Location = new System.Drawing.Point(31, 297);
+            this.btnAuditReportCustReport.Name = "btnAuditReportCustReport";
+            this.btnAuditReportCustReport.Size = new System.Drawing.Size(304, 33);
+            this.btnAuditReportCustReport.TabIndex = 15;
+            this.btnAuditReportCustReport.Text = "Generate Custom Access Report";
+            this.btnAuditReportCustReport.UseVisualStyleBackColor = true;
+            this.btnAuditReportCustReport.Click += new System.EventHandler(this.btnAuditReportCustReport_Click);
+            // 
             // AFISMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1991,6 +2071,7 @@
             this.Name = "AFISMain";
             this.Text = "AFIS/360";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.AFISMain_FormClosed);
             this.Load += new System.EventHandler(this.AFISMain_Load);
             this.tabControlAFIS.ResumeLayout(false);
             this.tabLogin.ResumeLayout(false);
@@ -2035,6 +2116,7 @@
             this.grpUserMgmt.ResumeLayout(false);
             this.grpUserMgmt.PerformLayout();
             this.tabAuditReport.ResumeLayout(false);
+            this.tabAuditReport.PerformLayout();
             this.menuStrip.ResumeLayout(false);
             this.menuStrip.PerformLayout();
             this.ResumeLayout(false);
@@ -2212,5 +2294,12 @@
         private System.Windows.Forms.ToolStripMenuItem changePasswordToolStripMenuItem;
         private System.Windows.Forms.Button btnUserMgmtResetPass;
         private System.Windows.Forms.Button btnUserAccessReportDaily;
+        private System.Windows.Forms.DateTimePicker dtpAuditReportEndDate;
+        private System.Windows.Forms.DateTimePicker dtpAuditReportStartDate;
+        private System.Windows.Forms.Label lblAuditReportRptEndDate;
+        private System.Windows.Forms.Label lblAuditReportRptStartDate;
+        private System.Windows.Forms.Label lblUserAccessReportUserId;
+        private System.Windows.Forms.TextBox txtAuditReportUserId;
+        private System.Windows.Forms.Button btnAuditReportCustReport;
     }
 }
