@@ -94,6 +94,43 @@ namespace AFIS360
         }//end storeFingerprints
 
 
+        public void updateFingerprints(MyPerson person)
+        {
+            string connStr = getConnectionStringByName("MySQL_AFIS_conn");
+            MySqlConnection conn = new MySqlConnection(connStr);
+            MySqlCommand cmd;
+            byte[] oSerializedFpImages;
+            conn.Open();
+            try
+            {
+                using (MemoryStream stream = new MemoryStream())
+                {
+                    BinaryFormatter oBFormatter = new BinaryFormatter();
+                    oBFormatter.Serialize(stream, person);
+                    oSerializedFpImages = stream.ToArray();
+                }
+
+                cmd = conn.CreateCommand();
+                cmd.CommandText = "UPDATE fingerprint SET image = @image, name = @name WHERE person_id = @person_id";
+                cmd.Parameters.AddWithValue("@person_id", person.PersonId);
+                cmd.Parameters.AddWithValue("@image", oSerializedFpImages);
+                cmd.Parameters.AddWithValue("@name", person.Name);
+                cmd.ExecuteNonQuery();
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+            finally
+            {
+                if (conn.State == System.Data.ConnectionState.Open)
+                {
+                    conn.Close();
+                }
+            }
+        }//end storeFingerprints
+
+
         public void storePersonDetail(PersonDetail personDetail)
         {
             string connStr = getConnectionStringByName("MySQL_AFIS_conn");
@@ -105,10 +142,10 @@ namespace AFIS360
             {
                 cmd = conn.CreateCommand();
                 cmd.CommandText = "INSERT INTO person(person_id, fname, lname, mname, name_prefix, name_suffix," +
-                                  "addr_street, addr_city, addr_postal_code, addr_state, addr_country, profession," +
+                                  "DOB, addr_street, addr_city, addr_postal_code, addr_state, addr_country, profession," +
                                   "father_name, cell_nbr, home_phone, office_phone, email_addr, photo)" +
                                   "VALUES(@person_id, @fname, @lname, @mname, @name_prefix, @name_suffix," +
-                                  "@addr_street, @addr_city, @addr_postal_code, @addr_state, @addr_country, @profession," +
+                                  "@DOB, @addr_street, @addr_city, @addr_postal_code, @addr_state, @addr_country, @profession," +
                                   "@father_name, @cell_nbr, @home_phone, @office_phone, @email_addr, @photo)";
 
                 cmd.Parameters.AddWithValue("@person_id", personDetail.getPersonId());
@@ -117,6 +154,66 @@ namespace AFIS360
                 cmd.Parameters.AddWithValue("@mname", personDetail.getMiddleName());
                 cmd.Parameters.AddWithValue("@name_Prefix", personDetail.getPrefix());
                 cmd.Parameters.AddWithValue("@name_suffix", personDetail.getSuffix());
+                cmd.Parameters.AddWithValue("@DOB", personDetail.getDOB());
+                cmd.Parameters.AddWithValue("@addr_street", personDetail.getStreetAddress());
+                cmd.Parameters.AddWithValue("@addr_city", personDetail.getCity());
+                cmd.Parameters.AddWithValue("@addr_postal_code", personDetail.getPostalCode());
+                cmd.Parameters.AddWithValue("@addr_state", personDetail.getState());
+                cmd.Parameters.AddWithValue("@addr_country", personDetail.getCountry());
+                cmd.Parameters.AddWithValue("@profession", personDetail.getProfession());
+                cmd.Parameters.AddWithValue("@father_name", personDetail.getFatherName());
+                cmd.Parameters.AddWithValue("@cell_nbr", personDetail.getCellNbr());
+                cmd.Parameters.AddWithValue("@home_phone", personDetail.getHomePhoneNbr());
+                cmd.Parameters.AddWithValue("@office_phone", personDetail.getWorkPhoneNbr());
+                cmd.Parameters.AddWithValue("@email_addr", personDetail.getEmail());
+
+                using (MemoryStream stream = new MemoryStream())
+                {
+                    BinaryFormatter oBFormatter = new BinaryFormatter();
+                    oBFormatter.Serialize(stream, personDetail.getPassportPhoto());
+                    oSerializedPassportPhoto = stream.ToArray();
+                }
+
+                cmd.Parameters.AddWithValue("@photo", oSerializedPassportPhoto);
+
+                cmd.ExecuteNonQuery();
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+            finally
+            {
+                if (conn.State == System.Data.ConnectionState.Open)
+                {
+                    conn.Close();
+                }
+            }
+        }//end storePersonDetail
+
+
+        public void updatePersonDetail(PersonDetail personDetail)
+        {
+            string connStr = getConnectionStringByName("MySQL_AFIS_conn");
+            MySqlConnection conn = new MySqlConnection(connStr);
+            MySqlCommand cmd;
+            byte[] oSerializedPassportPhoto;
+            conn.Open();
+            try
+            {
+                cmd = conn.CreateCommand();
+
+                cmd.CommandText = "UPDATE person SET fname = @fname, lname = @lname, mname = @mname, name_prefix = @name_prefix, name_suffix = @name_suffix ," +
+                                  "DOB = @DOB, addr_street = @addr_street, addr_city = @addr_city, addr_postal_code = @addr_postal_code, addr_state = @addr_state, addr_country = @addr_country, profession = @profession," +
+                                  "father_name = @father_name, cell_nbr = @cell_nbr, home_phone = @home_phone, office_phone = @office_phone, email_addr = @email_addr, photo = @photo WHERE person_id = @person_id";
+    
+                cmd.Parameters.AddWithValue("@person_id", personDetail.getPersonId());
+                cmd.Parameters.AddWithValue("@fname", personDetail.getFirstName());
+                cmd.Parameters.AddWithValue("@lname", personDetail.getLastName());
+                cmd.Parameters.AddWithValue("@mname", personDetail.getMiddleName());
+                cmd.Parameters.AddWithValue("@name_Prefix", personDetail.getPrefix());
+                cmd.Parameters.AddWithValue("@name_suffix", personDetail.getSuffix());
+                cmd.Parameters.AddWithValue("@DOB", personDetail.getDOB());
                 cmd.Parameters.AddWithValue("@addr_street", personDetail.getStreetAddress());
                 cmd.Parameters.AddWithValue("@addr_city", personDetail.getCity());
                 cmd.Parameters.AddWithValue("@addr_postal_code", personDetail.getPostalCode());
@@ -183,6 +280,20 @@ namespace AFIS360
                     string mname = (string)ds.Rows[i]["mname"];
                     string name_prefix = (string)ds.Rows[i]["name_prefix"];
                     string name_suffix = (string)ds.Rows[i]["name_suffix"];
+
+
+                    //Handle nullable DateTime
+                    DateTime? dob;
+
+                    if (ds.Rows[i]["DOB"] == DBNull.Value)
+                    {
+                        dob = new DateTime(1753, 01, 01);
+                    }
+                    else
+                    {
+                        dob = (DateTime?)ds.Rows[i]["DOB"];
+                    }
+
                     string addr_street = (string)ds.Rows[i]["addr_street"];
                     string addr_city = (string)ds.Rows[i]["addr_city"];
                     string addr_postal_code = (string)ds.Rows[i]["addr_postal_code"];
@@ -210,6 +321,7 @@ namespace AFIS360
                     pDetail.setMiddleName(mname);
                     pDetail.setPrefix(name_prefix);
                     pDetail.setSuffix(name_suffix);
+                    pDetail.setDOB(dob);
                     pDetail.setStreetAddress(addr_street);
                     pDetail.setCity(addr_city);
                     pDetail.setPostalCode(addr_postal_code);
@@ -675,7 +787,7 @@ namespace AFIS360
             {
                 string person_id = user.getPersonId();
                 cmd = conn.CreateCommand();
-                cmd.CommandText = "UPDATE users set fname = @fname, lname = @lname, username = @username, user_role = @user_role, " +
+                cmd.CommandText = "UPDATE users SET fname = @fname, lname = @lname, username = @username, user_role = @user_role, " +
                                   "station_id = @station_id, stationed_address = @stationed_address, stationed_city = @stationed_city, stationed_country = @stationed_country, " +
                                   "active_status = @active_status, service_start = @service_start, service_end = @service_end WHERE person_id = @person_id";
                 cmd.Parameters.AddWithValue("@person_id", user.getPersonId());
@@ -730,7 +842,7 @@ namespace AFIS360
                 if (user != null)
                 {
                     cmd = conn.CreateCommand();
-                    cmd.CommandText = "UPDATE users set password = @password WHERE username = @username";
+                    cmd.CommandText = "UPDATE users SET password = @password WHERE username = @username";
                     cmd.Parameters.AddWithValue("@username", username);
                     cmd.Parameters.AddWithValue("@password", Encrypt(new_password));
 
@@ -775,7 +887,7 @@ namespace AFIS360
             try
             {
                 cmd = conn.CreateCommand();
-                cmd.CommandText = "UPDATE users set password = @password WHERE username = @username";
+                cmd.CommandText = "UPDATE users SET password = @password WHERE username = @username";
                 cmd.Parameters.AddWithValue("@username", username);
                 cmd.Parameters.AddWithValue("@password", Encrypt(temp_password));
 
@@ -875,7 +987,7 @@ namespace AFIS360
                 }
 
                 cmd = conn.CreateCommand();
-                cmd.CommandText = "UPDATE audit_log set logout_date_time = @logout_date_time, login_duration = @login_duration, login_activity = @login_activity WHERE user_id = @user_id and id = @id";
+                cmd.CommandText = "UPDATE audit_log SET logout_date_time = @logout_date_time, login_duration = @login_duration, login_activity = @login_activity WHERE user_id = @user_id and id = @id";
 
                 cmd.Parameters.AddWithValue("@user_id", user.getPersonId());
                 cmd.Parameters.AddWithValue("@id", user.getId());

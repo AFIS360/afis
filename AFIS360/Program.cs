@@ -16,7 +16,6 @@ namespace AFIS360
     class Program
     {
     
-
         // Initialize path to images
         static readonly string ImagePath = Path.Combine(Path.Combine("..", ".."), "images");
 
@@ -52,7 +51,8 @@ namespace AFIS360
             Console.WriteLine(" Template size = {0} bytes", fp.Template.Length);
 
             return person;
-        }
+        }//getProbe
+
 
         // Take fingerprint image file and create Person object from the image
         public static MyPerson Enroll(ICollection<KeyValuePair<String, String>> imgFilePaths, string name, string id)
@@ -95,7 +95,8 @@ namespace AFIS360
             Console.WriteLine(" Template size = {0} bytes", fp.Template.Length);
 
             return person;
-        }
+        }//Enroll
+
 
         private static void setFingername(MyFingerprint fp, string fpLocationPath)
         {
@@ -152,22 +153,6 @@ namespace AFIS360
         }//end setFingername
 
 
-        public static void enrollPerson(MyPerson myPerson)
-        {
-            DataAccess dataAccess = new DataAccess();
-            dataAccess.storeFingerprints(myPerson);
-            Console.WriteLine("Enrollment successful...");
-        }
-
-        static List<MyPerson> retrieveFromDB()
-        {
-
-            DataAccess dataAccess = new DataAccess();
-            List<MyPerson> persons = dataAccess.retrievePersonFingerprints();
-            return persons;
-        }
-
-
         //Match probe with people in the database
         public static Match getMatch(string fpPath, string visitorId, Int32 threshold)
         {
@@ -176,8 +161,9 @@ namespace AFIS360
             // Match visitor with unknown identity
             MyPerson probe = getProbe(fpPath, visitorId);
 
-            // Load all people fron database 
-            List<MyPerson> persons = retrieveFromDB();
+            // Load all people fron database
+            DataAccess dataAccess = new DataAccess();
+            List<MyPerson> persons = dataAccess.retrievePersonFingerprints();
 
             // Look up the probe using Threshold = 10
             Afis.Threshold = threshold;
@@ -204,7 +190,8 @@ namespace AFIS360
             Console.WriteLine("Visitor " + visitorId + " matches with registered person " + matchedPerson.Name + ". Match score = " + score);
 
             return match;
-        }
+        }//getMatch
+
 
         [STAThread]
         static void Main(string[] args)

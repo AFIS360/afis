@@ -12,9 +12,12 @@ namespace AFIS360
 {
     public partial class PasswordChange : Form
     {
-        public PasswordChange()
+        private ActivityLog activityLog;
+
+        public PasswordChange(ActivityLog activityLog)
         {
             InitializeComponent();
+            this.activityLog = activityLog;
         }
 
         private void btnSubmit_Click(object sender, EventArgs e)
@@ -32,11 +35,13 @@ namespace AFIS360
             {
                 lblStatusMsg.ForeColor = System.Drawing.Color.Green;
                 lblStatusMsg.Text = status.getStatusDesc();
+                activityLog.setActivity("Password change for user (" + userId + ") is successful.");
             }
             else
             {
                 lblStatusMsg.ForeColor = System.Drawing.Color.Red;
                 lblStatusMsg.Text = status.getStatusDesc();
+                activityLog.setActivity("Password change for user (" + userId + ") is not successful.");
             }
         }
 

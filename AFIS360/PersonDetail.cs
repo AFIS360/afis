@@ -15,6 +15,7 @@ namespace AFIS360
         private string middleName;
         private string prefix;
         private string suffix;
+        private DateTime? DOB;
         private string streetAddress;
         private string city;
         private string postalCode;
@@ -76,6 +77,14 @@ namespace AFIS360
         public string getSuffix()
         {
             return this.suffix;
+        }
+        public void setDOB(DateTime? DOB)
+        {
+            this.DOB = DOB;
+        }
+        public DateTime? getDOB()
+        {
+            return this.DOB;
         }
         public void setStreetAddress(string streetAddress)
         {

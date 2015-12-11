@@ -62,6 +62,8 @@ namespace AFIS360
             string mname = txtEnrollMName.Text;
             string prefix = txtEnrollPrefix.Text;
             string suffix = txtEnrollSuffix.Text;
+            DateTime dobTemp = dtpEnrollDOB.Value;
+            DateTime dob = Convert.ToDateTime(dobTemp.ToString("MM/dd/yyy"));
             string streeAddr = txtEnrollAddrLine.Text;
             string city = txtEnrollCity.Text;
             string postalCode = txtEnrollPostalCode.Text;
@@ -85,6 +87,7 @@ namespace AFIS360
                 personDetail.setMiddleName(mname);
                 personDetail.setPrefix(prefix);
                 personDetail.setSuffix(suffix);
+                personDetail.setDOB(dob);
                 personDetail.setStreetAddress(streeAddr);
                 personDetail.setCity(city);
                 personDetail.setPostalCode(postalCode);
@@ -119,7 +122,8 @@ namespace AFIS360
 
                     //store person's finger prints
                     MyPerson person = Program.Enroll(imgFilePaths, fname, id);
-                    Program.enrollPerson(person);
+                    dataAccess.storeFingerprints(person);
+
                     status = "Enrollment of " + fname + " (Id = " + id + ") completed successfully.";
                     lblEnrollStatusMsg.ForeColor = System.Drawing.Color.Green;
                     activityLog.setActivity(status);
@@ -146,6 +150,12 @@ namespace AFIS360
             if (txtMatchThreshold.Text != null)
             {
                 matchingThreshold = Convert.ToInt32(txtMatchThreshold.Text);
+            }
+            //If fpPath = null, show the error message
+            if (fpPath == null)
+            {
+                MessageBox.Show("Must select a finger print to match.", "Warning Message", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
             }
 
             Match match = Program.getMatch(fpPath, visitorNbr, matchingThreshold);
@@ -229,7 +239,7 @@ namespace AFIS360
                         Console.WriteLine("####-->>>> Finger Name is not assigned");
                     }
                 }
-                message = "Match found. Matching score " + match.getScore();
+                message = "Match found (" + pDetail.getFirstName() + " " + pDetail.getLastName() + " - " + pDetail.getPersonId() + "). Matching score " + match.getScore();
                 lblMatchStatusText.ForeColor = System.Drawing.Color.Green;
                 //adding the activity log
                 activityLog.setActivity("Match Activity: " + message);
@@ -238,6 +248,7 @@ namespace AFIS360
             {
                 message = "Match not found.";
                 lblMatchStatusText.ForeColor = System.Drawing.Color.Red;
+                activityLog.setActivity("Match Activity: " + message);
             }
 
             lblMatchStatusText.Text = message;
@@ -445,6 +456,7 @@ namespace AFIS360
             txtEnrollMName.Clear();
             txtEnrollPrefix.Clear();
             txtEnrollSuffix.Clear();
+            dtpEnrollDOB.Value = dtpEnrollDOB.MinDate;
             txtEnrollFatherName.Clear();
             txtEnrollAddrLine.Clear();
             txtEnrollCity.Clear();
@@ -633,7 +645,8 @@ namespace AFIS360
 
             if (user != null)
             {
-
+                //set the login user - "Login as"
+                lblLoginPerson.Text = user.getFirstName() + " " + user.getLastName() + " (" + user.getPersonId() + ") - " + user.getUserRole();
                 //if same user login back, then no need to clear the tabs
                 if (!isCachedUser(user))
                 {
@@ -660,12 +673,11 @@ namespace AFIS360
 
                 //Start the audit log for the logged in user
                 Status status = dataAccess.createUserAuditLog(user, DateTime.Now);
-                Console.WriteLine("####-->> Logging Status: " + status.getStatusCode());
+                Console.WriteLine("####-->> Login Status: " + status.getStatusCode());
                 long auditLogId = status.getAuditLogId();
                 user.setId(auditLogId);
 
                 //Create the activity log
-                activityLog = new ActivityLog();
                 activityLog.setActivity("Successful login.");
             }
             else
@@ -739,13 +751,7 @@ namespace AFIS360
 
         private void logOutToolStripMenuItem_Click(object sender, EventArgs e)
         {
-/*
-            if(sender is ToolStripMenuItem)
-            {
-                string menuItemName = ((ToolStripMenuItem)sender).Name;
-                Console.WriteLine("####--->> event from = " + menuItemName);
-            }
-*/
+            lblLoginPerson.Text = "N/A";
             tabControlAFIS.TabPages.Add(tabLogin);
             tabControlAFIS.TabPages.Remove(tabEnroll);
             tabControlAFIS.TabPages.Remove(tabMatch);
@@ -781,8 +787,6 @@ namespace AFIS360
             string activeStatus = listUserMgmtActiveStatus.Text;
             DateTime serviceStartDate = dtpUserMgmtServiceStartDate.Value.Date;
             DateTime serviceEndDate = dtpUserMgmtServiceStartDate.Value.Date;
-            Console.WriteLine("####-->> Service Start Date = " + serviceStartDate);
-            Console.WriteLine("####-->> Service End Date = " + serviceEndDate);
 
             User user = new User();
             user.setPersonId(id);
@@ -805,10 +809,13 @@ namespace AFIS360
             if (status.getStatusCode().Equals(Status.STATUS_SUCCESSFUL))
             {
                 lblUserMgmtStatusMsg.ForeColor = System.Drawing.Color.Green;
+                activityLog.setActivity("User (" + user.getFirstName() + " " + user.getLastName() + " - " + user.getPersonId() + ") has been created successfully.");
             }
             else
             {
                 lblUserMgmtStatusMsg.ForeColor = System.Drawing.Color.Red;
+                activityLog.setActivity("Creation of user (" + user.getFirstName() + " " + user.getLastName() + " - " + user.getPersonId() + ") has failed.");
+
             }
             lblUserMgmtStatusMsg.Text = status.getStatusDesc();
 
@@ -887,6 +894,7 @@ namespace AFIS360
                     txtEnrollMName.Text = pDetail.getMiddleName();
                     txtEnrollPrefix.Text = pDetail.getPrefix();
                     txtEnrollSuffix.Text = pDetail.getSuffix();
+                    dtpEnrollDOB.Value = (DateTime)pDetail.getDOB();
                     txtEnrollFatherName.Text = pDetail.getFatherName();
                     txtEnrollAddrLine.Text = pDetail.getStreetAddress();
                     txtEnrollCity.Text = pDetail.getCity();
@@ -965,16 +973,14 @@ namespace AFIS360
                                 }
                             }
                         }
-                    }
-
-                }
+                    }//end-if - persons
+                }//end-if - personsDetail
                 else
                 {
                     string txtEnrollIdTemp = txtEnrollId.Text;
                     clearEnrollTab();
                     txtEnrollId.Text = txtEnrollIdTemp;
                 }
-
             }
 
         }//end txtEnrollId_Leave
@@ -1053,11 +1059,13 @@ namespace AFIS360
                 {
                     lblUserMgmtStatusMsg.ForeColor = System.Drawing.Color.Green;
                     lblUserMgmtStatusMsg.Text = status.getStatusDesc();
+                    activityLog.setActivity("User (" + user.getFirstName() + " " + user.getLastName() + " - " + user.getPersonId() + ") has been updated successfully.");
                 }
                 else
                 {
                     lblUserMgmtStatusMsg.ForeColor = System.Drawing.Color.Red;
                     lblUserMgmtStatusMsg.Text = status.getStatusDesc();
+                    activityLog.setActivity("Update of user (" + user.getFirstName() + " " + user.getLastName() + " - " + user.getPersonId() + ") has failed.");
                 }
             }
             else
@@ -1070,123 +1078,24 @@ namespace AFIS360
 
         private void changePasswordToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            PasswordChange passChange = new PasswordChange();
+            PasswordChange passChange = new PasswordChange(activityLog);
             passChange.ShowDialog();
 
         }//end changePasswordToolStripMenuItem_Click
 
         private void btnUserMgmtResetPass_Click(object sender, EventArgs e)
         {
-            PasswordReset passReset = new PasswordReset();
+            PasswordReset passReset = new PasswordReset(activityLog);
             passReset.ShowDialog();
 
         }//end btnUserMgmtResetPass_Cl
 
         private void AFISMain_Load(object sender, EventArgs e)
         {
-            Console.WriteLine("####-->> Closing the Window");
+            Console.WriteLine("####-->> Loading the Window");
+            activityLog = new ActivityLog();
         }
 
-        private void btnUserAccessReportDaily_Click(object sender, EventArgs e)
-        {   
-            Document doc = new Document(iTextSharp.text.PageSize.LETTER, 10, 10, 42, 35);
-            PdfWriter pdfWriter = PdfWriter.GetInstance(doc, new FileStream("..\\..\\reports\\UserAccessReport.pdf", FileMode.Create));
-            doc.Open();
-
-            //add title
-            doc.AddTitle("User Access Report");
-            doc.AddHeader("Daily Report", "User Access Report");
-
-            Paragraph paragraphCompanyInfo = new Paragraph("RAB (Rapid Action Battalion)\n");
-            paragraphCompanyInfo.Add("Station: " + user.getStationId() + ", " + user.getStationedCity() + "\n");
-            paragraphCompanyInfo.Add(user.getStationedCountry() + "\n");
-            paragraphCompanyInfo.Alignment = Element.ALIGN_LEFT;
-
-            iTextSharp.text.Font contentFont = iTextSharp.text.FontFactory.GetFont("Webdings", 20, iTextSharp.text.Font.BOLD);
-            Paragraph paragraphReportTitle = new Paragraph("Login Access Report\n", contentFont);
-            paragraphReportTitle.Alignment = Element.ALIGN_CENTER;
-
-            Paragraph paragraphReportSubTitle = new Paragraph();
-            paragraphReportSubTitle.Add("By: " + user.getFirstName() + " " + user.getLastName() + ", ID: " + user.getPersonId() + "\n");
-            paragraphReportSubTitle.Add("At: " + DateTime.Now.ToString() + "\n\n");
-            paragraphReportSubTitle.Alignment = Element.ALIGN_CENTER;
-
-            doc.Add(paragraphCompanyInfo);
-            doc.Add(paragraphReportTitle);
-            doc.Add(paragraphReportSubTitle);
-
-            PdfPTable accessReportTable = new PdfPTable(5);
-            PdfPCell headerCellID = new PdfPCell(new Phrase("ID"));
-            PdfPCell headerCellName = new PdfPCell(new Phrase("Name"));
-            PdfPCell headerCellLoginDateTime = new PdfPCell(new Phrase("Login Date time"));
-            PdfPCell headerCellLogoutDateTime = new PdfPCell(new Phrase("Logout Date time"));
-            PdfPCell headerCellActivityLog = new PdfPCell(new Phrase("Login Activity"));
-
-
-            //Add Headers to the table
-            accessReportTable.AddCell(headerCellID);
-            accessReportTable.AddCell(headerCellName);
-            accessReportTable.AddCell(headerCellLoginDateTime);
-            accessReportTable.AddCell(headerCellLogoutDateTime);
-            accessReportTable.AddCell(headerCellActivityLog);
-
-            List<AuditLog> auditLogs = new DataAccess().getAuditLogs();
-            Int32 auditLogsCount = auditLogs.Count;
-            Console.WriteLine("# of AuditLog = " + auditLogsCount);
-
-            for (int i = 0; i < auditLogsCount; i++)
-            {
-                AuditLog auditLog = (AuditLog)auditLogs.ElementAt(i);
-                PdfPCell userIdCell = new PdfPCell(new Phrase(auditLog.getUserId()));
-                PdfPCell usernameIdCell = new PdfPCell(new Phrase(auditLog.getUsername()));
-                PdfPCell loginDateTimeCell = new PdfPCell(new Phrase(auditLog.getLoginDateTime().ToString()));
-
-                //Add logout DateTime to the cell
-                DateTime? logoutDateTime = auditLog.getLogoutDateTime();
-                string logoutDateTimeStr;
-                if (logoutDateTime == null)
-                {
-                    logoutDateTimeStr = "N/A";
-                } else
-                {
-                    logoutDateTimeStr = logoutDateTime.ToString();
-                }
-                PdfPCell logoutDateTimeCell = new PdfPCell(new Phrase(logoutDateTimeStr));
-
-                //Add ActivityLog to the cell
-                ActivityLog activityLog = auditLog.getActivityLog();
-                Console.WriteLine("####-->>Activity Log = " + activityLog);
-                StringBuilder strBuilder = new StringBuilder();
-
-                if (activityLog != null)
-                {
-                    List<string> actvities = activityLog.getActivity();
-                    List<string>.Enumerator activitiesEnum = actvities.GetEnumerator();
-                    
-                    while (activitiesEnum.MoveNext())
-                    {
-                        string activity = activitiesEnum.Current;
-                        Console.WriteLine("####-->> Activity = " + activity);
-                        strBuilder.AppendLine(activity);
-                    }
-                }
-                PdfPCell activityLogCell = new PdfPCell(new Phrase(strBuilder.ToString()));
-
-                //Adding cells to the table
-                accessReportTable.AddCell(userIdCell);
-                accessReportTable.AddCell(usernameIdCell);
-                accessReportTable.AddCell(loginDateTimeCell);
-                accessReportTable.AddCell(logoutDateTimeCell);
-                accessReportTable.AddCell(activityLogCell);
-            }
-
-            doc.Add(accessReportTable);
-
-
-            doc.Close();
-            Console.WriteLine("PDF Generated successfully...");
-
-        }
 
         private void AFISMain_FormClosed(object sender, FormClosedEventArgs e)
         {
@@ -1197,8 +1106,10 @@ namespace AFIS360
             Console.WriteLine("####-->> Status code = " + status.getStatusCode());
         }
 
+
         private void btnAuditReportCustReport_Click(object sender, EventArgs e)
         {
+            activityLog.setActivity("Login Access Report Created.");
 
             string userId = txtAuditReportUserId.Text;
             DateTime startDate = dtpAuditReportStartDate.Value;
@@ -1209,7 +1120,8 @@ namespace AFIS360
 
             Document doc = new Document(iTextSharp.text.PageSize.LETTER, 10, 10, 42, 35);
             string datetimePref = DateTime.Now.ToString("yyyy-MM-dd-HH-mm-ss");
-            PdfWriter pdfWriter = PdfWriter.GetInstance(doc, new FileStream("..\\..\\reports\\UserAccessReport-" + datetimePref + ".pdf", FileMode.Create));
+            string pdfPath = "..\\..\\reports\\UserAccessReport-" + datetimePref + ".pdf";
+            PdfWriter pdfWriter = PdfWriter.GetInstance(doc, new FileStream(pdfPath, FileMode.Create));
             doc.Open();
 
             //add title
@@ -1235,6 +1147,9 @@ namespace AFIS360
             doc.Add(paragraphReportSubTitle);
 
             PdfPTable accessReportTable = new PdfPTable(6);
+            float[] widths = new float[] {25f, 40f, 40f, 40f, 40f, 100f};
+            accessReportTable.SetWidths(widths);
+
             PdfPCell headerCellRecNo = new PdfPCell(new Phrase("RecNo"));
             PdfPCell headerCellID = new PdfPCell(new Phrase("ID"));
             PdfPCell headerCellName = new PdfPCell(new Phrase("Name"));
@@ -1305,6 +1220,165 @@ namespace AFIS360
 
             doc.Close();
             Console.WriteLine("PDF Generated successfully...");
+            System.Diagnostics.Process.Start(pdfPath);
+        }
+
+        private void btnAuditReportPersonDetailReport_Click(object sender, EventArgs e)
+        {
+            activityLog.setActivity("Person Detailed Report Created.");
+
+            string personId = txtAuditReportPersonId.Text;
+
+            List<PersonDetail> personDetailList = new DataAccess().retrievePersonDetail(personId);
+            Console.WriteLine("# of Persons found = " + personDetailList.Count());
+            PersonDetail personDetail = personDetailList.FirstOrDefault();
+
+            Document doc = new Document(iTextSharp.text.PageSize.LETTER, 10, 10, 42, 35);
+            string datetimePref = DateTime.Now.ToString("yyyy-MM-dd-HH-mm-ss");
+            string pdfPath = "..\\..\\reports\\PersonDetailReport-" + datetimePref + ".pdf";
+            PdfWriter pdfWriter = PdfWriter.GetInstance(doc, new FileStream(pdfPath, FileMode.Create));
+            doc.Open();
+
+            //add title
+            doc.AddTitle("Person Detail Report");
+            doc.AddHeader("Person Detail Report", "Person Detail Report");
+
+            Paragraph paragraphCompanyInfo = new Paragraph("RAB (Rapid Action Battalion)\n");
+            paragraphCompanyInfo.Add("Station: " + user.getStationId() + ", " + user.getStationedCity() + "\n");
+            paragraphCompanyInfo.Add(user.getStationedCountry() + "\n");
+            paragraphCompanyInfo.Alignment = Element.ALIGN_LEFT;
+
+            iTextSharp.text.Font contentFont = iTextSharp.text.FontFactory.GetFont("Webdings", 20, iTextSharp.text.Font.BOLD);
+            Paragraph paragraphReportTitle = new Paragraph("Person Detail Report\n", contentFont);
+            paragraphReportTitle.Alignment = Element.ALIGN_CENTER;
+
+            Paragraph paragraphReportSubTitle = new Paragraph();
+            paragraphReportSubTitle.Add("By: " + user.getFirstName() + " " + user.getLastName() + ", ID: " + user.getPersonId() + "\n");
+            paragraphReportSubTitle.Add("At: " + DateTime.Now.ToString() + "\n\n");
+            paragraphReportSubTitle.Alignment = Element.ALIGN_CENTER;
+
+            doc.Add(paragraphCompanyInfo);
+            doc.Add(paragraphReportTitle);
+            doc.Add(paragraphReportSubTitle);
+
+            if (personDetail != null)
+            {
+                //Adding the Passport size photo
+                System.Drawing.Image passportPhoto = personDetail.getPassportPhoto();
+                iTextSharp.text.Image passportPic = iTextSharp.text.Image.GetInstance(passportPhoto, System.Drawing.Imaging.ImageFormat.Bmp);
+                passportPic.ScaleAbsolute(120f, 120f);
+                doc.Add(passportPic);
+
+                //Adding the person detail
+                Paragraph paragraphReportBody = new Paragraph();
+                paragraphReportBody.Add("ID: " + personDetail.getPersonId() + "\n");
+                paragraphReportBody.Add("Name: " + " " + personDetail.getPrefix() + " " + personDetail.getFirstName() + " " + personDetail.getMiddleName() + " " + personDetail.getLastName() + " " + personDetail.getSuffix() + "\n");
+                paragraphReportBody.Add("Date of Birth (DOB): " + ((DateTime)personDetail.getDOB()).ToString("yyyy-MM-dd") + "\n");
+                paragraphReportBody.Add("Father's Name: " + personDetail.getFatherName() + "\n");
+                paragraphReportBody.Add("Address: " + personDetail.getStreetAddress() + ", " + personDetail.getCity() + ", " + personDetail.getState() + " " + personDetail.getPostalCode() + ", " + personDetail.getCountry() + "\n");
+                paragraphReportBody.Add("Profession: " + personDetail.getProfession() + "\n");
+                paragraphReportBody.Add("Cell#: " + personDetail.getCellNbr() + ", Home Phone#: " + personDetail.getHomePhoneNbr() + ", Work Phone#: " + personDetail.getWorkPhoneNbr() + "\n");
+                paragraphReportBody.Add("Email: " + personDetail.getEmail() + "\n");
+                doc.Add(paragraphReportBody);                 
+            }
+
+            doc.Close();
+            Console.WriteLine("PDF Generated successfully...");
+            System.Diagnostics.Process.Start(pdfPath);
+        }
+
+        private void timerCurrentDateTime_Tick(object sender, EventArgs e)
+        {
+            lblTimer.Text = DateTime.Now.ToString("MMMM dd, yyyy hh:mm:ss tt");
+        }
+
+
+        private void btnEnrollUpdate_Click(object sender, EventArgs e)
+        {
+            string id = txtEnrollId.Text;
+            string fname = txtEnrollFName.Text;
+            string lname = txtEnrollLName.Text;
+            string mname = txtEnrollMName.Text;
+            string prefix = txtEnrollPrefix.Text;
+            string suffix = txtEnrollSuffix.Text;
+            DateTime dobTemp = dtpEnrollDOB.Value;
+            DateTime dob = Convert.ToDateTime(dobTemp.ToString("MM/dd/yyy"));
+            string streeAddr = txtEnrollAddrLine.Text;
+            string city = txtEnrollCity.Text;
+            string postalCode = txtEnrollPostalCode.Text;
+            string state = txtEnrollState.Text;
+            string country = txtEnrollCountry.Text;
+            string profession = txtEnrollProfession.Text;
+            string fatherName = txtEnrollFatherName.Text;
+            string cellNbr = txtEnrollCellNbr.Text;
+            string workPhoneNbr = txtEnrollWorkPNbr.Text;
+            string homePhoneNbr = txtEnrollHomePNbr.Text;
+            string email = txtEnrollEmail.Text;
+            System.Drawing.Image passportPhoto = picEnrollPassportPhoto.Image;
+            string status = null;
+
+            try
+            {
+                PersonDetail personDetail = new PersonDetail();
+                personDetail.setPersonId(id);
+                personDetail.setFirstName(fname);
+                personDetail.setLastName(lname);
+                personDetail.setMiddleName(mname);
+                personDetail.setPrefix(prefix);
+                personDetail.setSuffix(suffix);
+                personDetail.setDOB(dob);
+                personDetail.setStreetAddress(streeAddr);
+                personDetail.setCity(city);
+                personDetail.setPostalCode(postalCode);
+                personDetail.setState(state);
+                personDetail.setCountry(country);
+                personDetail.setProfession(profession);
+                personDetail.setFatherName(fatherName);
+                personDetail.setcellNbr(cellNbr);
+                personDetail.setWorkPhoneNbr(workPhoneNbr);
+                personDetail.setHomwPhoneNbr(homePhoneNbr);
+                personDetail.setEmail(email);
+                personDetail.setPassportPhoto(passportPhoto);
+
+
+                if (picRTImagePath != null) imgFilePaths.Add(new KeyValuePair<String, String>("fpRTPath", picRTImagePath));
+                if (picRIImagePath != null) imgFilePaths.Add(new KeyValuePair<String, String>("fpRIPath", picRIImagePath));
+                if (picRMImagePath != null) imgFilePaths.Add(new KeyValuePair<String, String>("fpRMPath", picRMImagePath));
+                if (picRRImagePath != null) imgFilePaths.Add(new KeyValuePair<String, String>("fpRRPath", picRRImagePath));
+                if (picRLImagePath != null) imgFilePaths.Add(new KeyValuePair<String, String>("fpRLPath", picRLImagePath));
+                if (picLTImagePath != null) imgFilePaths.Add(new KeyValuePair<String, String>("fpLTPath", picLTImagePath));
+                if (picLIImagePath != null) imgFilePaths.Add(new KeyValuePair<String, String>("fpLIPath", picLIImagePath));
+                if (picLMImagePath != null) imgFilePaths.Add(new KeyValuePair<String, String>("fpLMPath", picLMImagePath));
+                if (picLRImagePath != null) imgFilePaths.Add(new KeyValuePair<String, String>("fpLRPath", picLRImagePath));
+                if (picLLImagePath != null) imgFilePaths.Add(new KeyValuePair<String, String>("fpLLPath", picLLImagePath));
+
+                //store person's demograpgy
+                DataAccess dataAccess = new DataAccess();
+                dataAccess.updatePersonDetail(personDetail);
+
+                if (imgFilePaths.Count > 0)
+                {
+                    //store person's finger prints
+                    MyPerson person = Program.Enroll(imgFilePaths, fname, id);
+                    dataAccess.updateFingerprints(person);
+                }
+                status = "Enrollment update of " + fname + " (Id = " + id + ") completed successfully.";
+                lblEnrollStatusMsg.ForeColor = System.Drawing.Color.Green;
+                activityLog.setActivity(status);   
+            }
+            catch (Exception exp)
+            {
+                status = "Enrollment update of " + fname + " (Id = " + id + ") is unsuccessful. Reason is - " + exp.Message + ".";
+                activityLog.setActivity(status);
+                lblEnrollStatusMsg.ForeColor = System.Drawing.Color.Red;
+                throw exp;
+            }
+            lblEnrollStatusMsg.Text = status;
+        }//btnEnrollUpdate_Click
+
+        private void toolTip1_Popup(object sender, PopupEventArgs e)
+        {
+
         }
     }
 }

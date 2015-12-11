@@ -11,9 +11,12 @@ namespace AFIS360
 {
     public partial class PasswordReset : Form
     {
-        public PasswordReset()
+        private ActivityLog activityLog;
+
+        public PasswordReset(ActivityLog activityLog)
         {
             InitializeComponent();
+            this.activityLog = activityLog;
         }
 
         private void btnResetPassSubmit_Click(object sender, EventArgs e)
@@ -29,11 +32,13 @@ namespace AFIS360
             {
                 lblResetPassStatusMsg.ForeColor = System.Drawing.Color.Green;
                 lblResetPassStatusMsg.Text = status.getStatusDesc();
+                activityLog.setActivity("Password reset for user (" + userId + ") is successfully.");
             }
             else
             {
                 lblResetPassStatusMsg.ForeColor = System.Drawing.Color.Red;
                 lblResetPassStatusMsg.Text = status.getStatusDesc();
+                activityLog.setActivity("Password reset for user (" + userId + ") is unsuccessfully.");
             }
 
         }
