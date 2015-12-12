@@ -16,12 +16,12 @@ namespace AFIS360
             activityLogs = new List<string>();
         }
 
-        public void setActivityLog(string log)
+        public void setActivity(string log)
         {
             this.activityLogs.Add(log);
         }
 
-        public List<string> getActivityLog()
+        public List<string> getActivity()
         {
             return this.activityLogs;
         }
