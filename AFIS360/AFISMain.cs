@@ -1376,9 +1376,5 @@ namespace AFIS360
             lblEnrollStatusMsg.Text = status;
         }//btnEnrollUpdate_Click
 
-        private void toolTip1_Popup(object sender, PopupEventArgs e)
-        {
-
-        }
     }
 }

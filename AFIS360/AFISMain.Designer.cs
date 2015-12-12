@@ -2185,10 +2185,6 @@
             this.lblTimer.Size = new System.Drawing.Size(0, 16);
             this.lblTimer.TabIndex = 4;
             // 
-            // toolTip1
-            // 
-            this.toolTip1.Popup += new System.Windows.Forms.PopupEventHandler(this.toolTip1_Popup);
-            // 
             // AFISMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
