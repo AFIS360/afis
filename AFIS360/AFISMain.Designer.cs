@@ -42,6 +42,9 @@
             this.lblLoginCR = new System.Windows.Forms.Label();
             this.tabEnroll = new System.Windows.Forms.TabPage();
             this.grpEnroll = new System.Windows.Forms.GroupBox();
+            this.btnEnrollUpdate = new System.Windows.Forms.Button();
+            this.dtpEnrollDOB = new System.Windows.Forms.DateTimePicker();
+            this.lblEnrollDOB = new System.Windows.Forms.Label();
             this.lblId = new System.Windows.Forms.Label();
             this.btnEnrollCRL = new System.Windows.Forms.Button();
             this.lblEnrollStatus = new System.Windows.Forms.Label();
@@ -190,31 +193,28 @@
             this.lblUserMgmtPassword = new System.Windows.Forms.Label();
             this.lblUserMgmtCR = new System.Windows.Forms.Label();
             this.tabAuditReport = new System.Windows.Forms.TabPage();
+            this.grpBoxAuditReportPersonDetail = new System.Windows.Forms.GroupBox();
+            this.lblAuditReportPersonId = new System.Windows.Forms.Label();
+            this.btnAuditReportPersonDetailReport = new System.Windows.Forms.Button();
+            this.txtAuditReportPersonId = new System.Windows.Forms.TextBox();
             this.grpBoxAuditReportUserAccessRpt = new System.Windows.Forms.GroupBox();
             this.lblUserAccessReportUserId = new System.Windows.Forms.Label();
+            this.btnAuditReportCustReport = new System.Windows.Forms.Button();
             this.txtAuditReportUserId = new System.Windows.Forms.TextBox();
             this.dtpAuditReportEndDate = new System.Windows.Forms.DateTimePicker();
             this.lblAuditReportRptStartDate = new System.Windows.Forms.Label();
             this.lblAuditReportRptEndDate = new System.Windows.Forms.Label();
             this.dtpAuditReportStartDate = new System.Windows.Forms.DateTimePicker();
-            this.btnAuditReportCustReport = new System.Windows.Forms.Button();
             this.menuStrip = new System.Windows.Forms.MenuStrip();
             this.toolStripMenuItemMain = new System.Windows.Forms.ToolStripMenuItem();
             this.changePasswordToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.logOutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.directorySearcher1 = new System.DirectoryServices.DirectorySearcher();
-            this.grpBoxAuditReportPersonDetail = new System.Windows.Forms.GroupBox();
-            this.lblAuditReportPersonId = new System.Windows.Forms.Label();
-            this.btnAuditReportPersonDetailReport = new System.Windows.Forms.Button();
-            this.txtAuditReportPersonId = new System.Windows.Forms.TextBox();
             this.lblLoginAs = new System.Windows.Forms.Label();
             this.lblLoginPerson = new System.Windows.Forms.Label();
             this.timerCurrentDateTime = new System.Windows.Forms.Timer(this.components);
             this.lblTimer = new System.Windows.Forms.Label();
-            this.lblEnrollDOB = new System.Windows.Forms.Label();
-            this.dtpEnrollDOB = new System.Windows.Forms.DateTimePicker();
-            this.btnEnrollUpdate = new System.Windows.Forms.Button();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.tabControlAFIS.SuspendLayout();
             this.tabLogin.SuspendLayout();
@@ -250,9 +250,9 @@
             this.tabUserMgmt.SuspendLayout();
             this.grpUserMgmt.SuspendLayout();
             this.tabAuditReport.SuspendLayout();
+            this.grpBoxAuditReportPersonDetail.SuspendLayout();
             this.grpBoxAuditReportUserAccessRpt.SuspendLayout();
             this.menuStrip.SuspendLayout();
-            this.grpBoxAuditReportPersonDetail.SuspendLayout();
             this.SuspendLayout();
             // 
             // tabControlAFIS
@@ -459,6 +459,36 @@
             this.grpEnroll.TabIndex = 65;
             this.grpEnroll.TabStop = false;
             this.grpEnroll.Text = "Enroll a person into AFIS system";
+            // 
+            // btnEnrollUpdate
+            // 
+            this.btnEnrollUpdate.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnEnrollUpdate.Location = new System.Drawing.Point(513, 648);
+            this.btnEnrollUpdate.Name = "btnEnrollUpdate";
+            this.btnEnrollUpdate.Size = new System.Drawing.Size(86, 30);
+            this.btnEnrollUpdate.TabIndex = 67;
+            this.btnEnrollUpdate.Text = "Update";
+            this.btnEnrollUpdate.UseVisualStyleBackColor = true;
+            this.btnEnrollUpdate.Click += new System.EventHandler(this.btnEnrollUpdate_Click);
+            // 
+            // dtpEnrollDOB
+            // 
+            this.dtpEnrollDOB.CalendarFont = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.dtpEnrollDOB.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.dtpEnrollDOB.Location = new System.Drawing.Point(87, 229);
+            this.dtpEnrollDOB.Name = "dtpEnrollDOB";
+            this.dtpEnrollDOB.Size = new System.Drawing.Size(214, 20);
+            this.dtpEnrollDOB.TabIndex = 66;
+            // 
+            // lblEnrollDOB
+            // 
+            this.lblEnrollDOB.AutoSize = true;
+            this.lblEnrollDOB.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblEnrollDOB.Location = new System.Drawing.Point(17, 231);
+            this.lblEnrollDOB.Name = "lblEnrollDOB";
+            this.lblEnrollDOB.Size = new System.Drawing.Size(64, 20);
+            this.lblEnrollDOB.TabIndex = 65;
+            this.lblEnrollDOB.Text = "DOB *:";
             // 
             // lblId
             // 
@@ -1950,6 +1980,47 @@
             this.tabAuditReport.Text = "Audit/Report";
             this.tabAuditReport.UseVisualStyleBackColor = true;
             // 
+            // grpBoxAuditReportPersonDetail
+            // 
+            this.grpBoxAuditReportPersonDetail.Controls.Add(this.lblAuditReportPersonId);
+            this.grpBoxAuditReportPersonDetail.Controls.Add(this.btnAuditReportPersonDetailReport);
+            this.grpBoxAuditReportPersonDetail.Controls.Add(this.txtAuditReportPersonId);
+            this.grpBoxAuditReportPersonDetail.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.grpBoxAuditReportPersonDetail.Location = new System.Drawing.Point(563, 24);
+            this.grpBoxAuditReportPersonDetail.Name = "grpBoxAuditReportPersonDetail";
+            this.grpBoxAuditReportPersonDetail.Size = new System.Drawing.Size(474, 211);
+            this.grpBoxAuditReportPersonDetail.TabIndex = 17;
+            this.grpBoxAuditReportPersonDetail.TabStop = false;
+            this.grpBoxAuditReportPersonDetail.Text = "Person Detail Report";
+            // 
+            // lblAuditReportPersonId
+            // 
+            this.lblAuditReportPersonId.AutoSize = true;
+            this.lblAuditReportPersonId.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblAuditReportPersonId.Location = new System.Drawing.Point(19, 33);
+            this.lblAuditReportPersonId.Name = "lblAuditReportPersonId";
+            this.lblAuditReportPersonId.Size = new System.Drawing.Size(106, 20);
+            this.lblAuditReportPersonId.TabIndex = 3;
+            this.lblAuditReportPersonId.Text = "Person ID *:";
+            // 
+            // btnAuditReportPersonDetailReport
+            // 
+            this.btnAuditReportPersonDetailReport.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnAuditReportPersonDetailReport.Location = new System.Drawing.Point(23, 144);
+            this.btnAuditReportPersonDetailReport.Name = "btnAuditReportPersonDetailReport";
+            this.btnAuditReportPersonDetailReport.Size = new System.Drawing.Size(304, 33);
+            this.btnAuditReportPersonDetailReport.TabIndex = 15;
+            this.btnAuditReportPersonDetailReport.Text = "Generate Person\'s Detail Report";
+            this.btnAuditReportPersonDetailReport.UseVisualStyleBackColor = true;
+            this.btnAuditReportPersonDetailReport.Click += new System.EventHandler(this.btnAuditReportPersonDetailReport_Click);
+            // 
+            // txtAuditReportPersonId
+            // 
+            this.txtAuditReportPersonId.Location = new System.Drawing.Point(130, 30);
+            this.txtAuditReportPersonId.Name = "txtAuditReportPersonId";
+            this.txtAuditReportPersonId.Size = new System.Drawing.Size(177, 26);
+            this.txtAuditReportPersonId.TabIndex = 2;
+            // 
             // grpBoxAuditReportUserAccessRpt
             // 
             this.grpBoxAuditReportUserAccessRpt.Controls.Add(this.lblUserAccessReportUserId);
@@ -1976,6 +2047,17 @@
             this.lblUserAccessReportUserId.Size = new System.Drawing.Size(76, 20);
             this.lblUserAccessReportUserId.TabIndex = 3;
             this.lblUserAccessReportUserId.Text = "User ID:";
+            // 
+            // btnAuditReportCustReport
+            // 
+            this.btnAuditReportCustReport.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnAuditReportCustReport.Location = new System.Drawing.Point(23, 144);
+            this.btnAuditReportCustReport.Name = "btnAuditReportCustReport";
+            this.btnAuditReportCustReport.Size = new System.Drawing.Size(304, 33);
+            this.btnAuditReportCustReport.TabIndex = 15;
+            this.btnAuditReportCustReport.Text = "Generate User\'s Access Report";
+            this.btnAuditReportCustReport.UseVisualStyleBackColor = true;
+            this.btnAuditReportCustReport.Click += new System.EventHandler(this.btnAuditReportCustReport_Click);
             // 
             // txtAuditReportUserId
             // 
@@ -2022,24 +2104,13 @@
             this.dtpAuditReportStartDate.Size = new System.Drawing.Size(275, 22);
             this.dtpAuditReportStartDate.TabIndex = 13;
             // 
-            // btnAuditReportCustReport
-            // 
-            this.btnAuditReportCustReport.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnAuditReportCustReport.Location = new System.Drawing.Point(23, 144);
-            this.btnAuditReportCustReport.Name = "btnAuditReportCustReport";
-            this.btnAuditReportCustReport.Size = new System.Drawing.Size(304, 33);
-            this.btnAuditReportCustReport.TabIndex = 15;
-            this.btnAuditReportCustReport.Text = "Generate User\'s Access Report";
-            this.btnAuditReportCustReport.UseVisualStyleBackColor = true;
-            this.btnAuditReportCustReport.Click += new System.EventHandler(this.btnAuditReportCustReport_Click);
-            // 
             // menuStrip
             // 
             this.menuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolStripMenuItemMain});
             this.menuStrip.Location = new System.Drawing.Point(0, 0);
             this.menuStrip.Name = "menuStrip";
-            this.menuStrip.Size = new System.Drawing.Size(1219, 24);
+            this.menuStrip.Size = new System.Drawing.Size(1183, 24);
             this.menuStrip.TabIndex = 1;
             this.menuStrip.Text = "Menu";
             // 
@@ -2080,47 +2151,6 @@
             this.directorySearcher1.ServerPageTimeLimit = System.TimeSpan.Parse("-00:00:01");
             this.directorySearcher1.ServerTimeLimit = System.TimeSpan.Parse("-00:00:01");
             // 
-            // grpBoxAuditReportPersonDetail
-            // 
-            this.grpBoxAuditReportPersonDetail.Controls.Add(this.lblAuditReportPersonId);
-            this.grpBoxAuditReportPersonDetail.Controls.Add(this.btnAuditReportPersonDetailReport);
-            this.grpBoxAuditReportPersonDetail.Controls.Add(this.txtAuditReportPersonId);
-            this.grpBoxAuditReportPersonDetail.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.grpBoxAuditReportPersonDetail.Location = new System.Drawing.Point(563, 24);
-            this.grpBoxAuditReportPersonDetail.Name = "grpBoxAuditReportPersonDetail";
-            this.grpBoxAuditReportPersonDetail.Size = new System.Drawing.Size(474, 211);
-            this.grpBoxAuditReportPersonDetail.TabIndex = 17;
-            this.grpBoxAuditReportPersonDetail.TabStop = false;
-            this.grpBoxAuditReportPersonDetail.Text = "Person Detail Report";
-            // 
-            // lblAuditReportPersonId
-            // 
-            this.lblAuditReportPersonId.AutoSize = true;
-            this.lblAuditReportPersonId.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblAuditReportPersonId.Location = new System.Drawing.Point(19, 33);
-            this.lblAuditReportPersonId.Name = "lblAuditReportPersonId";
-            this.lblAuditReportPersonId.Size = new System.Drawing.Size(106, 20);
-            this.lblAuditReportPersonId.TabIndex = 3;
-            this.lblAuditReportPersonId.Text = "Person ID *:";
-            // 
-            // btnAuditReportPersonDetailReport
-            // 
-            this.btnAuditReportPersonDetailReport.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnAuditReportPersonDetailReport.Location = new System.Drawing.Point(23, 144);
-            this.btnAuditReportPersonDetailReport.Name = "btnAuditReportPersonDetailReport";
-            this.btnAuditReportPersonDetailReport.Size = new System.Drawing.Size(304, 33);
-            this.btnAuditReportPersonDetailReport.TabIndex = 15;
-            this.btnAuditReportPersonDetailReport.Text = "Generate Person\'s Detail Report";
-            this.btnAuditReportPersonDetailReport.UseVisualStyleBackColor = true;
-            this.btnAuditReportPersonDetailReport.Click += new System.EventHandler(this.btnAuditReportPersonDetailReport_Click);
-            // 
-            // txtAuditReportPersonId
-            // 
-            this.txtAuditReportPersonId.Location = new System.Drawing.Point(130, 30);
-            this.txtAuditReportPersonId.Name = "txtAuditReportPersonId";
-            this.txtAuditReportPersonId.Size = new System.Drawing.Size(177, 26);
-            this.txtAuditReportPersonId.TabIndex = 2;
-            // 
             // lblLoginAs
             // 
             this.lblLoginAs.AutoSize = true;
@@ -2155,36 +2185,6 @@
             this.lblTimer.Size = new System.Drawing.Size(0, 16);
             this.lblTimer.TabIndex = 4;
             // 
-            // lblEnrollDOB
-            // 
-            this.lblEnrollDOB.AutoSize = true;
-            this.lblEnrollDOB.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblEnrollDOB.Location = new System.Drawing.Point(17, 231);
-            this.lblEnrollDOB.Name = "lblEnrollDOB";
-            this.lblEnrollDOB.Size = new System.Drawing.Size(64, 20);
-            this.lblEnrollDOB.TabIndex = 65;
-            this.lblEnrollDOB.Text = "DOB *:";
-            // 
-            // dtpEnrollDOB
-            // 
-            this.dtpEnrollDOB.CalendarFont = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.dtpEnrollDOB.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.dtpEnrollDOB.Location = new System.Drawing.Point(87, 229);
-            this.dtpEnrollDOB.Name = "dtpEnrollDOB";
-            this.dtpEnrollDOB.Size = new System.Drawing.Size(214, 20);
-            this.dtpEnrollDOB.TabIndex = 66;
-            // 
-            // btnEnrollUpdate
-            // 
-            this.btnEnrollUpdate.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnEnrollUpdate.Location = new System.Drawing.Point(513, 648);
-            this.btnEnrollUpdate.Name = "btnEnrollUpdate";
-            this.btnEnrollUpdate.Size = new System.Drawing.Size(86, 30);
-            this.btnEnrollUpdate.TabIndex = 67;
-            this.btnEnrollUpdate.Text = "Update";
-            this.btnEnrollUpdate.UseVisualStyleBackColor = true;
-            this.btnEnrollUpdate.Click += new System.EventHandler(this.btnEnrollUpdate_Click);
-            // 
             // toolTip1
             // 
             this.toolTip1.Popup += new System.Windows.Forms.PopupEventHandler(this.toolTip1_Popup);
@@ -2194,7 +2194,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSize = true;
-            this.ClientSize = new System.Drawing.Size(1219, 741);
+            this.ClientSize = new System.Drawing.Size(1183, 741);
             this.Controls.Add(this.lblTimer);
             this.Controls.Add(this.lblLoginPerson);
             this.Controls.Add(this.lblLoginAs);
@@ -2249,12 +2249,12 @@
             this.grpUserMgmt.ResumeLayout(false);
             this.grpUserMgmt.PerformLayout();
             this.tabAuditReport.ResumeLayout(false);
+            this.grpBoxAuditReportPersonDetail.ResumeLayout(false);
+            this.grpBoxAuditReportPersonDetail.PerformLayout();
             this.grpBoxAuditReportUserAccessRpt.ResumeLayout(false);
             this.grpBoxAuditReportUserAccessRpt.PerformLayout();
             this.menuStrip.ResumeLayout(false);
             this.menuStrip.PerformLayout();
-            this.grpBoxAuditReportPersonDetail.ResumeLayout(false);
-            this.grpBoxAuditReportPersonDetail.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
