@@ -239,7 +239,7 @@ namespace AFIS360
                         Console.WriteLine("####-->>>> Finger Name is not assigned");
                     }
                 }
-                message = "Match found (" + pDetail.getFirstName() + " " + pDetail.getLastName() + " - " + pDetail.getPersonId() + "). Matching score " + match.getScore();
+                message = "Match found. Matching Score:" + match.getScore();
                 lblMatchStatusText.ForeColor = System.Drawing.Color.Green;
                 //adding the activity log
                 activityLog.setActivity("Match Activity: " + message);
