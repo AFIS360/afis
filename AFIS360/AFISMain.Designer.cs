@@ -275,10 +275,10 @@
             this.tabLogin.Controls.Add(this.grpLogin);
             this.tabLogin.Controls.Add(this.label1);
             this.tabLogin.Controls.Add(this.lblLoginCR);
-            this.tabLogin.Location = new System.Drawing.Point(4, 24);
+            this.tabLogin.Location = new System.Drawing.Point(4, 22);
             this.tabLogin.Name = "tabLogin";
             this.tabLogin.Padding = new System.Windows.Forms.Padding(3, 3, 3, 3);
-            this.tabLogin.Size = new System.Drawing.Size(1135, 745);
+            this.tabLogin.Size = new System.Drawing.Size(1135, 747);
             this.tabLogin.TabIndex = 2;
             this.tabLogin.Text = "Login";
             this.tabLogin.UseVisualStyleBackColor = true;
@@ -378,10 +378,10 @@
             this.tabEnroll.BackColor = System.Drawing.Color.Transparent;
             this.tabEnroll.Controls.Add(this.grpEnroll);
             this.tabEnroll.Controls.Add(this.lblCopyR);
-            this.tabEnroll.Location = new System.Drawing.Point(4, 24);
+            this.tabEnroll.Location = new System.Drawing.Point(4, 22);
             this.tabEnroll.Name = "tabEnroll";
             this.tabEnroll.Padding = new System.Windows.Forms.Padding(3, 3, 3, 3);
-            this.tabEnroll.Size = new System.Drawing.Size(1135, 745);
+            this.tabEnroll.Size = new System.Drawing.Size(1135, 747);
             this.tabEnroll.TabIndex = 0;
             this.tabEnroll.Text = "Enroll";
             // 
@@ -1614,9 +1614,9 @@
             this.tabUserMgmt.AutoScroll = true;
             this.tabUserMgmt.Controls.Add(this.grpUserMgmt);
             this.tabUserMgmt.Controls.Add(this.lblUserMgmtCR);
-            this.tabUserMgmt.Location = new System.Drawing.Point(4, 24);
+            this.tabUserMgmt.Location = new System.Drawing.Point(4, 22);
             this.tabUserMgmt.Name = "tabUserMgmt";
-            this.tabUserMgmt.Size = new System.Drawing.Size(1135, 745);
+            this.tabUserMgmt.Size = new System.Drawing.Size(1135, 747);
             this.tabUserMgmt.TabIndex = 3;
             this.tabUserMgmt.Text = "User Mgmt";
             this.tabUserMgmt.UseVisualStyleBackColor = true;
@@ -1973,9 +1973,9 @@
             this.tabAuditReport.AutoScroll = true;
             this.tabAuditReport.Controls.Add(this.grpBoxAuditReportPersonDetail);
             this.tabAuditReport.Controls.Add(this.grpBoxAuditReportUserAccessRpt);
-            this.tabAuditReport.Location = new System.Drawing.Point(4, 24);
+            this.tabAuditReport.Location = new System.Drawing.Point(4, 22);
             this.tabAuditReport.Name = "tabAuditReport";
-            this.tabAuditReport.Size = new System.Drawing.Size(1135, 745);
+            this.tabAuditReport.Size = new System.Drawing.Size(1135, 747);
             this.tabAuditReport.TabIndex = 4;
             this.tabAuditReport.Text = "Audit/Report";
             this.tabAuditReport.UseVisualStyleBackColor = true;
@@ -2112,7 +2112,7 @@
             this.sToolStripMenuItem});
             this.menuStrip.Location = new System.Drawing.Point(0, 0);
             this.menuStrip.Name = "menuStrip";
-            this.menuStrip.Size = new System.Drawing.Size(1168, 24);
+            this.menuStrip.Size = new System.Drawing.Size(1185, 24);
             this.menuStrip.TabIndex = 1;
             this.menuStrip.Text = "Menu";
             // 
@@ -2190,9 +2190,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.AutoScroll = true;
-            this.AutoSize = true;
-            this.ClientSize = new System.Drawing.Size(1185, 691);
+            this.ClientSize = new System.Drawing.Size(1185, 825);
             this.Controls.Add(this.lblTimer);
             this.Controls.Add(this.lblLoginPerson);
             this.Controls.Add(this.lblLoginAs);
