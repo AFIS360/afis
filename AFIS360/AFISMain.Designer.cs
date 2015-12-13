@@ -390,11 +390,11 @@
             this.tabEnroll.BackColor = System.Drawing.Color.Transparent;
             this.tabEnroll.Controls.Add(this.grpEnroll);
             this.tabEnroll.Controls.Add(this.lblCopyR);
-            this.tabEnroll.Location = new System.Drawing.Point(4, 25);
+            this.tabEnroll.Location = new System.Drawing.Point(4, 24);
             this.tabEnroll.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.tabEnroll.Name = "tabEnroll";
             this.tabEnroll.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.tabEnroll.Size = new System.Drawing.Size(1325, 863);
+            this.tabEnroll.Size = new System.Drawing.Size(1325, 864);
             this.tabEnroll.TabIndex = 0;
             this.tabEnroll.Text = "Enroll";
             // 
@@ -2375,7 +2375,8 @@
             // 
             // AFISMain
             // 
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
+            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoScroll = true;
             this.AutoSize = true;
             this.ClientSize = new System.Drawing.Size(1383, 797);
