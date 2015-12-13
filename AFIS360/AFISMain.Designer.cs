@@ -261,6 +261,7 @@
             this.tabControlAFIS.Controls.Add(this.tabMatch);
             this.tabControlAFIS.Controls.Add(this.tabUserMgmt);
             this.tabControlAFIS.Controls.Add(this.tabAuditReport);
+            this.tabControlAFIS.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.tabControlAFIS.Location = new System.Drawing.Point(21, 41);
             this.tabControlAFIS.Name = "tabControlAFIS";
             this.tabControlAFIS.SelectedIndex = 0;
@@ -275,10 +276,10 @@
             this.tabLogin.Controls.Add(this.grpLogin);
             this.tabLogin.Controls.Add(this.label1);
             this.tabLogin.Controls.Add(this.lblLoginCR);
-            this.tabLogin.Location = new System.Drawing.Point(4, 22);
+            this.tabLogin.Location = new System.Drawing.Point(4, 25);
             this.tabLogin.Name = "tabLogin";
             this.tabLogin.Padding = new System.Windows.Forms.Padding(3, 3, 3, 3);
-            this.tabLogin.Size = new System.Drawing.Size(1135, 747);
+            this.tabLogin.Size = new System.Drawing.Size(1135, 744);
             this.tabLogin.TabIndex = 2;
             this.tabLogin.Text = "Login";
             this.tabLogin.UseVisualStyleBackColor = true;
@@ -360,7 +361,7 @@
             this.label1.AutoSize = true;
             this.label1.Location = new System.Drawing.Point(307, 141);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(0, 13);
+            this.label1.Size = new System.Drawing.Size(0, 16);
             this.label1.TabIndex = 15;
             // 
             // lblLoginCR
@@ -368,7 +369,7 @@
             this.lblLoginCR.AutoSize = true;
             this.lblLoginCR.Location = new System.Drawing.Point(495, 722);
             this.lblLoginCR.Name = "lblLoginCR";
-            this.lblLoginCR.Size = new System.Drawing.Size(147, 13);
+            this.lblLoginCR.Size = new System.Drawing.Size(184, 16);
             this.lblLoginCR.TabIndex = 9;
             this.lblLoginCR.Text = "Copyright @ Lakers Tek USA";
             // 
@@ -378,10 +379,10 @@
             this.tabEnroll.BackColor = System.Drawing.Color.Transparent;
             this.tabEnroll.Controls.Add(this.grpEnroll);
             this.tabEnroll.Controls.Add(this.lblCopyR);
-            this.tabEnroll.Location = new System.Drawing.Point(4, 22);
+            this.tabEnroll.Location = new System.Drawing.Point(4, 25);
             this.tabEnroll.Name = "tabEnroll";
             this.tabEnroll.Padding = new System.Windows.Forms.Padding(3, 3, 3, 3);
-            this.tabEnroll.Size = new System.Drawing.Size(1135, 747);
+            this.tabEnroll.Size = new System.Drawing.Size(1135, 744);
             this.tabEnroll.TabIndex = 0;
             this.tabEnroll.Text = "Enroll";
             // 
@@ -1075,7 +1076,7 @@
             this.lblCopyR.AutoSize = true;
             this.lblCopyR.Location = new System.Drawing.Point(498, 722);
             this.lblCopyR.Name = "lblCopyR";
-            this.lblCopyR.Size = new System.Drawing.Size(147, 13);
+            this.lblCopyR.Size = new System.Drawing.Size(184, 16);
             this.lblCopyR.TabIndex = 8;
             this.lblCopyR.Text = "Copyright @ Lakers Tek USA";
             // 
@@ -1595,7 +1596,7 @@
             this.lblMatchCR.AutoSize = true;
             this.lblMatchCR.Location = new System.Drawing.Point(513, 722);
             this.lblMatchCR.Name = "lblMatchCR";
-            this.lblMatchCR.Size = new System.Drawing.Size(147, 13);
+            this.lblMatchCR.Size = new System.Drawing.Size(184, 16);
             this.lblMatchCR.TabIndex = 16;
             this.lblMatchCR.Text = "Copyright @ Lakers Tek USA";
             // 
@@ -1964,7 +1965,7 @@
             this.lblUserMgmtCR.AutoSize = true;
             this.lblUserMgmtCR.Location = new System.Drawing.Point(498, 723);
             this.lblUserMgmtCR.Name = "lblUserMgmtCR";
-            this.lblUserMgmtCR.Size = new System.Drawing.Size(147, 13);
+            this.lblUserMgmtCR.Size = new System.Drawing.Size(184, 16);
             this.lblUserMgmtCR.TabIndex = 23;
             this.lblUserMgmtCR.Text = "Copyright @ Lakers Tek USA";
             // 
@@ -2112,7 +2113,7 @@
             this.sToolStripMenuItem});
             this.menuStrip.Location = new System.Drawing.Point(0, 0);
             this.menuStrip.Name = "menuStrip";
-            this.menuStrip.Size = new System.Drawing.Size(1185, 24);
+            this.menuStrip.Size = new System.Drawing.Size(1185, 25);
             this.menuStrip.TabIndex = 1;
             this.menuStrip.Text = "Menu";
             // 
@@ -2122,8 +2123,9 @@
             this.changePasswordToolStripMenuItem,
             this.logOutToolStripMenuItem,
             this.exitToolStripMenuItem});
+            this.toolStripMenuItemMain.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.toolStripMenuItemMain.Name = "toolStripMenuItemMain";
-            this.toolStripMenuItemMain.Size = new System.Drawing.Size(80, 20);
+            this.toolStripMenuItemMain.Size = new System.Drawing.Size(86, 21);
             this.toolStripMenuItemMain.Text = "Main Menu";
             // 
             // changePasswordToolStripMenuItem
@@ -2155,9 +2157,10 @@
             // lblLoginAs
             // 
             this.lblLoginAs.AutoSize = true;
+            this.lblLoginAs.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblLoginAs.Location = new System.Drawing.Point(741, 8);
             this.lblLoginAs.Name = "lblLoginAs";
-            this.lblLoginAs.Size = new System.Drawing.Size(53, 13);
+            this.lblLoginAs.Size = new System.Drawing.Size(65, 16);
             this.lblLoginAs.TabIndex = 2;
             this.lblLoginAs.Text = "Login as: ";
             // 
