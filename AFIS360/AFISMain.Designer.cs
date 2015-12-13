@@ -1348,10 +1348,10 @@
             // lblMatchStatusText
             // 
             this.lblMatchStatusText.AutoSize = true;
-            this.lblMatchStatusText.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblMatchStatusText.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblMatchStatusText.Location = new System.Drawing.Point(15, 36);
             this.lblMatchStatusText.Name = "lblMatchStatusText";
-            this.lblMatchStatusText.Size = new System.Drawing.Size(0, 24);
+            this.lblMatchStatusText.Size = new System.Drawing.Size(0, 16);
             this.lblMatchStatusText.TabIndex = 21;
             // 
             // lblMatchResFNameTxt
