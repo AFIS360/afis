@@ -302,9 +302,10 @@
             // 
             // txtLoginId
             // 
+            this.txtLoginId.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtLoginId.Location = new System.Drawing.Point(129, 42);
             this.txtLoginId.Name = "txtLoginId";
-            this.txtLoginId.Size = new System.Drawing.Size(160, 26);
+            this.txtLoginId.Size = new System.Drawing.Size(160, 22);
             this.txtLoginId.TabIndex = 2;
             // 
             // lblLoginFailureStatus
@@ -339,9 +340,10 @@
             // 
             // txtLoginPass
             // 
+            this.txtLoginPass.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtLoginPass.Location = new System.Drawing.Point(129, 76);
             this.txtLoginPass.Name = "txtLoginPass";
-            this.txtLoginPass.Size = new System.Drawing.Size(160, 26);
+            this.txtLoginPass.Size = new System.Drawing.Size(160, 22);
             this.txtLoginPass.TabIndex = 3;
             this.txtLoginPass.UseSystemPasswordChar = true;
             // 
@@ -553,9 +555,10 @@
             // 
             // txtEnrollId
             // 
+            this.txtEnrollId.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtEnrollId.Location = new System.Drawing.Point(135, 32);
             this.txtEnrollId.Name = "txtEnrollId";
-            this.txtEnrollId.Size = new System.Drawing.Size(167, 26);
+            this.txtEnrollId.Size = new System.Drawing.Size(167, 22);
             this.txtEnrollId.TabIndex = 1;
             this.txtEnrollId.Leave += new System.EventHandler(this.txtEnrollId_Leave);
             // 
@@ -627,9 +630,10 @@
             // 
             // txtEnrollHomePNbr
             // 
+            this.txtEnrollHomePNbr.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtEnrollHomePNbr.Location = new System.Drawing.Point(477, 216);
             this.txtEnrollHomePNbr.Name = "txtEnrollHomePNbr";
-            this.txtEnrollHomePNbr.Size = new System.Drawing.Size(217, 26);
+            this.txtEnrollHomePNbr.Size = new System.Drawing.Size(217, 22);
             this.txtEnrollHomePNbr.TabIndex = 15;
             // 
             // picEnrollLI
@@ -668,9 +672,10 @@
             // 
             // txtEnrollEmail
             // 
+            this.txtEnrollEmail.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtEnrollEmail.Location = new System.Drawing.Point(777, 68);
             this.txtEnrollEmail.Name = "txtEnrollEmail";
-            this.txtEnrollEmail.Size = new System.Drawing.Size(289, 26);
+            this.txtEnrollEmail.Size = new System.Drawing.Size(289, 22);
             this.txtEnrollEmail.TabIndex = 17;
             // 
             // lblEnrollHomePNbr
@@ -695,16 +700,18 @@
             // 
             // txtEnrollFName
             // 
+            this.txtEnrollFName.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtEnrollFName.Location = new System.Drawing.Point(135, 62);
             this.txtEnrollFName.Name = "txtEnrollFName";
-            this.txtEnrollFName.Size = new System.Drawing.Size(167, 26);
+            this.txtEnrollFName.Size = new System.Drawing.Size(167, 22);
             this.txtEnrollFName.TabIndex = 2;
             // 
             // txtEnrollFatherName
             // 
+            this.txtEnrollFatherName.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtEnrollFatherName.Location = new System.Drawing.Point(846, 102);
             this.txtEnrollFatherName.Name = "txtEnrollFatherName";
-            this.txtEnrollFatherName.Size = new System.Drawing.Size(220, 26);
+            this.txtEnrollFatherName.Size = new System.Drawing.Size(220, 22);
             this.txtEnrollFatherName.TabIndex = 7;
             // 
             // lblFpLI
@@ -719,9 +726,10 @@
             // 
             // txtEnrollCellNbr
             // 
+            this.txtEnrollCellNbr.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtEnrollCellNbr.Location = new System.Drawing.Point(403, 186);
             this.txtEnrollCellNbr.Name = "txtEnrollCellNbr";
-            this.txtEnrollCellNbr.Size = new System.Drawing.Size(289, 26);
+            this.txtEnrollCellNbr.Size = new System.Drawing.Size(289, 22);
             this.txtEnrollCellNbr.TabIndex = 14;
             // 
             // lblEnrollFatherName
@@ -822,9 +830,10 @@
             // 
             // txtEnrollWorkPNbr
             // 
+            this.txtEnrollWorkPNbr.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtEnrollWorkPNbr.Location = new System.Drawing.Point(859, 34);
             this.txtEnrollWorkPNbr.Name = "txtEnrollWorkPNbr";
-            this.txtEnrollWorkPNbr.Size = new System.Drawing.Size(206, 26);
+            this.txtEnrollWorkPNbr.Size = new System.Drawing.Size(206, 22);
             this.txtEnrollWorkPNbr.TabIndex = 16;
             // 
             // picEnrollRI
@@ -863,16 +872,18 @@
             // 
             // txtEnrollLName
             // 
+            this.txtEnrollLName.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtEnrollLName.Location = new System.Drawing.Point(135, 94);
             this.txtEnrollLName.Name = "txtEnrollLName";
-            this.txtEnrollLName.Size = new System.Drawing.Size(169, 26);
+            this.txtEnrollLName.Size = new System.Drawing.Size(169, 22);
             this.txtEnrollLName.TabIndex = 3;
             // 
             // txtEnrollSuffix
             // 
+            this.txtEnrollSuffix.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtEnrollSuffix.Location = new System.Drawing.Point(135, 186);
             this.txtEnrollSuffix.Name = "txtEnrollSuffix";
-            this.txtEnrollSuffix.Size = new System.Drawing.Size(167, 26);
+            this.txtEnrollSuffix.Size = new System.Drawing.Size(167, 22);
             this.txtEnrollSuffix.TabIndex = 6;
             // 
             // lblFpRM
@@ -887,9 +898,10 @@
             // 
             // txtEnrollProfession
             // 
+            this.txtEnrollProfession.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtEnrollProfession.Location = new System.Drawing.Point(423, 154);
             this.txtEnrollProfession.Name = "txtEnrollProfession";
-            this.txtEnrollProfession.Size = new System.Drawing.Size(270, 26);
+            this.txtEnrollProfession.Size = new System.Drawing.Size(270, 22);
             this.txtEnrollProfession.TabIndex = 13;
             // 
             // lblEnrollSuffix
@@ -944,9 +956,10 @@
             // 
             // txtEnrollCountry
             // 
+            this.txtEnrollCountry.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtEnrollCountry.Location = new System.Drawing.Point(410, 124);
             this.txtEnrollCountry.Name = "txtEnrollCountry";
-            this.txtEnrollCountry.Size = new System.Drawing.Size(283, 26);
+            this.txtEnrollCountry.Size = new System.Drawing.Size(283, 22);
             this.txtEnrollCountry.TabIndex = 12;
             // 
             // lblEnrollAddrLine
@@ -971,16 +984,18 @@
             // 
             // txtEnrollPrefix
             // 
+            this.txtEnrollPrefix.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtEnrollPrefix.Location = new System.Drawing.Point(135, 156);
             this.txtEnrollPrefix.Name = "txtEnrollPrefix";
-            this.txtEnrollPrefix.Size = new System.Drawing.Size(169, 26);
+            this.txtEnrollPrefix.Size = new System.Drawing.Size(169, 22);
             this.txtEnrollPrefix.TabIndex = 5;
             // 
             // txtEnrollAddrLine
             // 
+            this.txtEnrollAddrLine.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtEnrollAddrLine.Location = new System.Drawing.Point(451, 36);
             this.txtEnrollAddrLine.Name = "txtEnrollAddrLine";
-            this.txtEnrollAddrLine.Size = new System.Drawing.Size(241, 26);
+            this.txtEnrollAddrLine.Size = new System.Drawing.Size(241, 22);
             this.txtEnrollAddrLine.TabIndex = 8;
             // 
             // lblEnrollPrefix
@@ -1005,9 +1020,10 @@
             // 
             // txtEnrollCity
             // 
+            this.txtEnrollCity.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtEnrollCity.Location = new System.Drawing.Point(375, 63);
             this.txtEnrollCity.Name = "txtEnrollCity";
-            this.txtEnrollCity.Size = new System.Drawing.Size(122, 26);
+            this.txtEnrollCity.Size = new System.Drawing.Size(122, 22);
             this.txtEnrollCity.TabIndex = 9;
             // 
             // lblEnrollPostalCode
@@ -1032,9 +1048,10 @@
             // 
             // txtEnrollPostalCode
             // 
-            this.txtEnrollPostalCode.Location = new System.Drawing.Point(630, 67);
+            this.txtEnrollPostalCode.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtEnrollPostalCode.Location = new System.Drawing.Point(630, 62);
             this.txtEnrollPostalCode.Name = "txtEnrollPostalCode";
-            this.txtEnrollPostalCode.Size = new System.Drawing.Size(62, 26);
+            this.txtEnrollPostalCode.Size = new System.Drawing.Size(62, 22);
             this.txtEnrollPostalCode.TabIndex = 10;
             // 
             // lblEnrollState
@@ -1049,16 +1066,18 @@
             // 
             // txtEnrollMName
             // 
+            this.txtEnrollMName.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtEnrollMName.Location = new System.Drawing.Point(135, 125);
             this.txtEnrollMName.Name = "txtEnrollMName";
-            this.txtEnrollMName.Size = new System.Drawing.Size(167, 26);
+            this.txtEnrollMName.Size = new System.Drawing.Size(167, 22);
             this.txtEnrollMName.TabIndex = 4;
             // 
             // txtEnrollState
             // 
+            this.txtEnrollState.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtEnrollState.Location = new System.Drawing.Point(463, 94);
             this.txtEnrollState.Name = "txtEnrollState";
-            this.txtEnrollState.Size = new System.Drawing.Size(229, 26);
+            this.txtEnrollState.Size = new System.Drawing.Size(229, 22);
             this.txtEnrollState.TabIndex = 11;
             // 
             // lblEnrollMName
@@ -1087,10 +1106,10 @@
             this.tabMatch.Controls.Add(this.grpBoxMatchResult);
             this.tabMatch.Controls.Add(this.lblMatchCR);
             this.tabMatch.Controls.Add(this.lblMatch);
-            this.tabMatch.Location = new System.Drawing.Point(4, 22);
+            this.tabMatch.Location = new System.Drawing.Point(4, 25);
             this.tabMatch.Name = "tabMatch";
             this.tabMatch.Padding = new System.Windows.Forms.Padding(3, 3, 3, 3);
-            this.tabMatch.Size = new System.Drawing.Size(1135, 747);
+            this.tabMatch.Size = new System.Drawing.Size(1135, 744);
             this.tabMatch.TabIndex = 1;
             this.tabMatch.Text = "Match";
             this.tabMatch.UseVisualStyleBackColor = true;
@@ -1125,9 +1144,10 @@
             // 
             // txtMatchVisitorNbr
             // 
+            this.txtMatchVisitorNbr.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtMatchVisitorNbr.Location = new System.Drawing.Point(87, 47);
             this.txtMatchVisitorNbr.Name = "txtMatchVisitorNbr";
-            this.txtMatchVisitorNbr.Size = new System.Drawing.Size(127, 26);
+            this.txtMatchVisitorNbr.Size = new System.Drawing.Size(127, 22);
             this.txtMatchVisitorNbr.TabIndex = 1;
             // 
             // lblMatchCLR
@@ -1153,9 +1173,10 @@
             // 
             // txtMatchThreshold
             // 
+            this.txtMatchThreshold.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtMatchThreshold.Location = new System.Drawing.Point(158, 80);
             this.txtMatchThreshold.Name = "txtMatchThreshold";
-            this.txtMatchThreshold.Size = new System.Drawing.Size(57, 26);
+            this.txtMatchThreshold.Size = new System.Drawing.Size(57, 22);
             this.txtMatchThreshold.TabIndex = 2;
             this.txtMatchThreshold.Text = "60";
             // 
@@ -1615,9 +1636,9 @@
             this.tabUserMgmt.AutoScroll = true;
             this.tabUserMgmt.Controls.Add(this.grpUserMgmt);
             this.tabUserMgmt.Controls.Add(this.lblUserMgmtCR);
-            this.tabUserMgmt.Location = new System.Drawing.Point(4, 22);
+            this.tabUserMgmt.Location = new System.Drawing.Point(4, 25);
             this.tabUserMgmt.Name = "tabUserMgmt";
-            this.tabUserMgmt.Size = new System.Drawing.Size(1135, 747);
+            this.tabUserMgmt.Size = new System.Drawing.Size(1135, 744);
             this.tabUserMgmt.TabIndex = 3;
             this.tabUserMgmt.Text = "User Mgmt";
             this.tabUserMgmt.UseVisualStyleBackColor = true;
@@ -1746,9 +1767,10 @@
             // 
             // txtUserMgmtStationedCountry
             // 
+            this.txtUserMgmtStationedCountry.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtUserMgmtStationedCountry.Location = new System.Drawing.Point(199, 394);
             this.txtUserMgmtStationedCountry.Name = "txtUserMgmtStationedCountry";
-            this.txtUserMgmtStationedCountry.Size = new System.Drawing.Size(174, 26);
+            this.txtUserMgmtStationedCountry.Size = new System.Drawing.Size(174, 22);
             this.txtUserMgmtStationedCountry.TabIndex = 10;
             // 
             // lblUserMgmtStationedCountry
@@ -1762,9 +1784,10 @@
             // 
             // txtUserMgmtStationedCity
             // 
+            this.txtUserMgmtStationedCity.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtUserMgmtStationedCity.Location = new System.Drawing.Point(171, 356);
             this.txtUserMgmtStationedCity.Name = "txtUserMgmtStationedCity";
-            this.txtUserMgmtStationedCity.Size = new System.Drawing.Size(202, 26);
+            this.txtUserMgmtStationedCity.Size = new System.Drawing.Size(202, 22);
             this.txtUserMgmtStationedCity.TabIndex = 9;
             // 
             // lblUserMgmtStationedCity
@@ -1778,9 +1801,10 @@
             // 
             // txtUserMgmtStationedAddr
             // 
+            this.txtUserMgmtStationedAddr.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtUserMgmtStationedAddr.Location = new System.Drawing.Point(202, 321);
             this.txtUserMgmtStationedAddr.Name = "txtUserMgmtStationedAddr";
-            this.txtUserMgmtStationedAddr.Size = new System.Drawing.Size(271, 26);
+            this.txtUserMgmtStationedAddr.Size = new System.Drawing.Size(271, 22);
             this.txtUserMgmtStationedAddr.TabIndex = 8;
             // 
             // lblUserMgmtStationedAddr
@@ -1794,9 +1818,10 @@
             // 
             // txtUserMgmtStationId
             // 
+            this.txtUserMgmtStationId.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtUserMgmtStationId.Location = new System.Drawing.Point(141, 282);
             this.txtUserMgmtStationId.Name = "txtUserMgmtStationId";
-            this.txtUserMgmtStationId.Size = new System.Drawing.Size(82, 26);
+            this.txtUserMgmtStationId.Size = new System.Drawing.Size(82, 22);
             this.txtUserMgmtStationId.TabIndex = 7;
             // 
             // lblUserMgmtStationId
@@ -1842,9 +1867,10 @@
             // 
             // txtUserMgmtId
             // 
+            this.txtUserMgmtId.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtUserMgmtId.Location = new System.Drawing.Point(141, 42);
             this.txtUserMgmtId.Name = "txtUserMgmtId";
-            this.txtUserMgmtId.Size = new System.Drawing.Size(174, 26);
+            this.txtUserMgmtId.Size = new System.Drawing.Size(174, 22);
             this.txtUserMgmtId.TabIndex = 1;
             this.txtUserMgmtId.Leave += new System.EventHandler(this.txtUserMgmtId_Leave);
             // 
@@ -1879,9 +1905,10 @@
             // 
             // txtUserMgmtFName
             // 
+            this.txtUserMgmtFName.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtUserMgmtFName.Location = new System.Drawing.Point(141, 78);
             this.txtUserMgmtFName.Name = "txtUserMgmtFName";
-            this.txtUserMgmtFName.Size = new System.Drawing.Size(334, 26);
+            this.txtUserMgmtFName.Size = new System.Drawing.Size(334, 22);
             this.txtUserMgmtFName.TabIndex = 2;
             // 
             // lblUserMgmtLName
@@ -1896,9 +1923,10 @@
             // 
             // txtUserMgmtLName
             // 
+            this.txtUserMgmtLName.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtUserMgmtLName.Location = new System.Drawing.Point(141, 119);
             this.txtUserMgmtLName.Name = "txtUserMgmtLName";
-            this.txtUserMgmtLName.Size = new System.Drawing.Size(334, 26);
+            this.txtUserMgmtLName.Size = new System.Drawing.Size(334, 22);
             this.txtUserMgmtLName.TabIndex = 3;
             // 
             // listUserMgmtRole
@@ -1937,17 +1965,19 @@
             // 
             // txtUserMgmtPass
             // 
+            this.txtUserMgmtPass.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtUserMgmtPass.Location = new System.Drawing.Point(141, 193);
             this.txtUserMgmtPass.Name = "txtUserMgmtPass";
-            this.txtUserMgmtPass.Size = new System.Drawing.Size(174, 26);
+            this.txtUserMgmtPass.Size = new System.Drawing.Size(174, 22);
             this.txtUserMgmtPass.TabIndex = 5;
             this.txtUserMgmtPass.UseSystemPasswordChar = true;
             // 
             // txtUserMgmtUsername
             // 
+            this.txtUserMgmtUsername.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtUserMgmtUsername.Location = new System.Drawing.Point(141, 152);
             this.txtUserMgmtUsername.Name = "txtUserMgmtUsername";
-            this.txtUserMgmtUsername.Size = new System.Drawing.Size(174, 26);
+            this.txtUserMgmtUsername.Size = new System.Drawing.Size(174, 22);
             this.txtUserMgmtUsername.TabIndex = 4;
             // 
             // lblUserMgmtPassword
@@ -1974,9 +2004,9 @@
             this.tabAuditReport.AutoScroll = true;
             this.tabAuditReport.Controls.Add(this.grpBoxAuditReportPersonDetail);
             this.tabAuditReport.Controls.Add(this.grpBoxAuditReportUserAccessRpt);
-            this.tabAuditReport.Location = new System.Drawing.Point(4, 22);
+            this.tabAuditReport.Location = new System.Drawing.Point(4, 25);
             this.tabAuditReport.Name = "tabAuditReport";
-            this.tabAuditReport.Size = new System.Drawing.Size(1135, 747);
+            this.tabAuditReport.Size = new System.Drawing.Size(1135, 744);
             this.tabAuditReport.TabIndex = 4;
             this.tabAuditReport.Text = "Audit/Report";
             this.tabAuditReport.UseVisualStyleBackColor = true;
@@ -2017,9 +2047,10 @@
             // 
             // txtAuditReportPersonId
             // 
+            this.txtAuditReportPersonId.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtAuditReportPersonId.Location = new System.Drawing.Point(129, 29);
             this.txtAuditReportPersonId.Name = "txtAuditReportPersonId";
-            this.txtAuditReportPersonId.Size = new System.Drawing.Size(177, 26);
+            this.txtAuditReportPersonId.Size = new System.Drawing.Size(177, 22);
             this.txtAuditReportPersonId.TabIndex = 2;
             // 
             // grpBoxAuditReportUserAccessRpt
@@ -2062,9 +2093,10 @@
             // 
             // txtAuditReportUserId
             // 
+            this.txtAuditReportUserId.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtAuditReportUserId.Location = new System.Drawing.Point(101, 29);
             this.txtAuditReportUserId.Name = "txtAuditReportUserId";
-            this.txtAuditReportUserId.Size = new System.Drawing.Size(177, 26);
+            this.txtAuditReportUserId.Size = new System.Drawing.Size(177, 22);
             this.txtAuditReportUserId.TabIndex = 2;
             // 
             // dtpAuditReportEndDate
