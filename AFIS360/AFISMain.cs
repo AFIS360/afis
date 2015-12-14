@@ -1337,9 +1337,17 @@ namespace AFIS360
                 if (picLRImagePath != null) imgFilePaths.Add(new KeyValuePair<String, String>("fpLRPath", picLRImagePath));
                 if (picLLImagePath != null) imgFilePaths.Add(new KeyValuePair<String, String>("fpLLPath", picLLImagePath));
 
-                //store person's demograpgy
                 DataAccess dataAccess = new DataAccess();
-                dataAccess.updatePersonDetail(personDetail);
+
+                if (!string.IsNullOrWhiteSpace(id))
+                {
+                    //store person's demograpgy
+                    dataAccess.updatePersonDetail(personDetail);
+                } else
+                {
+                    MessageBox.Show("Person ID field is required.", "Warning Message", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
 
                 if (imgFilePaths.Count > 0)
                 {
@@ -1356,6 +1364,7 @@ namespace AFIS360
                 status = "Enrollment update of " + fname + " (Id = " + id + ") is unsuccessful. Reason is - " + exp.Message + ".";
                 activityLog.setActivity(status);
                 lblEnrollStatusMsg.ForeColor = System.Drawing.Color.Red;
+                Console.WriteLine("###--->> exp.StackTrace = " + exp.StackTrace);
                 throw exp;
             }
             lblEnrollStatusMsg.Text = status;

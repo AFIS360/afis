@@ -226,14 +226,17 @@ namespace AFIS360
                 cmd.Parameters.AddWithValue("@office_phone", personDetail.getWorkPhoneNbr());
                 cmd.Parameters.AddWithValue("@email_addr", personDetail.getEmail());
 
-                using (MemoryStream stream = new MemoryStream())
+                if(personDetail.getPassportPhoto() != null)
                 {
-                    BinaryFormatter oBFormatter = new BinaryFormatter();
-                    oBFormatter.Serialize(stream, personDetail.getPassportPhoto());
-                    oSerializedPassportPhoto = stream.ToArray();
-                }
+                    using (MemoryStream stream = new MemoryStream())
+                    {
+                        BinaryFormatter oBFormatter = new BinaryFormatter();
+                        oBFormatter.Serialize(stream, personDetail.getPassportPhoto());
+                        oSerializedPassportPhoto = stream.ToArray();
+                    }
 
-                cmd.Parameters.AddWithValue("@photo", oSerializedPassportPhoto);
+                    cmd.Parameters.AddWithValue("@photo", oSerializedPassportPhoto);
+                }
 
                 cmd.ExecuteNonQuery();
             }
