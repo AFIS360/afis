@@ -140,8 +140,7 @@ namespace AFIS360
         private void btnMatch_Click(object sender, EventArgs e)
         {
             Int32 matchingThreshold = Convert.ToInt32(ConfigurationManager.AppSettings["InitialThresholdScore"]);
-//            string visitorNbr = txtMatchVisitorNbr.Text;
-            string fpPath = picMatchImagePath;
+           string fpPath = picMatchImagePath;
             string message = null;
 
             if (!string.IsNullOrWhiteSpace(txtMatchThreshold.Text)) matchingThreshold = Convert.ToInt32(txtMatchThreshold.Text);
@@ -231,19 +230,18 @@ namespace AFIS360
                         Console.WriteLine("####-->>>> Finger Name is not assigned");
                     }
                 }
-                message = "(Match found. Matching Score:" + match.getScore() +".)";
-                grpBoxMatchResult.ForeColor = Color.Green;
+                message = "Match found. Matching Score:" + match.getScore();
+                lblMatchResTxt.ForeColor = Color.Green;
                 //adding the activity log
-                activityLog.setActivity("Match Activity: " + message);
+                activityLog.setActivity("Match Activity: " + message + " .");
             }
             else
             {
-                message = "(Match not found.)";
-                grpBoxMatchResult.ForeColor = System.Drawing.Color.Red;
+                message = "Match not found.";
+                lblMatchResTxt.ForeColor = System.Drawing.Color.Red;
                 activityLog.setActivity("Match Activity: " + message);
             }
-
-                grpBoxMatchResult.Text = message;
+            lblMatchResTxt.Text = message;
         }
 
 
@@ -594,8 +592,8 @@ namespace AFIS360
             }
 
             picMatchImagePath = null;
-//            txtMatchVisitorNbr.Clear();
             richTxtMatchResAdds.Text = null;
+            lblMatchResTxt.Text = null;
             lblMatchResFNameTxt.Text = null;
             lblMatchResLNameTxt.Text = null;
             lblMatchResIDTxt.Text = null;
