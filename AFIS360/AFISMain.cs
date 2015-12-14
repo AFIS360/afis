@@ -11,6 +11,7 @@ using System.Windows.Media.Imaging;
 using System.IO;
 using iTextSharp.text;
 using iTextSharp.text.pdf;
+using System.Configuration;
 
 namespace AFIS360
 {
@@ -46,13 +47,9 @@ namespace AFIS360
             tabControlAFIS.TabPages.Remove(tabAuditReport);
             menuStrip.Visible = true;
             btnUserMgmtUpdate.Enabled = false;
-
-            if (picMatch.Image == null)
-            {
-                string imagePath = Path.Combine(Path.Combine("..", ".."), "images\\utilImage\\selectFpLarge.bmp");
-                picMatch.Image = System.Drawing.Image.FromFile(imagePath);
-            }
-        }
+            //set the default image for match picBox
+            if (picMatch.Image == null) picMatch.Image = System.Drawing.Image.FromFile(ConfigurationManager.AppSettings["defaultImageForMatch"]);
+      }
 
         private void btnEnroll_Click(object sender, EventArgs e)
         {
@@ -142,15 +139,13 @@ namespace AFIS360
 
         private void btnMatch_Click(object sender, EventArgs e)
         {
-            Int32 matchingThreshold = 60;
-            string visitorNbr = txtMatchVisitorNbr.Text;
+            Int32 matchingThreshold = Convert.ToInt32(ConfigurationManager.AppSettings["InitialThresholdScore"]);
+//            string visitorNbr = txtMatchVisitorNbr.Text;
             string fpPath = picMatchImagePath;
             string message = null;
 
-            if (txtMatchThreshold.Text != null)
-            {
-                matchingThreshold = Convert.ToInt32(txtMatchThreshold.Text);
-            }
+            if (!string.IsNullOrWhiteSpace(txtMatchThreshold.Text)) matchingThreshold = Convert.ToInt32(txtMatchThreshold.Text);
+            
             //If fpPath = null, show the error message
             if (fpPath == null)
             {
@@ -158,7 +153,7 @@ namespace AFIS360
                 return;
             }
 
-            Match match = Program.getMatch(fpPath, visitorNbr, matchingThreshold);
+            Match match = Program.getMatch(fpPath, "1234", matchingThreshold);
             MyPerson matchedPerson = match.getMatchedPerson();
             if (matchedPerson != null)
             {
@@ -170,9 +165,6 @@ namespace AFIS360
                 lblMatchResFNameTxt.Text = pDetail.getFirstName();
                 lblMatchResLNameTxt.Text = pDetail.getLastName();
                 richTxtMatchResAdds.Text = pDetail.getStreetAddress() + "\n" + pDetail.getCity() + ", " + pDetail.getState() + " " + pDetail.getPostalCode() + "\n" + pDetail.getCountry();
-                lblMatchResCellNbrTxt.Text = pDetail.getCellNbr();
-                lblMatchResWorkNbrTxt.Text = pDetail.getWorkPhoneNbr();
-                lblMatchResEmailTxt.Text = pDetail.getEmail();
                 picBoxMatchResPPhoto.Image = pDetail.getPassportPhoto();
 
                 //Get all the fingerprints of the matched person 
@@ -239,19 +231,19 @@ namespace AFIS360
                         Console.WriteLine("####-->>>> Finger Name is not assigned");
                     }
                 }
-                message = "Match found. Matching Score:" + match.getScore();
-                lblMatchStatusText.ForeColor = System.Drawing.Color.Green;
+                message = "(Match found. Matching Score:" + match.getScore() +".)";
+                grpBoxMatchResult.ForeColor = Color.Green;
                 //adding the activity log
                 activityLog.setActivity("Match Activity: " + message);
             }
             else
             {
-                message = "Match not found.";
-                lblMatchStatusText.ForeColor = System.Drawing.Color.Red;
+                message = "(Match not found.)";
+                grpBoxMatchResult.ForeColor = System.Drawing.Color.Red;
                 activityLog.setActivity("Match Activity: " + message);
             }
 
-            lblMatchStatusText.Text = message;
+                grpBoxMatchResult.Text = message;
         }
 
 
@@ -548,8 +540,7 @@ namespace AFIS360
             if (picMatch.Image != null)
             {
                 picMatch.Image.Dispose();
-                string imagePath = Path.Combine(Path.Combine("..", ".."), "images\\utilImage\\selectFpLarge.bmp");
-                picMatch.Image = System.Drawing.Image.FromFile(imagePath);
+                picMatch.Image = System.Drawing.Image.FromFile(ConfigurationManager.AppSettings["defaultImageForMatch"]);
             }
             if (picMatchRT.Image != null)
             {
@@ -603,15 +594,11 @@ namespace AFIS360
             }
 
             picMatchImagePath = null;
-            txtMatchVisitorNbr.Clear();
-            lblMatchStatusText.Text = null;
+//            txtMatchVisitorNbr.Clear();
             richTxtMatchResAdds.Text = null;
-            lblMatchResCellNbrTxt.Text = null;
-            lblMatchResEmailTxt.Text = null;
             lblMatchResFNameTxt.Text = null;
             lblMatchResLNameTxt.Text = null;
             lblMatchResIDTxt.Text = null;
-            lblMatchResWorkNbrTxt.Text = null;
             if (picBoxMatchResPPhoto.Image != null)
             {
                 picBoxMatchResPPhoto.Image.Dispose();
@@ -843,7 +830,7 @@ namespace AFIS360
             else if (e.TabPage.Text.Equals("Match"))
             {
                 Console.WriteLine("####--> Setting focus on txtMatchVisitorNbr");
-                txtMatchVisitorNbr.Select();
+                picMatch.Select();
             }
             else if (e.TabPage.Text.Equals("User Mgmt"))
             {
@@ -1120,7 +1107,7 @@ namespace AFIS360
 
             Document doc = new Document(iTextSharp.text.PageSize.LETTER, 10, 10, 42, 35);
             string datetimePref = DateTime.Now.ToString("yyyy-MM-dd-HH-mm-ss");
-            string pdfPath = "..\\..\\reports\\UserAccessReport-" + datetimePref + ".pdf";
+            string pdfPath = ConfigurationManager.AppSettings["CustUserReportPath"] + "-" + datetimePref + ".pdf";
             PdfWriter pdfWriter = PdfWriter.GetInstance(doc, new FileStream(pdfPath, FileMode.Create));
             doc.Open();
 
@@ -1235,7 +1222,7 @@ namespace AFIS360
 
             Document doc = new Document(iTextSharp.text.PageSize.LETTER, 10, 10, 42, 35);
             string datetimePref = DateTime.Now.ToString("yyyy-MM-dd-HH-mm-ss");
-            string pdfPath = "..\\..\\reports\\PersonDetailReport-" + datetimePref + ".pdf";
+            string pdfPath = ConfigurationManager.AppSettings["PersonReportPath"] + "-" + datetimePref + ".pdf";
             PdfWriter pdfWriter = PdfWriter.GetInstance(doc, new FileStream(pdfPath, FileMode.Create));
             doc.Open();
 
