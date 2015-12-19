@@ -21,42 +21,6 @@ namespace AFIS360
     public class DataAccess
     {
 
-        public void storeMyPerson(MyPerson person)
-        {
-            string connStr = getConnectionStringByName("MySQL_AFIS_conn");
-            MySqlConnection conn = new MySqlConnection(connStr);
-            MySqlCommand cmd;
-            byte[] oSerializedPerson;
-            conn.Open();
-            try
-            {
-                using (MemoryStream stream = new MemoryStream())
-                {
-                    BinaryFormatter oBFormatter = new BinaryFormatter();
-                    oBFormatter.Serialize(stream, person);
-                    oSerializedPerson = stream.ToArray();
-                }
-
-                cmd = conn.CreateCommand();
-                cmd.CommandText = "INSERT INTO person(id,person,name) VALUES(@id,@person,@name)";
-                cmd.Parameters.AddWithValue("@id", person.Id);
-                cmd.Parameters.AddWithValue("@person", oSerializedPerson);
-                cmd.Parameters.AddWithValue("@name", person.Name);
-                cmd.ExecuteNonQuery();
-            }
-            catch (Exception)
-            {
-                throw;
-            }
-            finally
-            {
-                if (conn.State == System.Data.ConnectionState.Open)
-                {
-                    conn.Close();
-                }
-            }
-        }//storeMyPerson
-
         public void storeFingerprints(MyPerson person)
         {
             string connStr = getConnectionStringByName("MySQL_AFIS_conn");
@@ -116,6 +80,7 @@ namespace AFIS360
                 cmd.Parameters.AddWithValue("@image", oSerializedFpImages);
                 cmd.Parameters.AddWithValue("@name", person.Name);
                 cmd.ExecuteNonQuery();
+                Console.WriteLine("####-->> PersonId = " + person.PersonId);
             }
             catch (Exception)
             {
@@ -167,14 +132,18 @@ namespace AFIS360
                 cmd.Parameters.AddWithValue("@office_phone", personDetail.getWorkPhoneNbr());
                 cmd.Parameters.AddWithValue("@email_addr", personDetail.getEmail());
 
-                using (MemoryStream stream = new MemoryStream())
+                if (personDetail.getPassportPhoto() != null)
                 {
-                    BinaryFormatter oBFormatter = new BinaryFormatter();
-                    oBFormatter.Serialize(stream, personDetail.getPassportPhoto());
-                    oSerializedPassportPhoto = stream.ToArray();
+                    using (MemoryStream stream = new MemoryStream())
+                    {
+                        BinaryFormatter oBFormatter = new BinaryFormatter();
+                        oBFormatter.Serialize(stream, personDetail.getPassportPhoto());
+                        oSerializedPassportPhoto = stream.ToArray();
+                    }
+                    cmd.Parameters.AddWithValue("@photo", oSerializedPassportPhoto);
+                } else {
+                    cmd.Parameters.AddWithValue("@photo", null);
                 }
-
-                cmd.Parameters.AddWithValue("@photo", oSerializedPassportPhoto);
 
                 cmd.ExecuteNonQuery();
             }
@@ -234,8 +203,11 @@ namespace AFIS360
                         oBFormatter.Serialize(stream, personDetail.getPassportPhoto());
                         oSerializedPassportPhoto = stream.ToArray();
                     }
-
                     cmd.Parameters.AddWithValue("@photo", oSerializedPassportPhoto);
+                }
+                else
+                {
+                    cmd.Parameters.AddWithValue("@photo", null);
                 }
 
                 cmd.ExecuteNonQuery();
@@ -311,11 +283,14 @@ namespace AFIS360
 
                     System.Drawing.Image photo = null;
 
-                    using (MemoryStream oStr = new MemoryStream((byte[])ds.Rows[i]["photo"]))
+                    if(ds.Rows[i]["photo"] != DBNull.Value)
                     {
-                        BinaryFormatter oBFormatter = new BinaryFormatter();
-                        oStr.Position = 0;
-                        photo = (System.Drawing.Image)oBFormatter.Deserialize(oStr);
+                        using (MemoryStream oStr = new MemoryStream((byte[])ds.Rows[i]["photo"]))
+                        {
+                            BinaryFormatter oBFormatter = new BinaryFormatter();
+                            oStr.Position = 0;
+                            photo = (System.Drawing.Image)oBFormatter.Deserialize(oStr);
+                        }
                     }
 
                     pDetail.setPersonId(pId);
@@ -372,56 +347,6 @@ namespace AFIS360
             {
                 throw;
             }
-        }
-
-
-        public List<MyPerson> retrieveMyPersons()
-        {
-            string connStr = getConnectionStringByName("MySQL_AFIS_conn");
-            MySqlConnection conn = new MySqlConnection(connStr);
-            MySqlCommand cmd;
-            MyPerson person = null;
-            List<MyPerson> persons;
-            DataTable ds;
-            conn.Open();
-            try
-            {
-                persons = new List<MyPerson>();
-                cmd = conn.CreateCommand();
-                cmd.CommandText = "SELECT * FROM afis.person";
-                MySqlDataAdapter da = new MySqlDataAdapter(cmd);
-                ds = new DataTable();
-                da.Fill(ds);
-                IEnumerator rows = ds.Rows.GetEnumerator();
-                Int32 i = 0;
-
-                while (rows.MoveNext())
-                {
-
-                    int id = (int)ds.Rows[i]["id"];
-                    using (MemoryStream oStr = new MemoryStream((byte[])ds.Rows[i]["person"]))
-                    {
-                        BinaryFormatter oBFormatter = new BinaryFormatter();
-                        oStr.Position = 0;
-                        person = (MyPerson)oBFormatter.Deserialize(oStr);
-                        persons.Add(person);
-                    }
-                    i = i + 1;
-                }
-            }
-            catch (Exception)
-            {
-                throw;
-            }
-            finally
-            {
-                if (conn.State == System.Data.ConnectionState.Open)
-                {
-                    conn.Close();
-                }
-            }
-
-            return persons;
         }
 
 
@@ -499,12 +424,15 @@ namespace AFIS360
                 {
 
                     int id = (int)ds.Rows[i]["id"];
-                    using (MemoryStream oStr = new MemoryStream((byte[])ds.Rows[i]["image"]))
+                    if(ds.Rows[i]["image"] != DBNull.Value)
                     {
-                        BinaryFormatter oBFormatter = new BinaryFormatter();
-                        oStr.Position = 0;
-                        person = (MyPerson)oBFormatter.Deserialize(oStr);
-                        persons.Add(person);
+                        using (MemoryStream oStr = new MemoryStream((byte[])ds.Rows[i]["image"]))
+                        {
+                            BinaryFormatter oBFormatter = new BinaryFormatter();
+                            oStr.Position = 0;
+                            person = (MyPerson)oBFormatter.Deserialize(oStr);
+                            persons.Add(person);
+                        }
                     }
                     i = i + 1;
                 }
@@ -594,43 +522,6 @@ namespace AFIS360
                 }
             }
             return status;
-        }
-
-
-        private bool isValidUser(string username, string password)
-        {
-            string connStr = getConnectionStringByName("MySQL_AFIS_conn");
-            MySqlConnection conn = new MySqlConnection(connStr);
-            MySqlCommand cmd;
-            bool validUser = false;
-            DataTable ds;
-            conn.Open();
-
-            try
-            {
-                cmd = conn.CreateCommand();
-                cmd.CommandText = "SELECT * FROM afis.users WHERE username = @username and password = @password";
-                cmd.Parameters.AddWithValue("@username", username);
-                cmd.Parameters.AddWithValue("@password", Encrypt(password));
-
-                MySqlDataAdapter da = new MySqlDataAdapter(cmd);
-                ds = new DataTable();
-                da.Fill(ds);
-                Int32 rows = ds.Rows.Count;
-                if (rows > 0) validUser = true;
-            }
-            catch (Exception)
-            {
-                throw;
-            }
-            finally
-            {
-                if (conn.State == System.Data.ConnectionState.Open)
-                {
-                    conn.Close();
-                }
-            }
-            return validUser;
         }
 
 
@@ -1075,86 +966,7 @@ namespace AFIS360
             return accessCntrl;
         }
 
-
-        public List<AuditLog> getAuditLogs()
-        {
-            string connStr = getConnectionStringByName("MySQL_AFIS_conn");
-            MySqlConnection conn = new MySqlConnection(connStr);
-            MySqlCommand cmd;
-            List<AuditLog> auditLogs;
-            DataTable ds;
-            conn.Open();
-
-            try
-            {
-                cmd = conn.CreateCommand();
-                cmd.CommandText = "SELECT * FROM afis.audit_log WHERE DATE(login_date_time) = CURDATE()";
-
-                MySqlDataAdapter da = new MySqlDataAdapter(cmd);
-                ds = new DataTable();
-                da.Fill(ds);
-                IEnumerator rows = ds.Rows.GetEnumerator();
-                Int32 i = 0;
-                auditLogs = new List<AuditLog>();
-
-                while (rows.MoveNext())
-                {
-
-                    string userId = (string)ds.Rows[i]["user_id"];
-                    string username = (string)ds.Rows[i]["user_name"];
-                    DateTime loginDateTime = (DateTime)ds.Rows[i]["login_date_time"];
-
-                    //Handle nullable DateTime
-                    DateTime? logoutDateTime;
-
-                    if (ds.Rows[i]["logout_date_time"] == DBNull.Value)
-                    {
-                        logoutDateTime = null;
-                    }
-                    else
-                    {
-                        logoutDateTime = (DateTime?)ds.Rows[i]["logout_date_time"];
-                    }
-
-                    //Get login activities
-                    ActivityLog activityLog = null;
-                    if (ds.Rows[i]["login_activity"] != DBNull.Value)
-                    {
-                        using (MemoryStream oStr = new MemoryStream((byte[])ds.Rows[i]["login_activity"]))
-                        {
-                            BinaryFormatter oBFormatter = new BinaryFormatter();
-                            oStr.Position = 0;
-                            activityLog = (ActivityLog)oBFormatter.Deserialize(oStr);
-                        }
-                    }
-
-                    AuditLog auditLog = new AuditLog();
-                    auditLog.setUserId(userId);
-                    auditLog.setUsername(username);
-                    auditLog.setLoginDateTime(loginDateTime);
-                    auditLog.setLogoutDateTime(logoutDateTime);
-                    auditLog.setActivityLog(activityLog);
-                    auditLogs.Add(auditLog);
-
-                    i = i + 1;
-                }
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine(e.StackTrace);
-                throw e;
-            }
-            finally
-            {
-                if (conn.State == System.Data.ConnectionState.Open)
-                {
-                    conn.Close();
-                }
-            }
-            return auditLogs;
-        }
-
-
+        //Get the AuditLogs between start & end date
         public List<AuditLog> getAuditLogs(string id, DateTime startDate, DateTime endDate)
         {
             string connStr = getConnectionStringByName("MySQL_AFIS_conn");

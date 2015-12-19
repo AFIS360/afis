@@ -206,6 +206,7 @@
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.lblMatchResTxt = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
+            this.lblEnrollPPhoto = new System.Windows.Forms.Label();
             this.tabControlAFIS.SuspendLayout();
             this.tabLogin.SuspendLayout();
             this.grpLogin.SuspendLayout();
@@ -256,7 +257,7 @@
             this.tabControlAFIS.Name = "tabControlAFIS";
             this.tabControlAFIS.SelectedIndex = 0;
             this.tabControlAFIS.Size = new System.Drawing.Size(1222, 716);
-            this.tabControlAFIS.TabIndex = 0;
+            this.tabControlAFIS.TabIndex = 1;
             this.tabControlAFIS.Selected += new System.Windows.Forms.TabControlEventHandler(this.tabControlAFIS_Selected);
             this.tabControlAFIS.VisibleChanged += new System.EventHandler(this.tabControlAFIS_VisibleChanged);
             // 
@@ -377,6 +378,7 @@
             // 
             // grpEnroll
             // 
+            this.grpEnroll.Controls.Add(this.lblEnrollPPhoto);
             this.grpEnroll.Controls.Add(this.btnEnrollUpdate);
             this.grpEnroll.Controls.Add(this.dtpEnrollDOB);
             this.grpEnroll.Controls.Add(this.lblEnrollDOB);
@@ -441,9 +443,9 @@
             this.grpEnroll.Controls.Add(this.txtEnrollState);
             this.grpEnroll.Controls.Add(this.lblEnrollMName);
             this.grpEnroll.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.grpEnroll.Location = new System.Drawing.Point(81, 19);
+            this.grpEnroll.Location = new System.Drawing.Point(81, 15);
             this.grpEnroll.Name = "grpEnroll";
-            this.grpEnroll.Size = new System.Drawing.Size(1151, 642);
+            this.grpEnroll.Size = new System.Drawing.Size(1151, 650);
             this.grpEnroll.TabIndex = 0;
             this.grpEnroll.TabStop = false;
             this.grpEnroll.Text = "Enroll a person into AFIS system";
@@ -474,9 +476,9 @@
             this.lblEnrollDOB.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblEnrollDOB.Location = new System.Drawing.Point(320, 165);
             this.lblEnrollDOB.Name = "lblEnrollDOB";
-            this.lblEnrollDOB.Size = new System.Drawing.Size(64, 20);
+            this.lblEnrollDOB.Size = new System.Drawing.Size(52, 20);
             this.lblEnrollDOB.TabIndex = 65;
-            this.lblEnrollDOB.Text = "DOB *:";
+            this.lblEnrollDOB.Text = "DOB:";
             // 
             // lblId
             // 
@@ -532,7 +534,7 @@
             // picEnrollPassportPhoto
             // 
             this.picEnrollPassportPhoto.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.picEnrollPassportPhoto.Location = new System.Drawing.Point(894, 290);
+            this.picEnrollPassportPhoto.Location = new System.Drawing.Point(900, 317);
             this.picEnrollPassportPhoto.Name = "picEnrollPassportPhoto";
             this.picEnrollPassportPhoto.Size = new System.Drawing.Size(193, 168);
             this.picEnrollPassportPhoto.TabIndex = 64;
@@ -587,9 +589,9 @@
             this.lblEnrollFName.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblEnrollFName.Location = new System.Drawing.Point(15, 73);
             this.lblEnrollFName.Name = "lblEnrollFName";
-            this.lblEnrollFName.Size = new System.Drawing.Size(113, 20);
+            this.lblEnrollFName.Size = new System.Drawing.Size(101, 20);
             this.lblEnrollFName.TabIndex = 1;
-            this.lblEnrollFName.Text = "First Name *:";
+            this.lblEnrollFName.Text = "First Name:";
             // 
             // picEnrollLM
             // 
@@ -782,9 +784,9 @@
             this.lblEnrollLName.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblEnrollLName.Location = new System.Drawing.Point(13, 102);
             this.lblEnrollLName.Name = "lblEnrollLName";
-            this.lblEnrollLName.Size = new System.Drawing.Size(112, 20);
+            this.lblEnrollLName.Size = new System.Drawing.Size(100, 20);
             this.lblEnrollLName.TabIndex = 33;
-            this.lblEnrollLName.Text = "Last Name *:";
+            this.lblEnrollLName.Text = "Last Name:";
             // 
             // picEnrollRM
             // 
@@ -933,9 +935,9 @@
             this.lblEnrollAddrLine.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblEnrollAddrLine.Location = new System.Drawing.Point(319, 37);
             this.lblEnrollAddrLine.Name = "lblEnrollAddrLine";
-            this.lblEnrollAddrLine.Size = new System.Drawing.Size(131, 20);
+            this.lblEnrollAddrLine.Size = new System.Drawing.Size(119, 20);
             this.lblEnrollAddrLine.TabIndex = 41;
-            this.lblEnrollAddrLine.Text = "Address Line *:";
+            this.lblEnrollAddrLine.Text = "Address Line:";
             // 
             // lblEnrollCountry
             // 
@@ -943,9 +945,9 @@
             this.lblEnrollCountry.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblEnrollCountry.Location = new System.Drawing.Point(319, 132);
             this.lblEnrollCountry.Name = "lblEnrollCountry";
-            this.lblEnrollCountry.Size = new System.Drawing.Size(88, 20);
+            this.lblEnrollCountry.Size = new System.Drawing.Size(76, 20);
             this.lblEnrollCountry.TabIndex = 50;
-            this.lblEnrollCountry.Text = "Country *:";
+            this.lblEnrollCountry.Text = "Country:";
             // 
             // txtEnrollPrefix
             // 
@@ -977,9 +979,9 @@
             this.lblEnrollAddrCity.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblEnrollAddrCity.Location = new System.Drawing.Point(319, 65);
             this.lblEnrollAddrCity.Name = "lblEnrollAddrCity";
-            this.lblEnrollAddrCity.Size = new System.Drawing.Size(56, 20);
+            this.lblEnrollAddrCity.Size = new System.Drawing.Size(44, 20);
             this.lblEnrollAddrCity.TabIndex = 43;
-            this.lblEnrollAddrCity.Text = "City *:";
+            this.lblEnrollAddrCity.Text = "City:";
             // 
             // txtEnrollCity
             // 
@@ -994,9 +996,9 @@
             this.lblEnrollPostalCode.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblEnrollPostalCode.Location = new System.Drawing.Point(506, 68);
             this.lblEnrollPostalCode.Name = "lblEnrollPostalCode";
-            this.lblEnrollPostalCode.Size = new System.Drawing.Size(123, 20);
+            this.lblEnrollPostalCode.Size = new System.Drawing.Size(111, 20);
             this.lblEnrollPostalCode.TabIndex = 45;
-            this.lblEnrollPostalCode.Text = "Postal Code *:";
+            this.lblEnrollPostalCode.Text = "Postal Code:";
             // 
             // lblFps
             // 
@@ -1021,9 +1023,9 @@
             this.lblEnrollState.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblEnrollState.Location = new System.Drawing.Point(320, 98);
             this.lblEnrollState.Name = "lblEnrollState";
-            this.lblEnrollState.Size = new System.Drawing.Size(143, 20);
+            this.lblEnrollState.Size = new System.Drawing.Size(131, 20);
             this.lblEnrollState.TabIndex = 47;
-            this.lblEnrollState.Text = "State/Province *:";
+            this.lblEnrollState.Text = "State/Province:";
             // 
             // txtEnrollMName
             // 
@@ -1059,7 +1061,7 @@
             this.tabMatch.Location = new System.Drawing.Point(4, 22);
             this.tabMatch.Name = "tabMatch";
             this.tabMatch.Padding = new System.Windows.Forms.Padding(3, 3, 3, 3);
-            this.tabMatch.Size = new System.Drawing.Size(1214, 596);
+            this.tabMatch.Size = new System.Drawing.Size(1214, 690);
             this.tabMatch.TabIndex = 1;
             this.tabMatch.Text = "Match";
             this.tabMatch.UseVisualStyleBackColor = true;
@@ -1072,13 +1074,13 @@
             this.grpBoxMatchInput.Controls.Add(this.btnMatch);
             this.grpBoxMatchInput.Controls.Add(this.picMatch);
             this.grpBoxMatchInput.Controls.Add(this.lblFpMatch);
-            this.grpBoxMatchInput.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.grpBoxMatchInput.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.grpBoxMatchInput.Location = new System.Drawing.Point(54, 66);
             this.grpBoxMatchInput.Name = "grpBoxMatchInput";
             this.grpBoxMatchInput.Size = new System.Drawing.Size(234, 373);
             this.grpBoxMatchInput.TabIndex = 54;
             this.grpBoxMatchInput.TabStop = false;
-            this.grpBoxMatchInput.Text = "Match Input";
+            this.grpBoxMatchInput.Text = "Match Fingerprint";
             // 
             // lblMatchCLR
             // 
@@ -1086,7 +1088,7 @@
             this.lblMatchCLR.Location = new System.Drawing.Point(118, 275);
             this.lblMatchCLR.Name = "lblMatchCLR";
             this.lblMatchCLR.Size = new System.Drawing.Size(86, 30);
-            this.lblMatchCLR.TabIndex = 4;
+            this.lblMatchCLR.TabIndex = 3;
             this.lblMatchCLR.Text = "Clear";
             this.lblMatchCLR.UseVisualStyleBackColor = true;
             this.lblMatchCLR.Click += new System.EventHandler(this.lblMatchCLR_Click);
@@ -1106,7 +1108,7 @@
             this.txtMatchThreshold.Location = new System.Drawing.Point(156, 36);
             this.txtMatchThreshold.Name = "txtMatchThreshold";
             this.txtMatchThreshold.Size = new System.Drawing.Size(57, 26);
-            this.txtMatchThreshold.TabIndex = 2;
+            this.txtMatchThreshold.TabIndex = 1;
             this.txtMatchThreshold.Text = "60";
             // 
             // btnMatch
@@ -1115,7 +1117,7 @@
             this.btnMatch.Location = new System.Drawing.Point(25, 275);
             this.btnMatch.Name = "btnMatch";
             this.btnMatch.Size = new System.Drawing.Size(85, 29);
-            this.btnMatch.TabIndex = 3;
+            this.btnMatch.TabIndex = 2;
             this.btnMatch.Text = "Match";
             this.btnMatch.UseVisualStyleBackColor = true;
             this.btnMatch.Click += new System.EventHandler(this.btnMatch_Click);
@@ -1179,7 +1181,7 @@
             this.grpBoxMatchResult.Location = new System.Drawing.Point(314, 66);
             this.grpBoxMatchResult.Name = "grpBoxMatchResult";
             this.grpBoxMatchResult.Size = new System.Drawing.Size(792, 610);
-            this.grpBoxMatchResult.TabIndex = 53;
+            this.grpBoxMatchResult.TabIndex = 0;
             this.grpBoxMatchResult.TabStop = false;
             this.grpBoxMatchResult.Text = "Matched Result";
             // 
@@ -1193,6 +1195,7 @@
             // 
             // richTxtMatchResAdds
             // 
+            this.richTxtMatchResAdds.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.richTxtMatchResAdds.Location = new System.Drawing.Point(21, 161);
             this.richTxtMatchResAdds.Name = "richTxtMatchResAdds";
             this.richTxtMatchResAdds.ReadOnly = true;
@@ -1270,9 +1273,9 @@
             // picMatchLL
             // 
             this.picMatchLL.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.picMatchLL.Location = new System.Drawing.Point(629, 482);
+            this.picMatchLL.Location = new System.Drawing.Point(629, 476);
             this.picMatchLL.Name = "picMatchLL";
-            this.picMatchLL.Size = new System.Drawing.Size(133, 87);
+            this.picMatchLL.Size = new System.Drawing.Size(133, 100);
             this.picMatchLL.TabIndex = 51;
             this.picMatchLL.TabStop = false;
             // 
@@ -1280,7 +1283,7 @@
             // 
             this.lblMatchFpLL.AutoSize = true;
             this.lblMatchFpLL.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblMatchFpLL.Location = new System.Drawing.Point(674, 437);
+            this.lblMatchFpLL.Location = new System.Drawing.Point(671, 451);
             this.lblMatchFpLL.Name = "lblMatchFpLL";
             this.lblMatchFpLL.Size = new System.Drawing.Size(29, 20);
             this.lblMatchFpLL.TabIndex = 52;
@@ -1289,9 +1292,9 @@
             // picMatchRT
             // 
             this.picMatchRT.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.picMatchRT.Location = new System.Drawing.Point(17, 347);
+            this.picMatchRT.Location = new System.Drawing.Point(17, 343);
             this.picMatchRT.Name = "picMatchRT";
-            this.picMatchRT.Size = new System.Drawing.Size(135, 87);
+            this.picMatchRT.Size = new System.Drawing.Size(135, 100);
             this.picMatchRT.TabIndex = 33;
             this.picMatchRT.TabStop = false;
             // 
@@ -1299,7 +1302,7 @@
             // 
             this.lblMatchFpRT.AutoSize = true;
             this.lblMatchFpRT.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblMatchFpRT.Location = new System.Drawing.Point(61, 311);
+            this.lblMatchFpRT.Location = new System.Drawing.Point(61, 315);
             this.lblMatchFpRT.Name = "lblMatchFpRT";
             this.lblMatchFpRT.Size = new System.Drawing.Size(32, 20);
             this.lblMatchFpRT.TabIndex = 34;
@@ -1308,9 +1311,9 @@
             // picMatchLR
             // 
             this.picMatchLR.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.picMatchLR.Location = new System.Drawing.Point(479, 482);
+            this.picMatchLR.Location = new System.Drawing.Point(479, 476);
             this.picMatchLR.Name = "picMatchLR";
-            this.picMatchLR.Size = new System.Drawing.Size(133, 87);
+            this.picMatchLR.Size = new System.Drawing.Size(133, 100);
             this.picMatchLR.TabIndex = 49;
             this.picMatchLR.TabStop = false;
             // 
@@ -1318,7 +1321,7 @@
             // 
             this.lblMatchFpLR.AutoSize = true;
             this.lblMatchFpLR.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblMatchFpLR.Location = new System.Drawing.Point(529, 437);
+            this.lblMatchFpLR.Location = new System.Drawing.Point(526, 451);
             this.lblMatchFpLR.Name = "lblMatchFpLR";
             this.lblMatchFpLR.Size = new System.Drawing.Size(32, 20);
             this.lblMatchFpLR.TabIndex = 50;
@@ -1328,7 +1331,7 @@
             // 
             this.lblMatchFpRI.AutoSize = true;
             this.lblMatchFpRI.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblMatchFpRI.Location = new System.Drawing.Point(215, 311);
+            this.lblMatchFpRI.Location = new System.Drawing.Point(218, 315);
             this.lblMatchFpRI.Name = "lblMatchFpRI";
             this.lblMatchFpRI.Size = new System.Drawing.Size(28, 20);
             this.lblMatchFpRI.TabIndex = 39;
@@ -1337,18 +1340,18 @@
             // picMatchRI
             // 
             this.picMatchRI.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.picMatchRI.Location = new System.Drawing.Point(172, 347);
+            this.picMatchRI.Location = new System.Drawing.Point(172, 343);
             this.picMatchRI.Name = "picMatchRI";
-            this.picMatchRI.Size = new System.Drawing.Size(131, 87);
+            this.picMatchRI.Size = new System.Drawing.Size(131, 100);
             this.picMatchRI.TabIndex = 35;
             this.picMatchRI.TabStop = false;
             // 
             // picMatchLM
             // 
             this.picMatchLM.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.picMatchLM.Location = new System.Drawing.Point(321, 482);
+            this.picMatchLM.Location = new System.Drawing.Point(321, 476);
             this.picMatchLM.Name = "picMatchLM";
-            this.picMatchLM.Size = new System.Drawing.Size(133, 87);
+            this.picMatchLM.Size = new System.Drawing.Size(133, 100);
             this.picMatchLM.TabIndex = 47;
             this.picMatchLM.TabStop = false;
             // 
@@ -1356,7 +1359,7 @@
             // 
             this.lblMatchFpLM.AutoSize = true;
             this.lblMatchFpLM.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblMatchFpLM.Location = new System.Drawing.Point(374, 437);
+            this.lblMatchFpLM.Location = new System.Drawing.Point(374, 451);
             this.lblMatchFpLM.Name = "lblMatchFpLM";
             this.lblMatchFpLM.Size = new System.Drawing.Size(33, 20);
             this.lblMatchFpLM.TabIndex = 48;
@@ -1366,7 +1369,7 @@
             // 
             this.lblMatchFpRM.AutoSize = true;
             this.lblMatchFpRM.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblMatchFpRM.Location = new System.Drawing.Point(371, 311);
+            this.lblMatchFpRM.Location = new System.Drawing.Point(371, 315);
             this.lblMatchFpRM.Name = "lblMatchFpRM";
             this.lblMatchFpRM.Size = new System.Drawing.Size(36, 20);
             this.lblMatchFpRM.TabIndex = 40;
@@ -1375,18 +1378,18 @@
             // picMatchRM
             // 
             this.picMatchRM.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.picMatchRM.Location = new System.Drawing.Point(321, 347);
+            this.picMatchRM.Location = new System.Drawing.Point(321, 343);
             this.picMatchRM.Name = "picMatchRM";
-            this.picMatchRM.Size = new System.Drawing.Size(133, 87);
+            this.picMatchRM.Size = new System.Drawing.Size(133, 100);
             this.picMatchRM.TabIndex = 36;
             this.picMatchRM.TabStop = false;
             // 
             // picMatchLI
             // 
             this.picMatchLI.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.picMatchLI.Location = new System.Drawing.Point(172, 482);
+            this.picMatchLI.Location = new System.Drawing.Point(172, 476);
             this.picMatchLI.Name = "picMatchLI";
-            this.picMatchLI.Size = new System.Drawing.Size(131, 87);
+            this.picMatchLI.Size = new System.Drawing.Size(131, 100);
             this.picMatchLI.TabIndex = 45;
             this.picMatchLI.TabStop = false;
             // 
@@ -1394,7 +1397,7 @@
             // 
             this.lblMatchFpLI.AutoSize = true;
             this.lblMatchFpLI.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblMatchFpLI.Location = new System.Drawing.Point(218, 437);
+            this.lblMatchFpLI.Location = new System.Drawing.Point(218, 451);
             this.lblMatchFpLI.Name = "lblMatchFpLI";
             this.lblMatchFpLI.Size = new System.Drawing.Size(25, 20);
             this.lblMatchFpLI.TabIndex = 46;
@@ -1404,7 +1407,7 @@
             // 
             this.lblMatchFpRR.AutoSize = true;
             this.lblMatchFpRR.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblMatchFpRR.Location = new System.Drawing.Point(526, 311);
+            this.lblMatchFpRR.Location = new System.Drawing.Point(523, 315);
             this.lblMatchFpRR.Name = "lblMatchFpRR";
             this.lblMatchFpRR.Size = new System.Drawing.Size(35, 20);
             this.lblMatchFpRR.TabIndex = 41;
@@ -1413,18 +1416,18 @@
             // picMatchRR
             // 
             this.picMatchRR.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.picMatchRR.Location = new System.Drawing.Point(479, 347);
+            this.picMatchRR.Location = new System.Drawing.Point(479, 343);
             this.picMatchRR.Name = "picMatchRR";
-            this.picMatchRR.Size = new System.Drawing.Size(133, 87);
+            this.picMatchRR.Size = new System.Drawing.Size(133, 100);
             this.picMatchRR.TabIndex = 37;
             this.picMatchRR.TabStop = false;
             // 
             // picMatchLT
             // 
             this.picMatchLT.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.picMatchLT.Location = new System.Drawing.Point(16, 482);
+            this.picMatchLT.Location = new System.Drawing.Point(17, 476);
             this.picMatchLT.Name = "picMatchLT";
-            this.picMatchLT.Size = new System.Drawing.Size(135, 87);
+            this.picMatchLT.Size = new System.Drawing.Size(135, 100);
             this.picMatchLT.TabIndex = 43;
             this.picMatchLT.TabStop = false;
             // 
@@ -1432,7 +1435,7 @@
             // 
             this.lblMatchFpLT.AutoSize = true;
             this.lblMatchFpLT.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblMatchFpLT.Location = new System.Drawing.Point(61, 446);
+            this.lblMatchFpLT.Location = new System.Drawing.Point(61, 451);
             this.lblMatchFpLT.Name = "lblMatchFpLT";
             this.lblMatchFpLT.Size = new System.Drawing.Size(29, 20);
             this.lblMatchFpLT.TabIndex = 44;
@@ -1442,7 +1445,7 @@
             // 
             this.lblMatchFpRL.AutoSize = true;
             this.lblMatchFpRL.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblMatchFpRL.Location = new System.Drawing.Point(671, 311);
+            this.lblMatchFpRL.Location = new System.Drawing.Point(671, 315);
             this.lblMatchFpRL.Name = "lblMatchFpRL";
             this.lblMatchFpRL.Size = new System.Drawing.Size(32, 20);
             this.lblMatchFpRL.TabIndex = 42;
@@ -1451,9 +1454,9 @@
             // picMatchRL
             // 
             this.picMatchRL.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.picMatchRL.Location = new System.Drawing.Point(629, 347);
+            this.picMatchRL.Location = new System.Drawing.Point(629, 343);
             this.picMatchRL.Name = "picMatchRL";
-            this.picMatchRL.Size = new System.Drawing.Size(133, 87);
+            this.picMatchRL.Size = new System.Drawing.Size(133, 100);
             this.picMatchRL.TabIndex = 38;
             this.picMatchRL.TabStop = false;
             // 
@@ -1473,7 +1476,7 @@
             this.tabUserMgmt.Controls.Add(this.lblUserMgmtCR);
             this.tabUserMgmt.Location = new System.Drawing.Point(4, 22);
             this.tabUserMgmt.Name = "tabUserMgmt";
-            this.tabUserMgmt.Size = new System.Drawing.Size(1214, 673);
+            this.tabUserMgmt.Size = new System.Drawing.Size(1214, 690);
             this.tabUserMgmt.TabIndex = 3;
             this.tabUserMgmt.Text = "User Mgmt";
             this.tabUserMgmt.UseVisualStyleBackColor = true;
@@ -1565,18 +1568,18 @@
             this.lblUserMgmtServiceEndDate.AutoSize = true;
             this.lblUserMgmtServiceEndDate.Location = new System.Drawing.Point(530, 143);
             this.lblUserMgmtServiceEndDate.Name = "lblUserMgmtServiceEndDate";
-            this.lblUserMgmtServiceEndDate.Size = new System.Drawing.Size(166, 20);
+            this.lblUserMgmtServiceEndDate.Size = new System.Drawing.Size(154, 20);
             this.lblUserMgmtServiceEndDate.TabIndex = 45;
-            this.lblUserMgmtServiceEndDate.Text = "Service End Date *:";
+            this.lblUserMgmtServiceEndDate.Text = "Service End Date:";
             // 
             // lblUserMgmtServiceStartDate
             // 
             this.lblUserMgmtServiceStartDate.AutoSize = true;
             this.lblUserMgmtServiceStartDate.Location = new System.Drawing.Point(530, 106);
             this.lblUserMgmtServiceStartDate.Name = "lblUserMgmtServiceStartDate";
-            this.lblUserMgmtServiceStartDate.Size = new System.Drawing.Size(174, 20);
+            this.lblUserMgmtServiceStartDate.Size = new System.Drawing.Size(162, 20);
             this.lblUserMgmtServiceStartDate.TabIndex = 43;
-            this.lblUserMgmtServiceStartDate.Text = "Service Start Date *:";
+            this.lblUserMgmtServiceStartDate.Text = "Service Start Date:";
             // 
             // listUserMgmtActiveStatus
             // 
@@ -1612,9 +1615,9 @@
             this.lblUserMgmtStationedCountry.AutoSize = true;
             this.lblUserMgmtStationedCountry.Location = new System.Drawing.Point(22, 415);
             this.lblUserMgmtStationedCountry.Name = "lblUserMgmtStationedCountry";
-            this.lblUserMgmtStationedCountry.Size = new System.Drawing.Size(171, 20);
+            this.lblUserMgmtStationedCountry.Size = new System.Drawing.Size(159, 20);
             this.lblUserMgmtStationedCountry.TabIndex = 39;
-            this.lblUserMgmtStationedCountry.Text = "Stationed Country *:";
+            this.lblUserMgmtStationedCountry.Text = "Stationed Country:";
             // 
             // txtUserMgmtStationedCity
             // 
@@ -1628,9 +1631,9 @@
             this.lblUserMgmtStationedCity.AutoSize = true;
             this.lblUserMgmtStationedCity.Location = new System.Drawing.Point(22, 377);
             this.lblUserMgmtStationedCity.Name = "lblUserMgmtStationedCity";
-            this.lblUserMgmtStationedCity.Size = new System.Drawing.Size(139, 20);
+            this.lblUserMgmtStationedCity.Size = new System.Drawing.Size(127, 20);
             this.lblUserMgmtStationedCity.TabIndex = 37;
-            this.lblUserMgmtStationedCity.Text = "Stationed City *:";
+            this.lblUserMgmtStationedCity.Text = "Stationed City:";
             // 
             // txtUserMgmtStationedAddr
             // 
@@ -1644,9 +1647,9 @@
             this.lblUserMgmtStationedAddr.AutoSize = true;
             this.lblUserMgmtStationedAddr.Location = new System.Drawing.Point(22, 334);
             this.lblUserMgmtStationedAddr.Name = "lblUserMgmtStationedAddr";
-            this.lblUserMgmtStationedAddr.Size = new System.Drawing.Size(175, 20);
+            this.lblUserMgmtStationedAddr.Size = new System.Drawing.Size(163, 20);
             this.lblUserMgmtStationedAddr.TabIndex = 35;
-            this.lblUserMgmtStationedAddr.Text = "Stationed Address *:";
+            this.lblUserMgmtStationedAddr.Text = "Stationed Address:";
             // 
             // txtUserMgmtStationId
             // 
@@ -1660,9 +1663,9 @@
             this.lblUserMgmtStationId.AutoSize = true;
             this.lblUserMgmtStationId.Location = new System.Drawing.Point(22, 300);
             this.lblUserMgmtStationId.Name = "lblUserMgmtStationId";
-            this.lblUserMgmtStationId.Size = new System.Drawing.Size(108, 20);
+            this.lblUserMgmtStationId.Size = new System.Drawing.Size(96, 20);
             this.lblUserMgmtStationId.TabIndex = 33;
-            this.lblUserMgmtStationId.Text = "Station ID *:";
+            this.lblUserMgmtStationId.Text = "Station ID:";
             // 
             // lblUserMgmtId
             // 
@@ -1729,9 +1732,9 @@
             this.lblUserMgmtFName.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblUserMgmtFName.Location = new System.Drawing.Point(22, 81);
             this.lblUserMgmtFName.Name = "lblUserMgmtFName";
-            this.lblUserMgmtFName.Size = new System.Drawing.Size(113, 20);
+            this.lblUserMgmtFName.Size = new System.Drawing.Size(101, 20);
             this.lblUserMgmtFName.TabIndex = 10;
-            this.lblUserMgmtFName.Text = "First Name *:";
+            this.lblUserMgmtFName.Text = "First Name:";
             // 
             // txtUserMgmtFName
             // 
@@ -1746,9 +1749,9 @@
             this.lblUserMgmtLName.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblUserMgmtLName.Location = new System.Drawing.Point(22, 122);
             this.lblUserMgmtLName.Name = "lblUserMgmtLName";
-            this.lblUserMgmtLName.Size = new System.Drawing.Size(112, 20);
+            this.lblUserMgmtLName.Size = new System.Drawing.Size(100, 20);
             this.lblUserMgmtLName.TabIndex = 11;
-            this.lblUserMgmtLName.Text = "Last Name *:";
+            this.lblUserMgmtLName.Text = "Last Name:";
             // 
             // txtUserMgmtLName
             // 
@@ -1831,7 +1834,7 @@
             this.tabAuditReport.Controls.Add(this.grpBoxAuditReportUserAccessRpt);
             this.tabAuditReport.Location = new System.Drawing.Point(4, 22);
             this.tabAuditReport.Name = "tabAuditReport";
-            this.tabAuditReport.Size = new System.Drawing.Size(1214, 673);
+            this.tabAuditReport.Size = new System.Drawing.Size(1214, 690);
             this.tabAuditReport.TabIndex = 4;
             this.tabAuditReport.Text = "Audit/Report";
             this.tabAuditReport.UseVisualStyleBackColor = true;
@@ -2058,6 +2061,15 @@
             this.label2.Size = new System.Drawing.Size(147, 13);
             this.label2.TabIndex = 18;
             this.label2.Text = "Copyright @ Lakers Tek USA";
+            // 
+            // lblEnrollPPhoto
+            // 
+            this.lblEnrollPPhoto.AutoSize = true;
+            this.lblEnrollPPhoto.Location = new System.Drawing.Point(896, 290);
+            this.lblEnrollPPhoto.Name = "lblEnrollPPhoto";
+            this.lblEnrollPPhoto.Size = new System.Drawing.Size(137, 20);
+            this.lblEnrollPPhoto.TabIndex = 66;
+            this.lblEnrollPPhoto.Text = "Passport Photo:";
             // 
             // AFISMain
             // 
@@ -2307,5 +2319,6 @@
         private System.Windows.Forms.GroupBox grpBoxMatchResult;
         private System.Windows.Forms.Label lblMatchResTxt;
         private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label lblEnrollPPhoto;
     }
 }

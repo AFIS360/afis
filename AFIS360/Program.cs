@@ -78,7 +78,7 @@ namespace AFIS360
                 fp.Filename = fingerImangePath;
                 setFingername(fp, fingerImagePathKey);
 
-                // Load image from the file
+                // Load image from the file                
                 Console.WriteLine(" Loading image from {0}...", fingerImangePath);
                 BitmapImage image = new BitmapImage(new Uri(fingerImangePath, UriKind.RelativeOrAbsolute));
                 fp.AsBitmapSource = image;
@@ -97,6 +97,40 @@ namespace AFIS360
             return person;
         }//Enroll
 
+/*
+        // Take fingerprint image file and create Person object from the image
+        public static MyPerson Enroll1(System.Drawing.Image img, string name, string id)
+        {
+
+            // Initialize empty person object and set its properties
+            MyPerson person = new MyPerson();
+            person.Name = name;
+            person.PersonId = id;
+            MyFingerprint fp = null;
+
+
+                // Initialize empty fingerprint object and set properties
+                fp = new MyFingerprint();
+                fp.Filename = MyFingerprint.RightThumb;
+
+                BitmapImage image = (BitmapImage)img;
+
+                fp.AsBitmapSource = image;
+                // Above update of fp.AsBitmapSource initialized also raw image in fp.Image
+                // Check raw image dimensions, Y axis is first, X axis is second
+                Console.WriteLine(" Image size = {0} x {1} (width x height)", fp.Image.GetLength(1), fp.Image.GetLength(0));
+                // Add fingerprint to the person
+                person.Fingerprints.Add(fp);
+            }
+
+            // Execute extraction in order to initialize fp.Template
+            Afis.Extract(person);
+            // Check template size
+            Console.WriteLine(" Template size = {0} bytes", fp.Template.Length);
+
+            return person;
+        }//Enroll
+*/
 
         private static void setFingername(MyFingerprint fp, string fpLocationPath)
         {

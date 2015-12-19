@@ -110,28 +110,42 @@ namespace AFIS360
                 if (picLRImagePath != null) imgFilePaths.Add(new KeyValuePair<String, String>("fpLRPath", picLRImagePath));
                 if (picLLImagePath != null) imgFilePaths.Add(new KeyValuePair<String, String>("fpLLPath", picLLImagePath));
 
+
+                //store person's demograpgy
+                DataAccess dataAccess = new DataAccess();
+
+                if (!string.IsNullOrWhiteSpace(id))
+                {
+                    dataAccess.storePersonDetail(personDetail);
+                } else
+                {
+                    MessageBox.Show("Person ID field is required.", "Warning Message", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
+
+                MyPerson person;
                 if (imgFilePaths.Count > 0)
                 {
-
-                    //store person's demograpgy
-                    DataAccess dataAccess = new DataAccess();
-                    dataAccess.storePersonDetail(personDetail);
-
                     //store person's finger prints
-                    MyPerson person = Program.Enroll(imgFilePaths, fname, id);
-                    dataAccess.storeFingerprints(person);
-
-                    status = "Enrollment of " + fname + " (Id = " + id + ") completed successfully.";
-                    lblEnrollStatusMsg.ForeColor = System.Drawing.Color.Green;
-                    activityLog.setActivity(status);
+                    person = Program.Enroll(imgFilePaths, fname, id);
+                } else
+                {
+                    person = new MyPerson();
+                    person.Name = fname;
+                    person.PersonId = id;
                 }
+                dataAccess.storeFingerprints(person);
+                
+                status = "Enrollment of " + fname + " (Id = " + id + ") completed successfully.";
+                lblEnrollStatusMsg.ForeColor = System.Drawing.Color.Green;
+                activityLog.setActivity(status);
             }
             catch (Exception exp)
             {
                 status = "Enrollment of " + fname + " (Id = " + id + ") is unsuccessful. Reason is - " + exp.Message + ".";
                 activityLog.setActivity(status);
                 lblEnrollStatusMsg.ForeColor = System.Drawing.Color.Red;
-                throw exp;
+//                throw exp;
             }
 
             lblEnrollStatusMsg.Text = status;
@@ -140,7 +154,7 @@ namespace AFIS360
         private void btnMatch_Click(object sender, EventArgs e)
         {
             Int32 matchingThreshold = Convert.ToInt32(ConfigurationManager.AppSettings["InitialThresholdScore"]);
-           string fpPath = picMatchImagePath;
+            string fpPath = picMatchImagePath;
             string message = null;
 
             if (!string.IsNullOrWhiteSpace(txtMatchThreshold.Text)) matchingThreshold = Convert.ToInt32(txtMatchThreshold.Text);
@@ -152,8 +166,13 @@ namespace AFIS360
                 return;
             }
 
-            Match match = Program.getMatch(fpPath, "1234", matchingThreshold);
+
+            Match match = Program.getMatch(fpPath, "[Unknown Identity]", matchingThreshold);
             MyPerson matchedPerson = match.getMatchedPerson();
+
+            //clear the Matched Result section before populating
+            clearMatchTab(sender);
+
             if (matchedPerson != null)
             {
                 string personId = matchedPerson.PersonId;
@@ -530,16 +549,21 @@ namespace AFIS360
 
         private void lblMatchCLR_Click(object sender, EventArgs e)
         {
-            clearMatchTab();
+            clearMatchTab(sender);
         }
 
-        private void clearMatchTab()
+        private void clearMatchTab(object sender)
         {
-            if (picMatch.Image != null)
+            string btnMatchName = ((Button)sender).Name;
+            Console.WriteLine("###-->> Button clicked = " + btnMatchName);
+
+            if (picMatch.Image != null && btnMatchName.Equals("lblMatchCLR"))
             {
                 picMatch.Image.Dispose();
                 picMatch.Image = System.Drawing.Image.FromFile(ConfigurationManager.AppSettings["defaultImageForMatch"]);
+                picMatchImagePath = null;
             }
+
             if (picMatchRT.Image != null)
             {
                 picMatchRT.Image.Dispose();
@@ -591,7 +615,7 @@ namespace AFIS360
                 picMatchLL.Image = null;
             }
 
-            picMatchImagePath = null;
+//            picMatchImagePath = null;
             richTxtMatchResAdds.Text = null;
             lblMatchResTxt.Text = null;
             lblMatchResFNameTxt.Text = null;
@@ -636,7 +660,7 @@ namespace AFIS360
                 if (!isCachedUser(user))
                 {
                     clearEnrollTab();
-                    clearMatchTab();
+                    clearMatchTab(sender);
                     clearUserMgmtTab();
                 }
 
@@ -764,7 +788,7 @@ namespace AFIS360
             string lname = txtUserMgmtLName.Text;
             string username = txtUserMgmtUsername.Text;
             string password = txtUserMgmtPass.Text;
-            string userRole = listUserMgmtRole.SelectedItem.ToString();
+            string userRole = (listUserMgmtRole.SelectedItem != null) ? listUserMgmtRole.SelectedItem.ToString() : null;
             string stationId = txtUserMgmtStationId.Text;
             string stationedAddr = txtUserMgmtStationedAddr.Text;
             string stationedCity = txtUserMgmtStationedCity.Text;
@@ -788,6 +812,15 @@ namespace AFIS360
             user.setServiceStartDate(serviceStartDate);
             user.setServiceEndDate(serviceEndDate);
 
+            if (string.IsNullOrWhiteSpace(id) || string.IsNullOrWhiteSpace(username) || string.IsNullOrWhiteSpace(password) || string.IsNullOrWhiteSpace(userRole) || string.IsNullOrWhiteSpace(activeStatus))
+            {
+                Console.WriteLine("###-->> Through Required field validation");
+                MessageBox.Show("Required fields (*) cannot be empty.", "Warning Message", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            } else
+            {
+                Console.WriteLine("###-->> NOT Through Required field validation");
+            }
 
             Status status = new DataAccess().createAFISUser(user);
 
@@ -805,6 +838,7 @@ namespace AFIS360
             lblUserMgmtStatusMsg.Text = status.getStatusDesc();
 
         }
+
 
         private void picMatch_MouseHover(object sender, EventArgs e)
         {
@@ -864,6 +898,12 @@ namespace AFIS360
         {
             Console.WriteLine("####-->> Lost focust from the txtEnrollId");
 
+            //clear the tab before populating 
+            string txtEnrollIdTemp = txtEnrollId.Text;
+            clearEnrollTab();
+            txtEnrollId.Text = txtEnrollIdTemp;
+
+
             if (txtEnrollId.Text.Length > 0)
             {
                 DataAccess dataAccess = new DataAccess();
@@ -872,6 +912,8 @@ namespace AFIS360
 
                 if (personsDetail.Count > 0)
                 {
+                    //disable the Enroll button
+                    btnEnrollEnroll.Enabled = false;
 
                     PersonDetail pDetail = (PersonDetail)personsDetail.FirstOrDefault();
                     txtEnrollFName.Text = pDetail.getFirstName();
@@ -895,11 +937,14 @@ namespace AFIS360
 
                     List<MyPerson> persons = dataAccess.retrievePersonFingerprintsById(personId);
 
+                    Console.WriteLine("####-->> # of persons retrived = " + persons.Count);
                     if (persons.Count > 0)
                     {
                         MyPerson person = persons.FirstOrDefault();
                         //Get all the fingerprints of the matched person 
                         List<Fingerprint> fps = person.Fingerprints;
+                        Console.WriteLine("###-->> # of Fps retrived = " + fps.Count);
+
                         for (int i = 0; i < fps.Count; i++)
                         {
                             MyFingerprint fp = (MyFingerprint)fps.ElementAt(i);
@@ -962,9 +1007,10 @@ namespace AFIS360
                 }//end-if - personsDetail
                 else
                 {
-                    string txtEnrollIdTemp = txtEnrollId.Text;
-                    clearEnrollTab();
-                    txtEnrollId.Text = txtEnrollIdTemp;
+//                    txtEnrollIdTemp = txtEnrollId.Text;
+//                   clearEnrollTab();
+//                    txtEnrollId.Text = txtEnrollIdTemp;
+                    btnEnrollEnroll.Enabled = true;
                 }
             }
 
@@ -1250,9 +1296,12 @@ namespace AFIS360
             {
                 //Adding the Passport size photo
                 System.Drawing.Image passportPhoto = personDetail.getPassportPhoto();
-                iTextSharp.text.Image passportPic = iTextSharp.text.Image.GetInstance(passportPhoto, System.Drawing.Imaging.ImageFormat.Bmp);
-                passportPic.ScaleAbsolute(120f, 120f);
-                doc.Add(passportPic);
+                if (passportPhoto != null)
+                {
+                    iTextSharp.text.Image passportPic = iTextSharp.text.Image.GetInstance(passportPhoto, System.Drawing.Imaging.ImageFormat.Bmp);
+                    passportPic.ScaleAbsolute(120f, 120f);
+                    doc.Add(passportPic);
+                }
 
                 //Adding the person detail
                 Paragraph paragraphReportBody = new Paragraph();
@@ -1263,9 +1312,288 @@ namespace AFIS360
                 paragraphReportBody.Add("Address: " + personDetail.getStreetAddress() + ", " + personDetail.getCity() + ", " + personDetail.getState() + " " + personDetail.getPostalCode() + ", " + personDetail.getCountry() + "\n");
                 paragraphReportBody.Add("Profession: " + personDetail.getProfession() + "\n");
                 paragraphReportBody.Add("Cell#: " + personDetail.getCellNbr() + ", Home Phone#: " + personDetail.getHomePhoneNbr() + ", Work Phone#: " + personDetail.getWorkPhoneNbr() + "\n");
-                paragraphReportBody.Add("Email: " + personDetail.getEmail() + "\n");
+                paragraphReportBody.Add("Email: " + personDetail.getEmail() + "\n\n");
                 doc.Add(paragraphReportBody);                 
             }
+
+            //add table for fingerprints
+            Paragraph paragraphFingerprints = new Paragraph();
+            paragraphFingerprints.Add("Fingerprint(s):\n\n");
+            doc.Add(paragraphFingerprints);
+
+            PdfPTable fingerprintsTable = new PdfPTable(5);
+            float[] widths = new float[] { 40f, 40f, 40f, 40f, 40f };
+            fingerprintsTable.SetWidths(widths);
+
+            //Add Headers to the table
+            fingerprintsTable.AddCell(new PdfPCell(new Phrase("RT")));
+            fingerprintsTable.AddCell(new PdfPCell(new Phrase("RI")));
+            fingerprintsTable.AddCell(new PdfPCell(new Phrase("RM")));
+            fingerprintsTable.AddCell(new PdfPCell(new Phrase("RR")));
+            fingerprintsTable.AddCell(new PdfPCell(new Phrase("RL")));
+
+            PdfPCell imageRTCell = null;
+            PdfPCell imageRICell = null;
+            PdfPCell imageRMCell = null;
+            PdfPCell imageRRCell = null;
+            PdfPCell imageRLCell = null;
+            PdfPCell imageLTCell = null;
+            PdfPCell imageLICell = null;
+            PdfPCell imageLMCell = null;
+            PdfPCell imageLRCell = null;
+            PdfPCell imageLLCell = null;
+
+            //Default image in case, image is not available
+            iTextSharp.text.Image iTextDefaultFpImage = iTextSharp.text.Image.GetInstance(ConfigurationManager.AppSettings["DefaultFpImagePath"]);
+
+            List<MyPerson> persons = new DataAccess().retrievePersonFingerprintsById(personId);
+            Console.WriteLine("####-->> # of persons retrived = " + persons.Count);
+
+            if (persons.Count > 0)
+            {
+                MyPerson person = persons.FirstOrDefault();
+                //Get all the fingerprints of the matched person 
+                List<Fingerprint> fps = person.Fingerprints;
+                Console.WriteLine("###-->> # of Fps retrived = " + fps.Count);
+                    
+                for (int i = 0; i < fps.Count; i++)
+                {
+                    MyFingerprint fp = (MyFingerprint)fps.ElementAt(i);
+
+                    if (fp.Fingername != null)
+                    {
+                        if (fp.Fingername.Equals(MyFingerprint.RightThumb))
+                        {
+                            System.Drawing.Image imageRT = fp.AsBitmap;
+                            if(imageRT != null)
+                            {
+                                Console.WriteLine("###-->> RT");
+                                iTextSharp.text.Image iTextImgRT = iTextSharp.text.Image.GetInstance(imageRT, System.Drawing.Imaging.ImageFormat.Bmp);
+                                iTextImgRT.ScaleAbsolute(60f, 80f);
+                                imageRTCell = new PdfPCell(iTextImgRT);
+                                imageRTCell.HorizontalAlignment = Element.ALIGN_CENTER;
+                                imageRTCell.VerticalAlignment = Element.ALIGN_MIDDLE;
+                            }
+                        }
+                        else if (fp.Fingername.Equals(MyFingerprint.RightIndex))
+                        {
+                            System.Drawing.Image imageRI = fp.AsBitmap;
+                            if(imageRI != null)
+                            {
+                                Console.WriteLine("###-->> RI");
+                                iTextSharp.text.Image iTextImgRI = iTextSharp.text.Image.GetInstance(imageRI, System.Drawing.Imaging.ImageFormat.Bmp);
+                                iTextImgRI.ScaleAbsolute(60f, 80f);
+                                imageRICell = new PdfPCell(iTextImgRI);
+                                imageRICell.HorizontalAlignment = Element.ALIGN_CENTER;
+                                imageRICell.VerticalAlignment = Element.ALIGN_MIDDLE;
+                            }
+                        }
+                        else if (fp.Fingername.Equals(MyFingerprint.RightMiddle))
+                        {
+                            System.Drawing.Image imageRM = fp.AsBitmap;
+                            if (imageRM != null)
+                            {
+                                Console.WriteLine("###-->> RM");
+                                iTextSharp.text.Image iTextImgRM = iTextSharp.text.Image.GetInstance(imageRM, System.Drawing.Imaging.ImageFormat.Bmp);
+                                iTextImgRM.ScaleAbsolute(60f, 80f);
+                                imageRMCell = new PdfPCell(iTextImgRM);
+                                imageRMCell.HorizontalAlignment = Element.ALIGN_CENTER;
+                                imageRMCell.VerticalAlignment = Element.ALIGN_MIDDLE;
+                            }
+                        }
+                        else if (fp.Fingername.Equals(MyFingerprint.RightRing))
+                        {
+                            System.Drawing.Image imageRR = fp.AsBitmap;
+                            if (imageRR != null)
+                            {
+                                Console.WriteLine("###-->> RR");
+                                iTextSharp.text.Image iTextImgRR = iTextSharp.text.Image.GetInstance(imageRR, System.Drawing.Imaging.ImageFormat.Bmp);
+                                iTextImgRR.ScaleAbsolute(60f, 80f);
+                                imageRRCell = new PdfPCell(iTextImgRR);
+                                imageRRCell.HorizontalAlignment = Element.ALIGN_CENTER;
+                                imageRRCell.VerticalAlignment = Element.ALIGN_MIDDLE;
+                            }
+                        }
+                        else if (fp.Fingername.Equals(MyFingerprint.RightLittle))
+                        {
+                            System.Drawing.Image imageRL = fp.AsBitmap;
+                            if (imageRL != null)
+                            {
+                                Console.WriteLine("###-->> RL");
+                                iTextSharp.text.Image iTextImgRL = iTextSharp.text.Image.GetInstance(imageRL, System.Drawing.Imaging.ImageFormat.Bmp);
+                                iTextImgRL.ScaleAbsolute(60f, 80f);
+                                imageRLCell = new PdfPCell(iTextImgRL);
+                                imageRLCell.HorizontalAlignment = Element.ALIGN_CENTER;
+                                imageRLCell.VerticalAlignment = Element.ALIGN_MIDDLE;
+                            }
+                        }
+                         
+                        else if (fp.Fingername.Equals(MyFingerprint.LeftThumb))
+                        {
+                            System.Drawing.Image imageLT = fp.AsBitmap;
+                            if(imageLT != null)
+                            {
+                                Console.WriteLine("###-->> LT");
+                                iTextSharp.text.Image iTextImgLT = iTextSharp.text.Image.GetInstance(imageLT, System.Drawing.Imaging.ImageFormat.Bmp);
+                                iTextImgLT.ScaleAbsolute(60f, 80f);
+                                imageLTCell = new PdfPCell(iTextImgLT);
+                                imageLTCell.HorizontalAlignment = Element.ALIGN_CENTER;
+                                imageLTCell.VerticalAlignment = Element.ALIGN_MIDDLE;
+                            }
+                        }
+                        else if (fp.Fingername.Equals(MyFingerprint.LeftIndex))
+                        {
+                            System.Drawing.Image imageLI = fp.AsBitmap;
+                            if (imageLI != null)
+                            {
+                                Console.WriteLine("###-->> LI");
+                                iTextSharp.text.Image iTextImgLI = iTextSharp.text.Image.GetInstance(imageLI, System.Drawing.Imaging.ImageFormat.Bmp);
+                                iTextImgLI.ScaleAbsolute(60f, 80f);
+                                imageLICell = new PdfPCell(iTextImgLI);
+                                imageLICell.HorizontalAlignment = Element.ALIGN_CENTER;
+                                imageLICell.VerticalAlignment = Element.ALIGN_MIDDLE;
+                            }
+                        }
+                        else if (fp.Fingername.Equals(MyFingerprint.LeftMiddle))
+                        {
+                            System.Drawing.Image imageLM = fp.AsBitmap;
+                            if (imageLM != null)
+                            {
+                                Console.WriteLine("###-->> LM");
+                                iTextSharp.text.Image iTextImgLM = iTextSharp.text.Image.GetInstance(imageLM, System.Drawing.Imaging.ImageFormat.Bmp);
+                                iTextImgLM.ScaleAbsolute(60f, 80f);
+                                imageLMCell = new PdfPCell(iTextImgLM);
+                                imageLMCell.HorizontalAlignment = Element.ALIGN_CENTER;
+                                imageLMCell.VerticalAlignment = Element.ALIGN_MIDDLE;
+                            }
+                        }
+                        else if (fp.Fingername.Equals(MyFingerprint.LeftRing))
+                        {
+                            System.Drawing.Image imageLR = fp.AsBitmap;
+                            if (imageLR != null)
+                            {
+                                Console.WriteLine("###-->> LR");
+                                iTextSharp.text.Image iTextImgLR = iTextSharp.text.Image.GetInstance(imageLR, System.Drawing.Imaging.ImageFormat.Bmp);
+                                iTextImgLR.ScaleAbsolute(60f, 80f);
+                                imageLRCell = new PdfPCell(iTextImgLR);
+                                imageLRCell.HorizontalAlignment = Element.ALIGN_CENTER;
+                                imageLRCell.VerticalAlignment = Element.ALIGN_MIDDLE;
+                            }
+                        }
+                        else if (fp.Fingername.Equals(MyFingerprint.LeftLittle))
+                        {
+                            System.Drawing.Image imageLL = fp.AsBitmap;
+                            if (imageLL != null)
+                            {
+                                Console.WriteLine("###-->> LL");
+                                iTextSharp.text.Image iTextImgLL = iTextSharp.text.Image.GetInstance(imageLL, System.Drawing.Imaging.ImageFormat.Bmp);
+                                iTextImgLL.ScaleAbsolute(60f, 80f);
+                                imageLLCell = new PdfPCell(iTextImgLL);
+                                imageLLCell.HorizontalAlignment = Element.ALIGN_CENTER;
+                                imageLLCell.VerticalAlignment = Element.ALIGN_MIDDLE;
+                            }
+                        }
+                    }
+                }
+
+                //add the Right-Hand fingerprints
+                if (imageRTCell != null)
+                {
+                    fingerprintsTable.AddCell(imageRTCell);
+                }else
+                {
+                    fingerprintsTable.AddCell(new PdfPCell(iTextDefaultFpImage, true));
+                }
+
+                if (imageRICell != null)
+                {
+                    fingerprintsTable.AddCell(imageRICell);
+                }
+                else
+                {
+                    fingerprintsTable.AddCell(new PdfPCell(iTextDefaultFpImage, true));
+                }
+                if (imageRMCell != null)
+                {
+                    fingerprintsTable.AddCell(imageRMCell);
+                }
+                else
+                {
+                    fingerprintsTable.AddCell(new PdfPCell(iTextDefaultFpImage, true));
+                }
+                if (imageRRCell != null)
+                {
+                    fingerprintsTable.AddCell(imageRRCell);
+                }
+                else
+                {
+                    fingerprintsTable.AddCell(new PdfPCell(iTextDefaultFpImage, true));
+                }
+                if (imageRLCell != null)
+                {
+                    fingerprintsTable.AddCell(imageRLCell);
+                }
+                else
+                {
+                    fingerprintsTable.AddCell(new PdfPCell(iTextDefaultFpImage, true));
+                }
+
+                //add 2nd row on the table
+                fingerprintsTable.AddCell(new PdfPCell(new Phrase("LT")));
+                fingerprintsTable.AddCell(new PdfPCell(new Phrase("LI")));
+                fingerprintsTable.AddCell(new PdfPCell(new Phrase("LM")));
+                fingerprintsTable.AddCell(new PdfPCell(new Phrase("LR")));
+                fingerprintsTable.AddCell(new PdfPCell(new Phrase("LL")));
+
+                //add the Left-Hand fingerprints
+                if (imageLTCell != null)
+                {
+                    fingerprintsTable.AddCell(imageLTCell);
+                }
+                else
+                {
+                    fingerprintsTable.AddCell(new PdfPCell(iTextDefaultFpImage, true));
+                }
+
+                if (imageLICell != null)
+                {
+                    fingerprintsTable.AddCell(imageLICell);
+                }
+                else
+                {
+                    fingerprintsTable.AddCell(new PdfPCell(iTextDefaultFpImage, true));
+                }
+                if (imageLMCell != null)
+                {
+                    fingerprintsTable.AddCell(imageLMCell);
+                }
+                else
+                {
+                    fingerprintsTable.AddCell(new PdfPCell(iTextDefaultFpImage, true));
+                }
+                if (imageLRCell != null)
+                {
+                    fingerprintsTable.AddCell(imageLRCell);
+                }
+                else
+                {
+                    fingerprintsTable.AddCell(new PdfPCell(iTextDefaultFpImage, true));
+                }
+                if (imageLLCell != null)
+                {
+                    fingerprintsTable.AddCell(imageLLCell);
+                }
+                else
+                {
+                    fingerprintsTable.AddCell(new PdfPCell(iTextDefaultFpImage, true));
+                }
+
+
+            }//end-if - persons
+
+            //add Table for fingerprints
+
+            doc.Add(fingerprintsTable);
 
             doc.Close();
             Console.WriteLine("PDF Generated successfully...");
@@ -1351,8 +1679,10 @@ namespace AFIS360
 
                 if (imgFilePaths.Count > 0)
                 {
+                    Console.WriteLine("####-->> # of Fp to update = " + imgFilePaths.Count);
                     //store person's finger prints
                     MyPerson person = Program.Enroll(imgFilePaths, fname, id);
+                    Console.WriteLine("####-->> person.name = " + person.Name);
                     dataAccess.updateFingerprints(person);
                 }
                 status = "Enrollment update of " + fname + " (Id = " + id + ") completed successfully.";
@@ -1365,7 +1695,7 @@ namespace AFIS360
                 activityLog.setActivity(status);
                 lblEnrollStatusMsg.ForeColor = System.Drawing.Color.Red;
                 Console.WriteLine("###--->> exp.StackTrace = " + exp.StackTrace);
-                throw exp;
+//                throw exp;
             }
             lblEnrollStatusMsg.Text = status;
         }//btnEnrollUpdate_Click
