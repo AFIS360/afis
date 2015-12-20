@@ -9,7 +9,7 @@ using System.Runtime.Serialization;
 using System.Runtime.Serialization.Formatters.Binary;
 using SourceAFIS.Simple; // import namespace SourceAFIS.Simple
 using System.Collections;
-
+using Wsqm;
 
 namespace AFIS360
 {
@@ -53,7 +53,7 @@ namespace AFIS360
             return person;
         }//getProbe
 
-
+/*
         // Take fingerprint image file and create Person object from the image
         public static MyPerson Enroll(ICollection<KeyValuePair<String, String>> imgFilePaths, string name, string id)
         {
@@ -97,9 +97,9 @@ namespace AFIS360
             return person;
         }//Enroll
 
-/*
+*/
         // Take fingerprint image file and create Person object from the image
-        public static MyPerson Enroll1(System.Drawing.Image img, string name, string id)
+        public static MyPerson Enroll(ICollection<KeyValuePair<String, System.Drawing.Image>> imgsFromPicBox, string name, string id)
         {
 
             // Initialize empty person object and set its properties
@@ -108,14 +108,18 @@ namespace AFIS360
             person.PersonId = id;
             MyFingerprint fp = null;
 
+            foreach (KeyValuePair<string, System.Drawing.Image> element in imgsFromPicBox)
+            {
+                string fingerName = element.Key;
+                System.Drawing.Image fingerImage = element.Value;
 
                 // Initialize empty fingerprint object and set properties
                 fp = new MyFingerprint();
-                fp.Filename = MyFingerprint.RightThumb;
+                fp.Fingername = fingerName;
 
-                BitmapImage image = (BitmapImage)img;
+                System.Drawing.Bitmap image = new System.Drawing.Bitmap(fingerImage);
+                fp.AsBitmap = image;
 
-                fp.AsBitmapSource = image;
                 // Above update of fp.AsBitmapSource initialized also raw image in fp.Image
                 // Check raw image dimensions, Y axis is first, X axis is second
                 Console.WriteLine(" Image size = {0} x {1} (width x height)", fp.Image.GetLength(1), fp.Image.GetLength(0));
@@ -130,8 +134,8 @@ namespace AFIS360
 
             return person;
         }//Enroll
-*/
 
+/*
         private static void setFingername(MyFingerprint fp, string fpLocationPath)
         {
             if (fpLocationPath.Equals("fpRTPath"))
@@ -185,7 +189,7 @@ namespace AFIS360
                 Console.WriteLine("Finger = " + fp.Fingername);
             }
         }//end setFingername
-
+*/
 
         //Match probe with people in the database
         public static Match getMatch(string fpPath, string visitorId, Int32 threshold)
@@ -226,6 +230,13 @@ namespace AFIS360
             return match;
         }//getMatch
 
+        public static string convertWSQtoBMP(string inputFilePath)
+        {
+            string outputFilePath = Path.GetFileNameWithoutExtension(inputFilePath) + ".bmp";
+            WSQ dec = new WSQ();
+            dec.DecoderFile(@inputFilePath, @outputFilePath);
+            return outputFilePath;
+        }
 
         [STAThread]
         static void Main(string[] args)

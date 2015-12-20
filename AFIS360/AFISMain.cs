@@ -12,6 +12,7 @@ using System.IO;
 using iTextSharp.text;
 using iTextSharp.text.pdf;
 using System.Configuration;
+using Wsqm;
 
 namespace AFIS360
 {
@@ -51,6 +52,7 @@ namespace AFIS360
             if (picMatch.Image == null) picMatch.Image = System.Drawing.Image.FromFile(ConfigurationManager.AppSettings["defaultImageForMatch"]);
       }
 
+/*
         private void btnEnroll_Click(object sender, EventArgs e)
         {
             string id = txtEnrollId.Text;
@@ -150,6 +152,124 @@ namespace AFIS360
 
             lblEnrollStatusMsg.Text = status;
         }
+*/
+
+        private void btnEnroll_Click(object sender, EventArgs e)
+        {
+            string id = txtEnrollId.Text;
+            string fname = txtEnrollFName.Text;
+            string lname = txtEnrollLName.Text;
+            string mname = txtEnrollMName.Text;
+            string prefix = txtEnrollPrefix.Text;
+            string suffix = txtEnrollSuffix.Text;
+            DateTime dobTemp = dtpEnrollDOB.Value;
+            DateTime dob = Convert.ToDateTime(dobTemp.ToString("MM/dd/yyy"));
+            string streeAddr = txtEnrollAddrLine.Text;
+            string city = txtEnrollCity.Text;
+            string postalCode = txtEnrollPostalCode.Text;
+            string state = txtEnrollState.Text;
+            string country = txtEnrollCountry.Text;
+            string profession = txtEnrollProfession.Text;
+            string fatherName = txtEnrollFatherName.Text;
+            string cellNbr = txtEnrollCellNbr.Text;
+            string workPhoneNbr = txtEnrollWorkPNbr.Text;
+            string homePhoneNbr = txtEnrollHomePNbr.Text;
+            string email = txtEnrollEmail.Text;
+            System.Drawing.Image passportPhoto = picEnrollPassportPhoto.Image;
+            string status = null;
+
+            try
+            {
+                PersonDetail personDetail = new PersonDetail();
+                personDetail.setPersonId(id);
+                personDetail.setFirstName(fname);
+                personDetail.setLastName(lname);
+                personDetail.setMiddleName(mname);
+                personDetail.setPrefix(prefix);
+                personDetail.setSuffix(suffix);
+                personDetail.setDOB(dob);
+                personDetail.setStreetAddress(streeAddr);
+                personDetail.setCity(city);
+                personDetail.setPostalCode(postalCode);
+                personDetail.setState(state);
+                personDetail.setCountry(country);
+                personDetail.setProfession(profession);
+                personDetail.setFatherName(fatherName);
+                personDetail.setcellNbr(cellNbr);
+                personDetail.setWorkPhoneNbr(workPhoneNbr);
+                personDetail.setHomwPhoneNbr(homePhoneNbr);
+                personDetail.setEmail(email);
+                personDetail.setPassportPhoto(passportPhoto);
+/*
+
+                if (picRTImagePath != null) imgFilePaths.Add(new KeyValuePair<String, String>("fpRTPath", picRTImagePath));
+                if (picRIImagePath != null) imgFilePaths.Add(new KeyValuePair<String, String>("fpRIPath", picRIImagePath));
+                if (picRMImagePath != null) imgFilePaths.Add(new KeyValuePair<String, String>("fpRMPath", picRMImagePath));
+                if (picRRImagePath != null) imgFilePaths.Add(new KeyValuePair<String, String>("fpRRPath", picRRImagePath));
+                if (picRLImagePath != null) imgFilePaths.Add(new KeyValuePair<String, String>("fpRLPath", picRLImagePath));
+                if (picLTImagePath != null) imgFilePaths.Add(new KeyValuePair<String, String>("fpLTPath", picLTImagePath));
+                if (picLIImagePath != null) imgFilePaths.Add(new KeyValuePair<String, String>("fpLIPath", picLIImagePath));
+                if (picLMImagePath != null) imgFilePaths.Add(new KeyValuePair<String, String>("fpLMPath", picLMImagePath));
+                if (picLRImagePath != null) imgFilePaths.Add(new KeyValuePair<String, String>("fpLRPath", picLRImagePath));
+                if (picLLImagePath != null) imgFilePaths.Add(new KeyValuePair<String, String>("fpLLPath", picLLImagePath));
+
+*/
+                //store person's demograpgy
+                DataAccess dataAccess = new DataAccess();
+
+                if (!string.IsNullOrWhiteSpace(id))
+                {
+                    dataAccess.storePersonDetail(personDetail);
+                }
+                else
+                {
+                    MessageBox.Show("Person ID field is required.", "Warning Message", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
+
+
+                //store person's fingerprints
+                ICollection<KeyValuePair<String, System.Drawing.Image>> imgsFromPicBox = new Dictionary<String, System.Drawing.Image>();
+                if (picEnrollRT.Image != null) imgsFromPicBox.Add(new KeyValuePair<string, System.Drawing.Image>(MyFingerprint.RightThumb, picEnrollRT.Image));
+                if (picEnrollRI.Image != null) imgsFromPicBox.Add(new KeyValuePair<string, System.Drawing.Image>(MyFingerprint.RightIndex, picEnrollRI.Image));
+                if (picEnrollRM.Image != null) imgsFromPicBox.Add(new KeyValuePair<string, System.Drawing.Image>(MyFingerprint.RightMiddle, picEnrollRM.Image));
+                if (picEnrollRR.Image != null) imgsFromPicBox.Add(new KeyValuePair<string, System.Drawing.Image>(MyFingerprint.RightRing, picEnrollRR.Image));
+                if (picEnrollRL.Image != null) imgsFromPicBox.Add(new KeyValuePair<string, System.Drawing.Image>(MyFingerprint.RightLittle, picEnrollRL.Image));
+                if (picEnrollLT.Image != null) imgsFromPicBox.Add(new KeyValuePair<string, System.Drawing.Image>(MyFingerprint.LeftThumb, picEnrollLT.Image));
+                if (picEnrollLI.Image != null) imgsFromPicBox.Add(new KeyValuePair<string, System.Drawing.Image>(MyFingerprint.LeftIndex, picEnrollLI.Image));
+                if (picEnrollLM.Image != null) imgsFromPicBox.Add(new KeyValuePair<string, System.Drawing.Image>(MyFingerprint.LeftMiddle, picEnrollLM.Image));
+                if (picEnrollLR.Image != null) imgsFromPicBox.Add(new KeyValuePair<string, System.Drawing.Image>(MyFingerprint.LeftRing, picEnrollLR.Image));
+                if (picEnrollLL.Image != null) imgsFromPicBox.Add(new KeyValuePair<string, System.Drawing.Image>(MyFingerprint.LeftLittle, picEnrollLL.Image));
+
+                MyPerson person;
+                if (imgsFromPicBox.Count > 0)
+                {
+                    //store person's finger prints
+                    person = Program.Enroll(imgsFromPicBox, fname, id);
+                }
+                else
+                {
+                    person = new MyPerson();
+                    person.Name = fname;
+                    person.PersonId = id;
+                }
+                dataAccess.storeFingerprints(person);
+
+                status = "Enrollment of " + fname + " (Id = " + id + ") completed successfully.";
+                lblEnrollStatusMsg.ForeColor = System.Drawing.Color.Green;
+                activityLog.setActivity(status);
+            }
+            catch (Exception exp)
+            {
+                status = "Enrollment of " + fname + " (Id = " + id + ") is unsuccessful. Reason is - " + exp.Message + ".";
+                activityLog.setActivity(status);
+                lblEnrollStatusMsg.ForeColor = System.Drawing.Color.Red;
+                //                throw exp;
+            }
+
+            lblEnrollStatusMsg.Text = status;
+        }
+
 
         private void btnMatch_Click(object sender, EventArgs e)
         {
@@ -267,11 +387,17 @@ namespace AFIS360
         private void picRT_Click(object sender, EventArgs e)
         {
             OpenFileDialog ofd = new OpenFileDialog();
-            ofd.Filter = "Image Files|*.jpg;*.jpeg;*.png;*.gif;*.bmp;*.tif;...";
+            ofd.Filter = "Image Files|*.wsq;*.jpg;*.jpeg;*.png;*.gif;*.bmp;*.tif;...";
             if (ofd.ShowDialog() == DialogResult.OK)
             {
                 picRTImagePath = ofd.FileName;
-                picEnrollRT.Image = System.Drawing.Image.FromFile(ofd.FileName);
+                //if image is in WSQ format convert it to BMP
+                if (Path.GetExtension(ofd.FileName).ToUpper().Replace(".", "") == "WSQ")
+                {
+                    picRTImagePath = Program.convertWSQtoBMP(picRTImagePath);
+                }
+
+                picEnrollRT.Image = System.Drawing.Image.FromFile(picRTImagePath);
                 picEnrollRT.SizeMode = PictureBoxSizeMode.StretchImage;
             }
         }
@@ -279,11 +405,16 @@ namespace AFIS360
         private void picRI_Click(object sender, EventArgs e)
         {
             OpenFileDialog ofd = new OpenFileDialog();
-            ofd.Filter = "Image Files|*.jpg;*.jpeg;*.png;*.gif;*.bmp;*.tif;...";
+            ofd.Filter = "Image Files|*.wsq;*.jpg;*.jpeg;*.png;*.gif;*.bmp;*.tif;...";
             if (ofd.ShowDialog() == DialogResult.OK)
             {
                 picRIImagePath = ofd.FileName;
-                picEnrollRI.Image = System.Drawing.Image.FromFile(ofd.FileName);
+                //if image is in WSQ format convert it to BMP
+                if (Path.GetExtension(ofd.FileName).ToUpper().Replace(".", "") == "WSQ")
+                {
+                    picRIImagePath = Program.convertWSQtoBMP(picRIImagePath);
+                }
+                picEnrollRI.Image = System.Drawing.Image.FromFile(picRIImagePath);
                 picEnrollRI.SizeMode = PictureBoxSizeMode.StretchImage;
             }
         }
@@ -291,11 +422,16 @@ namespace AFIS360
         private void picRM_Click(object sender, EventArgs e)
         {
             OpenFileDialog ofd = new OpenFileDialog();
-            ofd.Filter = "Image Files|*.jpg;*.jpeg;*.png;*.gif;*.bmp;*.tif;...";
+            ofd.Filter = "Image Files|*.wsq;*.jpg;*.jpeg;*.png;*.gif;*.bmp;*.tif;...";
             if (ofd.ShowDialog() == DialogResult.OK)
             {
                 picRMImagePath = ofd.FileName;
-                picEnrollRM.Image = System.Drawing.Image.FromFile(ofd.FileName);
+                //if image is in WSQ format convert it to BMP
+                if (Path.GetExtension(ofd.FileName).ToUpper().Replace(".", "") == "WSQ")
+                {
+                    picRMImagePath = Program.convertWSQtoBMP(picRMImagePath);
+                }
+                picEnrollRM.Image = System.Drawing.Image.FromFile(picRMImagePath);
                 picEnrollRM.SizeMode = PictureBoxSizeMode.StretchImage;
             }
         }
@@ -303,11 +439,16 @@ namespace AFIS360
         private void picRR_Click(object sender, EventArgs e)
         {
             OpenFileDialog ofd = new OpenFileDialog();
-            ofd.Filter = "Image Files|*.jpg;*.jpeg;*.png;*.gif;*.bmp;*.tif;...";
+            ofd.Filter = "Image Files|*.wsq;*.jpg;*.jpeg;*.png;*.gif;*.bmp;*.tif;...";
             if (ofd.ShowDialog() == DialogResult.OK)
             {
                 picRRImagePath = ofd.FileName;
-                picEnrollRR.Image = System.Drawing.Image.FromFile(ofd.FileName);
+                //if image is in WSQ format convert it to BMP
+                if (Path.GetExtension(ofd.FileName).ToUpper().Replace(".", "") == "WSQ")
+                {
+                    picRRImagePath = Program.convertWSQtoBMP(picRRImagePath);
+                }
+                picEnrollRR.Image = System.Drawing.Image.FromFile(picRRImagePath);
                 picEnrollRR.SizeMode = PictureBoxSizeMode.StretchImage;
             }
         }
@@ -315,11 +456,16 @@ namespace AFIS360
         private void picRL_Click(object sender, EventArgs e)
         {
             OpenFileDialog ofd = new OpenFileDialog();
-            ofd.Filter = "Image Files|*.jpg;*.jpeg;*.png;*.gif;*.bmp;*.tif;...";
+            ofd.Filter = "Image Files|*.wsq;*.jpg;*.jpeg;*.png;*.gif;*.bmp;*.tif;...";
             if (ofd.ShowDialog() == DialogResult.OK)
             {
                 picRLImagePath = ofd.FileName;
-                picEnrollRL.Image = System.Drawing.Image.FromFile(ofd.FileName);
+                //if image is in WSQ format convert it to BMP
+                if (Path.GetExtension(ofd.FileName).ToUpper().Replace(".", "") == "WSQ")
+                {
+                    picRLImagePath = Program.convertWSQtoBMP(picRLImagePath);
+                }
+                picEnrollRL.Image = System.Drawing.Image.FromFile(picRLImagePath);
                 picEnrollRL.SizeMode = PictureBoxSizeMode.StretchImage;
             }
         }
@@ -327,11 +473,16 @@ namespace AFIS360
         private void picLT_Click(object sender, EventArgs e)
         {
             OpenFileDialog ofd = new OpenFileDialog();
-            ofd.Filter = "Image Files|*.jpg;*.jpeg;*.png;*.gif;*.bmp;*.tif;...";
+            ofd.Filter = "Image Files|*.wsq;*.jpg;*.jpeg;*.png;*.gif;*.bmp;*.tif;...";
             if (ofd.ShowDialog() == DialogResult.OK)
             {
                 picLTImagePath = ofd.FileName;
-                picEnrollLT.Image = System.Drawing.Image.FromFile(ofd.FileName);
+                //if image is in WSQ format convert it to BMP
+                if (Path.GetExtension(ofd.FileName).ToUpper().Replace(".", "") == "WSQ")
+                {
+                    picLTImagePath = Program.convertWSQtoBMP(picLTImagePath);
+                }
+                picEnrollLT.Image = System.Drawing.Image.FromFile(picLTImagePath);
                 picEnrollLT.SizeMode = PictureBoxSizeMode.StretchImage;
             }
 
@@ -340,11 +491,16 @@ namespace AFIS360
         private void picLI_Click(object sender, EventArgs e)
         {
             OpenFileDialog ofd = new OpenFileDialog();
-            ofd.Filter = "Image Files|*.jpg;*.jpeg;*.png;*.gif;*.bmp;*.tif;...";
+            ofd.Filter = "Image Files|*.wsq;*.jpg;*.jpeg;*.png;*.gif;*.bmp;*.tif;...";
             if (ofd.ShowDialog() == DialogResult.OK)
             {
                 picLIImagePath = ofd.FileName;
-                picEnrollLI.Image = System.Drawing.Image.FromFile(ofd.FileName);
+                //if image is in WSQ format convert it to BMP
+                if (Path.GetExtension(ofd.FileName).ToUpper().Replace(".", "") == "WSQ")
+                {
+                    picLIImagePath = Program.convertWSQtoBMP(picLIImagePath);
+                }
+                picEnrollLI.Image = System.Drawing.Image.FromFile(picLIImagePath);
                 picEnrollLI.SizeMode = PictureBoxSizeMode.StretchImage;
             }
         }
@@ -352,11 +508,16 @@ namespace AFIS360
         private void picLM_Click(object sender, EventArgs e)
         {
             OpenFileDialog ofd = new OpenFileDialog();
-            ofd.Filter = "Image Files|*.jpg;*.jpeg;*.png;*.gif;*.bmp;*.tif;...";
+            ofd.Filter = "Image Files|*.wsq;*.jpg;*.jpeg;*.png;*.gif;*.bmp;*.tif;...";
             if (ofd.ShowDialog() == DialogResult.OK)
             {
                 picLMImagePath = ofd.FileName;
-                picEnrollLM.Image = System.Drawing.Image.FromFile(ofd.FileName);
+                //if image is in WSQ format convert it to BMP
+                if (Path.GetExtension(ofd.FileName).ToUpper().Replace(".", "") == "WSQ")
+                {
+                    picLMImagePath = Program.convertWSQtoBMP(picLMImagePath);
+                }
+                picEnrollLM.Image = System.Drawing.Image.FromFile(picLMImagePath);
                 picEnrollLM.SizeMode = PictureBoxSizeMode.StretchImage;
             }
         }
@@ -364,11 +525,16 @@ namespace AFIS360
         private void picLR_Click(object sender, EventArgs e)
         {
             OpenFileDialog ofd = new OpenFileDialog();
-            ofd.Filter = "Image Files|*.jpg;*.jpeg;*.png;*.gif;*.bmp;*.tif;...";
+            ofd.Filter = "Image Files|*.wsq;*.jpg;*.jpeg;*.png;*.gif;*.bmp;*.tif;...";
             if (ofd.ShowDialog() == DialogResult.OK)
             {
                 picLRImagePath = ofd.FileName;
-                picEnrollLR.Image = System.Drawing.Image.FromFile(ofd.FileName);
+                //if image is in WSQ format convert it to BMP
+                if (Path.GetExtension(ofd.FileName).ToUpper().Replace(".", "") == "WSQ")
+                {
+                    picLRImagePath = Program.convertWSQtoBMP(picLRImagePath);
+                }
+                picEnrollLR.Image = System.Drawing.Image.FromFile(picLRImagePath);
                 picEnrollLR.SizeMode = PictureBoxSizeMode.StretchImage;
             }
         }
@@ -376,11 +542,16 @@ namespace AFIS360
         private void picLL_Click(object sender, EventArgs e)
         {
             OpenFileDialog ofd = new OpenFileDialog();
-            ofd.Filter = "Image Files|*.jpg;*.jpeg;*.png;*.gif;*.bmp;*.tif;...";
+            ofd.Filter = "Image Files|*.wsq;*.jpg;*.jpeg;*.png;*.gif;*.bmp;*.tif;...";
             if (ofd.ShowDialog() == DialogResult.OK)
             {
                 picLLImagePath = ofd.FileName;
-                picEnrollLL.Image = System.Drawing.Image.FromFile(ofd.FileName);
+                //if image is in WSQ format convert it to BMP
+                if (Path.GetExtension(ofd.FileName).ToUpper().Replace(".", "") == "WSQ")
+                {
+                    picLLImagePath = Program.convertWSQtoBMP(picLLImagePath);
+                }
+                picEnrollLL.Image = System.Drawing.Image.FromFile(picLLImagePath);
                 picEnrollLL.SizeMode = PictureBoxSizeMode.StretchImage;
 
             }
@@ -405,11 +576,16 @@ namespace AFIS360
         private void picMatch_Click(object sender, EventArgs e)
         {
             OpenFileDialog ofd = new OpenFileDialog();
-            ofd.Filter = "Image Files|*.jpg;*.jpeg;*.png;*.gif;*.bmp;*.tif;...";
+            ofd.Filter = "Image Files|*.wsq;*.jpg;*.jpeg;*.png;*.gif;*.bmp;*.tif;...";
             if (ofd.ShowDialog() == DialogResult.OK)
             {
                 picMatchImagePath = ofd.FileName;
-                picMatch.Image = System.Drawing.Image.FromFile(ofd.FileName);
+                //if image is in WSQ format convert it to BMP
+                if (Path.GetExtension(ofd.FileName).ToUpper().Replace(".", "") == "WSQ")
+                {
+                    picMatchImagePath = Program.convertWSQtoBMP(picMatchImagePath);
+                }
+                picMatch.Image = System.Drawing.Image.FromFile(picMatchImagePath);
                 picMatch.SizeMode = PictureBoxSizeMode.StretchImage;
             }
 
@@ -949,6 +1125,8 @@ namespace AFIS360
                         {
                             MyFingerprint fp = (MyFingerprint)fps.ElementAt(i);
 
+                            Console.WriteLine("###-->> fp.Fingername = " + fp.Fingername);
+
                             if (fp.Fingername != null)
                             {
                                 if (fp.Fingername.Equals(MyFingerprint.RightThumb))
@@ -1369,7 +1547,7 @@ namespace AFIS360
                             {
                                 Console.WriteLine("###-->> RT");
                                 iTextSharp.text.Image iTextImgRT = iTextSharp.text.Image.GetInstance(imageRT, System.Drawing.Imaging.ImageFormat.Bmp);
-                                iTextImgRT.ScaleAbsolute(60f, 80f);
+                                iTextImgRT.ScaleAbsolute(60f, 60f);
                                 imageRTCell = new PdfPCell(iTextImgRT);
                                 imageRTCell.HorizontalAlignment = Element.ALIGN_CENTER;
                                 imageRTCell.VerticalAlignment = Element.ALIGN_MIDDLE;
@@ -1382,7 +1560,7 @@ namespace AFIS360
                             {
                                 Console.WriteLine("###-->> RI");
                                 iTextSharp.text.Image iTextImgRI = iTextSharp.text.Image.GetInstance(imageRI, System.Drawing.Imaging.ImageFormat.Bmp);
-                                iTextImgRI.ScaleAbsolute(60f, 80f);
+                                iTextImgRI.ScaleAbsolute(60f, 60f);
                                 imageRICell = new PdfPCell(iTextImgRI);
                                 imageRICell.HorizontalAlignment = Element.ALIGN_CENTER;
                                 imageRICell.VerticalAlignment = Element.ALIGN_MIDDLE;
@@ -1395,7 +1573,7 @@ namespace AFIS360
                             {
                                 Console.WriteLine("###-->> RM");
                                 iTextSharp.text.Image iTextImgRM = iTextSharp.text.Image.GetInstance(imageRM, System.Drawing.Imaging.ImageFormat.Bmp);
-                                iTextImgRM.ScaleAbsolute(60f, 80f);
+                                iTextImgRM.ScaleAbsolute(60f, 60f);
                                 imageRMCell = new PdfPCell(iTextImgRM);
                                 imageRMCell.HorizontalAlignment = Element.ALIGN_CENTER;
                                 imageRMCell.VerticalAlignment = Element.ALIGN_MIDDLE;
@@ -1408,7 +1586,7 @@ namespace AFIS360
                             {
                                 Console.WriteLine("###-->> RR");
                                 iTextSharp.text.Image iTextImgRR = iTextSharp.text.Image.GetInstance(imageRR, System.Drawing.Imaging.ImageFormat.Bmp);
-                                iTextImgRR.ScaleAbsolute(60f, 80f);
+                                iTextImgRR.ScaleAbsolute(60f, 60f);
                                 imageRRCell = new PdfPCell(iTextImgRR);
                                 imageRRCell.HorizontalAlignment = Element.ALIGN_CENTER;
                                 imageRRCell.VerticalAlignment = Element.ALIGN_MIDDLE;
@@ -1421,7 +1599,7 @@ namespace AFIS360
                             {
                                 Console.WriteLine("###-->> RL");
                                 iTextSharp.text.Image iTextImgRL = iTextSharp.text.Image.GetInstance(imageRL, System.Drawing.Imaging.ImageFormat.Bmp);
-                                iTextImgRL.ScaleAbsolute(60f, 80f);
+                                iTextImgRL.ScaleAbsolute(60f, 60f);
                                 imageRLCell = new PdfPCell(iTextImgRL);
                                 imageRLCell.HorizontalAlignment = Element.ALIGN_CENTER;
                                 imageRLCell.VerticalAlignment = Element.ALIGN_MIDDLE;
@@ -1435,7 +1613,7 @@ namespace AFIS360
                             {
                                 Console.WriteLine("###-->> LT");
                                 iTextSharp.text.Image iTextImgLT = iTextSharp.text.Image.GetInstance(imageLT, System.Drawing.Imaging.ImageFormat.Bmp);
-                                iTextImgLT.ScaleAbsolute(60f, 80f);
+                                iTextImgLT.ScaleAbsolute(60f, 60f);
                                 imageLTCell = new PdfPCell(iTextImgLT);
                                 imageLTCell.HorizontalAlignment = Element.ALIGN_CENTER;
                                 imageLTCell.VerticalAlignment = Element.ALIGN_MIDDLE;
@@ -1448,7 +1626,7 @@ namespace AFIS360
                             {
                                 Console.WriteLine("###-->> LI");
                                 iTextSharp.text.Image iTextImgLI = iTextSharp.text.Image.GetInstance(imageLI, System.Drawing.Imaging.ImageFormat.Bmp);
-                                iTextImgLI.ScaleAbsolute(60f, 80f);
+                                iTextImgLI.ScaleAbsolute(60f, 60f);
                                 imageLICell = new PdfPCell(iTextImgLI);
                                 imageLICell.HorizontalAlignment = Element.ALIGN_CENTER;
                                 imageLICell.VerticalAlignment = Element.ALIGN_MIDDLE;
@@ -1461,7 +1639,7 @@ namespace AFIS360
                             {
                                 Console.WriteLine("###-->> LM");
                                 iTextSharp.text.Image iTextImgLM = iTextSharp.text.Image.GetInstance(imageLM, System.Drawing.Imaging.ImageFormat.Bmp);
-                                iTextImgLM.ScaleAbsolute(60f, 80f);
+                                iTextImgLM.ScaleAbsolute(60f, 60f);
                                 imageLMCell = new PdfPCell(iTextImgLM);
                                 imageLMCell.HorizontalAlignment = Element.ALIGN_CENTER;
                                 imageLMCell.VerticalAlignment = Element.ALIGN_MIDDLE;
@@ -1474,7 +1652,7 @@ namespace AFIS360
                             {
                                 Console.WriteLine("###-->> LR");
                                 iTextSharp.text.Image iTextImgLR = iTextSharp.text.Image.GetInstance(imageLR, System.Drawing.Imaging.ImageFormat.Bmp);
-                                iTextImgLR.ScaleAbsolute(60f, 80f);
+                                iTextImgLR.ScaleAbsolute(60f, 60f);
                                 imageLRCell = new PdfPCell(iTextImgLR);
                                 imageLRCell.HorizontalAlignment = Element.ALIGN_CENTER;
                                 imageLRCell.VerticalAlignment = Element.ALIGN_MIDDLE;
@@ -1487,7 +1665,7 @@ namespace AFIS360
                             {
                                 Console.WriteLine("###-->> LL");
                                 iTextSharp.text.Image iTextImgLL = iTextSharp.text.Image.GetInstance(imageLL, System.Drawing.Imaging.ImageFormat.Bmp);
-                                iTextImgLL.ScaleAbsolute(60f, 80f);
+                                iTextImgLL.ScaleAbsolute(60f, 60f);
                                 imageLLCell = new PdfPCell(iTextImgLL);
                                 imageLLCell.HorizontalAlignment = Element.ALIGN_CENTER;
                                 imageLLCell.VerticalAlignment = Element.ALIGN_MIDDLE;
@@ -1605,7 +1783,7 @@ namespace AFIS360
             lblTimer.Text = DateTime.Now.ToString("MMMM dd, yyyy hh:mm:ss tt");
         }
 
-
+/*
         private void btnEnrollUpdate_Click(object sender, EventArgs e)
         {
             string id = txtEnrollId.Text;
@@ -1683,6 +1861,8 @@ namespace AFIS360
                     //store person's finger prints
                     MyPerson person = Program.Enroll(imgFilePaths, fname, id);
                     Console.WriteLine("####-->> person.name = " + person.Name);
+                    MyPerson person1 = Program.Enroll1(picEnrollRT.Image, fname, id);
+                    Console.WriteLine("####-->> person1.name = " + person.Name);
                     dataAccess.updateFingerprints(person);
                 }
                 status = "Enrollment update of " + fname + " (Id = " + id + ") completed successfully.";
@@ -1699,7 +1879,106 @@ namespace AFIS360
             }
             lblEnrollStatusMsg.Text = status;
         }//btnEnrollUpdate_Click
+*/
 
+        private void btnEnrollUpdate_Click(object sender, EventArgs e)
+        {
+            string id = txtEnrollId.Text;
+            string fname = txtEnrollFName.Text;
+            string lname = txtEnrollLName.Text;
+            string mname = txtEnrollMName.Text;
+            string prefix = txtEnrollPrefix.Text;
+            string suffix = txtEnrollSuffix.Text;
+            DateTime dobTemp = dtpEnrollDOB.Value;
+            DateTime dob = Convert.ToDateTime(dobTemp.ToString("MM/dd/yyy"));
+            string streeAddr = txtEnrollAddrLine.Text;
+            string city = txtEnrollCity.Text;
+            string postalCode = txtEnrollPostalCode.Text;
+            string state = txtEnrollState.Text;
+            string country = txtEnrollCountry.Text;
+            string profession = txtEnrollProfession.Text;
+            string fatherName = txtEnrollFatherName.Text;
+            string cellNbr = txtEnrollCellNbr.Text;
+            string workPhoneNbr = txtEnrollWorkPNbr.Text;
+            string homePhoneNbr = txtEnrollHomePNbr.Text;
+            string email = txtEnrollEmail.Text;
+            System.Drawing.Image passportPhoto = picEnrollPassportPhoto.Image;
+            string status = null;
 
+            try
+            {
+                PersonDetail personDetail = new PersonDetail();
+                personDetail.setPersonId(id);
+                personDetail.setFirstName(fname);
+                personDetail.setLastName(lname);
+                personDetail.setMiddleName(mname);
+                personDetail.setPrefix(prefix);
+                personDetail.setSuffix(suffix);
+                personDetail.setDOB(dob);
+                personDetail.setStreetAddress(streeAddr);
+                personDetail.setCity(city);
+                personDetail.setPostalCode(postalCode);
+                personDetail.setState(state);
+                personDetail.setCountry(country);
+                personDetail.setProfession(profession);
+                personDetail.setFatherName(fatherName);
+                personDetail.setcellNbr(cellNbr);
+                personDetail.setWorkPhoneNbr(workPhoneNbr);
+                personDetail.setHomwPhoneNbr(homePhoneNbr);
+                personDetail.setEmail(email);
+                personDetail.setPassportPhoto(passportPhoto);
+                DataAccess dataAccess = new DataAccess();
+
+                if (!string.IsNullOrWhiteSpace(id))
+                {
+                    //store person's demograpgy
+                    dataAccess.updatePersonDetail(personDetail);
+                }
+                else
+                {
+                    MessageBox.Show("Person ID field is required.", "Warning Message", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
+
+                ICollection<KeyValuePair<String, System.Drawing.Image>> imgsFromPicBox = new Dictionary<String, System.Drawing.Image>();
+                if (picEnrollRT.Image != null) imgsFromPicBox.Add(new KeyValuePair<string, System.Drawing.Image>(MyFingerprint.RightThumb, picEnrollRT.Image));
+                if (picEnrollRI.Image != null) imgsFromPicBox.Add(new KeyValuePair<string, System.Drawing.Image>(MyFingerprint.RightIndex, picEnrollRI.Image));
+                if (picEnrollRM.Image != null) imgsFromPicBox.Add(new KeyValuePair<string, System.Drawing.Image>(MyFingerprint.RightMiddle, picEnrollRM.Image));
+                if (picEnrollRR.Image != null) imgsFromPicBox.Add(new KeyValuePair<string, System.Drawing.Image>(MyFingerprint.RightRing, picEnrollRR.Image));
+                if (picEnrollRL.Image != null) imgsFromPicBox.Add(new KeyValuePair<string, System.Drawing.Image>(MyFingerprint.RightLittle, picEnrollRL.Image));
+                if (picEnrollLT.Image != null) imgsFromPicBox.Add(new KeyValuePair<string, System.Drawing.Image>(MyFingerprint.LeftThumb, picEnrollLT.Image));
+                if (picEnrollLI.Image != null) imgsFromPicBox.Add(new KeyValuePair<string, System.Drawing.Image>(MyFingerprint.LeftIndex, picEnrollLI.Image));
+                if (picEnrollLM.Image != null) imgsFromPicBox.Add(new KeyValuePair<string, System.Drawing.Image>(MyFingerprint.LeftMiddle, picEnrollLM.Image));
+                if (picEnrollLR.Image != null) imgsFromPicBox.Add(new KeyValuePair<string, System.Drawing.Image>(MyFingerprint.LeftRing, picEnrollLR.Image));
+                if (picEnrollLL.Image != null) imgsFromPicBox.Add(new KeyValuePair<string, System.Drawing.Image>(MyFingerprint.LeftLittle, picEnrollLL.Image));
+
+                if (imgsFromPicBox.Count > 0)
+                {
+                    Console.WriteLine("####-->> # of Fp to update = " + imgsFromPicBox.Count);
+                    //store person's finger prints
+                    MyPerson person = Program.Enroll(imgsFromPicBox, fname, id);
+                    Console.WriteLine("####-->> person.name = " + person.Name);
+                    dataAccess.updateFingerprints(person);
+                }
+                status = "Enrollment update of " + fname + " (Id = " + id + ") completed successfully.";
+                lblEnrollStatusMsg.ForeColor = System.Drawing.Color.Green;
+                activityLog.setActivity(status);
+            }
+            catch (Exception exp)
+            {
+                status = "Enrollment update of " + fname + " (Id = " + id + ") is unsuccessful. Reason is - " + exp.Message + ".";
+                activityLog.setActivity(status);
+                lblEnrollStatusMsg.ForeColor = System.Drawing.Color.Red;
+                Console.WriteLine("###--->> exp.StackTrace = " + exp.StackTrace);
+                //                throw exp;
+            }
+            lblEnrollStatusMsg.Text = status;
+        }//btnEnrollUpdate_Click
+
+        private void convertWSQToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ConvertToFromWSQ convrertWSQ = new ConvertToFromWSQ(activityLog);
+            convrertWSQ.ShowDialog();
+        }
     }
 }

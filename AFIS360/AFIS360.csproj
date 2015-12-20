@@ -75,6 +75,12 @@
       <DependentUpon>AFISMain.cs</DependentUpon>
     </Compile>
     <Compile Include="AuditLog.cs" />
+    <Compile Include="ConvertToFromWSQ.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ConvertToFromWSQ.Designer.cs">
+      <DependentUpon>ConvertToFromWSQ.cs</DependentUpon>
+    </Compile>
     <Compile Include="DataAccess.cs" />
     <Compile Include="Match.cs" />
     <Compile Include="MyFingerprint.cs" />
@@ -111,6 +117,9 @@
     <EmbeddedResource Include="AFISMain.resx">
       <DependentUpon>AFISMain.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="ConvertToFromWSQ.resx">
+      <DependentUpon>ConvertToFromWSQ.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="PasswordChange.resx">
       <DependentUpon>PasswordChange.cs</DependentUpon>
     </EmbeddedResource>
@@ -124,6 +133,12 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="reports\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\WSQ\Wsqm.csproj">
+      <Project>{9a7f3e52-8783-433b-9af2-536e1d0ee50c}</Project>
+      <Name>Wsqm</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
