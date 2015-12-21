@@ -52,107 +52,6 @@ namespace AFIS360
             if (picMatch.Image == null) picMatch.Image = System.Drawing.Image.FromFile(ConfigurationManager.AppSettings["defaultImageForMatch"]);
       }
 
-/*
-        private void btnEnroll_Click(object sender, EventArgs e)
-        {
-            string id = txtEnrollId.Text;
-            string fname = txtEnrollFName.Text;
-            string lname = txtEnrollLName.Text;
-            string mname = txtEnrollMName.Text;
-            string prefix = txtEnrollPrefix.Text;
-            string suffix = txtEnrollSuffix.Text;
-            DateTime dobTemp = dtpEnrollDOB.Value;
-            DateTime dob = Convert.ToDateTime(dobTemp.ToString("MM/dd/yyy"));
-            string streeAddr = txtEnrollAddrLine.Text;
-            string city = txtEnrollCity.Text;
-            string postalCode = txtEnrollPostalCode.Text;
-            string state = txtEnrollState.Text;
-            string country = txtEnrollCountry.Text;
-            string profession = txtEnrollProfession.Text;
-            string fatherName = txtEnrollFatherName.Text;
-            string cellNbr = txtEnrollCellNbr.Text;
-            string workPhoneNbr = txtEnrollWorkPNbr.Text;
-            string homePhoneNbr = txtEnrollHomePNbr.Text;
-            string email = txtEnrollEmail.Text;
-            System.Drawing.Image passportPhoto = picEnrollPassportPhoto.Image;
-            string status = null;
-
-            try
-            {
-                PersonDetail personDetail = new PersonDetail();
-                personDetail.setPersonId(id);
-                personDetail.setFirstName(fname);
-                personDetail.setLastName(lname);
-                personDetail.setMiddleName(mname);
-                personDetail.setPrefix(prefix);
-                personDetail.setSuffix(suffix);
-                personDetail.setDOB(dob);
-                personDetail.setStreetAddress(streeAddr);
-                personDetail.setCity(city);
-                personDetail.setPostalCode(postalCode);
-                personDetail.setState(state);
-                personDetail.setCountry(country);
-                personDetail.setProfession(profession);
-                personDetail.setFatherName(fatherName);
-                personDetail.setcellNbr(cellNbr);
-                personDetail.setWorkPhoneNbr(workPhoneNbr);
-                personDetail.setHomwPhoneNbr(homePhoneNbr);
-                personDetail.setEmail(email);
-                personDetail.setPassportPhoto(passportPhoto);
-
-
-                if (picRTImagePath != null) imgFilePaths.Add(new KeyValuePair<String, String>("fpRTPath", picRTImagePath));
-                if (picRIImagePath != null) imgFilePaths.Add(new KeyValuePair<String, String>("fpRIPath", picRIImagePath));
-                if (picRMImagePath != null) imgFilePaths.Add(new KeyValuePair<String, String>("fpRMPath", picRMImagePath));
-                if (picRRImagePath != null) imgFilePaths.Add(new KeyValuePair<String, String>("fpRRPath", picRRImagePath));
-                if (picRLImagePath != null) imgFilePaths.Add(new KeyValuePair<String, String>("fpRLPath", picRLImagePath));
-                if (picLTImagePath != null) imgFilePaths.Add(new KeyValuePair<String, String>("fpLTPath", picLTImagePath));
-                if (picLIImagePath != null) imgFilePaths.Add(new KeyValuePair<String, String>("fpLIPath", picLIImagePath));
-                if (picLMImagePath != null) imgFilePaths.Add(new KeyValuePair<String, String>("fpLMPath", picLMImagePath));
-                if (picLRImagePath != null) imgFilePaths.Add(new KeyValuePair<String, String>("fpLRPath", picLRImagePath));
-                if (picLLImagePath != null) imgFilePaths.Add(new KeyValuePair<String, String>("fpLLPath", picLLImagePath));
-
-
-                //store person's demograpgy
-                DataAccess dataAccess = new DataAccess();
-
-                if (!string.IsNullOrWhiteSpace(id))
-                {
-                    dataAccess.storePersonDetail(personDetail);
-                } else
-                {
-                    MessageBox.Show("Person ID field is required.", "Warning Message", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                    return;
-                }
-
-                MyPerson person;
-                if (imgFilePaths.Count > 0)
-                {
-                    //store person's finger prints
-                    person = Program.Enroll(imgFilePaths, fname, id);
-                } else
-                {
-                    person = new MyPerson();
-                    person.Name = fname;
-                    person.PersonId = id;
-                }
-                dataAccess.storeFingerprints(person);
-                
-                status = "Enrollment of " + fname + " (Id = " + id + ") completed successfully.";
-                lblEnrollStatusMsg.ForeColor = System.Drawing.Color.Green;
-                activityLog.setActivity(status);
-            }
-            catch (Exception exp)
-            {
-                status = "Enrollment of " + fname + " (Id = " + id + ") is unsuccessful. Reason is - " + exp.Message + ".";
-                activityLog.setActivity(status);
-                lblEnrollStatusMsg.ForeColor = System.Drawing.Color.Red;
-//                throw exp;
-            }
-
-            lblEnrollStatusMsg.Text = status;
-        }
-*/
 
         private void btnEnroll_Click(object sender, EventArgs e)
         {
@@ -200,20 +99,7 @@ namespace AFIS360
                 personDetail.setHomwPhoneNbr(homePhoneNbr);
                 personDetail.setEmail(email);
                 personDetail.setPassportPhoto(passportPhoto);
-/*
 
-                if (picRTImagePath != null) imgFilePaths.Add(new KeyValuePair<String, String>("fpRTPath", picRTImagePath));
-                if (picRIImagePath != null) imgFilePaths.Add(new KeyValuePair<String, String>("fpRIPath", picRIImagePath));
-                if (picRMImagePath != null) imgFilePaths.Add(new KeyValuePair<String, String>("fpRMPath", picRMImagePath));
-                if (picRRImagePath != null) imgFilePaths.Add(new KeyValuePair<String, String>("fpRRPath", picRRImagePath));
-                if (picRLImagePath != null) imgFilePaths.Add(new KeyValuePair<String, String>("fpRLPath", picRLImagePath));
-                if (picLTImagePath != null) imgFilePaths.Add(new KeyValuePair<String, String>("fpLTPath", picLTImagePath));
-                if (picLIImagePath != null) imgFilePaths.Add(new KeyValuePair<String, String>("fpLIPath", picLIImagePath));
-                if (picLMImagePath != null) imgFilePaths.Add(new KeyValuePair<String, String>("fpLMPath", picLMImagePath));
-                if (picLRImagePath != null) imgFilePaths.Add(new KeyValuePair<String, String>("fpLRPath", picLRImagePath));
-                if (picLLImagePath != null) imgFilePaths.Add(new KeyValuePair<String, String>("fpLLPath", picLLImagePath));
-
-*/
                 //store person's demograpgy
                 DataAccess dataAccess = new DataAccess();
 
@@ -1185,9 +1071,6 @@ namespace AFIS360
                 }//end-if - personsDetail
                 else
                 {
-//                    txtEnrollIdTemp = txtEnrollId.Text;
-//                   clearEnrollTab();
-//                    txtEnrollId.Text = txtEnrollIdTemp;
                     btnEnrollEnroll.Enabled = true;
                 }
             }
@@ -1783,103 +1666,6 @@ namespace AFIS360
             lblTimer.Text = DateTime.Now.ToString("MMMM dd, yyyy hh:mm:ss tt");
         }
 
-/*
-        private void btnEnrollUpdate_Click(object sender, EventArgs e)
-        {
-            string id = txtEnrollId.Text;
-            string fname = txtEnrollFName.Text;
-            string lname = txtEnrollLName.Text;
-            string mname = txtEnrollMName.Text;
-            string prefix = txtEnrollPrefix.Text;
-            string suffix = txtEnrollSuffix.Text;
-            DateTime dobTemp = dtpEnrollDOB.Value;
-            DateTime dob = Convert.ToDateTime(dobTemp.ToString("MM/dd/yyy"));
-            string streeAddr = txtEnrollAddrLine.Text;
-            string city = txtEnrollCity.Text;
-            string postalCode = txtEnrollPostalCode.Text;
-            string state = txtEnrollState.Text;
-            string country = txtEnrollCountry.Text;
-            string profession = txtEnrollProfession.Text;
-            string fatherName = txtEnrollFatherName.Text;
-            string cellNbr = txtEnrollCellNbr.Text;
-            string workPhoneNbr = txtEnrollWorkPNbr.Text;
-            string homePhoneNbr = txtEnrollHomePNbr.Text;
-            string email = txtEnrollEmail.Text;
-            System.Drawing.Image passportPhoto = picEnrollPassportPhoto.Image;
-            string status = null;
-
-            try
-            {
-                PersonDetail personDetail = new PersonDetail();
-                personDetail.setPersonId(id);
-                personDetail.setFirstName(fname);
-                personDetail.setLastName(lname);
-                personDetail.setMiddleName(mname);
-                personDetail.setPrefix(prefix);
-                personDetail.setSuffix(suffix);
-                personDetail.setDOB(dob);
-                personDetail.setStreetAddress(streeAddr);
-                personDetail.setCity(city);
-                personDetail.setPostalCode(postalCode);
-                personDetail.setState(state);
-                personDetail.setCountry(country);
-                personDetail.setProfession(profession);
-                personDetail.setFatherName(fatherName);
-                personDetail.setcellNbr(cellNbr);
-                personDetail.setWorkPhoneNbr(workPhoneNbr);
-                personDetail.setHomwPhoneNbr(homePhoneNbr);
-                personDetail.setEmail(email);
-                personDetail.setPassportPhoto(passportPhoto);
-
-
-                if (picRTImagePath != null) imgFilePaths.Add(new KeyValuePair<String, String>("fpRTPath", picRTImagePath));
-                if (picRIImagePath != null) imgFilePaths.Add(new KeyValuePair<String, String>("fpRIPath", picRIImagePath));
-                if (picRMImagePath != null) imgFilePaths.Add(new KeyValuePair<String, String>("fpRMPath", picRMImagePath));
-                if (picRRImagePath != null) imgFilePaths.Add(new KeyValuePair<String, String>("fpRRPath", picRRImagePath));
-                if (picRLImagePath != null) imgFilePaths.Add(new KeyValuePair<String, String>("fpRLPath", picRLImagePath));
-                if (picLTImagePath != null) imgFilePaths.Add(new KeyValuePair<String, String>("fpLTPath", picLTImagePath));
-                if (picLIImagePath != null) imgFilePaths.Add(new KeyValuePair<String, String>("fpLIPath", picLIImagePath));
-                if (picLMImagePath != null) imgFilePaths.Add(new KeyValuePair<String, String>("fpLMPath", picLMImagePath));
-                if (picLRImagePath != null) imgFilePaths.Add(new KeyValuePair<String, String>("fpLRPath", picLRImagePath));
-                if (picLLImagePath != null) imgFilePaths.Add(new KeyValuePair<String, String>("fpLLPath", picLLImagePath));
-
-                DataAccess dataAccess = new DataAccess();
-
-                if (!string.IsNullOrWhiteSpace(id))
-                {
-                    //store person's demograpgy
-                    dataAccess.updatePersonDetail(personDetail);
-                } else
-                {
-                    MessageBox.Show("Person ID field is required.", "Warning Message", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                    return;
-                }
-
-                if (imgFilePaths.Count > 0)
-                {
-                    Console.WriteLine("####-->> # of Fp to update = " + imgFilePaths.Count);
-                    //store person's finger prints
-                    MyPerson person = Program.Enroll(imgFilePaths, fname, id);
-                    Console.WriteLine("####-->> person.name = " + person.Name);
-                    MyPerson person1 = Program.Enroll1(picEnrollRT.Image, fname, id);
-                    Console.WriteLine("####-->> person1.name = " + person.Name);
-                    dataAccess.updateFingerprints(person);
-                }
-                status = "Enrollment update of " + fname + " (Id = " + id + ") completed successfully.";
-                lblEnrollStatusMsg.ForeColor = System.Drawing.Color.Green;
-                activityLog.setActivity(status);   
-            }
-            catch (Exception exp)
-            {
-                status = "Enrollment update of " + fname + " (Id = " + id + ") is unsuccessful. Reason is - " + exp.Message + ".";
-                activityLog.setActivity(status);
-                lblEnrollStatusMsg.ForeColor = System.Drawing.Color.Red;
-                Console.WriteLine("###--->> exp.StackTrace = " + exp.StackTrace);
-//                throw exp;
-            }
-            lblEnrollStatusMsg.Text = status;
-        }//btnEnrollUpdate_Click
-*/
 
         private void btnEnrollUpdate_Click(object sender, EventArgs e)
         {

@@ -46,6 +46,19 @@ namespace AFIS360
             string inputFileFormat = null;
             string outputFileFormat = null;
 
+            //Verify the Input & Output file directories are not empty
+            if(string.IsNullOrWhiteSpace(txtBoxWSQCInputFileLocation.Text))
+            {
+                MessageBox.Show("Input file directory must be selected.", "Warning Message", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            if (string.IsNullOrWhiteSpace(txtBoxWSQCOutputFileLocation.Text))
+            {
+                MessageBox.Show("Output file directory must be selected.", "Warning Message", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
             //Find out Input file format
             if (!string.IsNullOrWhiteSpace(listBoxWSQConvInputFileFormatList.Text) && listBoxWSQConvInputFileFormatList.Text == "BMP - Windows Bitmap Graphics")
             {
@@ -62,7 +75,7 @@ namespace AFIS360
             else
             {
                 Console.WriteLine("###-->> Selected Input File Format = " + listBoxWSQConvInputFileFormatList.Text);
-                MessageBox.Show("Input file format must be selected.", "Message");
+                MessageBox.Show("Input file format must be selected.", "Warning Message", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
 
@@ -82,44 +95,66 @@ namespace AFIS360
             else
             {
                 Console.WriteLine("###-->> Selected Output File Format = " + listBoxWSQConvInputFileFormatList.Text);
-                MessageBox.Show("Output file format must be selected.", "Message");
+                MessageBox.Show("Output file format must be selected.", "Warning Message", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
 
-
-
+            //Verify there are file(s) in the folder to convert
             string[] inputFiles = System.IO.Directory.GetFiles(inputFileDir, searchPattern);
             Console.WriteLine("###-->> # of Selected Format files = " + inputFiles.Length);
-            WSQ wsq = new WSQ();
-
-            for (int i = 0; i < inputFiles.Length; i++)
+            if(inputFiles.Length == 0)
             {
-                Console.WriteLine("###-->> # InputFiles [" + i + "] = " + inputFiles[i]);
-                string inputFileName = inputFiles[i];
-                string outputFileName = outputFileDir + "\\" + Path.GetFileNameWithoutExtension(inputFileName) + outputFileExtension;
-                Console.WriteLine("###-->> # OutputFiles [" + i + "] = " + outputFileName);
-
-                if(inputFileFormat == "bmp" && outputFileFormat == "wsq")
-                {
-                    Console.WriteLine("###-->> Converting BMP to WSQ");
-                    //Encode BMP to WSQ
-                    String[] comentario = new String[2];
-                    comentario[0] = "Mohammad Mohsin";
-                    comentario[1] = "LKT";
-
-                    wsq.EnconderFile(@inputFileName, @outputFileName, comentario, 0.75f);
-
-                } else if(inputFileFormat == "wsq" && outputFileFormat == "bmp")
-                {
-                    Console.WriteLine("###-->> Converting WSQ to BMP");
-                    //Decode WSQ to BMP
-                    wsq.DecoderFile(@inputFileName, @outputFileName);
-                } else
-                {
-                    MessageBox.Show(" Input and Output file format must be selected.", "Message");
-                    return;
-                }
+                MessageBox.Show("No file(s) to convert.", "Warning Message", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
             }
+
+            //Verify input & output formats are not same or empty
+            if(inputFileFormat == "wsq" && outputFileFormat == "wsq")
+            {
+                MessageBox.Show(" Both Input and Output file cannot be WSQ format.", "Warning Message", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+            else if(inputFileFormat == "bmp" && outputFileFormat == "bmp")
+            {
+                MessageBox.Show(" Both Input and Output file cannot be BMP format.", "Warning Message", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+            else if(string.IsNullOrWhiteSpace(inputFileFormat) || string.IsNullOrWhiteSpace(outputFileFormat))
+            {
+                MessageBox.Show(" Input and Output file format must be selected.", "Warning Message", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            } else
+            {
+                WSQ wsq = new WSQ();
+
+                for (int i = 0; i < inputFiles.Length; i++)
+                {
+                    Console.WriteLine("###-->> # InputFiles [" + i + "] = " + inputFiles[i]);
+                    string inputFileName = inputFiles[i];
+                    string outputFileName = outputFileDir + "\\" + Path.GetFileNameWithoutExtension(inputFileName) + outputFileExtension;
+                    Console.WriteLine("###-->> # OutputFiles [" + i + "] = " + outputFileName);
+
+                    if (inputFileFormat == "bmp" && outputFileFormat == "wsq")
+                    {
+                        Console.WriteLine("###-->> Converting BMP to WSQ");
+                        //Encode BMP to WSQ
+                        String[] comentario = new String[2];
+                        comentario[0] = "Mohammad Mohsin";
+                        comentario[1] = "LKT";
+                        wsq.EnconderFile(@inputFileName, @outputFileName, comentario, 0.75f);
+                    }
+                    else if (inputFileFormat == "wsq" && outputFileFormat == "bmp")
+                    {
+                        Console.WriteLine("###-->> Converting WSQ to BMP");
+                        //Decode WSQ to BMP
+                        wsq.DecoderFile(@inputFileName, @outputFileName);
+                    }
+                }//end for
+                MessageBox.Show(" Conversion completed successfully.", "Information Message", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return;
+
+            }//end else
+
         }
 
         private void btnWSQCClose_Click(object sender, EventArgs e)

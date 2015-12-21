@@ -34,58 +34,62 @@
             this.txtBoxWSQCInputFileLocation = new System.Windows.Forms.TextBox();
             this.btnWSQCInputFileLocation = new System.Windows.Forms.Button();
             this.grpBoxWSQConverter = new System.Windows.Forms.GroupBox();
-            this.lblWSQCOutputfileFormat = new System.Windows.Forms.Label();
-            this.listBoxWSQCOutputFileFormatList = new System.Windows.Forms.ListBox();
-            this.lblWSQCOutputFileLocation = new System.Windows.Forms.Label();
-            this.txtBoxWSQCOutputFileLocation = new System.Windows.Forms.TextBox();
-            this.btnWSQCOutputFileLocation = new System.Windows.Forms.Button();
-            this.btnWSQCConvert = new System.Windows.Forms.Button();
             this.btnWSQCClose = new System.Windows.Forms.Button();
+            this.btnWSQCConvert = new System.Windows.Forms.Button();
+            this.btnWSQCOutputFileLocation = new System.Windows.Forms.Button();
+            this.txtBoxWSQCOutputFileLocation = new System.Windows.Forms.TextBox();
+            this.lblWSQCOutputFileLocation = new System.Windows.Forms.Label();
+            this.listBoxWSQCOutputFileFormatList = new System.Windows.Forms.ListBox();
+            this.lblWSQCOutputfileFormat = new System.Windows.Forms.Label();
             this.grpBoxWSQConverter.SuspendLayout();
             this.SuspendLayout();
             // 
             // lblWSQConvInputFileFormat
             // 
             this.lblWSQConvInputFileFormat.AutoSize = true;
-            this.lblWSQConvInputFileFormat.Location = new System.Drawing.Point(35, 46);
+            this.lblWSQConvInputFileFormat.Location = new System.Drawing.Point(18, 24);
+            this.lblWSQConvInputFileFormat.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblWSQConvInputFileFormat.Name = "lblWSQConvInputFileFormat";
-            this.lblWSQConvInputFileFormat.Size = new System.Drawing.Size(179, 25);
+            this.lblWSQConvInputFileFormat.Size = new System.Drawing.Size(88, 13);
             this.lblWSQConvInputFileFormat.TabIndex = 0;
             this.lblWSQConvInputFileFormat.Text = "Input File Format:";
             // 
             // listBoxWSQConvInputFileFormatList
             // 
             this.listBoxWSQConvInputFileFormatList.FormattingEnabled = true;
-            this.listBoxWSQConvInputFileFormatList.ItemHeight = 25;
             this.listBoxWSQConvInputFileFormatList.Items.AddRange(new object[] {
             "WSQ - FBI Wavelet Scalar Quantization",
             "BMP - Windows Bitmap Graphics"});
-            this.listBoxWSQConvInputFileFormatList.Location = new System.Drawing.Point(40, 74);
+            this.listBoxWSQConvInputFileFormatList.Location = new System.Drawing.Point(20, 38);
+            this.listBoxWSQConvInputFileFormatList.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.listBoxWSQConvInputFileFormatList.Name = "listBoxWSQConvInputFileFormatList";
-            this.listBoxWSQConvInputFileFormatList.Size = new System.Drawing.Size(657, 179);
+            this.listBoxWSQConvInputFileFormatList.Size = new System.Drawing.Size(330, 95);
             this.listBoxWSQConvInputFileFormatList.TabIndex = 2;
             // 
             // lblWSQCInputFileLocation
             // 
             this.lblWSQCInputFileLocation.AutoSize = true;
-            this.lblWSQCInputFileLocation.Location = new System.Drawing.Point(35, 288);
+            this.lblWSQCInputFileLocation.Location = new System.Drawing.Point(18, 150);
+            this.lblWSQCInputFileLocation.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblWSQCInputFileLocation.Name = "lblWSQCInputFileLocation";
-            this.lblWSQCInputFileLocation.Size = new System.Drawing.Size(198, 25);
+            this.lblWSQCInputFileLocation.Size = new System.Drawing.Size(100, 13);
             this.lblWSQCInputFileLocation.TabIndex = 3;
             this.lblWSQCInputFileLocation.Text = "Input File/Directory:";
             // 
             // txtBoxWSQCInputFileLocation
             // 
-            this.txtBoxWSQCInputFileLocation.Location = new System.Drawing.Point(40, 316);
+            this.txtBoxWSQCInputFileLocation.Location = new System.Drawing.Point(20, 164);
+            this.txtBoxWSQCInputFileLocation.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.txtBoxWSQCInputFileLocation.Name = "txtBoxWSQCInputFileLocation";
-            this.txtBoxWSQCInputFileLocation.Size = new System.Drawing.Size(657, 31);
+            this.txtBoxWSQCInputFileLocation.Size = new System.Drawing.Size(330, 20);
             this.txtBoxWSQCInputFileLocation.TabIndex = 4;
             // 
             // btnWSQCInputFileLocation
             // 
-            this.btnWSQCInputFileLocation.Location = new System.Drawing.Point(727, 316);
+            this.btnWSQCInputFileLocation.Location = new System.Drawing.Point(364, 157);
+            this.btnWSQCInputFileLocation.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.btnWSQCInputFileLocation.Name = "btnWSQCInputFileLocation";
-            this.btnWSQCInputFileLocation.Size = new System.Drawing.Size(147, 36);
+            this.btnWSQCInputFileLocation.Size = new System.Drawing.Size(74, 26);
             this.btnWSQCInputFileLocation.TabIndex = 5;
             this.btnWSQCInputFileLocation.Text = "Browse";
             this.btnWSQCInputFileLocation.UseVisualStyleBackColor = true;
@@ -105,86 +109,95 @@
             this.grpBoxWSQConverter.Controls.Add(this.listBoxWSQConvInputFileFormatList);
             this.grpBoxWSQConverter.Controls.Add(this.txtBoxWSQCInputFileLocation);
             this.grpBoxWSQConverter.Controls.Add(this.lblWSQCInputFileLocation);
-            this.grpBoxWSQConverter.Location = new System.Drawing.Point(27, 28);
+            this.grpBoxWSQConverter.Location = new System.Drawing.Point(14, 15);
+            this.grpBoxWSQConverter.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.grpBoxWSQConverter.Name = "grpBoxWSQConverter";
-            this.grpBoxWSQConverter.Size = new System.Drawing.Size(1001, 888);
+            this.grpBoxWSQConverter.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.grpBoxWSQConverter.Size = new System.Drawing.Size(500, 462);
             this.grpBoxWSQConverter.TabIndex = 6;
             this.grpBoxWSQConverter.TabStop = false;
             this.grpBoxWSQConverter.Text = "WSQ Converter";
             // 
-            // lblWSQCOutputfileFormat
-            // 
-            this.lblWSQCOutputfileFormat.AutoSize = true;
-            this.lblWSQCOutputfileFormat.Location = new System.Drawing.Point(35, 398);
-            this.lblWSQCOutputfileFormat.Name = "lblWSQCOutputfileFormat";
-            this.lblWSQCOutputfileFormat.Size = new System.Drawing.Size(196, 25);
-            this.lblWSQCOutputfileFormat.TabIndex = 6;
-            this.lblWSQCOutputfileFormat.Text = "Output File Format:";
-            // 
-            // listBoxWSQCOutputFileFormatList
-            // 
-            this.listBoxWSQCOutputFileFormatList.FormattingEnabled = true;
-            this.listBoxWSQCOutputFileFormatList.ItemHeight = 25;
-            this.listBoxWSQCOutputFileFormatList.Items.AddRange(new object[] {
-            "WSQ - FBI Wavelet Scalar Quantization",
-            "BMP - Windows Bitmap Graphics"});
-            this.listBoxWSQCOutputFileFormatList.Location = new System.Drawing.Point(40, 431);
-            this.listBoxWSQCOutputFileFormatList.Name = "listBoxWSQCOutputFileFormatList";
-            this.listBoxWSQCOutputFileFormatList.Size = new System.Drawing.Size(657, 179);
-            this.listBoxWSQCOutputFileFormatList.TabIndex = 7;
-            // 
-            // lblWSQCOutputFileLocation
-            // 
-            this.lblWSQCOutputFileLocation.AutoSize = true;
-            this.lblWSQCOutputFileLocation.Location = new System.Drawing.Point(35, 661);
-            this.lblWSQCOutputFileLocation.Name = "lblWSQCOutputFileLocation";
-            this.lblWSQCOutputFileLocation.Size = new System.Drawing.Size(215, 25);
-            this.lblWSQCOutputFileLocation.TabIndex = 8;
-            this.lblWSQCOutputFileLocation.Text = "Output File/Directory:";
-            // 
-            // txtBoxWSQCOutputFileLocation
-            // 
-            this.txtBoxWSQCOutputFileLocation.Location = new System.Drawing.Point(40, 689);
-            this.txtBoxWSQCOutputFileLocation.Name = "txtBoxWSQCOutputFileLocation";
-            this.txtBoxWSQCOutputFileLocation.Size = new System.Drawing.Size(657, 31);
-            this.txtBoxWSQCOutputFileLocation.TabIndex = 9;
-            // 
-            // btnWSQCOutputFileLocation
-            // 
-            this.btnWSQCOutputFileLocation.Location = new System.Drawing.Point(727, 684);
-            this.btnWSQCOutputFileLocation.Name = "btnWSQCOutputFileLocation";
-            this.btnWSQCOutputFileLocation.Size = new System.Drawing.Size(147, 36);
-            this.btnWSQCOutputFileLocation.TabIndex = 10;
-            this.btnWSQCOutputFileLocation.Text = "Browse";
-            this.btnWSQCOutputFileLocation.UseVisualStyleBackColor = true;
-            this.btnWSQCOutputFileLocation.Click += new System.EventHandler(this.btnWSQCOutputFileLocation_Click);
-            // 
-            // btnWSQCConvert
-            // 
-            this.btnWSQCConvert.Location = new System.Drawing.Point(342, 789);
-            this.btnWSQCConvert.Name = "btnWSQCConvert";
-            this.btnWSQCConvert.Size = new System.Drawing.Size(130, 33);
-            this.btnWSQCConvert.TabIndex = 11;
-            this.btnWSQCConvert.Text = "Convert";
-            this.btnWSQCConvert.UseVisualStyleBackColor = true;
-            this.btnWSQCConvert.Click += new System.EventHandler(this.btnWSQCConvert_Click);
-            // 
             // btnWSQCClose
             // 
-            this.btnWSQCClose.Location = new System.Drawing.Point(495, 789);
+            this.btnWSQCClose.Location = new System.Drawing.Point(248, 410);
+            this.btnWSQCClose.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.btnWSQCClose.Name = "btnWSQCClose";
-            this.btnWSQCClose.Size = new System.Drawing.Size(130, 33);
+            this.btnWSQCClose.Size = new System.Drawing.Size(65, 27);
             this.btnWSQCClose.TabIndex = 12;
             this.btnWSQCClose.Text = "Close";
             this.btnWSQCClose.UseVisualStyleBackColor = true;
             this.btnWSQCClose.Click += new System.EventHandler(this.btnWSQCClose_Click);
             // 
+            // btnWSQCConvert
+            // 
+            this.btnWSQCConvert.Location = new System.Drawing.Point(171, 410);
+            this.btnWSQCConvert.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnWSQCConvert.Name = "btnWSQCConvert";
+            this.btnWSQCConvert.Size = new System.Drawing.Size(65, 27);
+            this.btnWSQCConvert.TabIndex = 11;
+            this.btnWSQCConvert.Text = "Convert";
+            this.btnWSQCConvert.UseVisualStyleBackColor = true;
+            this.btnWSQCConvert.Click += new System.EventHandler(this.btnWSQCConvert_Click);
+            // 
+            // btnWSQCOutputFileLocation
+            // 
+            this.btnWSQCOutputFileLocation.Location = new System.Drawing.Point(364, 350);
+            this.btnWSQCOutputFileLocation.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnWSQCOutputFileLocation.Name = "btnWSQCOutputFileLocation";
+            this.btnWSQCOutputFileLocation.Size = new System.Drawing.Size(74, 28);
+            this.btnWSQCOutputFileLocation.TabIndex = 10;
+            this.btnWSQCOutputFileLocation.Text = "Browse";
+            this.btnWSQCOutputFileLocation.UseVisualStyleBackColor = true;
+            this.btnWSQCOutputFileLocation.Click += new System.EventHandler(this.btnWSQCOutputFileLocation_Click);
+            // 
+            // txtBoxWSQCOutputFileLocation
+            // 
+            this.txtBoxWSQCOutputFileLocation.Location = new System.Drawing.Point(20, 358);
+            this.txtBoxWSQCOutputFileLocation.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txtBoxWSQCOutputFileLocation.Name = "txtBoxWSQCOutputFileLocation";
+            this.txtBoxWSQCOutputFileLocation.Size = new System.Drawing.Size(330, 20);
+            this.txtBoxWSQCOutputFileLocation.TabIndex = 9;
+            // 
+            // lblWSQCOutputFileLocation
+            // 
+            this.lblWSQCOutputFileLocation.AutoSize = true;
+            this.lblWSQCOutputFileLocation.Location = new System.Drawing.Point(18, 344);
+            this.lblWSQCOutputFileLocation.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lblWSQCOutputFileLocation.Name = "lblWSQCOutputFileLocation";
+            this.lblWSQCOutputFileLocation.Size = new System.Drawing.Size(108, 13);
+            this.lblWSQCOutputFileLocation.TabIndex = 8;
+            this.lblWSQCOutputFileLocation.Text = "Output File/Directory:";
+            // 
+            // listBoxWSQCOutputFileFormatList
+            // 
+            this.listBoxWSQCOutputFileFormatList.FormattingEnabled = true;
+            this.listBoxWSQCOutputFileFormatList.Items.AddRange(new object[] {
+            "WSQ - FBI Wavelet Scalar Quantization",
+            "BMP - Windows Bitmap Graphics"});
+            this.listBoxWSQCOutputFileFormatList.Location = new System.Drawing.Point(20, 224);
+            this.listBoxWSQCOutputFileFormatList.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.listBoxWSQCOutputFileFormatList.Name = "listBoxWSQCOutputFileFormatList";
+            this.listBoxWSQCOutputFileFormatList.Size = new System.Drawing.Size(330, 95);
+            this.listBoxWSQCOutputFileFormatList.TabIndex = 7;
+            // 
+            // lblWSQCOutputfileFormat
+            // 
+            this.lblWSQCOutputfileFormat.AutoSize = true;
+            this.lblWSQCOutputfileFormat.Location = new System.Drawing.Point(18, 207);
+            this.lblWSQCOutputfileFormat.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lblWSQCOutputfileFormat.Name = "lblWSQCOutputfileFormat";
+            this.lblWSQCOutputfileFormat.Size = new System.Drawing.Size(96, 13);
+            this.lblWSQCOutputfileFormat.TabIndex = 6;
+            this.lblWSQCOutputfileFormat.Text = "Output File Format:";
+            // 
             // ConvertToFromWSQ
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(12F, 25F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1060, 960);
+            this.ClientSize = new System.Drawing.Size(530, 499);
             this.Controls.Add(this.grpBoxWSQConverter);
+            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.Name = "ConvertToFromWSQ";
             this.Text = "WSQ Converter";
             this.grpBoxWSQConverter.ResumeLayout(false);
