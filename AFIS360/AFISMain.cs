@@ -12,7 +12,7 @@ using System.IO;
 using iTextSharp.text;
 using iTextSharp.text.pdf;
 using System.Configuration;
-using Wsqm;
+
 
 namespace AFIS360
 {
