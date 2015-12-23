@@ -1186,6 +1186,8 @@ namespace AFIS360
         {
             Console.WriteLine("####-->> Loading the Window");
             activityLog = new ActivityLog();
+//            Util.fitFormToScreen(this, 2538, 1533);
+//            this.CenterToScreen();
         }
 
 
