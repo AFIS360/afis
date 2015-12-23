@@ -18,20 +18,7 @@ namespace AFIS360
 {
     public partial class AFISMain : Form
     {
-        ICollection<KeyValuePair<String, String>> imgFilePaths = new Dictionary<String, String>();
-
-        string picRTImagePath = null;
-        string picRIImagePath = null;
-        string picRMImagePath = null;
-        string picRRImagePath = null;
-        string picRLImagePath = null;
-        string picLTImagePath = null;
-        string picLIImagePath = null;
-        string picLMImagePath = null;
-        string picLRImagePath = null;
-        string picLLImagePath = null;
         string picMatchImagePath = null;
-        ToolTip tTip = null;
         User cachedUser = null;
         User user = null;
         ActivityLog activityLog = null;
@@ -41,7 +28,6 @@ namespace AFIS360
         {
             Console.WriteLine("Init components...");
             InitializeComponent();
-            tTip = new ToolTip();
             tabControlAFIS.TabPages.Remove(tabEnroll);
             tabControlAFIS.TabPages.Remove(tabMatch);
             tabControlAFIS.TabPages.Remove(tabUserMgmt);
@@ -276,14 +262,15 @@ namespace AFIS360
             ofd.Filter = "Image Files|*.wsq;*.jpg;*.jpeg;*.png;*.gif;*.bmp;*.tif;...";
             if (ofd.ShowDialog() == DialogResult.OK)
             {
-                picRTImagePath = ofd.FileName;
+                string picRTImagePath = ofd.FileName;
                 //if image is in WSQ format convert it to BMP
                 if (Path.GetExtension(ofd.FileName).ToUpper().Replace(".", "") == "WSQ")
                 {
                     picRTImagePath = Program.convertWSQtoBMP(picRTImagePath);
                 }
 
-                picEnrollRT.Image = System.Drawing.Image.FromFile(picRTImagePath);
+                //                    picEnrollRT.Image = System.Drawing.Image.FromFile(picRTImagePath);
+                picEnrollRT.Image = System.Drawing.Image.FromStream(new MemoryStream(File.ReadAllBytes(picRTImagePath)));
                 picEnrollRT.SizeMode = PictureBoxSizeMode.StretchImage;
             }
         }
@@ -294,13 +281,14 @@ namespace AFIS360
             ofd.Filter = "Image Files|*.wsq;*.jpg;*.jpeg;*.png;*.gif;*.bmp;*.tif;...";
             if (ofd.ShowDialog() == DialogResult.OK)
             {
-                picRIImagePath = ofd.FileName;
+                string picRIImagePath = ofd.FileName;
                 //if image is in WSQ format convert it to BMP
                 if (Path.GetExtension(ofd.FileName).ToUpper().Replace(".", "") == "WSQ")
                 {
                     picRIImagePath = Program.convertWSQtoBMP(picRIImagePath);
                 }
-                picEnrollRI.Image = System.Drawing.Image.FromFile(picRIImagePath);
+                //                picEnrollRI.Image = System.Drawing.Image.FromFile(picRIImagePath);
+                picEnrollRI.Image = System.Drawing.Image.FromStream(new MemoryStream(File.ReadAllBytes(picRIImagePath)));
                 picEnrollRI.SizeMode = PictureBoxSizeMode.StretchImage;
             }
         }
@@ -311,13 +299,14 @@ namespace AFIS360
             ofd.Filter = "Image Files|*.wsq;*.jpg;*.jpeg;*.png;*.gif;*.bmp;*.tif;...";
             if (ofd.ShowDialog() == DialogResult.OK)
             {
-                picRMImagePath = ofd.FileName;
+                string picRMImagePath = ofd.FileName;
                 //if image is in WSQ format convert it to BMP
                 if (Path.GetExtension(ofd.FileName).ToUpper().Replace(".", "") == "WSQ")
                 {
                     picRMImagePath = Program.convertWSQtoBMP(picRMImagePath);
                 }
-                picEnrollRM.Image = System.Drawing.Image.FromFile(picRMImagePath);
+                //                picEnrollRM.Image = System.Drawing.Image.FromFile(picRMImagePath);
+                picEnrollRM.Image = System.Drawing.Image.FromStream(new MemoryStream(File.ReadAllBytes(picRMImagePath)));
                 picEnrollRM.SizeMode = PictureBoxSizeMode.StretchImage;
             }
         }
@@ -328,13 +317,14 @@ namespace AFIS360
             ofd.Filter = "Image Files|*.wsq;*.jpg;*.jpeg;*.png;*.gif;*.bmp;*.tif;...";
             if (ofd.ShowDialog() == DialogResult.OK)
             {
-                picRRImagePath = ofd.FileName;
+                string picRRImagePath = ofd.FileName;
                 //if image is in WSQ format convert it to BMP
                 if (Path.GetExtension(ofd.FileName).ToUpper().Replace(".", "") == "WSQ")
                 {
                     picRRImagePath = Program.convertWSQtoBMP(picRRImagePath);
                 }
-                picEnrollRR.Image = System.Drawing.Image.FromFile(picRRImagePath);
+                //                picEnrollRR.Image = System.Drawing.Image.FromFile(picRRImagePath);
+                picEnrollRR.Image = System.Drawing.Image.FromStream(new MemoryStream(File.ReadAllBytes(picRRImagePath)));
                 picEnrollRR.SizeMode = PictureBoxSizeMode.StretchImage;
             }
         }
@@ -345,13 +335,14 @@ namespace AFIS360
             ofd.Filter = "Image Files|*.wsq;*.jpg;*.jpeg;*.png;*.gif;*.bmp;*.tif;...";
             if (ofd.ShowDialog() == DialogResult.OK)
             {
-                picRLImagePath = ofd.FileName;
+                string picRLImagePath = ofd.FileName;
                 //if image is in WSQ format convert it to BMP
                 if (Path.GetExtension(ofd.FileName).ToUpper().Replace(".", "") == "WSQ")
                 {
                     picRLImagePath = Program.convertWSQtoBMP(picRLImagePath);
                 }
-                picEnrollRL.Image = System.Drawing.Image.FromFile(picRLImagePath);
+                //                picEnrollRL.Image = System.Drawing.Image.FromFile(picRLImagePath);
+                picEnrollRL.Image = System.Drawing.Image.FromStream(new MemoryStream(File.ReadAllBytes(picRLImagePath)));
                 picEnrollRL.SizeMode = PictureBoxSizeMode.StretchImage;
             }
         }
@@ -362,16 +353,16 @@ namespace AFIS360
             ofd.Filter = "Image Files|*.wsq;*.jpg;*.jpeg;*.png;*.gif;*.bmp;*.tif;...";
             if (ofd.ShowDialog() == DialogResult.OK)
             {
-                picLTImagePath = ofd.FileName;
+                string picLTImagePath = ofd.FileName;
                 //if image is in WSQ format convert it to BMP
                 if (Path.GetExtension(ofd.FileName).ToUpper().Replace(".", "") == "WSQ")
                 {
                     picLTImagePath = Program.convertWSQtoBMP(picLTImagePath);
                 }
-                picEnrollLT.Image = System.Drawing.Image.FromFile(picLTImagePath);
+                //                picEnrollLT.Image = System.Drawing.Image.FromFile(picLTImagePath);
+                picEnrollLT.Image = System.Drawing.Image.FromStream(new MemoryStream(File.ReadAllBytes(picLTImagePath)));
                 picEnrollLT.SizeMode = PictureBoxSizeMode.StretchImage;
             }
-
         }
 
         private void picLI_Click(object sender, EventArgs e)
@@ -380,13 +371,14 @@ namespace AFIS360
             ofd.Filter = "Image Files|*.wsq;*.jpg;*.jpeg;*.png;*.gif;*.bmp;*.tif;...";
             if (ofd.ShowDialog() == DialogResult.OK)
             {
-                picLIImagePath = ofd.FileName;
+                string picLIImagePath = ofd.FileName;
                 //if image is in WSQ format convert it to BMP
                 if (Path.GetExtension(ofd.FileName).ToUpper().Replace(".", "") == "WSQ")
                 {
                     picLIImagePath = Program.convertWSQtoBMP(picLIImagePath);
                 }
-                picEnrollLI.Image = System.Drawing.Image.FromFile(picLIImagePath);
+                //               picEnrollLI.Image = System.Drawing.Image.FromFile(picLIImagePath);
+                picEnrollLI.Image = System.Drawing.Image.FromStream(new MemoryStream(File.ReadAllBytes(picLIImagePath)));
                 picEnrollLI.SizeMode = PictureBoxSizeMode.StretchImage;
             }
         }
@@ -397,13 +389,14 @@ namespace AFIS360
             ofd.Filter = "Image Files|*.wsq;*.jpg;*.jpeg;*.png;*.gif;*.bmp;*.tif;...";
             if (ofd.ShowDialog() == DialogResult.OK)
             {
-                picLMImagePath = ofd.FileName;
+                string picLMImagePath = ofd.FileName;
                 //if image is in WSQ format convert it to BMP
                 if (Path.GetExtension(ofd.FileName).ToUpper().Replace(".", "") == "WSQ")
                 {
                     picLMImagePath = Program.convertWSQtoBMP(picLMImagePath);
                 }
-                picEnrollLM.Image = System.Drawing.Image.FromFile(picLMImagePath);
+                //                picEnrollLM.Image = System.Drawing.Image.FromFile(picLMImagePath);
+                picEnrollLM.Image = System.Drawing.Image.FromStream(new MemoryStream(File.ReadAllBytes(picLMImagePath)));
                 picEnrollLM.SizeMode = PictureBoxSizeMode.StretchImage;
             }
         }
@@ -414,13 +407,14 @@ namespace AFIS360
             ofd.Filter = "Image Files|*.wsq;*.jpg;*.jpeg;*.png;*.gif;*.bmp;*.tif;...";
             if (ofd.ShowDialog() == DialogResult.OK)
             {
-                picLRImagePath = ofd.FileName;
+                string picLRImagePath = ofd.FileName;
                 //if image is in WSQ format convert it to BMP
                 if (Path.GetExtension(ofd.FileName).ToUpper().Replace(".", "") == "WSQ")
                 {
                     picLRImagePath = Program.convertWSQtoBMP(picLRImagePath);
                 }
-                picEnrollLR.Image = System.Drawing.Image.FromFile(picLRImagePath);
+                //                picEnrollLR.Image = System.Drawing.Image.FromFile(picLRImagePath);
+                picEnrollLR.Image = System.Drawing.Image.FromStream(new MemoryStream(File.ReadAllBytes(picLRImagePath)));
                 picEnrollLR.SizeMode = PictureBoxSizeMode.StretchImage;
             }
         }
@@ -431,32 +425,31 @@ namespace AFIS360
             ofd.Filter = "Image Files|*.wsq;*.jpg;*.jpeg;*.png;*.gif;*.bmp;*.tif;...";
             if (ofd.ShowDialog() == DialogResult.OK)
             {
-                picLLImagePath = ofd.FileName;
+                string picLLImagePath = ofd.FileName;
                 //if image is in WSQ format convert it to BMP
                 if (Path.GetExtension(ofd.FileName).ToUpper().Replace(".", "") == "WSQ")
                 {
                     picLLImagePath = Program.convertWSQtoBMP(picLLImagePath);
                 }
-                picEnrollLL.Image = System.Drawing.Image.FromFile(picLLImagePath);
+                //                picEnrollLL.Image = System.Drawing.Image.FromFile(picLLImagePath);
+                picEnrollLL.Image = System.Drawing.Image.FromStream(new MemoryStream(File.ReadAllBytes(picLLImagePath)));
                 picEnrollLL.SizeMode = PictureBoxSizeMode.StretchImage;
-
             }
         }
 
         private void picRT_MouseHover(object sender, EventArgs e)
         {
-
-            tTip.SetToolTip(picEnrollRT, "Click to select the Right Thumb image");
+            new ToolTip().SetToolTip(picEnrollRT, "Click to select the Right Thumb image");
         }
 
         private void picRI_MouseHover(object sender, EventArgs e)
         {
-            tTip.SetToolTip(picEnrollRI, "Click to select the Right Index finger image");
+            new ToolTip().SetToolTip(picEnrollRI, "Click to select the Right Index finger image");
         }
 
         private void picRM_MouseHover(object sender, EventArgs e)
         {
-            tTip.SetToolTip(picEnrollRM, "Click to select the Right Middle finger image");
+            new ToolTip().SetToolTip(picEnrollRM, "Click to select the Right Middle finger image");
         }
 
         private void picMatch_Click(object sender, EventArgs e)
@@ -471,7 +464,8 @@ namespace AFIS360
                 {
                     picMatchImagePath = Program.convertWSQtoBMP(picMatchImagePath);
                 }
-                picMatch.Image = System.Drawing.Image.FromFile(picMatchImagePath);
+//                picMatch.Image = System.Drawing.Image.FromFile(picMatchImagePath);
+                picMatch.Image = System.Drawing.Image.FromStream(new MemoryStream(File.ReadAllBytes(picMatchImagePath)));
                 picMatch.SizeMode = PictureBoxSizeMode.StretchImage;
             }
 
@@ -479,37 +473,37 @@ namespace AFIS360
 
         private void picRR_MouseHover(object sender, EventArgs e)
         {
-            tTip.SetToolTip(picEnrollRR, "Click to select the Right Ring finger image");
+            new ToolTip().SetToolTip(picEnrollRR, "Click to select the Right Ring finger image");
         }
 
         private void picRL_MouseHover(object sender, EventArgs e)
         {
-            tTip.SetToolTip(picEnrollRL, "Click to select the Right Little finger image");
+            new ToolTip().SetToolTip(picEnrollRL, "Click to select the Right Little finger image");
         }
 
         private void picLT_MouseHover(object sender, EventArgs e)
         {
-            tTip.SetToolTip(picEnrollLT, "Click to select the Left Thumb image");
+            new ToolTip().SetToolTip(picEnrollLT, "Click to select the Left Thumb image");
         }
 
         private void picLI_MouseHover(object sender, EventArgs e)
         {
-            tTip.SetToolTip(picEnrollLI, "Click to select the Left Index finger image");
+            new ToolTip().SetToolTip(picEnrollLI, "Click to select the Left Index finger image");
         }
 
         private void picLM_MouseHover(object sender, EventArgs e)
         {
-            tTip.SetToolTip(picEnrollLM, "Click to select the Left Middle finger image");
+            new ToolTip().SetToolTip(picEnrollLM, "Click to select the Left Middle finger image");
         }
 
         private void picLR_MouseHover(object sender, EventArgs e)
         {
-            tTip.SetToolTip(picEnrollLR, "Click to select the Left Ring finger image");
+            new ToolTip().SetToolTip(picEnrollLR, "Click to select the Left Ring finger image");
         }
 
         private void picLL_MouseHover(object sender, EventArgs e)
         {
-            tTip.SetToolTip(picEnrollLL, "Click to select the Left Little finger image");
+            new ToolTip().SetToolTip(picEnrollLL, "Click to select the Left Little finger image");
         }
 
         private void btnCRL_Click(object sender, EventArgs e)
@@ -520,7 +514,6 @@ namespace AFIS360
 
         private void clearEnrollTab()
         {
-            if (imgFilePaths != null) imgFilePaths.Clear();
             txtEnrollId.Clear();
             txtEnrollFName.Clear();
             txtEnrollLName.Clear();
@@ -545,61 +538,51 @@ namespace AFIS360
             {
                 picEnrollRT.Image.Dispose();
                 picEnrollRT.Image = null;
-                picRTImagePath = null;
             }
             if (picEnrollRI.Image != null)
             {
                 picEnrollRI.Image.Dispose();
                 picEnrollRI.Image = null;
-                picRIImagePath = null;
             }
             if (picEnrollRM.Image != null)
             {
                 picEnrollRM.Image.Dispose();
                 picEnrollRM.Image = null;
-                picRMImagePath = null;
             }
             if (picEnrollRR.Image != null)
             {
                 picEnrollRR.Image.Dispose();
                 picEnrollRR.Image = null;
-                picRRImagePath = null;
             }
             if (picEnrollRL.Image != null)
             {
                 picEnrollRL.Image.Dispose();
                 picEnrollRL.Image = null;
-                picRLImagePath = null;
             }
             if (picEnrollLT.Image != null)
             {
                 picEnrollLT.Image.Dispose();
                 picEnrollLT.Image = null;
-                picLTImagePath = null;
             }
             if (picEnrollLI.Image != null)
             {
                 picEnrollLI.Image.Dispose();
                 picEnrollLI.Image = null;
-                picLIImagePath = null;
             }
             if (picEnrollLM.Image != null)
             {
                 picEnrollLM.Image.Dispose();
                 picEnrollLM.Image = null;
-                picLMImagePath = null;
             }
             if (picEnrollLR.Image != null)
             {
                 picEnrollLR.Image.Dispose();
                 picEnrollLR.Image = null;
-                picLRImagePath = null;
             }
             if (picEnrollLL.Image != null)
             {
                 picEnrollLL.Image.Dispose();
                 picEnrollLL.Image = null;
-                picLLImagePath = null;
             }
             if (picEnrollPassportPhoto.Image != null)
             {
@@ -616,10 +599,10 @@ namespace AFIS360
 
         private void clearMatchTab(object sender)
         {
-            string btnMatchName = ((Button)sender).Name;
-            Console.WriteLine("###-->> Button clicked = " + btnMatchName);
+            string btnClickedName = ((Button)sender).Name;
+            Console.WriteLine("###-->> Button clicked = " + btnClickedName);
 
-            if (picMatch.Image != null && btnMatchName.Equals("lblMatchCLR"))
+            if ((picMatch.Image != null && btnClickedName.Equals("lblMatchCLR")) || (picMatch.Image != null && btnClickedName.Equals("btnLogin")))
             {
                 picMatch.Image.Dispose();
                 picMatch.Image = System.Drawing.Image.FromFile(ConfigurationManager.AppSettings["defaultImageForMatch"]);
@@ -677,7 +660,6 @@ namespace AFIS360
                 picMatchLL.Image = null;
             }
 
-//            picMatchImagePath = null;
             richTxtMatchResAdds.Text = null;
             lblMatchResTxt.Text = null;
             lblMatchResFNameTxt.Text = null;
@@ -707,6 +689,12 @@ namespace AFIS360
             lblUserMgmtStatusMsg.Text = null;
         }
 
+        private void clearReportTab()
+        {
+            txtAuditReportPersonId.Clear();
+            txtAuditReportUserId.Clear();
+        }
+
         private void btnLogin_Click(object sender, EventArgs e)
         {
             string username = txtLoginId.Text;
@@ -724,6 +712,7 @@ namespace AFIS360
                     clearEnrollTab();
                     clearMatchTab(sender);
                     clearUserMgmtTab();
+                    clearReportTab();
                 }
 
                 Console.WriteLine("User.Id = " + user.getPersonId());
@@ -741,6 +730,12 @@ namespace AFIS360
 
                 //apply user access control
                 applyRolebasedAccessCntrl(user.getUserRole());
+
+                //Enable the WSQ converter MenuItem
+                convertToFromWSQToolStripMenuItem.Enabled = true;
+
+                //Enable the Logout MenuItem
+                logOutToolStripMenuItem.Enabled = true;
 
                 //Start the audit log for the logged in user
                 Status status = dataAccess.createUserAuditLog(user, DateTime.Now);
@@ -811,7 +806,12 @@ namespace AFIS360
         {
             if (cachedUser != null)
             {
-                if (cachedUser.getId().Equals(user.getId()) && cachedUser.getPassword().Equals(user.getPassword()))
+                Console.WriteLine("###-->> Cached  UserId = [" + cachedUser.getId() + "]");
+                Console.WriteLine("###-->> Current UserId = [" + user.getId() + "]");
+                Console.WriteLine("###-->> Cached  User Pass = [" + cachedUser.getPassword() + "]");
+                Console.WriteLine("###-->> Current User Pass = [" + user.getPassword() + "]");
+
+                if (cachedUser.getUsername().Equals(user.getUsername()) && cachedUser.getPassword().Equals(user.getPassword()))
                 {
                     return true;
                 }
@@ -834,6 +834,12 @@ namespace AFIS360
             lblLoginFailureStatus.Text = null;
             menuStrip.Visible = true;
             cachedUser = user;
+
+            //Disable the WSQ converter MenuItem
+            convertToFromWSQToolStripMenuItem.Enabled = false;
+
+            //Disable the Logout MenuItem
+            logOutToolStripMenuItem.Enabled = false;
 
             //Audit message for properly Logging out
             activityLog.setActivity("Gracefully logged out."); 
@@ -904,7 +910,7 @@ namespace AFIS360
 
         private void picMatch_MouseHover(object sender, EventArgs e)
         {
-            tTip.SetToolTip(picMatch, "Click to select the fingerprint to be matched");
+            new ToolTip().SetToolTip(picMatch, "Click to select the fingerprint to be matched");
         }
 
         private void btnUserMgmtCLR_Click(object sender, EventArgs e)
@@ -1186,6 +1192,10 @@ namespace AFIS360
         {
             Console.WriteLine("####-->> Loading the Window");
             activityLog = new ActivityLog();
+            //Disable the WSQ Converter MenuItem
+            convertToFromWSQToolStripMenuItem.Enabled = false;
+            //Disable the Logout MenuItem
+            logOutToolStripMenuItem.Enabled = false;
         }
 
 
@@ -1761,10 +1771,28 @@ namespace AFIS360
             lblEnrollStatusMsg.Text = status;
         }//btnEnrollUpdate_Click
 
-        private void convertWSQToolStripMenuItem_Click(object sender, EventArgs e)
+        private void convertToFromWSQToolStripMenuItem_Click(object sender, EventArgs e)
         {
             ConvertToFromWSQ convrertWSQ = new ConvertToFromWSQ(activityLog);
             convrertWSQ.ShowDialog();
+        }
+
+        private void btnFindFind_Click(object sender, EventArgs e)
+        {
+            string fname = txtBoxFindFirstName.Text;
+            string lname = txtBoxFindLastName.Text;
+            DateTime dob = dtpFindDOB.Value;
+
+            PersonDetail pDeatil = new PersonDetail();
+            pDeatil.setFirstName(fname);
+            pDeatil.setLastName(lname);
+            DateTime formattedDOB = DateTime.Parse(dob.ToString("yyyy-MM-dd 00:00:00"));
+            Console.WriteLine("###-->> formattedDOB = " + formattedDOB);
+            pDeatil.setDOB(formattedDOB);
+
+            DataAccess dataAccess = new DataAccess();
+            List<PersonDetail> matchedPersons = dataAccess.findPersons(pDeatil);
+            lblFindStatus.Text = "# of Match found = " + matchedPersons.Count();
         }
     }
 }

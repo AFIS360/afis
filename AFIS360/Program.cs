@@ -22,6 +22,9 @@ namespace AFIS360
         // Shared AfisEngine instance (cannot be shared between different threads though)
         static AfisEngine Afis;
 
+        //Load all persons from DB table on first time call persons
+        public static List<MyPerson> persons = null;
+
         // Take fingerprint image file and create Person object from the image
         public static MyPerson getProbe(string filename, string visitorNbr)
         {
@@ -135,61 +138,6 @@ namespace AFIS360
             return person;
         }//Enroll
 
-/*
-        private static void setFingername(MyFingerprint fp, string fpLocationPath)
-        {
-            if (fpLocationPath.Equals("fpRTPath"))
-            {
-                fp.Fingername = MyFingerprint.RightThumb;
-                Console.WriteLine("Finger = " + fp.Fingername);
-            }
-            else if (fpLocationPath.Equals("fpRIPath"))
-            {
-                fp.Fingername = MyFingerprint.RightIndex;
-                Console.WriteLine("Finger = " + fp.Fingername);
-            }
-            else if (fpLocationPath.Equals("fpRMPath"))
-            {
-                fp.Fingername = MyFingerprint.RightMiddle;
-                Console.WriteLine("Finger = " + fp.Fingername);
-            }
-            else if (fpLocationPath.Equals("fpRRPath"))
-            {
-                fp.Fingername = MyFingerprint.RightRing;
-                Console.WriteLine("Finger = " + fp.Fingername);
-            }
-            else if (fpLocationPath.Equals("fpRLPath"))
-            {
-                fp.Fingername = MyFingerprint.RightLittle;
-                Console.WriteLine("Finger = " + fp.Fingername);
-            }
-            else if (fpLocationPath.Equals("fpLTPath"))
-            {
-                fp.Fingername = MyFingerprint.LeftThumb;
-                Console.WriteLine("Finger = " + fp.Fingername);
-            }
-            else if (fpLocationPath.Equals("fpLIPath"))
-            {
-                fp.Fingername = MyFingerprint.LeftIndex;
-                Console.WriteLine("Finger = " + fp.Fingername);
-            }
-            else if (fpLocationPath.Equals("fpLMPath"))
-            {
-                fp.Fingername = MyFingerprint.LeftMiddle;
-                Console.WriteLine("Finger = " + fp.Fingername);
-            }
-            else if (fpLocationPath.Equals("fpLRPath"))
-            {
-                fp.Fingername = MyFingerprint.LeftRing;
-                Console.WriteLine("Finger = " + fp.Fingername);
-            }
-            else if (fpLocationPath.Equals("fpLLPath"))
-            {
-                fp.Fingername = MyFingerprint.LeftLittle;
-                Console.WriteLine("Finger = " + fp.Fingername);
-            }
-        }//end setFingername
-*/
 
         //Match probe with people in the database
         public static Match getMatch(string fpPath, string visitorId, Int32 threshold)
@@ -199,9 +147,17 @@ namespace AFIS360
             // Match visitor with unknown identity
             MyPerson probe = getProbe(fpPath, visitorId);
 
-            // Load all people fron database
-            DataAccess dataAccess = new DataAccess();
-            List<MyPerson> persons = dataAccess.retrievePersonFingerprints();
+            Console.WriteLine("###-->> persons object = " + persons);
+//            if(persons == null)
+//            {
+                // Load all people fron database
+                DataAccess dataAccess = new DataAccess();
+                persons = dataAccess.retrievePersonFingerprints();
+                Console.WriteLine("###-->> Loading persons from DB. Total persons = " + persons.Count());
+//            } else
+//            {
+//                Console.WriteLine("###-->> Using persons from Memory. Total persons = " + persons.Count());
+//            }
 
             // Look up the probe using Threshold = 10
             Afis.Threshold = threshold;
