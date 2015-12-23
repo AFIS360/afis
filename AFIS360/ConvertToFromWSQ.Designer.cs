@@ -60,7 +60,7 @@
             this.listBoxWSQConvInputFileFormatList.Items.AddRange(new object[] {
             "WSQ - FBI Wavelet Scalar Quantization",
             "BMP - Windows Bitmap Graphics"});
-            this.listBoxWSQConvInputFileFormatList.Location = new System.Drawing.Point(20, 38);
+            this.listBoxWSQConvInputFileFormatList.Location = new System.Drawing.Point(20, 40);
             this.listBoxWSQConvInputFileFormatList.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.listBoxWSQConvInputFileFormatList.Name = "listBoxWSQConvInputFileFormatList";
             this.listBoxWSQConvInputFileFormatList.Size = new System.Drawing.Size(330, 95);

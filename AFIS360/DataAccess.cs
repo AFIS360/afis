@@ -332,6 +332,135 @@ namespace AFIS360
             return personsDetail;
         }
 
+        public List<PersonDetail> findPersons (PersonDetail personDetail)
+        {
+            string connStr = getConnectionStringByName("MySQL_AFIS_conn");
+            MySqlConnection conn = new MySqlConnection(connStr);
+            MySqlCommand cmd;
+            List<PersonDetail> personsDetail;
+            DataTable ds;
+            conn.Open();
+            try
+            {
+                personsDetail = new List<PersonDetail>();
+                cmd = conn.CreateCommand();
+
+
+                cmd.CommandText = "SELECT * FROM afis.person p WHERE " +
+                                  "p.fname like '%@fname%' AND " +
+                                  "p.lname like '%@lname%' AND " +
+                                  "p.DOB like '@DOB%'";
+
+                cmd.Parameters.AddWithValue("@fname", personDetail.getFirstName());
+                cmd.Parameters.AddWithValue("@lname", personDetail.getLastName());
+                cmd.Parameters.AddWithValue("@DOB", personDetail.getDOB());
+
+
+                string query = cmd.CommandText;
+                foreach (MySql.Data.MySqlClient.MySqlParameter p in cmd.Parameters)
+                {
+                    Console.WriteLine("###-->> ParameterName = [" + p.ParameterName + "]");
+
+                    query = query.Replace(p.ParameterName, p.Value.ToString());
+                }
+
+                cmd.CommandText = query;
+                Console.WriteLine("###-->>cmd.CommandText = " + cmd.CommandText);
+
+
+                MySqlDataAdapter da = new MySqlDataAdapter(cmd);
+                ds = new DataTable();
+                da.Fill(ds);
+                IEnumerator rows = ds.Rows.GetEnumerator();
+                Int32 i = 0;
+
+                while (rows.MoveNext())
+                {
+                    PersonDetail pDetail = new PersonDetail();
+                    string pId = (string)ds.Rows[i]["person_id"];
+                    Console.WriteLine("###-->># of matched person Id = " + pId);
+                    string fname = (string)ds.Rows[i]["fname"];
+                    string lname = (string)ds.Rows[i]["lname"];
+                    string mname = (string)ds.Rows[i]["mname"];
+                    string name_prefix = (string)ds.Rows[i]["name_prefix"];
+                    string name_suffix = (string)ds.Rows[i]["name_suffix"];
+
+
+                    //Handle nullable DateTime
+                    DateTime? dob;
+
+                    if (ds.Rows[i]["DOB"] == DBNull.Value)
+                    {
+                        dob = new DateTime(1753, 01, 01);
+                    }
+                    else
+                    {
+                        dob = (DateTime?)ds.Rows[i]["DOB"];
+                    }
+
+                    string addr_street = (string)ds.Rows[i]["addr_street"];
+                    string addr_city = (string)ds.Rows[i]["addr_city"];
+                    string addr_postal_code = (string)ds.Rows[i]["addr_postal_code"];
+                    string addr_state = (string)ds.Rows[i]["addr_state"];
+                    string addr_country = (string)ds.Rows[i]["addr_country"];
+                    string profession = (string)ds.Rows[i]["profession"];
+                    string father_name = (string)ds.Rows[i]["father_name"];
+                    string cell_nbr = (string)ds.Rows[i]["cell_nbr"];
+                    string home_phone = (string)ds.Rows[i]["home_phone"];
+                    string office_phone = (string)ds.Rows[i]["office_phone"];
+                    string email_addr = (string)ds.Rows[i]["email_addr"];
+
+                    System.Drawing.Image photo = null;
+
+                    if (ds.Rows[i]["photo"] != DBNull.Value)
+                    {
+                        using (MemoryStream oStr = new MemoryStream((byte[])ds.Rows[i]["photo"]))
+                        {
+                            BinaryFormatter oBFormatter = new BinaryFormatter();
+                            oStr.Position = 0;
+                            photo = (System.Drawing.Image)oBFormatter.Deserialize(oStr);
+                        }
+                    }
+
+                    pDetail.setPersonId(pId);
+                    pDetail.setFirstName(fname);
+                    pDetail.setLastName(lname);
+                    pDetail.setMiddleName(mname);
+                    pDetail.setPrefix(name_prefix);
+                    pDetail.setSuffix(name_suffix);
+                    pDetail.setDOB(dob);
+                    pDetail.setStreetAddress(addr_street);
+                    pDetail.setCity(addr_city);
+                    pDetail.setPostalCode(addr_postal_code);
+                    pDetail.setState(addr_state);
+                    pDetail.setCountry(addr_country);
+                    pDetail.setProfession(profession);
+                    pDetail.setFatherName(father_name);
+                    pDetail.setcellNbr(cell_nbr);
+                    pDetail.setHomwPhoneNbr(home_phone);
+                    pDetail.setWorkPhoneNbr(office_phone);
+                    pDetail.setEmail(email_addr);
+                    pDetail.setPassportPhoto(photo);
+                    personsDetail.Add(pDetail);
+
+                    i = i + 1;
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+            finally
+            {
+                if (conn.State == System.Data.ConnectionState.Open)
+                {
+                    conn.Close();
+                }
+            }
+
+            return personsDetail;
+        }
+
 
         private void storeMyPersonToFile(MyPerson person)
         {
