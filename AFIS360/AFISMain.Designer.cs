@@ -196,6 +196,17 @@
             this.lblAuditReportRptStartDate = new System.Windows.Forms.Label();
             this.lblAuditReportRptEndDate = new System.Windows.Forms.Label();
             this.dtpAuditReportStartDate = new System.Windows.Forms.DateTimePicker();
+            this.tabFind = new System.Windows.Forms.TabPage();
+            this.tlpFindFindResult = new System.Windows.Forms.TableLayoutPanel();
+            this.checkBoxFindEmptyDOB = new System.Windows.Forms.CheckBox();
+            this.lblFindStatus = new System.Windows.Forms.Label();
+            this.btnFindFind = new System.Windows.Forms.Button();
+            this.dtpFindDOB = new System.Windows.Forms.DateTimePicker();
+            this.lblFindDOB = new System.Windows.Forms.Label();
+            this.txtBoxFindLastName = new System.Windows.Forms.TextBox();
+            this.lblFindLastName = new System.Windows.Forms.Label();
+            this.txtBoxFindFirstName = new System.Windows.Forms.TextBox();
+            this.lblFindFirstName = new System.Windows.Forms.Label();
             this.menuStrip = new System.Windows.Forms.MenuStrip();
             this.toolStripMenuItemMain = new System.Windows.Forms.ToolStripMenuItem();
             this.changePasswordToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -210,15 +221,6 @@
             this.lblTimer = new System.Windows.Forms.Label();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.timer1 = new System.Windows.Forms.Timer(this.components);
-            this.tabPageFind = new System.Windows.Forms.TabPage();
-            this.lblFindFirstName = new System.Windows.Forms.Label();
-            this.txtBoxFindFirstName = new System.Windows.Forms.TextBox();
-            this.lblFindLastName = new System.Windows.Forms.Label();
-            this.txtBoxFindLastName = new System.Windows.Forms.TextBox();
-            this.lblFindDOB = new System.Windows.Forms.Label();
-            this.dtpFindDOB = new System.Windows.Forms.DateTimePicker();
-            this.btnFindFind = new System.Windows.Forms.Button();
-            this.lblFindStatus = new System.Windows.Forms.Label();
             this.tabControlAFIS.SuspendLayout();
             this.tabLogin.SuspendLayout();
             this.grpLogin.SuspendLayout();
@@ -255,8 +257,8 @@
             this.tabAuditReport.SuspendLayout();
             this.grpBoxAuditReportPersonDetail.SuspendLayout();
             this.grpBoxAuditReportUserAccessRpt.SuspendLayout();
+            this.tabFind.SuspendLayout();
             this.menuStrip.SuspendLayout();
-            this.tabPageFind.SuspendLayout();
             this.SuspendLayout();
             // 
             // tabControlAFIS
@@ -266,7 +268,7 @@
             this.tabControlAFIS.Controls.Add(this.tabMatch);
             this.tabControlAFIS.Controls.Add(this.tabUserMgmt);
             this.tabControlAFIS.Controls.Add(this.tabAuditReport);
-            this.tabControlAFIS.Controls.Add(this.tabPageFind);
+            this.tabControlAFIS.Controls.Add(this.tabFind);
             this.tabControlAFIS.Location = new System.Drawing.Point(22, 42);
             this.tabControlAFIS.Name = "tabControlAFIS";
             this.tabControlAFIS.SelectedIndex = 0;
@@ -2003,6 +2005,117 @@
             this.dtpAuditReportStartDate.Size = new System.Drawing.Size(275, 22);
             this.dtpAuditReportStartDate.TabIndex = 13;
             // 
+            // tabFind
+            // 
+            this.tabFind.Controls.Add(this.tlpFindFindResult);
+            this.tabFind.Controls.Add(this.checkBoxFindEmptyDOB);
+            this.tabFind.Controls.Add(this.lblFindStatus);
+            this.tabFind.Controls.Add(this.btnFindFind);
+            this.tabFind.Controls.Add(this.dtpFindDOB);
+            this.tabFind.Controls.Add(this.lblFindDOB);
+            this.tabFind.Controls.Add(this.txtBoxFindLastName);
+            this.tabFind.Controls.Add(this.lblFindLastName);
+            this.tabFind.Controls.Add(this.txtBoxFindFirstName);
+            this.tabFind.Controls.Add(this.lblFindFirstName);
+            this.tabFind.Location = new System.Drawing.Point(4, 22);
+            this.tabFind.Name = "tabFind";
+            this.tabFind.Size = new System.Drawing.Size(1214, 690);
+            this.tabFind.TabIndex = 5;
+            this.tabFind.Text = "Find";
+            this.tabFind.UseVisualStyleBackColor = true;
+            // 
+            // tlpFindFindResult
+            // 
+            this.tlpFindFindResult.ColumnCount = 3;
+            this.tlpFindFindResult.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
+            this.tlpFindFindResult.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
+            this.tlpFindFindResult.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
+            this.tlpFindFindResult.Location = new System.Drawing.Point(48, 228);
+            this.tlpFindFindResult.Name = "tlpFindFindResult";
+            this.tlpFindFindResult.RowCount = 2;
+            this.tlpFindFindResult.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tlpFindFindResult.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tlpFindFindResult.Size = new System.Drawing.Size(771, 100);
+            this.tlpFindFindResult.TabIndex = 9;
+            // 
+            // checkBoxFindEmptyDOB
+            // 
+            this.checkBoxFindEmptyDOB.AutoSize = true;
+            this.checkBoxFindEmptyDOB.Location = new System.Drawing.Point(356, 99);
+            this.checkBoxFindEmptyDOB.Name = "checkBoxFindEmptyDOB";
+            this.checkBoxFindEmptyDOB.Size = new System.Drawing.Size(81, 17);
+            this.checkBoxFindEmptyDOB.TabIndex = 8;
+            this.checkBoxFindEmptyDOB.Text = "Empty DOB";
+            this.checkBoxFindEmptyDOB.UseVisualStyleBackColor = true;
+            this.checkBoxFindEmptyDOB.CheckedChanged += new System.EventHandler(this.checkBoxFindEmptyDOB_CheckedChanged);
+            // 
+            // lblFindStatus
+            // 
+            this.lblFindStatus.AutoSize = true;
+            this.lblFindStatus.Location = new System.Drawing.Point(112, 193);
+            this.lblFindStatus.Name = "lblFindStatus";
+            this.lblFindStatus.Size = new System.Drawing.Size(40, 13);
+            this.lblFindStatus.TabIndex = 7;
+            this.lblFindStatus.Text = "Status:";
+            // 
+            // btnFindFind
+            // 
+            this.btnFindFind.Location = new System.Drawing.Point(112, 144);
+            this.btnFindFind.Name = "btnFindFind";
+            this.btnFindFind.Size = new System.Drawing.Size(75, 23);
+            this.btnFindFind.TabIndex = 6;
+            this.btnFindFind.Text = "Find";
+            this.btnFindFind.UseVisualStyleBackColor = true;
+            this.btnFindFind.Click += new System.EventHandler(this.btnFindFind_Click);
+            // 
+            // dtpFindDOB
+            // 
+            this.dtpFindDOB.Location = new System.Drawing.Point(112, 99);
+            this.dtpFindDOB.Name = "dtpFindDOB";
+            this.dtpFindDOB.Size = new System.Drawing.Size(218, 20);
+            this.dtpFindDOB.TabIndex = 5;
+            // 
+            // lblFindDOB
+            // 
+            this.lblFindDOB.AutoSize = true;
+            this.lblFindDOB.Location = new System.Drawing.Point(45, 107);
+            this.lblFindDOB.Name = "lblFindDOB";
+            this.lblFindDOB.Size = new System.Drawing.Size(33, 13);
+            this.lblFindDOB.TabIndex = 4;
+            this.lblFindDOB.Text = "DOB:";
+            // 
+            // txtBoxFindLastName
+            // 
+            this.txtBoxFindLastName.Location = new System.Drawing.Point(112, 74);
+            this.txtBoxFindLastName.Name = "txtBoxFindLastName";
+            this.txtBoxFindLastName.Size = new System.Drawing.Size(218, 20);
+            this.txtBoxFindLastName.TabIndex = 3;
+            // 
+            // lblFindLastName
+            // 
+            this.lblFindLastName.AutoSize = true;
+            this.lblFindLastName.Location = new System.Drawing.Point(45, 81);
+            this.lblFindLastName.Name = "lblFindLastName";
+            this.lblFindLastName.Size = new System.Drawing.Size(61, 13);
+            this.lblFindLastName.TabIndex = 2;
+            this.lblFindLastName.Text = "Last Name:";
+            // 
+            // txtBoxFindFirstName
+            // 
+            this.txtBoxFindFirstName.Location = new System.Drawing.Point(112, 46);
+            this.txtBoxFindFirstName.Name = "txtBoxFindFirstName";
+            this.txtBoxFindFirstName.Size = new System.Drawing.Size(218, 20);
+            this.txtBoxFindFirstName.TabIndex = 1;
+            // 
+            // lblFindFirstName
+            // 
+            this.lblFindFirstName.AutoSize = true;
+            this.lblFindFirstName.Location = new System.Drawing.Point(45, 52);
+            this.lblFindFirstName.Name = "lblFindFirstName";
+            this.lblFindFirstName.Size = new System.Drawing.Size(60, 13);
+            this.lblFindFirstName.TabIndex = 0;
+            this.lblFindFirstName.Text = "First Name:";
+            // 
             // menuStrip
             // 
             this.menuStrip.ImageScalingSize = new System.Drawing.Size(32, 32);
@@ -2101,90 +2214,6 @@
             this.lblTimer.Size = new System.Drawing.Size(0, 16);
             this.lblTimer.TabIndex = 4;
             // 
-            // tabPageFind
-            // 
-            this.tabPageFind.Controls.Add(this.lblFindStatus);
-            this.tabPageFind.Controls.Add(this.btnFindFind);
-            this.tabPageFind.Controls.Add(this.dtpFindDOB);
-            this.tabPageFind.Controls.Add(this.lblFindDOB);
-            this.tabPageFind.Controls.Add(this.txtBoxFindLastName);
-            this.tabPageFind.Controls.Add(this.lblFindLastName);
-            this.tabPageFind.Controls.Add(this.txtBoxFindFirstName);
-            this.tabPageFind.Controls.Add(this.lblFindFirstName);
-            this.tabPageFind.Location = new System.Drawing.Point(4, 22);
-            this.tabPageFind.Name = "tabPageFind";
-            this.tabPageFind.Size = new System.Drawing.Size(1214, 690);
-            this.tabPageFind.TabIndex = 5;
-            this.tabPageFind.Text = "Find";
-            this.tabPageFind.UseVisualStyleBackColor = true;
-            // 
-            // lblFindFirstName
-            // 
-            this.lblFindFirstName.AutoSize = true;
-            this.lblFindFirstName.Location = new System.Drawing.Point(45, 52);
-            this.lblFindFirstName.Name = "lblFindFirstName";
-            this.lblFindFirstName.Size = new System.Drawing.Size(60, 13);
-            this.lblFindFirstName.TabIndex = 0;
-            this.lblFindFirstName.Text = "First Name:";
-            // 
-            // txtBoxFindFirstName
-            // 
-            this.txtBoxFindFirstName.Location = new System.Drawing.Point(112, 46);
-            this.txtBoxFindFirstName.Name = "txtBoxFindFirstName";
-            this.txtBoxFindFirstName.Size = new System.Drawing.Size(218, 20);
-            this.txtBoxFindFirstName.TabIndex = 1;
-            // 
-            // lblFindLastName
-            // 
-            this.lblFindLastName.AutoSize = true;
-            this.lblFindLastName.Location = new System.Drawing.Point(45, 81);
-            this.lblFindLastName.Name = "lblFindLastName";
-            this.lblFindLastName.Size = new System.Drawing.Size(61, 13);
-            this.lblFindLastName.TabIndex = 2;
-            this.lblFindLastName.Text = "Last Name:";
-            // 
-            // txtBoxFindLastName
-            // 
-            this.txtBoxFindLastName.Location = new System.Drawing.Point(112, 74);
-            this.txtBoxFindLastName.Name = "txtBoxFindLastName";
-            this.txtBoxFindLastName.Size = new System.Drawing.Size(218, 20);
-            this.txtBoxFindLastName.TabIndex = 3;
-            // 
-            // lblFindDOB
-            // 
-            this.lblFindDOB.AutoSize = true;
-            this.lblFindDOB.Location = new System.Drawing.Point(45, 107);
-            this.lblFindDOB.Name = "lblFindDOB";
-            this.lblFindDOB.Size = new System.Drawing.Size(33, 13);
-            this.lblFindDOB.TabIndex = 4;
-            this.lblFindDOB.Text = "DOB:";
-            // 
-            // dtpFindDOB
-            // 
-            this.dtpFindDOB.Location = new System.Drawing.Point(112, 99);
-            this.dtpFindDOB.Name = "dtpFindDOB";
-            this.dtpFindDOB.Size = new System.Drawing.Size(218, 20);
-            this.dtpFindDOB.TabIndex = 5;
-            // 
-            // btnFindFind
-            // 
-            this.btnFindFind.Location = new System.Drawing.Point(112, 144);
-            this.btnFindFind.Name = "btnFindFind";
-            this.btnFindFind.Size = new System.Drawing.Size(75, 23);
-            this.btnFindFind.TabIndex = 6;
-            this.btnFindFind.Text = "Find";
-            this.btnFindFind.UseVisualStyleBackColor = true;
-            this.btnFindFind.Click += new System.EventHandler(this.btnFindFind_Click);
-            // 
-            // lblFindStatus
-            // 
-            this.lblFindStatus.AutoSize = true;
-            this.lblFindStatus.Location = new System.Drawing.Point(112, 193);
-            this.lblFindStatus.Name = "lblFindStatus";
-            this.lblFindStatus.Size = new System.Drawing.Size(40, 13);
-            this.lblFindStatus.TabIndex = 7;
-            this.lblFindStatus.Text = "Status:";
-            // 
             // AFISMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -2248,10 +2277,10 @@
             this.grpBoxAuditReportPersonDetail.PerformLayout();
             this.grpBoxAuditReportUserAccessRpt.ResumeLayout(false);
             this.grpBoxAuditReportUserAccessRpt.PerformLayout();
+            this.tabFind.ResumeLayout(false);
+            this.tabFind.PerformLayout();
             this.menuStrip.ResumeLayout(false);
             this.menuStrip.PerformLayout();
-            this.tabPageFind.ResumeLayout(false);
-            this.tabPageFind.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -2438,7 +2467,7 @@
         private System.Windows.Forms.Label lblEnrollPPhoto;
         private System.Windows.Forms.ToolStripMenuItem toolsToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem convertToFromWSQToolStripMenuItem;
-        private System.Windows.Forms.TabPage tabPageFind;
+        private System.Windows.Forms.TabPage tabFind;
         private System.Windows.Forms.Label lblFindStatus;
         private System.Windows.Forms.Button btnFindFind;
         private System.Windows.Forms.DateTimePicker dtpFindDOB;
@@ -2448,5 +2477,7 @@
         private System.Windows.Forms.TextBox txtBoxFindFirstName;
         private System.Windows.Forms.Label lblFindFirstName;
         private System.Windows.Forms.Timer timer1;
+        private System.Windows.Forms.CheckBox checkBoxFindEmptyDOB;
+        private System.Windows.Forms.TableLayoutPanel tlpFindFindResult;
     }
 }

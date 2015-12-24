@@ -13,6 +13,7 @@ namespace AFIS360
         private string access_match_tab;
         private string access_usermgmt_tab;
         private string access_audit_tab;
+        private string access_find_tab;
 
         public void setAccessLoginTab(string access_login_tab)
         {
@@ -101,6 +102,25 @@ namespace AFIS360
         public bool hasAccessToAuditTab()
         {
             if (this.access_audit_tab.Equals("Y"))
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+        public void setAccessFindTab(string access_find_tab)
+        {
+            this.access_find_tab = access_find_tab;
+        }
+        public string getAccessFindTab()
+        {
+            return this.access_find_tab;
+        }
+        public bool hasAccessToFindTab()
+        {
+            if (this.access_find_tab.Equals("Y"))
             {
                 return true;
             }
