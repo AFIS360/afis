@@ -349,11 +349,19 @@ namespace AFIS360
                 cmd.CommandText = "SELECT * FROM afis.person p WHERE " +
                                   "p.fname like '%@fname%' AND " +
                                   "p.lname like '%@lname%' AND " +
-                                  "p.DOB like '@DOB%'";
+                                  "p.DOB like '%@DOB%'";
 
+                
                 cmd.Parameters.AddWithValue("@fname", personDetail.getFirstName());
                 cmd.Parameters.AddWithValue("@lname", personDetail.getLastName());
-                cmd.Parameters.AddWithValue("@DOB", personDetail.getDOB());
+
+                string dobStr = "";
+                if (!string.IsNullOrWhiteSpace(personDetail.getDOBText()))
+                {
+                    DateTime dateTime = DateTime.Parse(personDetail.getDOBText());
+                    dobStr = dateTime.ToString("yyyy-MM-dd");
+                }
+                cmd.Parameters.AddWithValue("@DOB", dobStr);
 
 
                 string query = cmd.CommandText;
@@ -1069,6 +1077,7 @@ namespace AFIS360
                     string access_match_tab = (string)ds.Rows[i]["access_match_tab"];
                     string access_usermgmt_tab = (string)ds.Rows[i]["access_usermgmt_tab"];
                     string access_audit_tab = (string)ds.Rows[i]["access_audit_tab"];
+                    string access_find_tab = (string)ds.Rows[i]["access_find_tab"];
 
                     accessCntrl = new AccessControl();
                     accessCntrl.setAccessLoginTab(access_login_tab);
@@ -1076,6 +1085,7 @@ namespace AFIS360
                     accessCntrl.setAccessMatchTab(access_match_tab);
                     accessCntrl.setAccessUserMgmtTab(access_usermgmt_tab);
                     accessCntrl.setAccessAuditTab(access_audit_tab);
+                    accessCntrl.setAccessFindTab(access_find_tab);
 
                     i = i + 1;
                 }

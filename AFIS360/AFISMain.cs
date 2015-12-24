@@ -32,6 +32,7 @@ namespace AFIS360
             tabControlAFIS.TabPages.Remove(tabMatch);
             tabControlAFIS.TabPages.Remove(tabUserMgmt);
             tabControlAFIS.TabPages.Remove(tabAuditReport);
+            tabControlAFIS.TabPages.Remove(tabFind);
             menuStrip.Visible = true;
             btnUserMgmtUpdate.Enabled = false;
             //set the default image for match picBox
@@ -695,6 +696,12 @@ namespace AFIS360
             txtAuditReportUserId.Clear();
         }
 
+        private void clearFindTab()
+        {
+            txtBoxFindFirstName.Clear();
+            txtBoxFindLastName.Clear();  
+        }
+
         private void btnLogin_Click(object sender, EventArgs e)
         {
             string username = txtLoginId.Text;
@@ -713,6 +720,7 @@ namespace AFIS360
                     clearMatchTab(sender);
                     clearUserMgmtTab();
                     clearReportTab();
+                    clearFindTab();
                 }
 
                 Console.WriteLine("User.Id = " + user.getPersonId());
@@ -797,6 +805,14 @@ namespace AFIS360
             else
             {
                 tabControlAFIS.TabPages.Remove(tabLogin);
+            }
+            if (accessCntrl.hasAccessToFindTab())
+            {
+                tabControlAFIS.TabPages.Add(tabFind);
+            }
+            else
+            {
+                tabControlAFIS.TabPages.Remove(tabFind);
             }
 
         }//end applyRolebasedAccessCntrl
@@ -1781,18 +1797,64 @@ namespace AFIS360
         {
             string fname = txtBoxFindFirstName.Text;
             string lname = txtBoxFindLastName.Text;
-            DateTime dob = dtpFindDOB.Value;
+            string dobText = dtpFindDOB.Text;
+
+            Console.WriteLine("###-->> dob1Text = " + dtpFindDOB.Text);
 
             PersonDetail pDeatil = new PersonDetail();
             pDeatil.setFirstName(fname);
             pDeatil.setLastName(lname);
-            DateTime formattedDOB = DateTime.Parse(dob.ToString("yyyy-MM-dd 00:00:00"));
-            Console.WriteLine("###-->> formattedDOB = " + formattedDOB);
-            pDeatil.setDOB(formattedDOB);
+            pDeatil.setDOBText(dobText);
 
             DataAccess dataAccess = new DataAccess();
             List<PersonDetail> matchedPersons = dataAccess.findPersons(pDeatil);
             lblFindStatus.Text = "# of Match found = " + matchedPersons.Count();
+
+            for(int i = 0; i < matchedPersons.Count(); i++)
+            {
+                Console.WriteLine("Id = " + matchedPersons[i].getPersonId() + ", FirstName = " + matchedPersons[i].getFirstName() + ", LastName = " + matchedPersons[i].getLastName());
+            }
+            
+
+            /*
+                        TableLayoutPanel panel = new TableLayoutPanel();
+                        panel.ColumnCount = 3;
+                        panel.RowCount = 1;
+                        panel.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 40F));
+                        panel.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 30F));
+                        panel.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 30F));
+                        panel.RowStyles.Add(new RowStyle(SizeType.Absolute, 50F));
+                        panel.Controls.Add(new Label() { Text = "Address" }, 1, 0);
+                        panel.Controls.Add(new Label() { Text = "Contact No" }, 2, 0);
+                        panel.Controls.Add(new Label() { Text = "Email ID" }, 3, 0);
+
+                        // For Add New Row (Loop this code for add multiple rows)
+                        panel.RowCount = panel.RowCount + 1;
+                        panel.RowStyles.Add(new RowStyle(SizeType.Absolute, 50F));
+                        panel.Controls.Add(new Label() { Text = "Street, City, State" }, 1, panel.RowCount - 1);
+                        panel.Controls.Add(new Label() { Text = "888888888888" }, 2, panel.RowCount - 1);
+                        panel.Controls.Add(new Label() { Text = "xxxxxxx@gmail.com" }, 3, panel.RowCount - 1);
+
+            */
+
+
+        }
+
+        private void checkBoxFindEmptyDOB_CheckedChanged(object sender, EventArgs e)
+        {
+            if (checkBoxFindEmptyDOB.Checked == true)
+            {
+                dtpFindDOB.Enabled = false;
+                dtpFindDOB.CustomFormat = " ";
+                dtpFindDOB.Format = DateTimePickerFormat.Custom;
+                Console.WriteLine("###-->> dob2Text = " + dtpFindDOB.Text);
+            }
+            else
+            {
+                dtpFindDOB.Enabled = true;
+                dtpFindDOB.Format = DateTimePickerFormat.Long;
+                Console.WriteLine("###-->> dob3Text = " + dtpFindDOB.Text);
+            }
         }
     }
 }
