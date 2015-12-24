@@ -1810,17 +1810,11 @@ namespace AFIS360
             List<PersonDetail> matchedPersons = dataAccess.findPersons(pDeatil);
             lblFindStatus.Text = "# of Match found = " + matchedPersons.Count();
 
-            tlpFindFindResult.Controls.Add(new Label() { Text = "Address" }, 1, 0);
-            tlpFindFindResult.Controls.Add(new Label() { Text = "Contact No" }, 2, 0);
-            tlpFindFindResult.Controls.Add(new Label() { Text = "Email ID" }, 3, 0);
-
-            // For Add New Row (Loop this code for add multiple rows)
-            tlpFindFindResult.RowCount = tlpFindFindResult.RowCount + 1;
-            tlpFindFindResult.RowStyles.Add(new RowStyle(SizeType.Absolute, 50F));
-            tlpFindFindResult.Controls.Add(new Label() { Text = "Street, City, State" }, 1, tlpFindFindResult.RowCount - 1);
-            tlpFindFindResult.Controls.Add(new Label() { Text = "888888888888" }, 2, tlpFindFindResult.RowCount - 1);
-            tlpFindFindResult.Controls.Add(new Label() { Text = "xxxxxxx@gmail.com" }, 3, tlpFindFindResult.RowCount - 1);
-
+            for(int i = 0; i < matchedPersons.Count(); i++)
+            {
+                Console.WriteLine("Id = " + matchedPersons[i].getPersonId() + ", FirstName = " + matchedPersons[i].getFirstName() + ", LastName = " + matchedPersons[i].getLastName());
+            }
+            
 
             /*
                         TableLayoutPanel panel = new TableLayoutPanel();

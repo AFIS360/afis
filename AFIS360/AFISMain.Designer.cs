@@ -197,7 +197,6 @@
             this.lblAuditReportRptEndDate = new System.Windows.Forms.Label();
             this.dtpAuditReportStartDate = new System.Windows.Forms.DateTimePicker();
             this.tabFind = new System.Windows.Forms.TabPage();
-            this.tlpFindFindResult = new System.Windows.Forms.TableLayoutPanel();
             this.checkBoxFindEmptyDOB = new System.Windows.Forms.CheckBox();
             this.lblFindStatus = new System.Windows.Forms.Label();
             this.btnFindFind = new System.Windows.Forms.Button();
@@ -2007,7 +2006,6 @@
             // 
             // tabFind
             // 
-            this.tabFind.Controls.Add(this.tlpFindFindResult);
             this.tabFind.Controls.Add(this.checkBoxFindEmptyDOB);
             this.tabFind.Controls.Add(this.lblFindStatus);
             this.tabFind.Controls.Add(this.btnFindFind);
@@ -2023,20 +2021,6 @@
             this.tabFind.TabIndex = 5;
             this.tabFind.Text = "Find";
             this.tabFind.UseVisualStyleBackColor = true;
-            // 
-            // tlpFindFindResult
-            // 
-            this.tlpFindFindResult.ColumnCount = 3;
-            this.tlpFindFindResult.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
-            this.tlpFindFindResult.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
-            this.tlpFindFindResult.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
-            this.tlpFindFindResult.Location = new System.Drawing.Point(48, 228);
-            this.tlpFindFindResult.Name = "tlpFindFindResult";
-            this.tlpFindFindResult.RowCount = 2;
-            this.tlpFindFindResult.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tlpFindFindResult.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tlpFindFindResult.Size = new System.Drawing.Size(771, 100);
-            this.tlpFindFindResult.TabIndex = 9;
             // 
             // checkBoxFindEmptyDOB
             // 
@@ -2478,6 +2462,5 @@
         private System.Windows.Forms.Label lblFindFirstName;
         private System.Windows.Forms.Timer timer1;
         private System.Windows.Forms.CheckBox checkBoxFindEmptyDOB;
-        private System.Windows.Forms.TableLayoutPanel tlpFindFindResult;
     }
 }
