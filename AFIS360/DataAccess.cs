@@ -349,11 +349,36 @@ namespace AFIS360
                 cmd.CommandText = "SELECT * FROM afis.person p WHERE " +
                                   "p.fname like '%@fname%' AND " +
                                   "p.lname like '%@lname%' AND " +
+                                  "p.mname like '%@mname%' AND " +
+                                  "p.name_prefix like '%@name_prefix%' AND " +
+                                  "p.addr_street like '%@addr_street%' AND " +
+                                  "p.addr_city like '%@addr_city%' AND " +
+                                  "p.addr_state like '%@addr_state%' AND " +
+                                  "p.addr_postal_code like '%@addr_postal_code%' AND " +
+                                  "p.addr_country like '%@addr_country%' AND " +
+                                  "p.cell_nbr like '%@cell_nbr%' AND " +
+                                  "p.home_phone like '%@home_phone%' AND " +
+                                  "p.office_phone like '%@office_phone%' AND " +
+                                  "p.email_addr like '%@email_addr%' AND " +
+                                  "p.profession like '%@profession%' AND " +
                                   "p.DOB like '%@DOB%'";
 
                 
                 cmd.Parameters.AddWithValue("@fname", personDetail.getFirstName());
                 cmd.Parameters.AddWithValue("@lname", personDetail.getLastName());
+                cmd.Parameters.AddWithValue("@mname", personDetail.getMiddleName());
+                cmd.Parameters.AddWithValue("@name_prefix", personDetail.getPrefix());
+                cmd.Parameters.AddWithValue("@addr_street", personDetail.getStreetAddress());
+                cmd.Parameters.AddWithValue("@addr_city", personDetail.getCity());
+                cmd.Parameters.AddWithValue("@addr_state", personDetail.getState());
+                cmd.Parameters.AddWithValue("@addr_postal_code", personDetail.getPostalCode());
+                cmd.Parameters.AddWithValue("@addr_country", personDetail.getCountry());
+                cmd.Parameters.AddWithValue("@cell_nbr", personDetail.getCellNbr());
+                cmd.Parameters.AddWithValue("@home_phone", personDetail.getHomePhoneNbr());
+                cmd.Parameters.AddWithValue("@office_phone", personDetail.getWorkPhoneNbr());
+                cmd.Parameters.AddWithValue("@email_addr", personDetail.getEmail());
+                cmd.Parameters.AddWithValue("@profession", personDetail.getProfession());
+
 
                 string dobStr = "";
                 if (!string.IsNullOrWhiteSpace(personDetail.getDOBText()))

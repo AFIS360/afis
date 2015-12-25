@@ -12,7 +12,7 @@ using System.IO;
 using iTextSharp.text;
 using iTextSharp.text.pdf;
 using System.Configuration;
-
+using System.Text.RegularExpressions;
 
 namespace AFIS360
 {
@@ -57,7 +57,7 @@ namespace AFIS360
             string country = txtEnrollCountry.Text;
             string profession = txtEnrollProfession.Text;
             string fatherName = txtEnrollFatherName.Text;
-            string cellNbr = txtEnrollCellNbr.Text;
+            string cellNbr = txtEnrollCellNbr.Text != null ? Regex.Replace(txtEnrollCellNbr.Text, @"\D", "") : null;
             string workPhoneNbr = txtEnrollWorkPNbr.Text;
             string homePhoneNbr = txtEnrollHomePNbr.Text;
             string email = txtEnrollEmail.Text;
@@ -1212,6 +1212,11 @@ namespace AFIS360
             convertToFromWSQToolStripMenuItem.Enabled = false;
             //Disable the Logout MenuItem
             logOutToolStripMenuItem.Enabled = false;
+            //Disble the DateTimePicker on Find Tab
+            dtpFindDOB.Enabled = false;
+            dtpFindDOB.CustomFormat = " ";
+            dtpFindDOB.Format = DateTimePickerFormat.Custom;
+            checkBoxFindEmptyDOB.Checked = true;
         }
 
 
@@ -1710,9 +1715,9 @@ namespace AFIS360
             string country = txtEnrollCountry.Text;
             string profession = txtEnrollProfession.Text;
             string fatherName = txtEnrollFatherName.Text;
-            string cellNbr = txtEnrollCellNbr.Text;
-            string workPhoneNbr = txtEnrollWorkPNbr.Text;
-            string homePhoneNbr = txtEnrollHomePNbr.Text;
+            string cellNbr = txtEnrollCellNbr.Text != null ? Regex.Replace(txtEnrollCellNbr.Text, @"\D", "") : null;
+            string workPhoneNbr = txtEnrollWorkPNbr.Text != null ? Regex.Replace(txtEnrollWorkPNbr.Text, @"\D", "") : null;
+            string homePhoneNbr = txtEnrollHomePNbr.Text != null ? Regex.Replace(txtEnrollHomePNbr.Text, @"\D", "") : null;
             string email = txtEnrollEmail.Text;
             System.Drawing.Image passportPhoto = picEnrollPassportPhoto.Image;
             string status = null;
@@ -1798,13 +1803,36 @@ namespace AFIS360
             string fname = txtBoxFindFirstName.Text;
             string lname = txtBoxFindLastName.Text;
             string dobText = dtpFindDOB.Text;
-
-            Console.WriteLine("###-->> dob1Text = " + dtpFindDOB.Text);
+            string mnane = txtBoxFindMiddleName.Text;
+            string prefix = txtBoxFindPrefix.Text;
+            string street = txtBoxFindStreet.Text;
+            string city = txtBoxFindCity.Text;
+            string state = txtBoxFindState.Text;
+            string postalCode = txtBoxFindPostalCode.Text;
+            string country = txtBoxFindCountry.Text;
+//            string cellNbr = txtBoxFindCellNbr.Text;
+            string cellNbr = Regex.Replace(txtBoxFindCellNbr.Text, @"\D", "");
+            string workNbr = txtBoxFindWorkPhoneNbr.Text;
+            string homeNbr = txtBoxFindHomePhoneNbr.Text;
+            string email = txtBoxFindEmail.Text;
+            string profession = txtBoxFindProfession.Text;
 
             PersonDetail pDeatil = new PersonDetail();
             pDeatil.setFirstName(fname);
             pDeatil.setLastName(lname);
             pDeatil.setDOBText(dobText);
+            pDeatil.setMiddleName(mnane);
+            pDeatil.setPrefix(prefix);
+            pDeatil.setStreetAddress(street);
+            pDeatil.setCity(city);
+            pDeatil.setState(state);
+            pDeatil.setPostalCode(postalCode);
+            pDeatil.setCountry(country);
+            pDeatil.setcellNbr(cellNbr);
+            pDeatil.setHomwPhoneNbr(homeNbr);
+            pDeatil.setWorkPhoneNbr(workNbr);
+            pDeatil.setEmail(email);
+            pDeatil.setProfession(profession);
 
             DataAccess dataAccess = new DataAccess();
             List<PersonDetail> matchedPersons = dataAccess.findPersons(pDeatil);
@@ -1847,13 +1875,11 @@ namespace AFIS360
                 dtpFindDOB.Enabled = false;
                 dtpFindDOB.CustomFormat = " ";
                 dtpFindDOB.Format = DateTimePickerFormat.Custom;
-                Console.WriteLine("###-->> dob2Text = " + dtpFindDOB.Text);
             }
             else
             {
                 dtpFindDOB.Enabled = true;
                 dtpFindDOB.Format = DateTimePickerFormat.Long;
-                Console.WriteLine("###-->> dob3Text = " + dtpFindDOB.Text);
             }
         }
     }
