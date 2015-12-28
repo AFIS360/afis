@@ -186,6 +186,51 @@ namespace AFIS360
             return match;
         }//getMatch
 
+        //Match probe with people in the database
+        public static List<Match> getMatches(string fpPath, string visitorId, Int32 threshold)
+        {
+            List<Match> matches = new List<Match>();
+
+            // Match visitor with unknown identity
+            MyPerson probe = getProbe(fpPath, visitorId);
+
+            Console.WriteLine("###-->> persons object = " + persons);
+            //            if(persons == null)
+            //            {
+            // Load all people fron database
+            DataAccess dataAccess = new DataAccess();
+            persons = dataAccess.retrievePersonFingerprints();
+            Console.WriteLine("###-->> Loading persons from DB. Total persons = " + persons.Count());
+            //            } else
+            //            {
+            //                Console.WriteLine("###-->> Using persons from Memory. Total persons = " + persons.Count());
+            //            }
+
+            // Look up the probe using Threshold = 10
+            Afis.Threshold = threshold;
+            Console.WriteLine("Identifying {0} in database of {1} persons...", probe.Name, persons.Count);
+            //            MyPerson matchedPerson = Afis.Identify(probe, persons).FirstOrDefault() as MyPerson;
+            IEnumerable<Person> matchedPersons = Afis.Identify(probe, persons);
+            IEnumerator<Person> matchedPersonsIterator = matchedPersons.GetEnumerator();
+            while (matchedPersonsIterator.MoveNext())
+            {
+                MyPerson matchedPerson = (MyPerson)matchedPersonsIterator.Current;
+                Match match = new Match();
+                // Compute similarity score
+                float score = Afis.Verify(probe, matchedPerson);
+                match.setProbe(probe);
+                match.setMatchedPerson(matchedPerson);
+                match.setStatus(true);
+                match.setScore(score);
+                matches.Add(match);
+                Console.WriteLine("Similarity score between {0} and {1} = {2:F3}", probe.Name, matchedPerson.Name, score);
+                Console.WriteLine("Visitor " + visitorId + " matches with registered person " + matchedPerson.Name + ". Match score = " + score);
+            }
+            return matches;
+
+        }//getMatches
+
+
         public static string convertWSQtoBMP(string inputFilePath)
         {
             string outputFilePath = Path.GetFileNameWithoutExtension(inputFilePath) + ".bmp";

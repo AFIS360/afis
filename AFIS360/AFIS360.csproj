@@ -68,6 +68,12 @@
   <ItemGroup>
     <Compile Include="AccessControl.cs" />
     <Compile Include="ActivityLog.cs" />
+    <Compile Include="AdvancedMatcher.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AdvancedMatcher.Designer.cs">
+      <DependentUpon>AdvancedMatcher.cs</DependentUpon>
+    </Compile>
     <Compile Include="AFISMain.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -134,6 +140,9 @@
     <None Include="obj\Release\DesignTimeResolveAssemblyReferencesInput.cache" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="AdvancedMatcher.resx">
+      <DependentUpon>AdvancedMatcher.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="AFISMain.resx">
       <DependentUpon>AFISMain.cs</DependentUpon>
     </EmbeddedResource>

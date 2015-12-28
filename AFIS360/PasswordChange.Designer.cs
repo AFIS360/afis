@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(PasswordChange));
             this.lblChangePassCurrentPass = new System.Windows.Forms.Label();
             this.lblChangePassNewPass = new System.Windows.Forms.Label();
             this.txtChangePassCurrentPass = new System.Windows.Forms.TextBox();
@@ -160,8 +161,9 @@
             this.ClientSize = new System.Drawing.Size(518, 305);
             this.Controls.Add(this.grpBoxChangePass);
             this.Controls.Add(this.lblChangePassCR);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "PasswordChange";
-            this.Text = "PasswordChange";
+            this.Text = "Password Change";
             this.grpBoxChangePass.ResumeLayout(false);
             this.grpBoxChangePass.PerformLayout();
             this.ResumeLayout(false);
