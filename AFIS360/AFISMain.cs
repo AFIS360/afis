@@ -758,7 +758,7 @@ namespace AFIS360
                 convertToFromWSQToolStripMenuItem.Enabled = true;
 
                 //Enable Advanced Matcher
-                advancedMatchToolStripMenuItem.Enabled = true;
+//                advancedMatchToolStripMenuItem.Enabled = true;
 
                 //Enable the Logout MenuItem
                 logOutToolStripMenuItem.Enabled = true;
@@ -795,10 +795,12 @@ namespace AFIS360
             if (accessCntrl.hasAccessToMatchTab())
             {
                 tabControlAFIS.TabPages.Add(tabMatch);
+                advancedMatchToolStripMenuItem.Enabled = true;
             }
             else
             {
                 tabControlAFIS.TabPages.Remove(tabMatch);
+                advancedMatchToolStripMenuItem.Enabled = false;
             }
             if (accessCntrl.hasAccessToUserMgmtTab())
             {
@@ -874,7 +876,7 @@ namespace AFIS360
             convertToFromWSQToolStripMenuItem.Enabled = false;
 
             //Disble Advanced Matcher
-            advancedMatchToolStripMenuItem.Enabled = false;
+//            advancedMatchToolStripMenuItem.Enabled = false;
 
             //Disable the Logout MenuItem
             logOutToolStripMenuItem.Enabled = false;
