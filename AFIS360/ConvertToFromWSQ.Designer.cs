@@ -42,7 +42,11 @@
             this.lblWSQCOutputFileLocation = new System.Windows.Forms.Label();
             this.listBoxWSQCOutputFileFormatList = new System.Windows.Forms.ListBox();
             this.lblWSQCOutputfileFormat = new System.Windows.Forms.Label();
+            this.menuStrip1 = new System.Windows.Forms.MenuStrip();
+            this.menuToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.grpBoxWSQConverter.SuspendLayout();
+            this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // lblWSQConvInputFileFormat
@@ -110,7 +114,7 @@
             this.grpBoxWSQConverter.Controls.Add(this.listBoxWSQConvInputFileFormatList);
             this.grpBoxWSQConverter.Controls.Add(this.txtBoxWSQCInputFileLocation);
             this.grpBoxWSQConverter.Controls.Add(this.lblWSQCInputFileLocation);
-            this.grpBoxWSQConverter.Location = new System.Drawing.Point(14, 15);
+            this.grpBoxWSQConverter.Location = new System.Drawing.Point(14, 34);
             this.grpBoxWSQConverter.Margin = new System.Windows.Forms.Padding(2);
             this.grpBoxWSQConverter.Name = "grpBoxWSQConverter";
             this.grpBoxWSQConverter.Padding = new System.Windows.Forms.Padding(2);
@@ -192,19 +196,49 @@
             this.lblWSQCOutputfileFormat.TabIndex = 6;
             this.lblWSQCOutputfileFormat.Text = "Output File Format:";
             // 
+            // menuStrip1
+            // 
+            this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.menuToolStripMenuItem});
+            this.menuStrip1.Location = new System.Drawing.Point(0, 0);
+            this.menuStrip1.Name = "menuStrip1";
+            this.menuStrip1.Size = new System.Drawing.Size(530, 24);
+            this.menuStrip1.TabIndex = 7;
+            this.menuStrip1.Text = "menuStrip1";
+            // 
+            // menuToolStripMenuItem
+            // 
+            this.menuToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.exitToolStripMenuItem});
+            this.menuToolStripMenuItem.Name = "menuToolStripMenuItem";
+            this.menuToolStripMenuItem.Size = new System.Drawing.Size(50, 20);
+            this.menuToolStripMenuItem.Text = "Menu";
+            // 
+            // exitToolStripMenuItem
+            // 
+            this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
+            this.exitToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.exitToolStripMenuItem.Text = "Exit";
+            this.exitToolStripMenuItem.Click += new System.EventHandler(this.exitToolStripMenuItem_Click);
+            // 
             // ConvertToFromWSQ
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(530, 499);
+            this.ClientSize = new System.Drawing.Size(530, 519);
             this.Controls.Add(this.grpBoxWSQConverter);
+            this.Controls.Add(this.menuStrip1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.MainMenuStrip = this.menuStrip1;
             this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "ConvertToFromWSQ";
             this.Text = "WSQ Converter";
             this.grpBoxWSQConverter.ResumeLayout(false);
             this.grpBoxWSQConverter.PerformLayout();
+            this.menuStrip1.ResumeLayout(false);
+            this.menuStrip1.PerformLayout();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -223,5 +257,8 @@
         private System.Windows.Forms.Label lblWSQCOutputFileLocation;
         private System.Windows.Forms.Button btnWSQCClose;
         private System.Windows.Forms.Button btnWSQCConvert;
+        private System.Windows.Forms.MenuStrip menuStrip1;
+        private System.Windows.Forms.ToolStripMenuItem menuToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem exitToolStripMenuItem;
     }
 }

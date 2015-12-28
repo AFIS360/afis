@@ -46,6 +46,9 @@ namespace AFIS360
             string inputFileFormat = null;
             string outputFileFormat = null;
 
+            //set activity
+            activityLog.setActivity("Activity: Image conversion \n");
+
             //Verify the Input & Output file directories are not empty
             if(string.IsNullOrWhiteSpace(txtBoxWSQCInputFileLocation.Text))
             {
@@ -158,6 +161,11 @@ namespace AFIS360
         }
 
         private void btnWSQCClose_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+
+        private void exitToolStripMenuItem_Click(object sender, EventArgs e)
         {
             this.Close();
         }

@@ -32,13 +32,13 @@ namespace AFIS360
             {
                 lblResetPassStatusMsg.ForeColor = System.Drawing.Color.Green;
                 lblResetPassStatusMsg.Text = status.getStatusDesc();
-                activityLog.setActivity("Password reset for user (" + userId + ") is successfully.");
+                activityLog.setActivity("Password reset for user (" + userId + ") is successfully. \n");
             }
             else
             {
                 lblResetPassStatusMsg.ForeColor = System.Drawing.Color.Red;
                 lblResetPassStatusMsg.Text = status.getStatusDesc();
-                activityLog.setActivity("Password reset for user (" + userId + ") is unsuccessfully.");
+                activityLog.setActivity("Password reset for user (" + userId + ") is unsuccessfully.\n");
             }
 
         }

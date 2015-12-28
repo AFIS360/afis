@@ -35,13 +35,13 @@ namespace AFIS360
             {
                 lblStatusMsg.ForeColor = System.Drawing.Color.Green;
                 lblStatusMsg.Text = status.getStatusDesc();
-                activityLog.setActivity("Password change for user (" + userId + ") is successful.");
+                activityLog.setActivity("Password change for user (" + userId + ") is successful. \n");
             }
             else
             {
                 lblStatusMsg.ForeColor = System.Drawing.Color.Red;
                 lblStatusMsg.Text = status.getStatusDesc();
-                activityLog.setActivity("Password change for user (" + userId + ") is not successful.");
+                activityLog.setActivity("Password change for user (" + userId + ") is not successful. \n");
             }
         }
 
