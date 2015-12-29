@@ -13,7 +13,7 @@ using iTextSharp.text;
 using iTextSharp.text.pdf;
 using System.Configuration;
 using System.Text.RegularExpressions;
-
+using System.Threading;
 
 namespace AFIS360
 {
@@ -147,6 +147,9 @@ namespace AFIS360
 
         private void btnMatch_Click(object sender, EventArgs e)
         {
+            //Set Serach status
+            new Thread(displayFindProgressStatusSearchStart).Start();
+
             Int32 matchingThreshold = Convert.ToInt32(ConfigurationManager.AppSettings["InitialThresholdScore"]);
             string fpPath = picMatchImagePath;
             string message = null;
@@ -160,9 +163,11 @@ namespace AFIS360
                 return;
             }
 
-
             Match match = Program.getMatch(fpPath, "[Unknown Identity]", matchingThreshold);
             MyPerson matchedPerson = match.getMatchedPerson();
+
+            //Set Serach status
+            new Thread(displayFindProgressStatusSearchComplete).Start();
 
             //clear the Matched Result section before populating
             clearMatchTab(sender);
@@ -257,6 +262,21 @@ namespace AFIS360
             }
             lblMatchResTxt.Text = message;
         }
+
+        private void displayFindProgressStatusSearchStart()
+        {
+
+            lblMatchProgressStatus.Text = "Searching....";
+            Console.WriteLine("###--->> New thread started...Search Started");
+        }
+
+        private void displayFindProgressStatusSearchComplete()
+        {
+
+            lblMatchProgressStatus.Text = "Search Completed.";
+            Console.WriteLine("###--->> New thread started...Search Completed");
+        }
+
 
 
         private void picRT_Click(object sender, EventArgs e)
@@ -469,6 +489,9 @@ namespace AFIS360
                 }
                 picMatch.Image = System.Drawing.Image.FromStream(new MemoryStream(File.ReadAllBytes(picMatchImagePath)));
                 picMatch.SizeMode = PictureBoxSizeMode.StretchImage;
+
+                String selectedImageName = Path.GetFileName(picMatchImagePath);
+                lblMatchSelectedFp.Text = selectedImageName;
             }
 
         }
@@ -1042,6 +1065,8 @@ namespace AFIS360
                     txtEnrollHomePNbr.Text = pDetail.getHomePhoneNbr();
                     txtEnrollEmail.Text = pDetail.getEmail();
                     picEnrollPassportPhoto.Image = pDetail.getPassportPhoto();
+                    picEnrollPassportPhoto.SizeMode = PictureBoxSizeMode.StretchImage;
+
 
                     List<MyPerson> persons = dataAccess.retrievePersonFingerprintsById(personId);
 
