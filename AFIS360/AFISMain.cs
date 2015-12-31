@@ -147,9 +147,6 @@ namespace AFIS360
 
         private void btnMatch_Click(object sender, EventArgs e)
         {
-            //Set Serach status
-            new Thread(displayFindProgressStatusSearchStart).Start();
-
             Int32 matchingThreshold = Convert.ToInt32(ConfigurationManager.AppSettings["InitialThresholdScore"]);
             string fpPath = picMatchImagePath;
             string message = null;
@@ -162,6 +159,9 @@ namespace AFIS360
                 MessageBox.Show("Must select a finger print to match.", "Warning Message", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
+
+            //Set Serach status
+            new Thread(displayFindProgressStatusSearchStart).Start();
 
             Match match = Program.getMatch(fpPath, "[Unknown Identity]", matchingThreshold);
             MyPerson matchedPerson = match.getMatchedPerson();
@@ -493,7 +493,6 @@ namespace AFIS360
                 String selectedImageName = Path.GetFileName(picMatchImagePath);
                 lblMatchSelectedFp.Text = selectedImageName;
             }
-
         }
 
         private void picRR_MouseHover(object sender, EventArgs e)
@@ -632,6 +631,7 @@ namespace AFIS360
                 picMatch.Image.Dispose();
                 picMatch.Image = System.Drawing.Image.FromFile(ConfigurationManager.AppSettings["defaultImageForMatch"]);
                 picMatchImagePath = null;
+                lblMatchSelectedFp.Text = null;
             }
 
             if (picMatchRT.Image != null)
@@ -695,6 +695,7 @@ namespace AFIS360
                 picBoxMatchResPPhoto.Image.Dispose();
                 picBoxMatchResPPhoto.Image = null; ;
             }
+            lblMatchProgressStatus.Text = null;
         }
 
         private void clearUserMgmtTab()
@@ -783,8 +784,8 @@ namespace AFIS360
                 //Enable the WSQ converter MenuItem
                 convertToFromWSQToolStripMenuItem.Enabled = true;
 
-                //Enable Advanced Matcher
-//                advancedMatchToolStripMenuItem.Enabled = true;
+                //Enable the Password Change
+                changePasswordToolStripMenuItem.Enabled = true;
 
                 //Enable the Logout MenuItem
                 logOutToolStripMenuItem.Enabled = true;
@@ -900,6 +901,9 @@ namespace AFIS360
 
             //Disable the WSQ converter MenuItem
             convertToFromWSQToolStripMenuItem.Enabled = false;
+
+            //Disable the Password Change
+            changePasswordToolStripMenuItem.Enabled = false;
 
             //Disable the Logout MenuItem
             logOutToolStripMenuItem.Enabled = false;
@@ -1258,6 +1262,8 @@ namespace AFIS360
             Console.WriteLine("####-->> Loading the Window");
             //Disable the WSQ Converter MenuItem
             convertToFromWSQToolStripMenuItem.Enabled = false;
+            //Disable the Password Change
+            changePasswordToolStripMenuItem.Enabled = false;
             //Disable Advanced Matcher
             advancedMatchToolStripMenuItem.Enabled = false;
             //Disable the Logout MenuItem
@@ -1272,11 +1278,15 @@ namespace AFIS360
 
         private void AFISMain_FormClosed(object sender, FormClosedEventArgs e)
         {
-            activityLog.setActivity("Gracefully closed the AFIS. \n");
-            //Audit log the logout time
-            DataAccess dataAccess = new DataAccess();
-            Status status = dataAccess.updateUserAuditLog(user, DateTime.Now, 0, activityLog);
-            Console.WriteLine("####-->> Status code = " + status.getStatusCode());
+
+            if(activityLog != null)
+            {
+                activityLog.setActivity("Gracefully closed the AFIS. \n");
+                //Audit log the logout time
+                DataAccess dataAccess = new DataAccess();
+                Status status = dataAccess.updateUserAuditLog(user, DateTime.Now, 0, activityLog);
+                Console.WriteLine("####-->> Status code = " + status.getStatusCode());
+            }
         }
 
 
@@ -1569,6 +1579,15 @@ namespace AFIS360
         {
             AdvancedMatcher advMatcher = new AdvancedMatcher(activityLog);
             advMatcher.Show(); //non-modal dialog
+        }
+
+        private void lnklblFooterLKT_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            // Specify that the link was visited.
+            this.lnklblFooterLKT.LinkVisited = true;
+
+            // Navigate to a URL.
+            System.Diagnostics.Process.Start("http://www.lakerstekusa.com");
         }
     }
 }

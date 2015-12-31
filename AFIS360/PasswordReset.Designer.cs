@@ -37,7 +37,6 @@
             this.btnResetPassSubmit = new System.Windows.Forms.Button();
             this.lblRestPassTempPass = new System.Windows.Forms.Label();
             this.txtResetPassTempPass = new System.Windows.Forms.TextBox();
-            this.lblResetPassCR = new System.Windows.Forms.Label();
             this.grpBoxResetPass.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -61,26 +60,28 @@
             // lblResetPassUserId
             // 
             this.lblResetPassUserId.AutoSize = true;
-            this.lblResetPassUserId.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblResetPassUserId.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblResetPassUserId.Location = new System.Drawing.Point(93, 70);
             this.lblResetPassUserId.Name = "lblResetPassUserId";
-            this.lblResetPassUserId.Size = new System.Drawing.Size(108, 20);
+            this.lblResetPassUserId.Size = new System.Drawing.Size(82, 16);
             this.lblResetPassUserId.TabIndex = 4;
             this.lblResetPassUserId.Text = "Username *:";
             // 
             // txtResetPassUserId
             // 
-            this.txtResetPassUserId.Location = new System.Drawing.Point(207, 64);
+            this.txtResetPassUserId.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtResetPassUserId.Location = new System.Drawing.Point(186, 64);
             this.txtResetPassUserId.Name = "txtResetPassUserId";
-            this.txtResetPassUserId.Size = new System.Drawing.Size(141, 26);
+            this.txtResetPassUserId.Size = new System.Drawing.Size(141, 22);
             this.txtResetPassUserId.TabIndex = 1;
             // 
             // lblResetPassStatusMsg
             // 
             this.lblResetPassStatusMsg.AutoSize = true;
+            this.lblResetPassStatusMsg.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblResetPassStatusMsg.Location = new System.Drawing.Point(61, 145);
             this.lblResetPassStatusMsg.Name = "lblResetPassStatusMsg";
-            this.lblResetPassStatusMsg.Size = new System.Drawing.Size(0, 20);
+            this.lblResetPassStatusMsg.Size = new System.Drawing.Size(0, 16);
             this.lblResetPassStatusMsg.TabIndex = 8;
             // 
             // btnResetPassClose
@@ -108,37 +109,27 @@
             // lblRestPassTempPass
             // 
             this.lblRestPassTempPass.AutoSize = true;
-            this.lblRestPassTempPass.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblRestPassTempPass.Location = new System.Drawing.Point(49, 104);
+            this.lblRestPassTempPass.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblRestPassTempPass.Location = new System.Drawing.Point(57, 104);
             this.lblRestPassTempPass.Name = "lblRestPassTempPass";
-            this.lblRestPassTempPass.Size = new System.Drawing.Size(152, 20);
+            this.lblRestPassTempPass.Size = new System.Drawing.Size(118, 16);
             this.lblRestPassTempPass.TabIndex = 1;
             this.lblRestPassTempPass.Text = "Temp Password *:";
             // 
             // txtResetPassTempPass
             // 
-            this.txtResetPassTempPass.Location = new System.Drawing.Point(207, 98);
+            this.txtResetPassTempPass.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtResetPassTempPass.Location = new System.Drawing.Point(186, 98);
             this.txtResetPassTempPass.Name = "txtResetPassTempPass";
-            this.txtResetPassTempPass.Size = new System.Drawing.Size(141, 26);
+            this.txtResetPassTempPass.Size = new System.Drawing.Size(141, 22);
             this.txtResetPassTempPass.TabIndex = 3;
             this.txtResetPassTempPass.UseSystemPasswordChar = true;
-            // 
-            // lblResetPassCR
-            // 
-            this.lblResetPassCR.AutoSize = true;
-            this.lblResetPassCR.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblResetPassCR.Location = new System.Drawing.Point(195, 285);
-            this.lblResetPassCR.Name = "lblResetPassCR";
-            this.lblResetPassCR.Size = new System.Drawing.Size(147, 13);
-            this.lblResetPassCR.TabIndex = 25;
-            this.lblResetPassCR.Text = "Copyright @ Lakers Tek USA";
             // 
             // PasswordReset
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(523, 301);
-            this.Controls.Add(this.lblResetPassCR);
             this.Controls.Add(this.grpBoxResetPass);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "PasswordReset";
@@ -146,7 +137,6 @@
             this.grpBoxResetPass.ResumeLayout(false);
             this.grpBoxResetPass.PerformLayout();
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
@@ -160,6 +150,5 @@
         private System.Windows.Forms.Button btnResetPassSubmit;
         private System.Windows.Forms.Label lblRestPassTempPass;
         private System.Windows.Forms.TextBox txtResetPassTempPass;
-        private System.Windows.Forms.Label lblResetPassCR;
     }
 }

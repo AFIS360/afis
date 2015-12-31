@@ -64,7 +64,8 @@
             this.listBoxWSQConvInputFileFormatList.FormattingEnabled = true;
             this.listBoxWSQConvInputFileFormatList.Items.AddRange(new object[] {
             "WSQ - FBI Wavelet Scalar Quantization",
-            "BMP - Windows Bitmap Graphics"});
+            "BMP - Windows Bitmap Graphics",
+            "TIF - PC Tagged Information File Format"});
             this.listBoxWSQConvInputFileFormatList.Location = new System.Drawing.Point(20, 40);
             this.listBoxWSQConvInputFileFormatList.Margin = new System.Windows.Forms.Padding(2);
             this.listBoxWSQConvInputFileFormatList.Name = "listBoxWSQConvInputFileFormatList";
@@ -179,7 +180,8 @@
             this.listBoxWSQCOutputFileFormatList.FormattingEnabled = true;
             this.listBoxWSQCOutputFileFormatList.Items.AddRange(new object[] {
             "WSQ - FBI Wavelet Scalar Quantization",
-            "BMP - Windows Bitmap Graphics"});
+            "BMP - Windows Bitmap Graphics",
+            "TIF - PC Tagged Information File Format"});
             this.listBoxWSQCOutputFileFormatList.Location = new System.Drawing.Point(20, 224);
             this.listBoxWSQCOutputFileFormatList.Margin = new System.Windows.Forms.Padding(2);
             this.listBoxWSQCOutputFileFormatList.Name = "listBoxWSQCOutputFileFormatList";
@@ -217,7 +219,7 @@
             // exitToolStripMenuItem
             // 
             this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
-            this.exitToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.exitToolStripMenuItem.Size = new System.Drawing.Size(92, 22);
             this.exitToolStripMenuItem.Text = "Exit";
             this.exitToolStripMenuItem.Click += new System.EventHandler(this.exitToolStripMenuItem_Click);
             // 

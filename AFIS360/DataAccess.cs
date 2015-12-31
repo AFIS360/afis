@@ -902,11 +902,19 @@ namespace AFIS360
                     cmd.Parameters.AddWithValue("@username", username);
                     cmd.Parameters.AddWithValue("@password", Encrypt(new_password));
 
-                    cmd.ExecuteNonQuery();
+                    int resp = cmd.ExecuteNonQuery();
 
-                    status = new Status();
-                    status.setStatusCode(Status.STATUS_SUCCESSFUL);
-                    status.setStatusDesc("Password updated successfully.");
+                    if( resp == 1)
+                    {
+                        status = new Status();
+                        status.setStatusCode(Status.STATUS_SUCCESSFUL);
+                        status.setStatusDesc("Password updated successfully.");
+                    } else
+                    {
+                        status = new Status();
+                        status.setStatusCode(Status.STATUS_FAILURE);
+                        status.setStatusDesc("Password update is not successful. \nUsername (" + username + ") does not exists.");
+                    }
                 }
                 else
                 {
@@ -918,8 +926,7 @@ namespace AFIS360
 
                 status = new Status();
                 status.setStatusCode(Status.STATUS_FAILURE);
-                status.setStatusDesc("Password update unsuccessful. \nReason is - " + e.Message);
-                //                throw e;
+                status.setStatusDesc("Password update is not successful. \nReason is - " + e.Message);
             }
             finally
             {
@@ -947,18 +954,27 @@ namespace AFIS360
                 cmd.Parameters.AddWithValue("@username", username);
                 cmd.Parameters.AddWithValue("@password", Encrypt(temp_password));
 
-                cmd.ExecuteNonQuery();
+                int resp = cmd.ExecuteNonQuery();
 
-                status = new Status();
-                status.setStatusCode(Status.STATUS_SUCCESSFUL);
-                status.setStatusDesc("Password reseted successfully.");
+                Console.WriteLine("###-->> Password RESET response = " + resp);
+                if (resp == 1)
+                {
+                    status = new Status();
+                    status.setStatusCode(Status.STATUS_SUCCESSFUL);
+                    status.setStatusDesc("Password reseted successfully.");
+                } else
+                {
+                    status = new Status();
+                    status.setStatusCode(Status.STATUS_FAILURE);
+                    status.setStatusDesc("Password reset is not successful. \nUsername (" + username + ") does not exist.");
+                }
             }
             catch (Exception e)
             {
 
                 status = new Status();
                 status.setStatusCode(Status.STATUS_FAILURE);
-                status.setStatusDesc("Password reset unsuccessful. \nReason is - " + e.Message);
+                status.setStatusDesc("Password reset is not successful. \nReason is - " + e.Message);
                 throw e;
             }
             finally

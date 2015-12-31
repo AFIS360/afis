@@ -75,6 +75,12 @@ namespace AFIS360
                 searchPattern = "*.wsq";
                 inputFileFormat = "wsq";
             }
+            else if (!string.IsNullOrWhiteSpace(listBoxWSQConvInputFileFormatList.Text) && listBoxWSQConvInputFileFormatList.Text == "TIF - PC Tagged Information File Format")
+            {
+                Console.WriteLine("###-->> Selected Input File Format = " + listBoxWSQConvInputFileFormatList.Text);
+                searchPattern = "*.tif";
+                inputFileFormat = "tif";
+            }
             else
             {
                 Console.WriteLine("###-->> Selected Input File Format = " + listBoxWSQConvInputFileFormatList.Text);
@@ -94,6 +100,12 @@ namespace AFIS360
                 Console.WriteLine("###-->> Selected Output File Format = " + listBoxWSQCOutputFileFormatList.Text);
                 outputFileExtension = ".wsq";
                 outputFileFormat = "wsq";
+            }
+            else if (!string.IsNullOrWhiteSpace(listBoxWSQCOutputFileFormatList.Text) && listBoxWSQCOutputFileFormatList.Text == "TIF - PC Tagged Information File Format")
+            {
+                Console.WriteLine("###-->> Selected Output File Format = " + listBoxWSQCOutputFileFormatList.Text);
+                outputFileExtension = ".tif";
+                outputFileFormat = "tif";
             }
             else
             {
@@ -122,7 +134,17 @@ namespace AFIS360
                 MessageBox.Show(" Both Input and Output file cannot be BMP format.", "Warning Message", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
-            else if(string.IsNullOrWhiteSpace(inputFileFormat) || string.IsNullOrWhiteSpace(outputFileFormat))
+            else if (inputFileFormat == "tif" && outputFileFormat == "tif")
+            {
+                MessageBox.Show(" Both Input and Output file cannot be TIF format.", "Warning Message", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+            else if (inputFileFormat == outputFileFormat)
+            {
+                MessageBox.Show(" Both Input and Output file cannot be same format.", "Warning Message", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+            else if (string.IsNullOrWhiteSpace(inputFileFormat) || string.IsNullOrWhiteSpace(outputFileFormat))
             {
                 MessageBox.Show(" Input and Output file format must be selected.", "Warning Message", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
@@ -151,6 +173,26 @@ namespace AFIS360
                         Console.WriteLine("###-->> Converting WSQ to BMP");
                         //Decode WSQ to BMP
                         wsq.DecoderFile(@inputFileName, @outputFileName);
+                    }
+                    else if (inputFileFormat == "wsq" && outputFileFormat == "tif")
+                    {
+                        Console.WriteLine("###-->> Converting WSQ to TIF");
+                        //Decode WSQ to BMP
+                        wsq.DecoderFile(@inputFileName, @outputFileName);
+                    }
+                    else if (inputFileFormat == "tif" && outputFileFormat == "wsq")
+                    {
+                        Console.WriteLine("###-->> Converting TIF to WSQ");
+                        //Encode BMP to WSQ
+                        String[] comentario = new String[2];
+                        comentario[0] = "Mohammad Mohsin";
+                        comentario[1] = "LKT";
+                        wsq.EnconderFile(@inputFileName, @outputFileName, comentario, 0.75f);
+                    }
+                    else
+                    {
+                        MessageBox.Show(" Invalid conversion parameter. Converter only converts To/From WSQ.", "Warning Message", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        return;
                     }
                 }//end for
                 MessageBox.Show(" Conversion completed successfully.", "Information Message", MessageBoxButtons.OK, MessageBoxIcon.Information);
