@@ -148,16 +148,11 @@ namespace AFIS360
             MyPerson probe = getProbe(fpPath, visitorId);
 
             Console.WriteLine("###-->> persons object = " + persons);
-//            if(persons == null)
-//            {
-                // Load all people fron database
-                DataAccess dataAccess = new DataAccess();
-                persons = dataAccess.retrievePersonFingerprints();
-                Console.WriteLine("###-->> Loading persons from DB. Total persons = " + persons.Count());
-//            } else
-//            {
-//                Console.WriteLine("###-->> Using persons from Memory. Total persons = " + persons.Count());
-//            }
+            // Load all people fron database
+            DataAccess dataAccess = new DataAccess();
+            persons = dataAccess.retrievePersonFingerprintTemplates();
+
+            Console.WriteLine("###-->> Loading persons from DB. Total persons = " + persons.Count());
 
             // Look up the probe using Threshold = 10
             Afis.Threshold = threshold;

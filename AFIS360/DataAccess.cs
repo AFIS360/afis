@@ -57,6 +57,56 @@ namespace AFIS360
             }
         }//end storeFingerprints
 
+        public void storeFingerprintTemplates(MyPerson person)
+        {
+            string connStr = getConnectionStringByName("MySQL_AFIS_conn");
+            MySqlConnection conn = new MySqlConnection(connStr);
+            MySqlCommand cmd;
+            byte[] oSerializedFpImages;
+            conn.Open();
+            try
+            {
+                //first remove the fingerprint images from MyPerson object
+                removeFingerptintImages(person);
+
+                using (MemoryStream stream = new MemoryStream())
+                {
+                    BinaryFormatter oBFormatter = new BinaryFormatter();
+                    oBFormatter.Serialize(stream, person);
+                    oSerializedFpImages = stream.ToArray();
+                }
+
+                cmd = conn.CreateCommand();
+                cmd.CommandText = "INSERT INTO fp_template(person_id,template,name) VALUES(@person_id,@template,@name)";
+                cmd.Parameters.AddWithValue("@person_id", person.PersonId);
+                cmd.Parameters.AddWithValue("@template", oSerializedFpImages);
+                cmd.Parameters.AddWithValue("@name", person.Name);
+                cmd.ExecuteNonQuery();
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+            finally
+            {
+                if (conn.State == System.Data.ConnectionState.Open)
+                {
+                    conn.Close();
+                }
+            }
+        }//end storeFingerprintTemplates
+
+
+        //Remove fingerprint images from Person
+        private static void removeFingerptintImages(MyPerson person)
+        {
+            for (int i = 0; i < person.Fingerprints.Count; i++)
+            {
+                MyFingerprint fp = (MyFingerprint)person.Fingerprints.ElementAt(i);
+                fp.Image = null;
+            }
+        }
+
 
         public void updateFingerprints(MyPerson person)
         {
@@ -95,6 +145,46 @@ namespace AFIS360
             }
         }//end storeFingerprints
 
+
+        public void updateFingerprintTemplates(MyPerson person)
+        {
+            string connStr = getConnectionStringByName("MySQL_AFIS_conn");
+            MySqlConnection conn = new MySqlConnection(connStr);
+            MySqlCommand cmd;
+            byte[] oSerializedFpImages;
+            conn.Open();
+            try
+            {
+                ////first remove the fingerprint images from MyPerson object
+                removeFingerptintImages(person);
+
+                using (MemoryStream stream = new MemoryStream())
+                {
+                    BinaryFormatter oBFormatter = new BinaryFormatter();
+                    oBFormatter.Serialize(stream, person);
+                    oSerializedFpImages = stream.ToArray();
+                }
+
+                cmd = conn.CreateCommand();
+                cmd.CommandText = "UPDATE fp_template SET template = @template, name = @name WHERE person_id = @person_id";
+                cmd.Parameters.AddWithValue("@person_id", person.PersonId);
+                cmd.Parameters.AddWithValue("@template", oSerializedFpImages);
+                cmd.Parameters.AddWithValue("@name", person.Name);
+                cmd.ExecuteNonQuery();
+                Console.WriteLine("####-->> PersonId = " + person.PersonId);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+            finally
+            {
+                if (conn.State == System.Data.ConnectionState.Open)
+                {
+                    conn.Close();
+                }
+            }
+        }//end storeFingerprintTemplates
 
         public void storePersonDetail(PersonDetail personDetail)
         {
@@ -560,6 +650,56 @@ namespace AFIS360
 
             return persons;
         }
+
+        public List<MyPerson> retrievePersonFingerprintTemplates()
+        {
+            string connStr = getConnectionStringByName("MySQL_AFIS_conn");
+            MySqlConnection conn = new MySqlConnection(connStr);
+            MySqlCommand cmd;
+            MyPerson person = null;
+            List<MyPerson> persons;
+            DataTable ds;
+            conn.Open();
+            try
+            {
+                persons = new List<MyPerson>();
+                cmd = conn.CreateCommand();
+                cmd.CommandText = "SELECT * FROM afis.fp_template";
+                MySqlDataAdapter da = new MySqlDataAdapter(cmd);
+                ds = new DataTable();
+                da.Fill(ds);
+                IEnumerator rows = ds.Rows.GetEnumerator();
+                Int32 i = 0;
+
+                while (rows.MoveNext())
+                {
+
+                    int id = (int)ds.Rows[i]["id"];
+                    using (MemoryStream oStr = new MemoryStream((byte[])ds.Rows[i]["template"]))
+                    {
+                        BinaryFormatter oBFormatter = new BinaryFormatter();
+                        oStr.Position = 0;
+                        person = (MyPerson)oBFormatter.Deserialize(oStr);
+                        persons.Add(person);
+                    }
+                    i = i + 1;
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+            finally
+            {
+                if (conn.State == System.Data.ConnectionState.Open)
+                {
+                    conn.Close();
+                }
+            }
+
+            return persons;
+        }
+
 
         public List<MyPerson> retrievePersonFingerprintsById(string personId)
         {

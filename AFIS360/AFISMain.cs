@@ -127,7 +127,11 @@ namespace AFIS360
                     person.Name = fname;
                     person.PersonId = id;
                 }
+                //store person with fingerprint images
                 dataAccess.storeFingerprints(person);
+
+                //store person without fingerprint images but fingerptint templates. Match will be performed against the template
+                dataAccess.storeFingerprintTemplates(person);
 
                 status = "Enrollment of " + fname + " (Id = " + id + ") completed successfully.";
                 lblEnrollStatusMsg.ForeColor = System.Drawing.Color.Green;
@@ -185,7 +189,9 @@ namespace AFIS360
                 picBoxMatchResPPhoto.Image = pDetail.getPassportPhoto();
 
                 //Get all the fingerprints of the matched person 
-                List<Fingerprint> fps = matchedPerson.Fingerprints;
+                MyPerson person  = dataAccess.retrievePersonFingerprintsById(pDetail.getPersonId()).FirstOrDefault();
+                List<Fingerprint> fps = person.Fingerprints;
+
                 for (int i = 0; i < fps.Count; i++)
                 {
                     MyFingerprint fp = (MyFingerprint)fps.ElementAt(i);
@@ -248,7 +254,7 @@ namespace AFIS360
                         Console.WriteLine("####-->>>> Finger Name is not assigned");
                     }
                 }
-                message = "Match found. Matching Score:" + match.getScore();
+                message = "Match found. Matching Score: " + match.getScore();
                 lblMatchResTxt.ForeColor = Color.Green;
                 //adding the activity log
                 string activityMsg = "Match found. Person Id = " + match.getMatchedPerson().PersonId + ", Matching Score: " + match.getScore();
@@ -1031,7 +1037,7 @@ namespace AFIS360
 
         private void txtEnrollId_Leave(object sender, EventArgs e)
         {
-            Console.WriteLine("####-->> Lost focust from the txtEnrollId");
+            Console.WriteLine("####-->> Lost focus from the txtEnrollId");
 
             //clear the tab before populating 
             string txtEnrollIdTemp = txtEnrollId.Text;
@@ -1404,7 +1410,10 @@ namespace AFIS360
                     //store person's finger prints
                     MyPerson person = Program.Enroll(imgsFromPicBox, fname, id);
                     Console.WriteLine("####-->> person.name = " + person.Name);
+                    //update fingerprint image
                     dataAccess.updateFingerprints(person);
+                    //update fingerprint templates
+                    dataAccess.updateFingerprintTemplates(person);
                 }
                 status = "Enrollment update of " + fname + " (Id = " + id + ") completed successfully.";
                 lblEnrollStatusMsg.ForeColor = System.Drawing.Color.Green;
