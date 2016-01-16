@@ -20,82 +20,215 @@ namespace AFIS360
 {
     public class DataAccess
     {
-
-        public void storeFingerprints(MyPerson person)
+        public Status storePersonDetailwithFingerprints(MyPerson person, PersonDetail personDetail)
         {
             string connStr = getConnectionStringByName("MySQL_AFIS_conn");
-            MySqlConnection conn = new MySqlConnection(connStr);
-            MySqlCommand cmd;
-            byte[] oSerializedFpImages;
-            conn.Open();
-            try
+            Status status = null;
+
+            using (MySqlConnection conn = new MySqlConnection(connStr))
             {
-                using (MemoryStream stream = new MemoryStream())
+                conn.Open();
+
+                using (MySqlTransaction trans = conn.BeginTransaction())
                 {
-                    BinaryFormatter oBFormatter = new BinaryFormatter();
-                    oBFormatter.Serialize(stream, person);
-                    oSerializedFpImages = stream.ToArray();
-                }
+                    try
+                    {
+                        //store person detail
+                        using (MySqlCommand cmd = conn.CreateCommand())
+                        {
+                            byte[] oSerializedPassportPhoto;
+                            cmd.CommandText = "INSERT INTO person(person_id, fname, lname, mname, name_prefix, name_suffix," +
+                                              "DOB, addr_street, addr_city, addr_postal_code, addr_state, addr_country, profession," +
+                                              "father_name, cell_nbr, home_phone, office_phone, email_addr, photo)" +
+                                              "VALUES(@person_id, @fname, @lname, @mname, @name_prefix, @name_suffix," +
+                                              "@DOB, @addr_street, @addr_city, @addr_postal_code, @addr_state, @addr_country, @profession," +
+                                              "@father_name, @cell_nbr, @home_phone, @office_phone, @email_addr, @photo)";
+                            cmd.Transaction = trans;
 
-                cmd = conn.CreateCommand();
-                cmd.CommandText = "INSERT INTO fingerprint(person_id,image,name) VALUES(@person_id,@image,@name)";
-                cmd.Parameters.AddWithValue("@person_id", person.PersonId);
-                cmd.Parameters.AddWithValue("@image", oSerializedFpImages);
-                cmd.Parameters.AddWithValue("@name", person.Name);
-                cmd.ExecuteNonQuery();
-            }
-            catch (Exception)
-            {
-                throw;
-            }
-            finally
-            {
-                if (conn.State == System.Data.ConnectionState.Open)
+                            cmd.Parameters.AddWithValue("@person_id", personDetail.getPersonId());
+                            cmd.Parameters.AddWithValue("@fname", personDetail.getFirstName());
+                            cmd.Parameters.AddWithValue("@lname", personDetail.getLastName());
+                            cmd.Parameters.AddWithValue("@mname", personDetail.getMiddleName());
+                            cmd.Parameters.AddWithValue("@name_Prefix", personDetail.getPrefix());
+                            cmd.Parameters.AddWithValue("@name_suffix", personDetail.getSuffix());
+                            cmd.Parameters.AddWithValue("@DOB", personDetail.getDOB());
+                            cmd.Parameters.AddWithValue("@addr_street", personDetail.getStreetAddress());
+                            cmd.Parameters.AddWithValue("@addr_city", personDetail.getCity());
+                            cmd.Parameters.AddWithValue("@addr_postal_code", personDetail.getPostalCode());
+                            cmd.Parameters.AddWithValue("@addr_state", personDetail.getState());
+                            cmd.Parameters.AddWithValue("@addr_country", personDetail.getCountry());
+                            cmd.Parameters.AddWithValue("@profession", personDetail.getProfession());
+                            cmd.Parameters.AddWithValue("@father_name", personDetail.getFatherName());
+                            cmd.Parameters.AddWithValue("@cell_nbr", personDetail.getCellNbr());
+                            cmd.Parameters.AddWithValue("@home_phone", personDetail.getHomePhoneNbr());
+                            cmd.Parameters.AddWithValue("@office_phone", personDetail.getWorkPhoneNbr());
+                            cmd.Parameters.AddWithValue("@email_addr", personDetail.getEmail());
+
+                            if (personDetail.getPassportPhoto() != null)
+                            {
+                                using (MemoryStream stream = new MemoryStream())
+                                {
+                                    BinaryFormatter oBFormatter = new BinaryFormatter();
+                                    oBFormatter.Serialize(stream, personDetail.getPassportPhoto());
+                                    oSerializedPassportPhoto = stream.ToArray();
+                                }
+                                cmd.Parameters.AddWithValue("@photo", oSerializedPassportPhoto);
+                            }
+                            else {
+                                cmd.Parameters.AddWithValue("@photo", null);
+                            }
+
+                            cmd.ExecuteNonQuery();
+                            cmd.Parameters.Clear();
+                        }
+                        //store person's finperprints
+                        using (MySqlCommand cmd = conn.CreateCommand())
+                        {
+                            byte[] oSerializedFpImages;
+                            using (MemoryStream stream = new MemoryStream())
+                            {
+                                BinaryFormatter oBFormatter = new BinaryFormatter();
+                                oBFormatter.Serialize(stream, person);
+                                oSerializedFpImages = stream.ToArray();
+                            }
+
+                            cmd.CommandText = "INSERT INTO fingerprint(person_id,image,name) VALUES(@person_id,@image,@name)";
+                            cmd.Transaction = trans;
+
+                            cmd.Parameters.AddWithValue("@person_id", person.PersonId);
+                            cmd.Parameters.AddWithValue("@image", oSerializedFpImages);
+                            cmd.Parameters.AddWithValue("@name", person.Name);
+
+                            cmd.ExecuteNonQuery();
+                            cmd.Parameters.Clear();
+                        }
+                        //store fingerptint templates
+                        using (MySqlCommand cmd = conn.CreateCommand())
+                        {
+                            byte[] oSerializedFpImages;
+                            //first remove the fingerprint images from MyPerson object
+                            removeFingerptintImages(person);
+
+                            using (MemoryStream stream = new MemoryStream())
+                            {
+                                BinaryFormatter oBFormatter = new BinaryFormatter();
+                                oBFormatter.Serialize(stream, person);
+                                oSerializedFpImages = stream.ToArray();
+                            }
+                            
+                            cmd.CommandText = "INSERT INTO fp_template(person_id,template,name) VALUES(@person_id,@template,@name)";
+                            cmd.Transaction = trans;
+
+                            cmd.Parameters.AddWithValue("@person_id", person.PersonId);
+                            cmd.Parameters.AddWithValue("@template", oSerializedFpImages);
+                            cmd.Parameters.AddWithValue("@name", person.Name);
+
+                            cmd.ExecuteNonQuery();
+                            cmd.Parameters.Clear();
+                        }
+                        trans.Commit();
+
+                        //Successful status
+                        status = new Status();
+                        status.setStatusCode(Status.STATUS_SUCCESSFUL);
+                        status.setStatusDesc("Enrollment of " + person.Name + " (Id = " + person.PersonId + ") completed successfully.");
+                    }
+                    catch (Exception ex)
+                    {
+                        trans.Rollback();
+                        status = new Status();
+                        status.setStatusCode(Status.STATUS_FAILURE);
+                        status.setStatusDesc("Enrollment of " + person.Name + " (Id = " + person.PersonId + ") is unsuccessful. Reason is - " + ex.Message + ".");
+                    }
+                    finally
+                    {
+                        if (conn.State == System.Data.ConnectionState.Open)
+                        {
+                            conn.Close();
+                        }
+                    }
+                }//end transaction
+            }//end Connection
+
+            return status;
+        }//end storePersonDetailwithFingerprints
+
+        /*
+                public void storeFingerprints(MyPerson person)
                 {
-                    conn.Close();
-                }
-            }
-        }//end storeFingerprints
+                    string connStr = getConnectionStringByName("MySQL_AFIS_conn");
+                    MySqlConnection conn = new MySqlConnection(connStr);
+                    MySqlCommand cmd;
+                    byte[] oSerializedFpImages;
+                    conn.Open();
+                    try
+                    {
+                        using (MemoryStream stream = new MemoryStream())
+                        {
+                            BinaryFormatter oBFormatter = new BinaryFormatter();
+                            oBFormatter.Serialize(stream, person);
+                            oSerializedFpImages = stream.ToArray();
+                        }
 
-        public void storeFingerprintTemplates(MyPerson person)
-        {
-            string connStr = getConnectionStringByName("MySQL_AFIS_conn");
-            MySqlConnection conn = new MySqlConnection(connStr);
-            MySqlCommand cmd;
-            byte[] oSerializedFpImages;
-            conn.Open();
-            try
-            {
-                //first remove the fingerprint images from MyPerson object
-                removeFingerptintImages(person);
+                        cmd = conn.CreateCommand();
+                        cmd.CommandText = "INSERT INTO fingerprint(person_id,image,name) VALUES(@person_id,@image,@name)";
+                        cmd.Parameters.AddWithValue("@person_id", person.PersonId);
+                        cmd.Parameters.AddWithValue("@image", oSerializedFpImages);
+                        cmd.Parameters.AddWithValue("@name", person.Name);
+                        cmd.ExecuteNonQuery();
+                    }
+                    catch (Exception)
+                    {
+                        throw;
+                    }
+                    finally
+                    {
+                        if (conn.State == System.Data.ConnectionState.Open)
+                        {
+                            conn.Close();
+                        }
+                    }
+                }//end storeFingerprints
 
-                using (MemoryStream stream = new MemoryStream())
+                public void storeFingerprintTemplates(MyPerson person)
                 {
-                    BinaryFormatter oBFormatter = new BinaryFormatter();
-                    oBFormatter.Serialize(stream, person);
-                    oSerializedFpImages = stream.ToArray();
-                }
+                    string connStr = getConnectionStringByName("MySQL_AFIS_conn");
+                    MySqlConnection conn = new MySqlConnection(connStr);
+                    MySqlCommand cmd;
+                    byte[] oSerializedFpImages;
+                    conn.Open();
+                    try
+                    {
+                        //first remove the fingerprint images from MyPerson object
+                        removeFingerptintImages(person);
 
-                cmd = conn.CreateCommand();
-                cmd.CommandText = "INSERT INTO fp_template(person_id,template,name) VALUES(@person_id,@template,@name)";
-                cmd.Parameters.AddWithValue("@person_id", person.PersonId);
-                cmd.Parameters.AddWithValue("@template", oSerializedFpImages);
-                cmd.Parameters.AddWithValue("@name", person.Name);
-                cmd.ExecuteNonQuery();
-            }
-            catch (Exception)
-            {
-                throw;
-            }
-            finally
-            {
-                if (conn.State == System.Data.ConnectionState.Open)
-                {
-                    conn.Close();
-                }
-            }
-        }//end storeFingerprintTemplates
+                        using (MemoryStream stream = new MemoryStream())
+                        {
+                            BinaryFormatter oBFormatter = new BinaryFormatter();
+                            oBFormatter.Serialize(stream, person);
+                            oSerializedFpImages = stream.ToArray();
+                        }
 
+                        cmd = conn.CreateCommand();
+                        cmd.CommandText = "INSERT INTO fp_template(person_id,template,name) VALUES(@person_id,@template,@name)";
+                        cmd.Parameters.AddWithValue("@person_id", person.PersonId);
+                        cmd.Parameters.AddWithValue("@template", oSerializedFpImages);
+                        cmd.Parameters.AddWithValue("@name", person.Name);
+                        cmd.ExecuteNonQuery();
+                    }
+                    catch (Exception)
+                    {
+                        throw;
+                    }
+                    finally
+                    {
+                        if (conn.State == System.Data.ConnectionState.Open)
+                        {
+                            conn.Close();
+                        }
+                    }
+                }//end storeFingerprintTemplates
+        */
 
         //Remove fingerprint images from Person
         private static void removeFingerptintImages(MyPerson person)
@@ -105,9 +238,142 @@ namespace AFIS360
                 MyFingerprint fp = (MyFingerprint)person.Fingerprints.ElementAt(i);
                 fp.Image = null;
             }
-        }
+        }//end removeFingerptintImages
 
 
+        public Status updatePersonDetailWithFingerprints(MyPerson person, PersonDetail personDetail)
+        {
+            string connStr = getConnectionStringByName("MySQL_AFIS_conn");
+            Status status = null;
+
+            using (MySqlConnection conn = new MySqlConnection(connStr))
+            {
+                conn.Open();
+
+                using (MySqlTransaction trans = conn.BeginTransaction())
+                {
+                    try
+                    {
+                        //update person detail
+                        using (MySqlCommand cmd = conn.CreateCommand())
+                        {
+                            byte[] oSerializedPassportPhoto;
+                            cmd.CommandText = "UPDATE person SET fname = @fname, lname = @lname, mname = @mname, name_prefix = @name_prefix, name_suffix = @name_suffix ," +
+                                              "DOB = @DOB, addr_street = @addr_street, addr_city = @addr_city, addr_postal_code = @addr_postal_code, addr_state = @addr_state, addr_country = @addr_country, profession = @profession," +
+                                              "father_name = @father_name, cell_nbr = @cell_nbr, home_phone = @home_phone, office_phone = @office_phone, email_addr = @email_addr, photo = @photo WHERE person_id = @person_id";
+                            cmd.Transaction = trans;
+
+                            cmd.Parameters.AddWithValue("@person_id", personDetail.getPersonId());
+                            cmd.Parameters.AddWithValue("@fname", personDetail.getFirstName());
+                            cmd.Parameters.AddWithValue("@lname", personDetail.getLastName());
+                            cmd.Parameters.AddWithValue("@mname", personDetail.getMiddleName());
+                            cmd.Parameters.AddWithValue("@name_Prefix", personDetail.getPrefix());
+                            cmd.Parameters.AddWithValue("@name_suffix", personDetail.getSuffix());
+                            cmd.Parameters.AddWithValue("@DOB", personDetail.getDOB());
+                            cmd.Parameters.AddWithValue("@addr_street", personDetail.getStreetAddress());
+                            cmd.Parameters.AddWithValue("@addr_city", personDetail.getCity());
+                            cmd.Parameters.AddWithValue("@addr_postal_code", personDetail.getPostalCode());
+                            cmd.Parameters.AddWithValue("@addr_state", personDetail.getState());
+                            cmd.Parameters.AddWithValue("@addr_country", personDetail.getCountry());
+                            cmd.Parameters.AddWithValue("@profession", personDetail.getProfession());
+                            cmd.Parameters.AddWithValue("@father_name", personDetail.getFatherName());
+                            cmd.Parameters.AddWithValue("@cell_nbr", personDetail.getCellNbr());
+                            cmd.Parameters.AddWithValue("@home_phone", personDetail.getHomePhoneNbr());
+                            cmd.Parameters.AddWithValue("@office_phone", personDetail.getWorkPhoneNbr());
+                            cmd.Parameters.AddWithValue("@email_addr", personDetail.getEmail());
+
+                            if (personDetail.getPassportPhoto() != null)
+                            {
+                                using (MemoryStream stream = new MemoryStream())
+                                {
+                                    BinaryFormatter oBFormatter = new BinaryFormatter();
+                                    oBFormatter.Serialize(stream, personDetail.getPassportPhoto());
+                                    oSerializedPassportPhoto = stream.ToArray();
+                                }
+                                cmd.Parameters.AddWithValue("@photo", oSerializedPassportPhoto);
+                            }
+                            else
+                            {
+                                cmd.Parameters.AddWithValue("@photo", null);
+                            }
+
+                            cmd.ExecuteNonQuery();
+                            cmd.Parameters.Clear();
+                        }
+                        //update person's finperprints
+                        using (MySqlCommand cmd = conn.CreateCommand())
+                        {
+                            byte[] oSerializedFpImages;
+                            using (MemoryStream stream = new MemoryStream())
+                            {
+                                BinaryFormatter oBFormatter = new BinaryFormatter();
+                                oBFormatter.Serialize(stream, person);
+                                oSerializedFpImages = stream.ToArray();
+                            }
+
+                            cmd.CommandText = "UPDATE fingerprint SET image = @image, name = @name WHERE person_id = @person_id";
+                            cmd.Transaction = trans;
+
+                            cmd.Parameters.AddWithValue("@person_id", person.PersonId);
+                            cmd.Parameters.AddWithValue("@image", oSerializedFpImages);
+                            cmd.Parameters.AddWithValue("@name", person.Name);
+
+                            cmd.ExecuteNonQuery();
+                            cmd.Parameters.Clear();
+                        }
+                        //update fingerptint templates
+                        using (MySqlCommand cmd = conn.CreateCommand())
+                        {
+                            byte[] oSerializedFpImages;
+                            //first remove the fingerprint images from MyPerson object
+                            removeFingerptintImages(person);
+
+                            using (MemoryStream stream = new MemoryStream())
+                            {
+                                BinaryFormatter oBFormatter = new BinaryFormatter();
+                                oBFormatter.Serialize(stream, person);
+                                oSerializedFpImages = stream.ToArray();
+                            }
+                        
+                            cmd.CommandText = "UPDATE fp_template SET template = @template, name = @name WHERE person_id = @person_id";
+                            cmd.Transaction = trans;
+
+                            cmd.Parameters.AddWithValue("@person_id", person.PersonId);
+                            cmd.Parameters.AddWithValue("@template", oSerializedFpImages);
+                            cmd.Parameters.AddWithValue("@name", person.Name);
+
+                            cmd.ExecuteNonQuery();
+                            cmd.Parameters.Clear();
+                        }
+                        trans.Commit();
+
+                        //Successful status
+                        status = new Status();
+                        status.setStatusCode(Status.STATUS_SUCCESSFUL);
+                        status.setStatusDesc("Enrollment update of " + person.Name + " (Id = " + person.PersonId + ") completed successfully.");
+                    }
+                    catch (Exception ex)
+                    {
+                        trans.Rollback();
+                        status = new Status();
+                        status.setStatusCode(Status.STATUS_FAILURE);
+                        status.setStatusDesc("Enrollment update of " + person.Name + " (Id = " + person.PersonId + ") is unsuccessful. Reason is - " + ex.Message + ".");
+                    }
+                    finally
+                    {
+                        if (conn.State == System.Data.ConnectionState.Open)
+                        {
+                            conn.Close();
+                        }
+                    }
+                }//end transaction
+            }//end Connection
+
+            return status;
+
+        }//end updatePersonDetailWithFingerprints
+
+/*
         public void updateFingerprints(MyPerson person)
         {
             string connStr = getConnectionStringByName("MySQL_AFIS_conn");
@@ -143,7 +409,7 @@ namespace AFIS360
                     conn.Close();
                 }
             }
-        }//end storeFingerprints
+        }//end updateFingerprints
 
 
         public void updateFingerprintTemplates(MyPerson person)
@@ -184,8 +450,10 @@ namespace AFIS360
                     conn.Close();
                 }
             }
-        }//end storeFingerprintTemplates
+        }//end updateFingerprintTemplates
+*/
 
+/*
         public void storePersonDetail(PersonDetail personDetail)
         {
             string connStr = getConnectionStringByName("MySQL_AFIS_conn");
@@ -249,8 +517,8 @@ namespace AFIS360
                 }
             }
         }//end storePersonDetail
-
-
+*/
+/*
         public void updatePersonDetail(PersonDetail personDetail)
         {
             string connStr = getConnectionStringByName("MySQL_AFIS_conn");
@@ -314,7 +582,7 @@ namespace AFIS360
                 }
             }
         }//end storePersonDetail
-
+*/
 
         public List<PersonDetail> retrievePersonDetail(string personId)
         {
@@ -422,7 +690,7 @@ namespace AFIS360
             return personsDetail;
         }
 
-        public List<PersonDetail> findPersons (PersonDetail personDetail)
+        public List<PersonDetail> findPersons(PersonDetail personDetail)
         {
             string connStr = getConnectionStringByName("MySQL_AFIS_conn");
             MySqlConnection conn = new MySqlConnection(connStr);
@@ -451,7 +719,7 @@ namespace AFIS360
                                   "p.office_phone like '%@office_phone%' AND " +
                                   "p.email_addr like '%@email_addr%' AND " +
                                   "p.profession like '%@profession%' AND " +
-                                  "p.DOB like '%@DOB%'";
+                                  "p.DOB like '%@DOB%' limit 100";
 
                 
                 cmd.Parameters.AddWithValue("@fname", personDetail.getFirstName());
@@ -582,26 +850,9 @@ namespace AFIS360
             }
 
             return personsDetail;
-        }
+        }//end findPersons
 
-
-        private void storeMyPersonToFile(MyPerson person)
-        {
-            try
-            {
-                using (Stream stream = File.Open("C:\\software\\SourceAFIS\\Sample\\bin\\Release\\person.dat", FileMode.Create))
-                {
-                    BinaryFormatter oBFormatter = new BinaryFormatter();
-                    oBFormatter.Serialize(stream, person);
-                }
-            }
-            catch (Exception)
-            {
-                throw;
-            }
-        }
-
-
+/*
         public List<MyPerson> retrievePersonFingerprints()
         {
             string connStr = getConnectionStringByName("MySQL_AFIS_conn");
@@ -650,7 +901,7 @@ namespace AFIS360
 
             return persons;
         }
-
+*/
         public List<MyPerson> retrievePersonFingerprintTemplates()
         {
             string connStr = getConnectionStringByName("MySQL_AFIS_conn");
@@ -755,77 +1006,173 @@ namespace AFIS360
         }
 
 
-        private MyPerson retrieveMyPersonFromFile()
-        {
-            MyPerson person = null;
-            try
-            {
-                using (FileStream stream = File.OpenRead("C:\\software\\SourceAFIS\\Sample\\bin\\Release\\person.dat"))
-                {
-                    BinaryFormatter oBFormatter = new BinaryFormatter();
-                    stream.Position = 0;
-                    person = (MyPerson)oBFormatter.Deserialize(stream);
-                }
-
-                Console.WriteLine("###--->> Id from File = " + person.Id);
-            }
-            catch (Exception)
-            {
-                throw;
-            }
-
-            return person;
-        }
-
-
         public Status createAFISUser(User user)
         {
             string connStr = getConnectionStringByName("MySQL_AFIS_conn");
-            MySqlConnection conn = new MySqlConnection(connStr);
-            MySqlCommand cmd;
             Status status = null;
-            conn.Open();
-            try
+            using (MySqlConnection conn = new MySqlConnection(connStr))
             {
-                cmd = conn.CreateCommand();
-                cmd.CommandText = "INSERT INTO users(person_id,fname,lname, username, password, user_role, station_id, stationed_address, stationed_city, stationed_country, active_status, service_start, service_end) " +
-                                  "VALUES(@person_id, @fname, @lname, @username, @password, @user_role, @station_id, @stationed_address, @stationed_city, @stationed_country, @active_status, @service_start, @service_end)";
-                cmd.Parameters.AddWithValue("@person_id", user.getPersonId());
-                cmd.Parameters.AddWithValue("@fname", user.getFirstName());
-                cmd.Parameters.AddWithValue("@lname", user.getLastName());
-                cmd.Parameters.AddWithValue("@username", user.getUsername());
-                cmd.Parameters.AddWithValue("@password", Encrypt(user.getPassword()));
-                cmd.Parameters.AddWithValue("@user_role", user.getUserRole());
-                cmd.Parameters.AddWithValue("@station_id", user.getStationId());
-                cmd.Parameters.AddWithValue("@stationed_address", user.getStationedAddress());
-                cmd.Parameters.AddWithValue("@stationed_city", user.getStationedCity());
-                cmd.Parameters.AddWithValue("@stationed_Country", user.getStationedCountry());
-                cmd.Parameters.AddWithValue("@active_status", user.getActiveStatus());
-                cmd.Parameters.AddWithValue("@service_start", user.getServiceStartDate());
-                cmd.Parameters.AddWithValue("@service_end", user.getServiceEndDate());
+                conn.Open();
 
-                cmd.ExecuteNonQuery();
-
-                status = new Status();
-                status.setStatusCode(Status.STATUS_SUCCESSFUL);
-                status.setStatusDesc("User created successfully.");
-            }
-            catch (Exception e)
-            {
-                status = new Status();
-                status.setStatusCode(Status.STATUS_FAILURE);
-                status.setStatusDesc("User creation unsuccessful. Reason is - " + e.Message + ".");
-            }
-            finally
-            {
-                if (conn.State == System.Data.ConnectionState.Open)
+                using (MySqlTransaction trans = conn.BeginTransaction())
                 {
-                    conn.Close();
-                }
-            }
-            return status;
-        }
+                    try
+                    {
+                        //Create new User
+                        using (MySqlCommand cmd = conn.CreateCommand())
+                        {
+                            cmd.CommandText = "INSERT INTO users(person_id,fname,lname, username, password, user_role, station_id, stationed_address, stationed_city, stationed_country, active_status, service_start, service_end) " +
+                                              "VALUES(@person_id, @fname, @lname, @username, @password, @user_role, @station_id, @stationed_address, @stationed_city, @stationed_country, @active_status, @service_start, @service_end)";
+                            cmd.Transaction = trans;
 
+                            cmd.Parameters.AddWithValue("@person_id", user.getPersonId());
+                            cmd.Parameters.AddWithValue("@fname", user.getFirstName());
+                            cmd.Parameters.AddWithValue("@lname", user.getLastName());
+                            cmd.Parameters.AddWithValue("@username", user.getUsername());
+                            cmd.Parameters.AddWithValue("@password", Encrypt(user.getPassword()));
+                            cmd.Parameters.AddWithValue("@user_role", user.getUserRole());
+                            cmd.Parameters.AddWithValue("@station_id", user.getStationId());
+                            cmd.Parameters.AddWithValue("@stationed_address", user.getStationedAddress());
+                            cmd.Parameters.AddWithValue("@stationed_city", user.getStationedCity());
+                            cmd.Parameters.AddWithValue("@stationed_Country", user.getStationedCountry());
+                            cmd.Parameters.AddWithValue("@active_status", user.getActiveStatus());
+                            cmd.Parameters.AddWithValue("@service_start", user.getServiceStartDate());
+                            cmd.Parameters.AddWithValue("@service_end", user.getServiceEndDate());
+
+                            cmd.ExecuteNonQuery();
+                            cmd.Parameters.Clear();
+                        }
+                        //Create Default Application Config (user preference) for this User
+                        using (MySqlCommand cmd = conn.CreateCommand())
+                        {
+                            cmd.CommandText = "INSERT INTO app_conf(person_id,dup_check) " +
+                                              "VALUES(@person_id, @dup_check)";
+                            cmd.Transaction = trans;
+
+                            cmd.Parameters.AddWithValue("@person_id", user.getPersonId());
+                            cmd.Parameters.AddWithValue("@dup_check", "N");
+
+                            cmd.ExecuteNonQuery();
+                            cmd.Parameters.Clear();
+                        }
+                        trans.Commit();
+
+                        //Successful status
+                        status = new Status();
+                        status.setStatusCode(Status.STATUS_SUCCESSFUL);
+                        status.setStatusDesc("User created successfully.");
+
+                    }
+                    catch (Exception ex)
+                    {
+                        trans.Rollback();
+                        status = new Status();
+                        status.setStatusCode(Status.STATUS_FAILURE);
+                        status.setStatusDesc("User creation unsuccessful. Reason is - " + ex.Message + ".");
+                    }
+                    finally
+                    {
+                        if (conn.State == System.Data.ConnectionState.Open)
+                        {
+                            conn.Close();
+                        }
+                    }
+                }//end transaction
+            }//end Connection
+
+            return status;
+
+        }//end createAFISUser
+
+        /*
+                public Status createAFISUserOld(User user)
+                {
+                    string connStr = getConnectionStringByName("MySQL_AFIS_conn");
+                    MySqlConnection conn = new MySqlConnection(connStr);
+                    MySqlCommand cmd;
+                    Status status = null;
+                    conn.Open();
+                    try
+                    {
+                        cmd = conn.CreateCommand();
+                        cmd.CommandText = "INSERT INTO users(person_id,fname,lname, username, password, user_role, station_id, stationed_address, stationed_city, stationed_country, active_status, service_start, service_end) " +
+                                          "VALUES(@person_id, @fname, @lname, @username, @password, @user_role, @station_id, @stationed_address, @stationed_city, @stationed_country, @active_status, @service_start, @service_end)";
+                        cmd.Parameters.AddWithValue("@person_id", user.getPersonId());
+                        cmd.Parameters.AddWithValue("@fname", user.getFirstName());
+                        cmd.Parameters.AddWithValue("@lname", user.getLastName());
+                        cmd.Parameters.AddWithValue("@username", user.getUsername());
+                        cmd.Parameters.AddWithValue("@password", Encrypt(user.getPassword()));
+                        cmd.Parameters.AddWithValue("@user_role", user.getUserRole());
+                        cmd.Parameters.AddWithValue("@station_id", user.getStationId());
+                        cmd.Parameters.AddWithValue("@stationed_address", user.getStationedAddress());
+                        cmd.Parameters.AddWithValue("@stationed_city", user.getStationedCity());
+                        cmd.Parameters.AddWithValue("@stationed_Country", user.getStationedCountry());
+                        cmd.Parameters.AddWithValue("@active_status", user.getActiveStatus());
+                        cmd.Parameters.AddWithValue("@service_start", user.getServiceStartDate());
+                        cmd.Parameters.AddWithValue("@service_end", user.getServiceEndDate());
+
+                        cmd.ExecuteNonQuery();
+
+                        status = new Status();
+                        status.setStatusCode(Status.STATUS_SUCCESSFUL);
+                        status.setStatusDesc("User created successfully.");
+                    }
+                    catch (Exception e)
+                    {
+                        status = new Status();
+                        status.setStatusCode(Status.STATUS_FAILURE);
+                        status.setStatusDesc("User creation unsuccessful. Reason is - " + e.Message + ".");
+                    }
+                    finally
+                    {
+                        if (conn.State == System.Data.ConnectionState.Open)
+                        {
+                            conn.Close();
+                        }
+                    }
+                    return status;
+                }//end createAFISUser
+        */
+
+        /*
+                public Status createUserDefaultAppConfigOld(User user)
+                {
+                    string connStr = getConnectionStringByName("MySQL_AFIS_conn");
+                    MySqlConnection conn = new MySqlConnection(connStr);
+                    MySqlCommand cmd;
+                    Status status = null;
+                    conn.Open();
+                    try
+                    {
+                        Console.WriteLine("###-->> Creating default AppConfig....");
+                        cmd = conn.CreateCommand();
+                        cmd.CommandText = "INSERT INTO app_conf(person_id,dup_check) " +
+                                          "VALUES(@person_id, @dup_check)";
+                        cmd.Parameters.AddWithValue("@person_id", user.getPersonId());
+                        cmd.Parameters.AddWithValue("@dup_check", "N");
+
+                        cmd.ExecuteNonQuery();
+
+                        status = new Status();
+                        status.setStatusCode(Status.STATUS_SUCCESSFUL);
+                        status.setStatusDesc("User Default AppConfig created successfully.");
+                    }
+                    catch (Exception e)
+                    {
+                        status = new Status();
+                        status.setStatusCode(Status.STATUS_FAILURE);
+                        status.setStatusDesc("User Default AppConfig unsuccessful. Reason is - " + e.Message + ".");
+                    }
+                    finally
+                    {
+                        if (conn.State == System.Data.ConnectionState.Open)
+                        {
+                            conn.Close();
+                        }
+                    }
+                    return status;
+                }//end createUserDefaultAppConfig
+        */
 
         public User getValidUser(string username, string password)
         {
@@ -1022,6 +1369,45 @@ namespace AFIS360
             }
             return status;
         }
+
+        public Status updateUserPref(AppConfig appConfig)
+        {
+            string connStr = getConnectionStringByName("MySQL_AFIS_conn");
+            MySqlConnection conn = new MySqlConnection(connStr);
+            MySqlCommand cmd;
+            Status status = null;
+            conn.Open();
+
+            try
+            {
+                Console.WriteLine("###-->> Update User Preference....");
+                cmd = conn.CreateCommand();
+                cmd.CommandText = "UPDATE app_conf SET person_id = @person_id, dup_check = @dup_check WHERE person_id = @person_id";
+                cmd.Parameters.AddWithValue("@person_id", appConfig.PersonId);
+                cmd.Parameters.AddWithValue("@dup_check", appConfig.DupCheck);
+                cmd.ExecuteNonQuery();
+
+                status = new Status();
+                status.setStatusCode(Status.STATUS_SUCCESSFUL);
+                status.setStatusDesc("User Preference updated successfully.");
+            }
+            catch (Exception e)
+            {
+
+                status = new Status();
+                status.setStatusCode(Status.STATUS_FAILURE);
+                status.setStatusDesc("Update of User Preference is unsuccessful. Reason is - " + e.Message + ".");
+            }
+            finally
+            {
+                if (conn.State == System.Data.ConnectionState.Open)
+                {
+                    conn.Close();
+                }
+            }
+            return status;
+        }
+
 
         public Status updateAFISUserPassword(string username, string current_password, string new_password)
         {
@@ -1286,6 +1672,56 @@ namespace AFIS360
             return accessCntrl;
         }
 
+        //get AppConfig
+        public AppConfig getAppConfig(string personId)
+        { 
+            string connStr = getConnectionStringByName("MySQL_AFIS_conn");
+            MySqlConnection conn = new MySqlConnection(connStr);
+            MySqlCommand cmd;
+            AppConfig appConfig = null;
+            DataTable ds;
+            conn.Open();
+
+            try
+            {
+                cmd = conn.CreateCommand();
+                cmd.CommandText = "SELECT * FROM afis.app_conf WHERE person_id = @person_id";
+                cmd.Parameters.AddWithValue("@person_id", personId);
+
+                MySqlDataAdapter da = new MySqlDataAdapter(cmd);
+                ds = new DataTable();
+                da.Fill(ds);
+                IEnumerator rows = ds.Rows.GetEnumerator();
+                Int32 i = 0;
+
+                while (rows.MoveNext())
+                {
+                    Int32 id = (Int32)ds.Rows[i]["id"];
+                    string dupCheck = (string)ds.Rows[i]["dup_check"];
+
+                    appConfig = new AppConfig();
+                    appConfig.PersonId = personId;
+                    appConfig.DupCheck = dupCheck;
+
+                    i = i + 1;
+                }
+
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+            finally
+            {
+                if (conn.State == System.Data.ConnectionState.Open)
+                {
+                    conn.Close();
+                }
+            }
+            return appConfig;
+        }//end getAppConfig
+
+
         //Get the AuditLogs between start & end date
         public List<AuditLog> getAuditLogs(string id, DateTime startDate, DateTime endDate)
         {
@@ -1475,5 +1911,44 @@ namespace AFIS360
 
             return returnValue;
         }
+
+        private MyPerson retrieveMyPersonFromFile()
+        {
+            MyPerson person = null;
+            try
+            {
+                using (FileStream stream = File.OpenRead("C:\\software\\SourceAFIS\\Sample\\bin\\Release\\person.dat"))
+                {
+                    BinaryFormatter oBFormatter = new BinaryFormatter();
+                    stream.Position = 0;
+                    person = (MyPerson)oBFormatter.Deserialize(stream);
+                }
+
+                Console.WriteLine("###--->> Id from File = " + person.Id);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+
+            return person;
+        }
+
+        private void storeMyPersonToFile(MyPerson person)
+        {
+            try
+            {
+                using (Stream stream = File.Open("C:\\software\\SourceAFIS\\Sample\\bin\\Release\\person.dat", FileMode.Create))
+                {
+                    BinaryFormatter oBFormatter = new BinaryFormatter();
+                    oBFormatter.Serialize(stream, person);
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
     }
 }

@@ -359,6 +359,8 @@ namespace AFIS360
 
         public static void generateUserAccessReport(User user, string userId, DateTime startDate, DateTime endDate)
         {
+            Console.WriteLine("###-->> Current Thread = " + System.Threading.Thread.CurrentThread.Name);
+
             List<AuditLog> auditLogs = new DataAccess().getAuditLogs(userId, startDate, endDate);
             Console.WriteLine("# of AuditLog = " + auditLogs.Count());
 
@@ -465,7 +467,79 @@ namespace AFIS360
             doc.Close();
             Console.WriteLine("PDF Generated successfully...");
             System.Diagnostics.Process.Start(pdfPath);
+        }
 
+
+        public static void generateDuplicateFingerprintReport(User user, ICollection<KeyValuePair<String, MyPerson>> dupMatches)
+        {
+            Console.WriteLine("###-->> Current Thread = " + System.Threading.Thread.CurrentThread.Name);
+
+            Document doc = new Document(iTextSharp.text.PageSize.LETTER, 10, 10, 42, 35);
+            string datetimePref = DateTime.Now.ToString("yyyy-MM-dd-HH-mm-ss");
+            string pdfPath = ConfigurationManager.AppSettings["DupFingerprintReportPath"] + "-" + datetimePref + ".pdf";
+            PdfWriter pdfWriter = PdfWriter.GetInstance(doc, new FileStream(pdfPath, FileMode.Create));
+            doc.Open();
+
+            //add title
+            doc.AddTitle("Duplicate Fingerprint Report");
+            doc.AddHeader("Monthly Report", "Duplicate Fingerprint Report");
+
+            Paragraph paragraphCompanyInfo = new Paragraph("RAB (Rapid Action Battalion)\n");
+            paragraphCompanyInfo.Add("Station: " + user.getStationId() + ", " + user.getStationedCity() + "\n");
+            paragraphCompanyInfo.Add(user.getStationedCountry() + "\n");
+            paragraphCompanyInfo.Alignment = Element.ALIGN_LEFT;
+
+            iTextSharp.text.Font contentFont = iTextSharp.text.FontFactory.GetFont("Webdings", 20, iTextSharp.text.Font.BOLD);
+            Paragraph paragraphReportTitle = new Paragraph("Duplicate Fingerprint Report\n", contentFont);
+            paragraphReportTitle.Alignment = Element.ALIGN_CENTER;
+
+            Paragraph paragraphReportSubTitle = new Paragraph();
+            paragraphReportSubTitle.Add("By: " + user.getFirstName() + " " + user.getLastName() + ", ID: " + user.getPersonId() + "\n");
+            paragraphReportSubTitle.Add("At: " + DateTime.Now.ToString() + "\n\n");
+            paragraphReportSubTitle.Alignment = Element.ALIGN_CENTER;
+
+            doc.Add(paragraphCompanyInfo);
+            doc.Add(paragraphReportTitle);
+            doc.Add(paragraphReportSubTitle);
+
+            PdfPTable dupFingerprintReportTable = new PdfPTable(3);
+            float[] widths = new float[] { 25f, 40f, 40f };
+            dupFingerprintReportTable.SetWidths(widths);
+
+            PdfPCell headerCellRecNo = new PdfPCell(new Phrase("RecNo"));
+            PdfPCell headerCellID = new PdfPCell(new Phrase("Person Id"));
+            PdfPCell headerCellDup = new PdfPCell(new Phrase("Person Id with Duplicate fingerprint"));
+
+
+            //Add Headers to the table
+            dupFingerprintReportTable.AddCell(headerCellRecNo);
+            dupFingerprintReportTable.AddCell(headerCellID);
+            dupFingerprintReportTable.AddCell(headerCellDup);
+
+            int i = 0;
+
+            foreach (KeyValuePair<string, MyPerson> dupMatch in dupMatches)
+            {                
+                string probePersonId = dupMatch.Key;
+                MyPerson dupPerson = dupMatch.Value;
+                Console.WriteLine("###-->> Fingerprints of Person[PersonId = " + probePersonId + "] has duplicate with Person[PersonId = " + dupPerson.PersonId + "]");
+                PdfPCell recNo = new PdfPCell(new Phrase(Convert.ToString(i + 1)));
+                PdfPCell probePersonIdCell = new PdfPCell(new Phrase(probePersonId));
+                PdfPCell dupPersonIdCell = new PdfPCell(new Phrase(dupPerson.PersonId));
+
+                //Adding cells to the table
+                dupFingerprintReportTable.AddCell(recNo);
+                dupFingerprintReportTable.AddCell(probePersonIdCell);
+                dupFingerprintReportTable.AddCell(dupPersonIdCell);
+
+                i++;
+            }
+
+            doc.Add(dupFingerprintReportTable);
+
+            doc.Close();
+            Console.WriteLine("PDF Generated successfully...");
+            System.Diagnostics.Process.Start(pdfPath);
         }
     }
 }

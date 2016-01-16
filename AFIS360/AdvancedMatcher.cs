@@ -29,10 +29,18 @@ namespace AFIS360
 
         private void btnAdvMatcherMatch_Click(object sender, EventArgs e)
         {
+            Thread advMultiMatchThread = new Thread(processAdvancedMultiMatch);
+            advMultiMatchThread.Name = "AdvMultiMatchThread";
+            advMultiMatchThread.Start();
+
+        }//end btnAdvMatcherMatch_Click
+
+        private void processAdvancedMultiMatch()
+        {
             try
             {
                 //Set Serach status
-                new Thread(displayFindProgressStatusSearchStart).Start();
+                lblAdvMatcherStatus.Text = "Searching....";
 
                 //Get the Threshold
                 Int32 matchingThreshold = Convert.ToInt32(ConfigurationManager.AppSettings["InitialThresholdScore"]);
@@ -42,7 +50,7 @@ namespace AFIS360
                 //If fpPath = null, show the error message
                 if (picMatchImagePath == null)
                 {
-                    MessageBox.Show("Must select a finger print to match.", "Warning Message", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    MessageBox.Show("Must select a fingerprint to match.", "Warning Message", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     return;
                 }
 
@@ -50,148 +58,125 @@ namespace AFIS360
                 List<Match> matches = Program.getMatches(picMatchImagePath, "[Unknown Identity]", matchingThreshold);
                 Console.WriteLine("###-->> Multi-Match performed...# of matches found = " + matches.Count);
 
-                //Set Serach status
-                new Thread(displayFindProgressStatusSearchComplete).Start();
-
                 if (matches.Count == 0)
                 {
                     MessageBox.Show("No Match found for threshold = " + matchingThreshold + ", adjust the threshold and try again.", "Warning Message", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     return;
                 }
 
-                //First Clear previous controlls on button click
-                this.tlpAdvMatcherResult.Controls.Clear();
-
-                //Add the Table Header
-                this.tlpAdvMatcherResult.Controls.Add(lblAdvMatcherPersonId, 0, 0);
-                this.tlpAdvMatcherResult.Controls.Add(lblAdvMatcherFName, 1, 0);
-                this.tlpAdvMatcherResult.Controls.Add(lblAdvMatcherLName, 2, 0);
-                this.tlpAdvMatcherResult.Controls.Add(lblAdvMatcherScore, 3, 0);
-
-                DataAccess dataAccess = new DataAccess();
-
-                for (int i = 0; i < this.tlpAdvMatcherResult.RowCount - 1; i++)
+                this.Invoke((MethodInvoker)delegate
                 {
-                    MyPerson person = matches[i].getMatchedPerson();
-                    float score = matches[i].getScore();
-                    PersonDetail pDetail = dataAccess.retrievePersonDetail(person.PersonId).FirstOrDefault();
-                    Console.WriteLine("Id = " + person.PersonId + ", FirstName = " + pDetail.getFirstName() + ", LastName = " + pDetail.getLastName());
 
-                    if (i == 0)
-                    {
-                        lnllblAdvMatchId_1.Text = person.PersonId;
-                        this.tlpAdvMatcherResult.Controls.Add(lnllblAdvMatchId_1, 0, i + 1);
-                    }
-                    else if (i == 1)
-                    {
-                        lnllblAdvMatchId_2.Text = person.PersonId;
-                        this.tlpAdvMatcherResult.Controls.Add(lnllblAdvMatchId_2, 0, i + 1);
-                    }
-                    else if (i == 2)
-                    {
-                        lnllblAdvMatchId_3.Text = person.PersonId;
-                        this.tlpAdvMatcherResult.Controls.Add(lnllblAdvMatchId_3, 0, i + 1);
-                    }
-                    else if (i == 3)
-                    {
-                        lnllblAdvMatchId_4.Text = person.PersonId;
-                        this.tlpAdvMatcherResult.Controls.Add(lnllblAdvMatchId_4, 0, i + 1);
-                    }
-                    else if (i == 4)
-                    {
-                        lnllblAdvMatchId_5.Text = person.PersonId;
-                        this.tlpAdvMatcherResult.Controls.Add(lnllblAdvMatchId_5, 0, i + 1);
-                    }
-                    else if (i == 5)
-                    {
-                        lnllblAdvMatchId_6.Text = person.PersonId;
-                        this.tlpAdvMatcherResult.Controls.Add(lnllblAdvMatchId_6, 0, i + 1);
-                    }
-                    else if (i == 6)
-                    {
-                        lnllblAdvMatchId_7.Text = person.PersonId;
-                        this.tlpAdvMatcherResult.Controls.Add(lnllblAdvMatchId_7, 0, i + 1);
-                    }
-                    else if (i == 7)
-                    {
-                        lnllblAdvMatchId_8.Text = person.PersonId;
-                        this.tlpAdvMatcherResult.Controls.Add(lnllblAdvMatchId_8, 0, i + 1);
-                    }
-                    else if (i == 8)
-                    {
-                        lnllblAdvMatchId_9.Text = person.PersonId;
-                        this.tlpAdvMatcherResult.Controls.Add(lnllblAdvMatchId_9, 0, i + 1);
-                    }
-                    else if (i == 9)
-                    {
-                        lnllblAdvMatchId_10.Text = person.PersonId;
-                        this.tlpAdvMatcherResult.Controls.Add(lnllblAdvMatchId_10, 0, i + 1);
-                    }
-                    else if (i == 10)
-                    {
-                        lnllblAdvMatchId_11.Text = person.PersonId;
-                        this.tlpAdvMatcherResult.Controls.Add(lnllblAdvMatchId_11, 0, i + 1);
-                    }
-                    else if (i == 11)
-                    {
-                        lnllblAdvMatchId_12.Text = person.PersonId;
-                        this.tlpAdvMatcherResult.Controls.Add(lnllblAdvMatchId_12, 0, i + 1);
-                    }
-                    else if (i == 12)
-                    {
-                        lnllblAdvMatchId_13.Text = person.PersonId;
-                        this.tlpAdvMatcherResult.Controls.Add(lnllblAdvMatchId_13, 0, i + 1);
-                    }
-                    else if (i == 13)
-                    {
-                        lnllblAdvMatchId_14.Text = person.PersonId;
-                        this.tlpAdvMatcherResult.Controls.Add(lnllblAdvMatchId_14, 0, i + 1);
-                    }
-                    else if (i == 14)
-                    {
-                        lnllblAdvMatchId_15.Text = person.PersonId;
-                        this.tlpAdvMatcherResult.Controls.Add(lnllblAdvMatchId_15, 0, i + 1);
-                    }
+                    //First Clear previous controlls on button click
+                    this.tlpAdvMatcherResult.Controls.Clear();
 
-                    //Label - First Nmae
-                    Label lblAdvMatcherFirstName = new Label() { Text = pDetail.getFirstName() };
-                    lblAdvMatcherFirstName.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-                    this.tlpAdvMatcherResult.Controls.Add(lblAdvMatcherFirstName, 1, i + 1);
-                    //Label - Last Name
-                    Label lblAdvMatcherLastName = new Label() { Text = pDetail.getLastName() };
-                    lblAdvMatcherLastName.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-                    this.tlpAdvMatcherResult.Controls.Add(lblAdvMatcherLastName, 2, i + 1);
-                    //Label - Score
-                    Label lblAdvMatcherScore = new Label() { Text = matches[i].getScore().ToString() };
-                    lblAdvMatcherScore.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-                    this.tlpAdvMatcherResult.Controls.Add(lblAdvMatcherScore, 3, i + 1);
+                    //Add the Table Header
+                    this.tlpAdvMatcherResult.Controls.Add(lblAdvMatcherPersonId, 0, 0);
+                    this.tlpAdvMatcherResult.Controls.Add(lblAdvMatcherFName, 1, 0);
+                    this.tlpAdvMatcherResult.Controls.Add(lblAdvMatcherLName, 2, 0);
+                    this.tlpAdvMatcherResult.Controls.Add(lblAdvMatcherScore, 3, 0);
 
+                    DataAccess dataAccess = new DataAccess();
 
-                    if (matches.Count < i) break;
+                    for (int i = 0; i < this.tlpAdvMatcherResult.RowCount - 1; i++)
+                    {
 
-                }//end for
+                        if(matches.Count > i)
+                        {
+                            MyPerson person = matches[i].getMatchedPerson();
+                            float score = matches[i].getScore();
+                            PersonDetail pDetail = dataAccess.retrievePersonDetail(person.PersonId).FirstOrDefault();
+
+                            Console.WriteLine("Id = " + person.PersonId + ", FirstName = " + pDetail.getFirstName() + ", LastName = " + pDetail.getLastName());
+
+                            switch(i)
+                            {
+                                case 0:
+                                    lnllblAdvMatchId_1.Text = person.PersonId;
+                                    this.tlpAdvMatcherResult.Controls.Add(lnllblAdvMatchId_1, 0, i + 1);
+                                    break;
+                                case 1:
+                                    lnllblAdvMatchId_2.Text = person.PersonId;
+                                    this.tlpAdvMatcherResult.Controls.Add(lnllblAdvMatchId_2, 0, i + 1);
+                                    break;
+                                case 2:
+                                    lnllblAdvMatchId_3.Text = person.PersonId;
+                                    this.tlpAdvMatcherResult.Controls.Add(lnllblAdvMatchId_3, 0, i + 1);
+                                    break;
+                                case 3:                                
+                                    lnllblAdvMatchId_4.Text = person.PersonId;
+                                    this.tlpAdvMatcherResult.Controls.Add(lnllblAdvMatchId_4, 0, i + 1);
+                                    break;
+                                case 4:
+                                    lnllblAdvMatchId_5.Text = person.PersonId;
+                                    this.tlpAdvMatcherResult.Controls.Add(lnllblAdvMatchId_5, 0, i + 1);
+                                    break;
+                                case 5:
+                                    lnllblAdvMatchId_6.Text = person.PersonId;
+                                    this.tlpAdvMatcherResult.Controls.Add(lnllblAdvMatchId_6, 0, i + 1);
+                                    break;
+                                case 6:
+                                    lnllblAdvMatchId_7.Text = person.PersonId;
+                                    this.tlpAdvMatcherResult.Controls.Add(lnllblAdvMatchId_7, 0, i + 1);
+                                    break;
+                                case 7:
+                                    lnllblAdvMatchId_8.Text = person.PersonId;
+                                    this.tlpAdvMatcherResult.Controls.Add(lnllblAdvMatchId_8, 0, i + 1);
+                                    break;
+                                case 8:
+                                    lnllblAdvMatchId_9.Text = person.PersonId;
+                                    this.tlpAdvMatcherResult.Controls.Add(lnllblAdvMatchId_9, 0, i + 1);
+                                    break;
+                                case 9:
+                                    lnllblAdvMatchId_10.Text = person.PersonId;
+                                    this.tlpAdvMatcherResult.Controls.Add(lnllblAdvMatchId_10, 0, i + 1);
+                                    break;
+                                case 10:
+                                    lnllblAdvMatchId_11.Text = person.PersonId;
+                                    this.tlpAdvMatcherResult.Controls.Add(lnllblAdvMatchId_11, 0, i + 1);
+                                    break;
+                                case 11:
+                                    lnllblAdvMatchId_12.Text = person.PersonId;
+                                    this.tlpAdvMatcherResult.Controls.Add(lnllblAdvMatchId_12, 0, i + 1);
+                                    break;
+                                case 12:
+                                    lnllblAdvMatchId_13.Text = person.PersonId;
+                                    this.tlpAdvMatcherResult.Controls.Add(lnllblAdvMatchId_13, 0, i + 1);
+                                    break;
+                                case 13:
+                                    lnllblAdvMatchId_14.Text = person.PersonId;
+                                    this.tlpAdvMatcherResult.Controls.Add(lnllblAdvMatchId_14, 0, i + 1);
+                                    break;
+                                case 14:
+                                    lnllblAdvMatchId_15.Text = person.PersonId;
+                                    this.tlpAdvMatcherResult.Controls.Add(lnllblAdvMatchId_15, 0, i + 1);
+                                    break;
+                            }
+
+                            //Label - First Nmae
+                            Label lblAdvMatcherFirstName = new Label() { Text = pDetail.getFirstName() };
+                            lblAdvMatcherFirstName.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+                            this.tlpAdvMatcherResult.Controls.Add(lblAdvMatcherFirstName, 1, i + 1);
+                            //Label - Last Name
+                            Label lblAdvMatcherLastName = new Label() { Text = pDetail.getLastName() };
+                            lblAdvMatcherLastName.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+                            this.tlpAdvMatcherResult.Controls.Add(lblAdvMatcherLastName, 2, i + 1);
+                            //Label - Score
+                            Label lblAdvMatcherScore = new Label() { Text = matches[i].getScore().ToString() };
+                            lblAdvMatcherScore.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+                            this.tlpAdvMatcherResult.Controls.Add(lblAdvMatcherScore, 3, i + 1);
+                        }//end if
+                    }//end for
+                    //Set Serach status
+                    lblAdvMatcherStatus.Text = "Search Completed.";
+                });
             }
             catch (Exception exp)
             {
-                Console.WriteLine(exp.StackTrace);
+                Console.WriteLine(exp);
             }
-
-
-        }//end btnAdvMatcherMatch_Click
-
-        private void displayFindProgressStatusSearchStart()
-        {
-
-            lblAdvMatcherStatus.Text = "Searching....";
-            Console.WriteLine("###--->> New thread started...Search Started");
         }
 
-        private void displayFindProgressStatusSearchComplete()
-        {
-
-            lblAdvMatcherStatus.Text = "Search Completed.";
-            Console.WriteLine("###--->> New thread started...Search Completed");
-        }
 
         private void AdvancedMatcher_Load(object sender, EventArgs e)
         {

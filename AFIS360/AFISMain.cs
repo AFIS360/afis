@@ -23,6 +23,7 @@ namespace AFIS360
         User cachedUser = null;
         public static User user = null;
         public static ActivityLog activityLog = null;
+        public static AppConfig appConfig = null;
 
 
         public AFISMain()
@@ -63,7 +64,8 @@ namespace AFIS360
             string homePhoneNbr = txtEnrollHomePNbr.Text;
             string email = txtEnrollEmail.Text;
             System.Drawing.Image passportPhoto = picEnrollPassportPhoto.Image;
-            string status = null;
+//            string statusStr = null;
+            Status status = null;
 
             try
             {
@@ -91,11 +93,12 @@ namespace AFIS360
                 //store person's demograpgy
                 DataAccess dataAccess = new DataAccess();
 
-                if (!string.IsNullOrWhiteSpace(id))
-                {
-                    dataAccess.storePersonDetail(personDetail);
-                }
-                else
+//                if (!string.IsNullOrWhiteSpace(id))
+                if (string.IsNullOrWhiteSpace(id))
+//                {
+//                    dataAccess.storePersonDetail(personDetail);
+//                }
+//                else
                 {
                     MessageBox.Show("Person ID field is required.", "Warning Message", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     return;
@@ -118,8 +121,8 @@ namespace AFIS360
                 MyPerson person;
                 if (imgsFromPicBox.Count > 0)
                 {
-                    //store person's finger prints
-                    person = Program.Enroll(imgsFromPicBox, fname, id);
+                        //get person with fingerprints
+                        person = Program.Enroll(imgsFromPicBox, fname, id);
                 }
                 else
                 {
@@ -128,50 +131,63 @@ namespace AFIS360
                     person.PersonId = id;
                 }
                 //store person with fingerprint images
-                dataAccess.storeFingerprints(person);
+                //                dataAccess.storeFingerprints(person);
+                status = dataAccess.storePersonDetailwithFingerprints(person, personDetail);
 
                 //store person without fingerprint images but fingerptint templates. Match will be performed against the template
-                dataAccess.storeFingerprintTemplates(person);
+                //                dataAccess.storeFingerprintTemplates(person);
 
-                status = "Enrollment of " + fname + " (Id = " + id + ") completed successfully.";
-                lblEnrollStatusMsg.ForeColor = System.Drawing.Color.Green;
-                activityLog.setActivity(status + "\n");
+                //                status = "Enrollment of " + fname + " (Id = " + id + ") completed successfully.";
+                if (status.getStatusCode().Equals(Status.STATUS_SUCCESSFUL))
+                {
+                    lblEnrollStatusMsg.ForeColor = System.Drawing.Color.Green;
+                    activityLog.setActivity(status.getStatusDesc() + "\n");
+                } else
+                {
+                    activityLog.setActivity(status.getStatusDesc() + "\n");
+                    lblEnrollStatusMsg.ForeColor = System.Drawing.Color.Red;
+                }
             }
             catch (Exception exp)
             {
-                status = "Enrollment of " + fname + " (Id = " + id + ") is unsuccessful. Reason is - " + exp.Message + ".";
-                activityLog.setActivity(status + "\n");
+//                statusStr = "Enrollment of " + fname + " (Id = " + id + ") is unsuccessful. Reason is - " + exp.Message + ".";
+                status.setStatusCode(Status.STATUS_FAILURE);
+                status.setStatusDesc("Enrollment of " + fname + " (Id = " + id + ") is unsuccessful. Reason is - " + exp.Message + ".");
+                activityLog.setActivity(status.getStatusDesc() + "\n");
                 lblEnrollStatusMsg.ForeColor = System.Drawing.Color.Red;
-                //                throw exp;
             }
 
-            lblEnrollStatusMsg.Text = status;
+            lblEnrollStatusMsg.Text = status.getStatusDesc();
         }
 
 
         private void btnMatch_Click(object sender, EventArgs e)
+        {
+            Thread fingerprintMatchThread = new Thread(processFingerprintMatch);
+            fingerprintMatchThread.Name = "FpMatchThread";
+            fingerprintMatchThread.Start(sender);
+        }
+
+        private void processFingerprintMatch(object sender)
         {
             Int32 matchingThreshold = Convert.ToInt32(ConfigurationManager.AppSettings["InitialThresholdScore"]);
             string fpPath = picMatchImagePath;
             string message = null;
 
             if (!string.IsNullOrWhiteSpace(txtMatchThreshold.Text)) matchingThreshold = Convert.ToInt32(txtMatchThreshold.Text);
-            
+
             //If fpPath = null, show the error message
             if (fpPath == null)
             {
-                MessageBox.Show("Must select a finger print to match.", "Warning Message", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show("Must select a fingerprint to match.", "Warning Message", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
 
             //Set Serach status
-            new Thread(displayFindProgressStatusSearchStart).Start();
+            lblMatchProgressStatus.Text = "Searching....";
 
             Match match = Program.getMatch(fpPath, "[Unknown Identity]", matchingThreshold);
             MyPerson matchedPerson = match.getMatchedPerson();
-
-            //Set Serach status
-            new Thread(displayFindProgressStatusSearchComplete).Start();
 
             //clear the Matched Result section before populating
             clearMatchTab(sender);
@@ -189,7 +205,7 @@ namespace AFIS360
                 picBoxMatchResPPhoto.Image = pDetail.getPassportPhoto();
 
                 //Get all the fingerprints of the matched person 
-                MyPerson person  = dataAccess.retrievePersonFingerprintsById(pDetail.getPersonId()).FirstOrDefault();
+                MyPerson person = dataAccess.retrievePersonFingerprintsById(pDetail.getPersonId()).FirstOrDefault();
                 List<Fingerprint> fps = person.Fingerprints;
 
                 for (int i = 0; i < fps.Count; i++)
@@ -267,22 +283,28 @@ namespace AFIS360
                 activityLog.setActivity("Match Activity: " + message + "\n");
             }
             lblMatchResTxt.Text = message;
+            //Set Serach status
+            lblMatchProgressStatus.Text = "Search Completed...";
         }
 
-        private void displayFindProgressStatusSearchStart()
+
+        private void doDuplicateCheck(string fingerName, System.Drawing.Image fingerImage, PictureBox picBox)
         {
-
-            lblMatchProgressStatus.Text = "Searching....";
-            Console.WriteLine("###--->> New thread started...Search Started");
+            Match match = Program.getMatch(fingerName, fingerImage, "[Unknown]", 60);
+            if (match.getStatus())
+            {
+                DialogResult dr = MessageBox.Show("Duplicate fingerprint found that belongs to a Person with Person Id = " + match.getMatchedPerson().PersonId + ". Do you want to continue?", "Warning Message", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+                if (dr == DialogResult.Yes)
+                {
+                    picBox.Image = fingerImage;
+                    picBox.SizeMode = PictureBoxSizeMode.StretchImage;
+                }
+            } else
+            {
+                picBox.Image = fingerImage;
+                picBox.SizeMode = PictureBoxSizeMode.StretchImage;
+            }
         }
-
-        private void displayFindProgressStatusSearchComplete()
-        {
-
-            lblMatchProgressStatus.Text = "Search Completed.";
-            Console.WriteLine("###--->> New thread started...Search Completed");
-        }
-
 
 
         private void picRT_Click(object sender, EventArgs e)
@@ -298,9 +320,16 @@ namespace AFIS360
                     picRTImagePath = Program.convertWSQtoBMP(picRTImagePath);
                 }
 
-                //                    picEnrollRT.Image = System.Drawing.Image.FromFile(picRTImagePath);
-                picEnrollRT.Image = System.Drawing.Image.FromStream(new MemoryStream(File.ReadAllBytes(picRTImagePath)));
-                picEnrollRT.SizeMode = PictureBoxSizeMode.StretchImage;
+                System.Drawing.Image fingerImage = System.Drawing.Image.FromStream(new MemoryStream(File.ReadAllBytes(picRTImagePath)));
+
+                if (appConfig.isDupCheck())
+                {
+                    doDuplicateCheck(picRTImagePath, fingerImage, picEnrollRT);
+                }else
+                {
+                    picEnrollRT.Image = fingerImage;
+                    picEnrollRT.SizeMode = PictureBoxSizeMode.StretchImage;
+                }
             }
         }
 
@@ -316,9 +345,18 @@ namespace AFIS360
                 {
                     picRIImagePath = Program.convertWSQtoBMP(picRIImagePath);
                 }
-                //                picEnrollRI.Image = System.Drawing.Image.FromFile(picRIImagePath);
-                picEnrollRI.Image = System.Drawing.Image.FromStream(new MemoryStream(File.ReadAllBytes(picRIImagePath)));
-                picEnrollRI.SizeMode = PictureBoxSizeMode.StretchImage;
+
+                System.Drawing.Image fingerImage = System.Drawing.Image.FromStream(new MemoryStream(File.ReadAllBytes(picRIImagePath)));
+
+                if (appConfig.isDupCheck())
+                {
+                    doDuplicateCheck(picRIImagePath, fingerImage, picEnrollRI);
+                }
+                else
+                {
+                    picEnrollRI.Image = fingerImage;
+                    picEnrollRI.SizeMode = PictureBoxSizeMode.StretchImage;
+                }
             }
         }
 
@@ -334,9 +372,18 @@ namespace AFIS360
                 {
                     picRMImagePath = Program.convertWSQtoBMP(picRMImagePath);
                 }
-                //                picEnrollRM.Image = System.Drawing.Image.FromFile(picRMImagePath);
-                picEnrollRM.Image = System.Drawing.Image.FromStream(new MemoryStream(File.ReadAllBytes(picRMImagePath)));
-                picEnrollRM.SizeMode = PictureBoxSizeMode.StretchImage;
+
+                System.Drawing.Image fingerImage = System.Drawing.Image.FromStream(new MemoryStream(File.ReadAllBytes(picRMImagePath)));
+
+                if (appConfig.isDupCheck())
+                {
+                    doDuplicateCheck(picRMImagePath, fingerImage, picEnrollRM);
+                }
+                else
+                {
+                    picEnrollRM.Image = fingerImage;
+                    picEnrollRM.SizeMode = PictureBoxSizeMode.StretchImage;
+                }
             }
         }
 
@@ -352,9 +399,18 @@ namespace AFIS360
                 {
                     picRRImagePath = Program.convertWSQtoBMP(picRRImagePath);
                 }
-                //                picEnrollRR.Image = System.Drawing.Image.FromFile(picRRImagePath);
-                picEnrollRR.Image = System.Drawing.Image.FromStream(new MemoryStream(File.ReadAllBytes(picRRImagePath)));
-                picEnrollRR.SizeMode = PictureBoxSizeMode.StretchImage;
+
+                System.Drawing.Image fingerImage = System.Drawing.Image.FromStream(new MemoryStream(File.ReadAllBytes(picRRImagePath)));
+
+                if (appConfig.isDupCheck())
+                {
+                    doDuplicateCheck(picRRImagePath, fingerImage, picEnrollRR);
+                }
+                else
+                {
+                    picEnrollRR.Image = fingerImage;
+                    picEnrollRR.SizeMode = PictureBoxSizeMode.StretchImage;
+                }
             }
         }
 
@@ -370,9 +426,18 @@ namespace AFIS360
                 {
                     picRLImagePath = Program.convertWSQtoBMP(picRLImagePath);
                 }
-                //                picEnrollRL.Image = System.Drawing.Image.FromFile(picRLImagePath);
-                picEnrollRL.Image = System.Drawing.Image.FromStream(new MemoryStream(File.ReadAllBytes(picRLImagePath)));
-                picEnrollRL.SizeMode = PictureBoxSizeMode.StretchImage;
+
+                System.Drawing.Image fingerImage = System.Drawing.Image.FromStream(new MemoryStream(File.ReadAllBytes(picRLImagePath)));
+
+                if (appConfig.isDupCheck())
+                {
+                    doDuplicateCheck(picRLImagePath, fingerImage, picEnrollRL);
+                }
+                else
+                {
+                    picEnrollRL.Image = fingerImage;
+                    picEnrollRL.SizeMode = PictureBoxSizeMode.StretchImage;
+                }
             }
         }
 
@@ -388,9 +453,18 @@ namespace AFIS360
                 {
                     picLTImagePath = Program.convertWSQtoBMP(picLTImagePath);
                 }
-                //                picEnrollLT.Image = System.Drawing.Image.FromFile(picLTImagePath);
-                picEnrollLT.Image = System.Drawing.Image.FromStream(new MemoryStream(File.ReadAllBytes(picLTImagePath)));
-                picEnrollLT.SizeMode = PictureBoxSizeMode.StretchImage;
+
+                System.Drawing.Image fingerImage = System.Drawing.Image.FromStream(new MemoryStream(File.ReadAllBytes(picLTImagePath)));
+
+                if (appConfig.isDupCheck())
+                {
+                    doDuplicateCheck(picLTImagePath, fingerImage, picEnrollLT);
+                }
+                else
+                {
+                    picEnrollLT.Image = fingerImage;
+                    picEnrollLT.SizeMode = PictureBoxSizeMode.StretchImage;
+                }
             }
         }
 
@@ -406,9 +480,18 @@ namespace AFIS360
                 {
                     picLIImagePath = Program.convertWSQtoBMP(picLIImagePath);
                 }
-                //               picEnrollLI.Image = System.Drawing.Image.FromFile(picLIImagePath);
-                picEnrollLI.Image = System.Drawing.Image.FromStream(new MemoryStream(File.ReadAllBytes(picLIImagePath)));
-                picEnrollLI.SizeMode = PictureBoxSizeMode.StretchImage;
+
+                System.Drawing.Image fingerImage = System.Drawing.Image.FromStream(new MemoryStream(File.ReadAllBytes(picLIImagePath)));
+
+                if (appConfig.isDupCheck())
+                {
+                    doDuplicateCheck(picLIImagePath, fingerImage, picEnrollLI);
+                }
+                else
+                {
+                    picEnrollLI.Image = fingerImage;
+                    picEnrollLI.SizeMode = PictureBoxSizeMode.StretchImage;
+                }
             }
         }
 
@@ -424,9 +507,18 @@ namespace AFIS360
                 {
                     picLMImagePath = Program.convertWSQtoBMP(picLMImagePath);
                 }
-                //                picEnrollLM.Image = System.Drawing.Image.FromFile(picLMImagePath);
-                picEnrollLM.Image = System.Drawing.Image.FromStream(new MemoryStream(File.ReadAllBytes(picLMImagePath)));
-                picEnrollLM.SizeMode = PictureBoxSizeMode.StretchImage;
+
+                System.Drawing.Image fingerImage = System.Drawing.Image.FromStream(new MemoryStream(File.ReadAllBytes(picLMImagePath)));
+
+                if (appConfig.isDupCheck())
+                {
+                    doDuplicateCheck(picLMImagePath, fingerImage, picEnrollLM);
+                }
+                else
+                {
+                    picEnrollLM.Image = fingerImage;
+                    picEnrollLM.SizeMode = PictureBoxSizeMode.StretchImage;
+                }
             }
         }
 
@@ -442,9 +534,18 @@ namespace AFIS360
                 {
                     picLRImagePath = Program.convertWSQtoBMP(picLRImagePath);
                 }
-                //                picEnrollLR.Image = System.Drawing.Image.FromFile(picLRImagePath);
-                picEnrollLR.Image = System.Drawing.Image.FromStream(new MemoryStream(File.ReadAllBytes(picLRImagePath)));
-                picEnrollLR.SizeMode = PictureBoxSizeMode.StretchImage;
+
+                System.Drawing.Image fingerImage = System.Drawing.Image.FromStream(new MemoryStream(File.ReadAllBytes(picLRImagePath)));
+
+                if (appConfig.isDupCheck())
+                {
+                    doDuplicateCheck(picLRImagePath, fingerImage, picEnrollLR);
+                }
+                else
+                {
+                    picEnrollLR.Image = fingerImage;
+                    picEnrollLR.SizeMode = PictureBoxSizeMode.StretchImage;
+                }
             }
         }
 
@@ -460,9 +561,18 @@ namespace AFIS360
                 {
                     picLLImagePath = Program.convertWSQtoBMP(picLLImagePath);
                 }
-                //                picEnrollLL.Image = System.Drawing.Image.FromFile(picLLImagePath);
-                picEnrollLL.Image = System.Drawing.Image.FromStream(new MemoryStream(File.ReadAllBytes(picLLImagePath)));
-                picEnrollLL.SizeMode = PictureBoxSizeMode.StretchImage;
+
+                System.Drawing.Image fingerImage = System.Drawing.Image.FromStream(new MemoryStream(File.ReadAllBytes(picLLImagePath)));
+
+                if (appConfig.isDupCheck())
+                {
+                    doDuplicateCheck(picLLImagePath, fingerImage, picEnrollLL);
+                }
+                else
+                {
+                    picEnrollLL.Image = fingerImage;
+                    picEnrollLL.SizeMode = PictureBoxSizeMode.StretchImage;
+                }
             }
         }
 
@@ -787,6 +897,9 @@ namespace AFIS360
                 //apply user access control
                 applyRolebasedAccessCntrl(user.getUserRole());
 
+                //apply AppConfig
+                applyAppConfig(user.getPersonId());
+
                 //Enable the WSQ converter MenuItem
                 convertToFromWSQToolStripMenuItem.Enabled = true;
 
@@ -795,6 +908,9 @@ namespace AFIS360
 
                 //Enable the Logout MenuItem
                 logOutToolStripMenuItem.Enabled = true;
+
+                //Enable the userPreferenceToolstripMenuItem
+                userPreferenceToolStripMenuItem.Enabled = true;
 
                 //Start the audit log for the logged in user
                 Status status = dataAccess.createUserAuditLog(user, DateTime.Now);
@@ -870,6 +986,13 @@ namespace AFIS360
 
         }//end applyRolebasedAccessCntrl
 
+        //apply User specific application configuration
+        private void applyAppConfig(string personId)
+        {
+            DataAccess dataAccess = new DataAccess();
+            appConfig = dataAccess.getAppConfig(personId);
+            Console.WriteLine("####-->> AppConfig - PersonId = " + personId + ", dupCheck = " + appConfig.isDupCheck());
+        }
 
         private bool isCachedUser(User user)
         {
@@ -913,6 +1036,9 @@ namespace AFIS360
 
             //Disable the Logout MenuItem
             logOutToolStripMenuItem.Enabled = false;
+
+            //Disable the User Preference menu item
+            userPreferenceToolStripMenuItem.Enabled = false;
 
             //Audit message for properly Logging out
             activityLog.setActivity("Gracefully logged out. \n"); 
@@ -960,10 +1086,14 @@ namespace AFIS360
                 return;
             } else
             {
-                Console.WriteLine("###-->> NOT Through Required field validation");
+                Console.WriteLine("###-->> Through Required field validation");
             }
-
+            //create new User
             Status status = new DataAccess().createAFISUser(user);
+
+            //create Default AppConfig for this user 
+            //            Status statusAppConfig = new DataAccess().createUserDefaultAppConfig(user);
+            //            Console.WriteLine("###-->> statusConfig = " + statusAppConfig.getStatusDesc());
 
             if (status.getStatusCode().Equals(Status.STATUS_SUCCESSFUL))
             {
@@ -1265,6 +1395,8 @@ namespace AFIS360
 
         private void AFISMain_Load(object sender, EventArgs e)
         {
+            System.Threading.Thread.CurrentThread.Name = "Main Thread";
+
             Console.WriteLine("####-->> Loading the Window");
             //Disable the WSQ Converter MenuItem
             convertToFromWSQToolStripMenuItem.Enabled = false;
@@ -1274,6 +1406,8 @@ namespace AFIS360
             advancedMatchToolStripMenuItem.Enabled = false;
             //Disable the Logout MenuItem
             logOutToolStripMenuItem.Enabled = false;
+            //Disable the User Preference Menu Item
+            userPreferenceToolStripMenuItem.Enabled = false;
             //Disble the DateTimePicker on Find Tab
             dtpFindDOB.Enabled = false;
             dtpFindDOB.CustomFormat = " ";
@@ -1298,17 +1432,27 @@ namespace AFIS360
 
         private void btnAuditReportCustReport_Click(object sender, EventArgs e)
         {
+            Thread userAccessReportThread = new Thread(processUserAccessReport);
+            userAccessReportThread.Name = "UserAccessReportThread";
+            userAccessReportThread.Start();
+        }
+
+        private void processUserAccessReport()
+        {
+            lblAuditReportAccessReportStatus.Text = "Processing..";
             string userId = txtAuditReportUserId.Text;
             DateTime startDate = dtpAuditReportStartDate.Value;
             DateTime endDate = dtpAuditReportEndDate.Value;
             Reporter.generateUserAccessReport(user, userId, startDate, endDate);
-            if(!string.IsNullOrWhiteSpace(userId))
+            if (!string.IsNullOrWhiteSpace(userId))
             {
                 activityLog.setActivity("Login Access Report Created, User Id = " + userId + ".\n");
-            } else
+            }
+            else
             {
                 activityLog.setActivity("Login Access Report Created for all users.\n");
             }
+            lblAuditReportAccessReportStatus.Text = "Complete..";
         }
 
         private void btnAuditReportPersonDetailReport_Click(object sender, EventArgs e)
@@ -1355,7 +1499,9 @@ namespace AFIS360
             string homePhoneNbr = txtEnrollHomePNbr.Text != null ? Regex.Replace(txtEnrollHomePNbr.Text, @"\D", "") : null;
             string email = txtEnrollEmail.Text;
             System.Drawing.Image passportPhoto = picEnrollPassportPhoto.Image;
-            string status = null;
+            //            string status = null;
+            Status status = null;
+            MyPerson person = null;
 
             try
             {
@@ -1381,13 +1527,14 @@ namespace AFIS360
                 personDetail.setPassportPhoto(passportPhoto);
                 DataAccess dataAccess = new DataAccess();
 
-                if (!string.IsNullOrWhiteSpace(id))
+//                if (!string.IsNullOrWhiteSpace(id))
+                if (string.IsNullOrWhiteSpace(id))
                 {
                     //store person's demograpgy
-                    dataAccess.updatePersonDetail(personDetail);
-                }
-                else
-                {
+//                    dataAccess.updatePersonDetail(personDetail);
+//                }
+//                else
+//                {
                     MessageBox.Show("Person ID field is required.", "Warning Message", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     return;
                 }
@@ -1406,28 +1553,37 @@ namespace AFIS360
 
                 if (imgsFromPicBox.Count > 0)
                 {
-                    Console.WriteLine("####-->> # of Fp to update = " + imgsFromPicBox.Count);
-                    //store person's finger prints
-                    MyPerson person = Program.Enroll(imgsFromPicBox, fname, id);
+                   Console.WriteLine("####-->> # of Fp to update1 = " + imgsFromPicBox.Count);
+                   //person's fingeprints
+                    person = Program.Enroll(imgsFromPicBox, fname, id);
+                    Console.WriteLine("####-->> person = " + person);
                     Console.WriteLine("####-->> person.name = " + person.Name);
-                    //update fingerprint image
-                    dataAccess.updateFingerprints(person);
-                    //update fingerprint templates
-                    dataAccess.updateFingerprintTemplates(person);
+
+                //update fingerprint image
+                //                    dataAccess.updateFingerprints(person);
+                //update fingerprint templates
+                //                    dataAccess.updateFingerprintTemplates(person);
+                }else
+                {
+                    person = new MyPerson();
+                    person.Name = personDetail.getFirstName();
+                    person.PersonId = personDetail.getPersonId();
                 }
-                status = "Enrollment update of " + fname + " (Id = " + id + ") completed successfully.";
+                status = dataAccess.updatePersonDetailWithFingerprints(person, personDetail);
+//                status = "Enrollment update of " + fname + " (Id = " + id + ") completed successfully.";
                 lblEnrollStatusMsg.ForeColor = System.Drawing.Color.Green;
-                activityLog.setActivity(status + "\n");
+                activityLog.setActivity(status.getStatusDesc() + "\n");
             }
             catch (Exception exp)
             {
-                status = "Enrollment update of " + fname + " (Id = " + id + ") is unsuccessful. Reason is - " + exp.Message + ".";
-                activityLog.setActivity(status + "\n");
+//                status = "Enrollment update of " + fname + " (Id = " + id + ") is unsuccessful. Reason is - " + exp.Message + ".";
+                activityLog.setActivity(status.getStatusDesc() + "\n");
                 lblEnrollStatusMsg.ForeColor = System.Drawing.Color.Red;
                 Console.WriteLine("###--->> exp.StackTrace = " + exp.StackTrace);
                 //                throw exp;
             }
-            lblEnrollStatusMsg.Text = status;
+            lblEnrollStatusMsg.Text = status.getStatusDesc();
+
         }//btnEnrollUpdate_Click
 
         private void convertToFromWSQToolStripMenuItem_Click(object sender, EventArgs e)
@@ -1438,8 +1594,16 @@ namespace AFIS360
 
         private void btnFindFind_Click(object sender, EventArgs e)
         {
-            try {
+            Thread searchFindThread = new Thread(processSearchFind);
+            searchFindThread.Name = "SearchFindThread";
+            searchFindThread.Start();
+        }
 
+        private void processSearchFind()
+        {
+            try
+            {
+                lblFindStatus.Text = "Searching....";
                 string fname = txtBoxFindFirstName.Text;
                 string lname = txtBoxFindLastName.Text;
                 string dobText = dtpFindDOB.Text;
@@ -1477,87 +1641,84 @@ namespace AFIS360
 
                 DataAccess dataAccess = new DataAccess();
                 List<PersonDetail> matchedPersons = dataAccess.findPersons(pDeatil);
-                lblFindStatus.Text = "# of Match found = " + matchedPersons.Count();
 
-                //First Clear previous controlls on button click
-                this.tlpFindResult.Controls.Clear();
-
-                //Add the Table Header
-                this.tlpFindResult.Controls.Add(lblFindResID, 0, 0);
-                this.tlpFindResult.Controls.Add(lblFindResFirstName, 1, 0);
-                this.tlpFindResult.Controls.Add(lblFindResLastName, 2, 0);
-
-                //Build new controlls based on find ressults. Max results = 10 rows
-                for (int i = 0; i < this.tlpFindResult.RowCount-1; i++)
+                this.Invoke((MethodInvoker)delegate
                 {
-                    Console.WriteLine("Id = " + matchedPersons[i].getPersonId() + ", FirstName = " + matchedPersons[i].getFirstName() + ", LastName = " + matchedPersons[i].getLastName());
+                    //First Clear previous controlls on button click
+                    this.tlpFindResult.Controls.Clear();
 
-                    if (i == 0)
-                    {
-                        lnklblPersonId_1.Text = matchedPersons[i].getPersonId();
-                        this.tlpFindResult.Controls.Add(lnklblPersonId_1, 0, i + 1);
-                    }
-                    if (i == 1)
-                    {
-                        lnklblPersonId_2.Text = matchedPersons[i].getPersonId();
-                        this.tlpFindResult.Controls.Add(lnklblPersonId_2, 0, i + 1);
-                    }
-                    if (i == 2)
-                    {
-                        lnklblPersonId_3.Text = matchedPersons[i].getPersonId();
-                        this.tlpFindResult.Controls.Add(lnklblPersonId_3, 0, i + 1);
-                    }
-                    if (i == 3)
-                    {
-                        lnklblPersonId_4.Text = matchedPersons[i].getPersonId();
-                        this.tlpFindResult.Controls.Add(lnklblPersonId_4, 0, i + 1);
-                    }
-                    if (i == 4)
-                    {
-                        lnklblPersonId_5.Text = matchedPersons[i].getPersonId();
-                        this.tlpFindResult.Controls.Add(lnklblPersonId_5, 0, i + 1);
-                    }
-                    if (i == 5)
-                    {
-                        lnklblPersonId_6.Text = matchedPersons[i].getPersonId();
-                        this.tlpFindResult.Controls.Add(lnklblPersonId_6, 0, i + 1);
-                    }
-                    if (i == 6)
-                    {
-                        lnklblPersonId_7.Text = matchedPersons[i].getPersonId();
-                        this.tlpFindResult.Controls.Add(lnklblPersonId_7, 0, i + 1);
-                    }
-                    if (i == 7)
-                    {
-                        lnklblPersonId_8.Text = matchedPersons[i].getPersonId();
-                        this.tlpFindResult.Controls.Add(lnklblPersonId_8, 0, i + 1);
-                    }
-                    if (i == 8)
-                    {
-                        lnklblPersonId_9.Text = matchedPersons[i].getPersonId();
-                        this.tlpFindResult.Controls.Add(lnklblPersonId_9, 0, i + 1);
-                    }
-                    if (i == 9)
-                    {
-                        lnklblPersonId_10.Text = matchedPersons[i].getPersonId();
-                        this.tlpFindResult.Controls.Add(lnklblPersonId_10, 0, i + 1);
-                    }
+                    //Add the Table Header
+                    this.tlpFindResult.Controls.Add(lblFindResID, 0, 0);
+                    this.tlpFindResult.Controls.Add(lblFindResFirstName, 1, 0);
+                    this.tlpFindResult.Controls.Add(lblFindResLastName, 2, 0);
 
-                    //Label - First Nmae
-                    Label lblFindFirstName = new Label() { Text = matchedPersons[i].getFirstName() };
-                    lblFindFirstName.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-                    this.tlpFindResult.Controls.Add(lblFindFirstName, 1, i + 1);
-                    //Label - Last Name
-                    Label lblFindLastName = new Label() { Text = matchedPersons[i].getLastName() };
-                    lblFindLastName.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-                    this.tlpFindResult.Controls.Add(lblFindLastName, 2, i + 1);
+                    Console.WriteLine("###-->>tlpFindResult.RowCount = " + tlpFindResult.RowCount);
+                    //Build new controlls based on find ressults. Max results = 10 rows
+                    for (int i = 0; i < this.tlpFindResult.RowCount - 1; i++)
+                    {
+                        if (matchedPersons.Count > i)
+                        {
+                            Console.WriteLine("Id = " + matchedPersons[i].getPersonId() + ", FirstName = " + matchedPersons[i].getFirstName() + ", LastName = " + matchedPersons[i].getLastName());
+                            switch (i)
+                            {
+                                case 0:
+                                    lnklblPersonId_1.Text = matchedPersons[i].getPersonId();
+                                    this.tlpFindResult.Controls.Add(lnklblPersonId_1, 0, i + 1);
+                                    break;
+                                case 1:
+                                    lnklblPersonId_2.Text = matchedPersons[i].getPersonId();
+                                    this.tlpFindResult.Controls.Add(lnklblPersonId_2, 0, i + 1);
+                                    break;
+                                case 2:
+                                    lnklblPersonId_3.Text = matchedPersons[i].getPersonId();
+                                    this.tlpFindResult.Controls.Add(lnklblPersonId_3, 0, i + 1);
+                                    break;
+                                case 3:
+                                    lnklblPersonId_4.Text = matchedPersons[i].getPersonId();
+                                    this.tlpFindResult.Controls.Add(lnklblPersonId_4, 0, i + 1);
+                                    break;
+                                case 4:
+                                    lnklblPersonId_5.Text = matchedPersons[i].getPersonId();
+                                    this.tlpFindResult.Controls.Add(lnklblPersonId_5, 0, i + 1);
+                                    break;
+                                case 5:
+                                    lnklblPersonId_6.Text = matchedPersons[i].getPersonId();
+                                    this.tlpFindResult.Controls.Add(lnklblPersonId_6, 0, i + 1);
+                                    break;
+                                case 6:
+                                    lnklblPersonId_7.Text = matchedPersons[i].getPersonId();
+                                    this.tlpFindResult.Controls.Add(lnklblPersonId_7, 0, i + 1);
+                                    break;
+                                case 7:
+                                    lnklblPersonId_8.Text = matchedPersons[i].getPersonId();
+                                    this.tlpFindResult.Controls.Add(lnklblPersonId_8, 0, i + 1);
+                                    break;
+                                case 8:
+                                    lnklblPersonId_9.Text = matchedPersons[i].getPersonId();
+                                    this.tlpFindResult.Controls.Add(lnklblPersonId_9, 0, i + 1);
+                                    break;
+                                case 9:
+                                    lnklblPersonId_10.Text = matchedPersons[i].getPersonId();
+                                    this.tlpFindResult.Controls.Add(lnklblPersonId_10, 0, i + 1);
+                                    break;
+                            }//end switch
 
-                    if (matchedPersons.Count() < i) break;
-                }
+                            //Label - First Nmae
+                            Label lblFindFirstName = new Label() { Text = matchedPersons[i].getFirstName() };
+                            lblFindFirstName.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+                            this.tlpFindResult.Controls.Add(lblFindFirstName, 1, i + 1);
+                            //Label - Last Name
+                            Label lblFindLastName = new Label() { Text = matchedPersons[i].getLastName() };
+                            lblFindLastName.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+                            this.tlpFindResult.Controls.Add(lblFindLastName, 2, i + 1);
+                        }
+                    }
+                    lblFindStatus.Text = "# of Match found = " + matchedPersons.Count();
+                });
             }
             catch (Exception exp)
             {
-                Console.WriteLine(exp.StackTrace);
+                Console.WriteLine(exp);
             }
         }
 
@@ -1597,6 +1758,33 @@ namespace AFIS360
 
             // Navigate to a URL.
             System.Diagnostics.Process.Start("http://www.lakerstekusa.com");
+        }
+
+        private void userPreferenceToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            UserPref userPref = new UserPref(activityLog);
+            userPref.ShowDialog();
+        }
+
+        private void btnAuditReportDuplicatefpReport_Click(object sender, EventArgs e)
+        {
+            DialogResult dr = MessageBox.Show("Do you really want to continue with duplicate check report?", "Warning Message", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+            if (dr == DialogResult.Yes)
+            {
+                Thread dupFpMatchReportthread = new Thread(this.processDupFingerprintMatchReport);
+                dupFpMatchReportthread.Name = "DupMatchReportThread";
+                dupFpMatchReportthread.Start();
+            }
+        }
+
+        private void processDupFingerprintMatchReport()
+        {
+            lblAuditReportDupReportStatus.Text = "Processing..";
+            Console.WriteLine("###-->> Performing duplicate check against Fingerprint table for entire population.");
+            ICollection<KeyValuePair<String, MyPerson>> dupMatches = Program.getDuplicateFingerprintRecords();
+            Reporter.generateDuplicateFingerprintReport(user, dupMatches);
+            Console.WriteLine("###-->> Duplicate check complete...");
+            lblAuditReportDupReportStatus.Text = "Complete..";
         }
     }
 }
