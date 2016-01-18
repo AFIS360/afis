@@ -89,6 +89,12 @@
       <DependentUpon>ConvertToFromWSQ.cs</DependentUpon>
     </Compile>
     <Compile Include="DataAccess.cs" />
+    <Compile Include="ExportData.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ExportData.Designer.cs">
+      <DependentUpon>ExportData.cs</DependentUpon>
+    </Compile>
     <Compile Include="Match.cs" />
     <Compile Include="MyFingerprint.cs" />
     <Compile Include="MyPerson.cs" />
@@ -157,6 +163,9 @@
     <EmbeddedResource Include="ConvertToFromWSQ.resx">
       <DependentUpon>ConvertToFromWSQ.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="ExportData.resx">
+      <DependentUpon>ExportData.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="obj\Debug\AFIS360.AFISMain.resources" />
     <EmbeddedResource Include="obj\Debug\AFIS360.ConvertToFromWSQ.resources" />
     <EmbeddedResource Include="obj\Debug\AFIS360.PasswordChange.resources" />
@@ -185,6 +194,10 @@
     <Folder Include="reports\" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\CsvFile\CsvFileTest.csproj">
+      <Project>{7fe06d88-b5a6-4249-9d6a-ed2862848173}</Project>
+      <Name>CsvFileTest</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\WSQ\Wsqm.csproj">
       <Project>{9a7f3e52-8783-433b-9af2-536e1d0ee50c}</Project>
       <Name>Wsqm</Name>

@@ -76,9 +76,9 @@
             this.grpBoxAdvMatcher.Controls.Add(this.tlpAdvMatcherFp);
             this.grpBoxAdvMatcher.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.grpBoxAdvMatcher.Location = new System.Drawing.Point(36, 63);
-            this.grpBoxAdvMatcher.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.grpBoxAdvMatcher.Margin = new System.Windows.Forms.Padding(6);
             this.grpBoxAdvMatcher.Name = "grpBoxAdvMatcher";
-            this.grpBoxAdvMatcher.Padding = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.grpBoxAdvMatcher.Padding = new System.Windows.Forms.Padding(6);
             this.grpBoxAdvMatcher.Size = new System.Drawing.Size(1994, 1037);
             this.grpBoxAdvMatcher.TabIndex = 0;
             this.grpBoxAdvMatcher.TabStop = false;
@@ -92,7 +92,7 @@
             this.tlpAdvMatcherResult.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 68.93004F));
             this.tlpAdvMatcherResult.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 31.06996F));
             this.tlpAdvMatcherResult.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 286F));
-            this.tlpAdvMatcherResult.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 232F));
+            this.tlpAdvMatcherResult.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 234F));
             this.tlpAdvMatcherResult.Controls.Add(this.lblAdvMatcherPersonId, 0, 0);
             this.tlpAdvMatcherResult.Controls.Add(this.lblAdvMatcherFName, 1, 0);
             this.tlpAdvMatcherResult.Controls.Add(this.lblAdvMatcherLName, 2, 0);
@@ -114,7 +114,7 @@
             this.tlpAdvMatcherResult.Controls.Add(this.lnllblAdvMatchId_15, 0, 15);
             this.tlpAdvMatcherResult.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.tlpAdvMatcherResult.Location = new System.Drawing.Point(508, 92);
-            this.tlpAdvMatcherResult.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.tlpAdvMatcherResult.Margin = new System.Windows.Forms.Padding(6);
             this.tlpAdvMatcherResult.Name = "tlpAdvMatcherResult";
             this.tlpAdvMatcherResult.RowCount = 16;
             this.tlpAdvMatcherResult.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50.81967F));
@@ -153,7 +153,7 @@
             this.lblAdvMatcherFName.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.lblAdvMatcherFName.AutoSize = true;
             this.lblAdvMatcherFName.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblAdvMatcherFName.Location = new System.Drawing.Point(680, 18);
+            this.lblAdvMatcherFName.Location = new System.Drawing.Point(679, 18);
             this.lblAdvMatcherFName.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
             this.lblAdvMatcherFName.Name = "lblAdvMatcherFName";
             this.lblAdvMatcherFName.Size = new System.Drawing.Size(150, 30);
@@ -165,7 +165,7 @@
             this.lblAdvMatcherLName.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.lblAdvMatcherLName.AutoSize = true;
             this.lblAdvMatcherLName.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblAdvMatcherLName.Location = new System.Drawing.Point(965, 18);
+            this.lblAdvMatcherLName.Location = new System.Drawing.Point(963, 18);
             this.lblAdvMatcherLName.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
             this.lblAdvMatcherLName.Name = "lblAdvMatcherLName";
             this.lblAdvMatcherLName.Size = new System.Drawing.Size(146, 30);
@@ -177,7 +177,7 @@
             this.lblAdvMatcherScore.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.lblAdvMatcherScore.AutoSize = true;
             this.lblAdvMatcherScore.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblAdvMatcherScore.Location = new System.Drawing.Point(1256, 18);
+            this.lblAdvMatcherScore.Location = new System.Drawing.Point(1255, 18);
             this.lblAdvMatcherScore.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
             this.lblAdvMatcherScore.Name = "lblAdvMatcherScore";
             this.lblAdvMatcherScore.Size = new System.Drawing.Size(85, 30);
@@ -358,7 +358,7 @@
             this.tlpAdvMatcherFp.Controls.Add(this.tlpAdvMatcherBtns, 0, 1);
             this.tlpAdvMatcherFp.Controls.Add(this.lblAdvMatcherStatus, 0, 3);
             this.tlpAdvMatcherFp.Location = new System.Drawing.Point(64, 92);
-            this.tlpAdvMatcherFp.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.tlpAdvMatcherFp.Margin = new System.Windows.Forms.Padding(6);
             this.tlpAdvMatcherFp.Name = "tlpAdvMatcherFp";
             this.tlpAdvMatcherFp.RowCount = 4;
             this.tlpAdvMatcherFp.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 62.63345F));
@@ -371,7 +371,7 @@
             // picBoxAdvMatcherFp
             // 
             this.picBoxAdvMatcherFp.Location = new System.Drawing.Point(6, 6);
-            this.picBoxAdvMatcherFp.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.picBoxAdvMatcherFp.Margin = new System.Windows.Forms.Padding(6);
             this.picBoxAdvMatcherFp.Name = "picBoxAdvMatcherFp";
             this.picBoxAdvMatcherFp.Size = new System.Drawing.Size(392, 329);
             this.picBoxAdvMatcherFp.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -401,7 +401,7 @@
             this.tlpAdvMatcherBtns.Controls.Add(this.lblAdvMatchThreshold, 0, 0);
             this.tlpAdvMatcherBtns.Controls.Add(this.txtBoxAdvMatcherThreshold, 1, 0);
             this.tlpAdvMatcherBtns.Location = new System.Drawing.Point(6, 363);
-            this.tlpAdvMatcherBtns.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.tlpAdvMatcherBtns.Margin = new System.Windows.Forms.Padding(6);
             this.tlpAdvMatcherBtns.Name = "tlpAdvMatcherBtns";
             this.tlpAdvMatcherBtns.RowCount = 2;
             this.tlpAdvMatcherBtns.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
@@ -412,7 +412,7 @@
             // btnAdvMatcherMatch
             // 
             this.btnAdvMatcherMatch.Location = new System.Drawing.Point(6, 97);
-            this.btnAdvMatcherMatch.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.btnAdvMatcherMatch.Margin = new System.Windows.Forms.Padding(6);
             this.btnAdvMatcherMatch.Name = "btnAdvMatcherMatch";
             this.btnAdvMatcherMatch.Size = new System.Drawing.Size(184, 55);
             this.btnAdvMatcherMatch.TabIndex = 0;
@@ -423,7 +423,7 @@
             // btnAdvMatcherClose
             // 
             this.btnAdvMatcherClose.Location = new System.Drawing.Point(202, 97);
-            this.btnAdvMatcherClose.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.btnAdvMatcherClose.Margin = new System.Windows.Forms.Padding(6);
             this.btnAdvMatcherClose.Name = "btnAdvMatcherClose";
             this.btnAdvMatcherClose.Size = new System.Drawing.Size(184, 55);
             this.btnAdvMatcherClose.TabIndex = 1;
@@ -446,7 +446,7 @@
             // 
             this.txtBoxAdvMatcherThreshold.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.txtBoxAdvMatcherThreshold.Location = new System.Drawing.Point(204, 23);
-            this.txtBoxAdvMatcherThreshold.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.txtBoxAdvMatcherThreshold.Margin = new System.Windows.Forms.Padding(6);
             this.txtBoxAdvMatcherThreshold.Name = "txtBoxAdvMatcherThreshold";
             this.txtBoxAdvMatcherThreshold.Size = new System.Drawing.Size(180, 44);
             this.txtBoxAdvMatcherThreshold.TabIndex = 3;
@@ -469,7 +469,7 @@
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Padding = new System.Windows.Forms.Padding(12, 4, 0, 4);
-            this.menuStrip1.Size = new System.Drawing.Size(2006, 44);
+            this.menuStrip1.Size = new System.Drawing.Size(2070, 44);
             this.menuStrip1.TabIndex = 1;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -492,12 +492,12 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(12F, 25F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(2006, 1062);
+            this.ClientSize = new System.Drawing.Size(2070, 1137);
             this.Controls.Add(this.grpBoxAdvMatcher);
             this.Controls.Add(this.menuStrip1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MainMenuStrip = this.menuStrip1;
-            this.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.Margin = new System.Windows.Forms.Padding(6);
             this.Name = "AdvancedMatcher";
             this.Text = "Advanced Matcher";
             this.Load += new System.EventHandler(this.AdvancedMatcher_Load);

@@ -14,6 +14,7 @@ using iTextSharp.text.pdf;
 using System.Configuration;
 using System.Text.RegularExpressions;
 using System.Threading;
+using CsvFile;
 
 namespace AFIS360
 {
@@ -1786,5 +1787,132 @@ namespace AFIS360
             Console.WriteLine("###-->> Duplicate check complete...");
             lblAuditReportDupReportStatus.Text = "Complete..";
         }
+
+        private void exportDataToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Thread exportDataThread = new Thread(this.processExportData);
+            exportDataThread.Name = "ExportDataThread";
+            exportDataThread.Start();
+        }
+
+        private void processExportData()
+        {
+
+            string filename = "C:\\project\\temp\\csv\\test.csv";
+            try
+            {
+                DataAccess dataAccess = new DataAccess();
+                List<PersonDetail> persons = dataAccess.retrievePersonDetail("469261111");
+
+                using (var writer = new CsvFileWriter(filename))
+                {
+                    //add the headers
+                    List<string> columns = new List<string>();
+                    columns.Add("Person Id");
+                    columns.Add("First Name");
+                    columns.Add("Last Name");
+                    columns.Add("Middle Name");
+                    columns.Add("Prefix");
+                    columns.Add("Suffix");
+                    columns.Add("DOB");
+                    columns.Add("Street");
+                    columns.Add("City");
+                    columns.Add("State");
+                    columns.Add("Postal Code");
+                    columns.Add("Country");
+                    columns.Add("Profession");
+                    columns.Add("Father Name");
+                    columns.Add("Cell Nbr");
+                    columns.Add("Home Nbr");
+                    columns.Add("Work Nbr");
+                    columns.Add("Email");
+                    columns.Add("Photo");
+                    writer.WriteRow(columns);
+
+                    foreach (PersonDetail person in persons)
+                    {
+                        columns = new List<string>();
+                        columns.Add(person.getPersonId() ?? String.Empty);
+                        columns.Add(person.getFirstName() ?? String.Empty);
+                        columns.Add(person.getLastName() ?? String.Empty);
+                        columns.Add(person.getMiddleName() ?? String.Empty);
+                        columns.Add(person.getPrefix() ?? String.Empty);
+                        columns.Add(person.getSuffix() ?? String.Empty);
+                        columns.Add(person.getDOB().ToString() ?? String.Empty);
+                        columns.Add(person.getStreetAddress() ?? String.Empty);
+                        columns.Add(person.getCity() ?? String.Empty);
+                        columns.Add(person.getState() ?? String.Empty);
+                        columns.Add(person.getPostalCode() ?? String.Empty);
+                        columns.Add(person.getCountry() ?? String.Empty);
+                        columns.Add(person.getProfession() ?? String.Empty);
+                        columns.Add(person.getFatherName() ?? String.Empty);
+                        columns.Add(person.getCellNbr() ?? String.Empty);
+                        columns.Add(person.getHomePhoneNbr() ?? String.Empty);
+                        columns.Add(person.getWorkPhoneNbr() ?? String.Empty);
+                        columns.Add(person.getEmail() ?? String.Empty);
+                        System.Drawing.Image photo = person.getPassportPhoto();
+                        string photoStr = (photo != null) ? Program.ImageToBase64(person.getPassportPhoto(), System.Drawing.Imaging.ImageFormat.Bmp) : null;
+                        Console.WriteLine("###-->> Image in Base64String = " + photoStr);
+                        columns.Add(photoStr ?? String.Empty);
+                        writer.WriteRow(columns);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(String.Format("Error writing to {0}.\r\n\r\n{1}", filename, ex.Message));
+            }
+            finally
+            {
+                Cursor = Cursors.Default;
+            }
+            //            return false;
+        }//end processExportData
+
+        private void importDataToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Thread importDataThread = new Thread(this.processImportData);
+            importDataThread.Name = "ImportDataThread";
+            importDataThread.Start();
+        }
+
+
+        private void processImportData()
+        {
+            string filename = "C:\\project\\temp\\csv\\test.csv";
+            try
+            {
+                List<string> columns = new List<string>();
+                using (var reader = new CsvFileReader(filename))
+                {
+                    while (reader.ReadRow(columns))
+                    {
+//                        columns.ToArray();
+                        foreach(string column in columns)
+                        {
+                            Console.Write("###-->> column = " + column + " ");
+                        }
+                        Console.WriteLine("\n");
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(String.Format("Error reading from {0}.\r\n\r\n{1}", filename, ex.Message));
+            }
+            finally
+            {
+                Cursor = Cursors.Default;
+            }
+
+        }
+
+        private void btnFindClear_Click(object sender, EventArgs e)
+        {
+            //Clear all the controlls of the table with past result
+            this.tlpFindResult.Controls.Clear();
+            this.lblFindStatus.Text = null;
+        }
     }
 }
+
