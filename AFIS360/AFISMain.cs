@@ -1790,9 +1790,13 @@ namespace AFIS360
 
         private void exportDataToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Thread exportDataThread = new Thread(this.processExportData);
-            exportDataThread.Name = "ExportDataThread";
-            exportDataThread.Start();
+            ExportData advMatcher = new ExportData(activityLog);
+            advMatcher.Show(); //non-modal dialog
+
+
+//            Thread exportDataThread = new Thread(this.processExportData);
+//            exportDataThread.Name = "ExportDataThread";
+//            exportDataThread.Start();
         }
 
         private void processExportData()

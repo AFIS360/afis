@@ -852,21 +852,78 @@ namespace AFIS360
             return personsDetail;
         }//end findPersons
 
-/*
-        public List<MyPerson> retrievePersonFingerprints()
+        public List<PersonDetail> findPersonsToExport(PersonDetail personDetail)
         {
             string connStr = getConnectionStringByName("MySQL_AFIS_conn");
             MySqlConnection conn = new MySqlConnection(connStr);
             MySqlCommand cmd;
-            MyPerson person = null;
-            List<MyPerson> persons;
+            List<PersonDetail> personsDetail;
             DataTable ds;
             conn.Open();
             try
             {
-                persons = new List<MyPerson>();
+                personsDetail = new List<PersonDetail>();
                 cmd = conn.CreateCommand();
-                cmd.CommandText = "SELECT * FROM afis.fingerprint";
+
+
+                cmd.CommandText = "SELECT * FROM afis.person p WHERE " +
+                                  "p.person_id like '%@person_id%' AND " +
+                                  "p.fname like '%@fname%' AND " +
+                                  "p.lname like '%@lname%' AND " +
+                                  "p.mname like '%@mname%' AND " +
+                                  "p.name_prefix like '%@name_prefix%' AND " +
+                                  "p.addr_street like '%@addr_street%' AND " +
+                                  "p.addr_city like '%@addr_city%' AND " +
+                                  "p.addr_state like '%@addr_state%' AND " +
+                                  "p.addr_postal_code like '%@addr_postal_code%' AND " +
+                                  "p.addr_country like '%@addr_country%' AND " +
+                                  "p.cell_nbr like '%@cell_nbr%' AND " +
+                                  "p.home_phone like '%@home_phone%' AND " +
+                                  "p.office_phone like '%@office_phone%' AND " +
+                                  "p.email_addr like '%@email_addr%' AND " +
+                                  "p.profession like '%@profession%' AND " +
+                                  "p.father_name like '%@father_name%' AND " +
+                                  "p.DOB like '%@DOB%' limit 100";
+
+                cmd.Parameters.AddWithValue("@person_id", personDetail.getPersonId());
+                cmd.Parameters.AddWithValue("@fname", personDetail.getFirstName());
+                cmd.Parameters.AddWithValue("@lname", personDetail.getLastName());
+                cmd.Parameters.AddWithValue("@mname", personDetail.getMiddleName());
+                cmd.Parameters.AddWithValue("@name_prefix", personDetail.getPrefix());
+                cmd.Parameters.AddWithValue("@addr_street", personDetail.getStreetAddress());
+                cmd.Parameters.AddWithValue("@addr_city", personDetail.getCity());
+                cmd.Parameters.AddWithValue("@addr_state", personDetail.getState());
+                cmd.Parameters.AddWithValue("@addr_postal_code", personDetail.getPostalCode());
+                cmd.Parameters.AddWithValue("@addr_country", personDetail.getCountry());
+                cmd.Parameters.AddWithValue("@cell_nbr", personDetail.getCellNbr());
+                cmd.Parameters.AddWithValue("@home_phone", personDetail.getHomePhoneNbr());
+                cmd.Parameters.AddWithValue("@office_phone", personDetail.getWorkPhoneNbr());
+                cmd.Parameters.AddWithValue("@email_addr", personDetail.getEmail());
+                cmd.Parameters.AddWithValue("@profession", personDetail.getProfession());
+                cmd.Parameters.AddWithValue("@father_name", personDetail.getFatherName());
+
+
+                string dobStr = "";
+                if (!string.IsNullOrWhiteSpace(personDetail.getDOBText()))
+                {
+                    DateTime dateTime = DateTime.Parse(personDetail.getDOBText());
+                    dobStr = dateTime.ToString("yyyy-MM-dd");
+                }
+                cmd.Parameters.AddWithValue("@DOB", dobStr);
+
+
+                string query = cmd.CommandText;
+                foreach (MySql.Data.MySqlClient.MySqlParameter p in cmd.Parameters)
+                {
+                    Console.WriteLine("###-->> ParameterName = [" + p.ParameterName + "]");
+
+                    query = query.Replace(p.ParameterName, p.Value.ToString());
+                }
+
+                cmd.CommandText = query;
+                Console.WriteLine("###-->>cmd.CommandText = " + cmd.CommandText);
+
+
                 MySqlDataAdapter da = new MySqlDataAdapter(cmd);
                 ds = new DataTable();
                 da.Fill(ds);
@@ -875,15 +932,73 @@ namespace AFIS360
 
                 while (rows.MoveNext())
                 {
+                    PersonDetail pDetail = new PersonDetail();
+                    string pId = (string)ds.Rows[i]["person_id"];
+                    Console.WriteLine("###-->># of matched person Id = " + pId);
+                    string fname = (string)ds.Rows[i]["fname"];
+                    string lname = (string)ds.Rows[i]["lname"];
+                    string mname = (string)ds.Rows[i]["mname"];
+                    string name_prefix = (string)ds.Rows[i]["name_prefix"];
+                    string name_suffix = (string)ds.Rows[i]["name_suffix"];
 
-                    int id = (int)ds.Rows[i]["id"];
-                    using (MemoryStream oStr = new MemoryStream((byte[])ds.Rows[i]["image"]))
+
+                    //Handle nullable DateTime
+                    DateTime? dob;
+
+                    if (ds.Rows[i]["DOB"] == DBNull.Value)
                     {
-                        BinaryFormatter oBFormatter = new BinaryFormatter();
-                        oStr.Position = 0;
-                        person = (MyPerson)oBFormatter.Deserialize(oStr);
-                        persons.Add(person);
+                        dob = new DateTime(1753, 01, 01);
                     }
+                    else
+                    {
+                        dob = (DateTime?)ds.Rows[i]["DOB"];
+                    }
+
+                    string addr_street = (string)ds.Rows[i]["addr_street"];
+                    string addr_city = (string)ds.Rows[i]["addr_city"];
+                    string addr_postal_code = (string)ds.Rows[i]["addr_postal_code"];
+                    string addr_state = (string)ds.Rows[i]["addr_state"];
+                    string addr_country = (string)ds.Rows[i]["addr_country"];
+                    string profession = (string)ds.Rows[i]["profession"];
+                    string father_name = (string)ds.Rows[i]["father_name"];
+                    string cell_nbr = (string)ds.Rows[i]["cell_nbr"];
+                    string home_phone = (string)ds.Rows[i]["home_phone"];
+                    string office_phone = (string)ds.Rows[i]["office_phone"];
+                    string email_addr = (string)ds.Rows[i]["email_addr"];
+
+                    System.Drawing.Image photo = null;
+
+                    if (ds.Rows[i]["photo"] != DBNull.Value)
+                    {
+                        using (MemoryStream oStr = new MemoryStream((byte[])ds.Rows[i]["photo"]))
+                        {
+                            BinaryFormatter oBFormatter = new BinaryFormatter();
+                            oStr.Position = 0;
+                            photo = (System.Drawing.Image)oBFormatter.Deserialize(oStr);
+                        }
+                    }
+
+                    pDetail.setPersonId(pId);
+                    pDetail.setFirstName(fname);
+                    pDetail.setLastName(lname);
+                    pDetail.setMiddleName(mname);
+                    pDetail.setPrefix(name_prefix);
+                    pDetail.setSuffix(name_suffix);
+                    pDetail.setDOB(dob);
+                    pDetail.setStreetAddress(addr_street);
+                    pDetail.setCity(addr_city);
+                    pDetail.setPostalCode(addr_postal_code);
+                    pDetail.setState(addr_state);
+                    pDetail.setCountry(addr_country);
+                    pDetail.setProfession(profession);
+                    pDetail.setFatherName(father_name);
+                    pDetail.setcellNbr(cell_nbr);
+                    pDetail.setHomwPhoneNbr(home_phone);
+                    pDetail.setWorkPhoneNbr(office_phone);
+                    pDetail.setEmail(email_addr);
+                    pDetail.setPassportPhoto(photo);
+                    personsDetail.Add(pDetail);
+
                     i = i + 1;
                 }
             }
@@ -899,9 +1014,59 @@ namespace AFIS360
                 }
             }
 
-            return persons;
-        }
-*/
+            return personsDetail;
+        }//end findPersonsToExport
+
+        /*
+                public List<MyPerson> retrievePersonFingerprints()
+                {
+                    string connStr = getConnectionStringByName("MySQL_AFIS_conn");
+                    MySqlConnection conn = new MySqlConnection(connStr);
+                    MySqlCommand cmd;
+                    MyPerson person = null;
+                    List<MyPerson> persons;
+                    DataTable ds;
+                    conn.Open();
+                    try
+                    {
+                        persons = new List<MyPerson>();
+                        cmd = conn.CreateCommand();
+                        cmd.CommandText = "SELECT * FROM afis.fingerprint";
+                        MySqlDataAdapter da = new MySqlDataAdapter(cmd);
+                        ds = new DataTable();
+                        da.Fill(ds);
+                        IEnumerator rows = ds.Rows.GetEnumerator();
+                        Int32 i = 0;
+
+                        while (rows.MoveNext())
+                        {
+
+                            int id = (int)ds.Rows[i]["id"];
+                            using (MemoryStream oStr = new MemoryStream((byte[])ds.Rows[i]["image"]))
+                            {
+                                BinaryFormatter oBFormatter = new BinaryFormatter();
+                                oStr.Position = 0;
+                                person = (MyPerson)oBFormatter.Deserialize(oStr);
+                                persons.Add(person);
+                            }
+                            i = i + 1;
+                        }
+                    }
+                    catch (Exception)
+                    {
+                        throw;
+                    }
+                    finally
+                    {
+                        if (conn.State == System.Data.ConnectionState.Open)
+                        {
+                            conn.Close();
+                        }
+                    }
+
+                    return persons;
+                }
+        */
         public List<MyPerson> retrievePersonFingerprintTemplates()
         {
             string connStr = getConnectionStringByName("MySQL_AFIS_conn");
