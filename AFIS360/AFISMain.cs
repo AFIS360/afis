@@ -94,12 +94,7 @@ namespace AFIS360
                 //store person's demograpgy
                 DataAccess dataAccess = new DataAccess();
 
-//                if (!string.IsNullOrWhiteSpace(id))
                 if (string.IsNullOrWhiteSpace(id))
-//                {
-//                    dataAccess.storePersonDetail(personDetail);
-//                }
-//                else
                 {
                     MessageBox.Show("Person ID field is required.", "Warning Message", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     return;
@@ -913,6 +908,13 @@ namespace AFIS360
                 //Enable the userPreferenceToolstripMenuItem
                 userPreferenceToolStripMenuItem.Enabled = true;
 
+                //Enable the Export Data
+                exportDataToolStripMenuItem.Enabled = true;
+
+                //Enable the Import Data
+                importDataToolStripMenuItem.Enabled = true;
+
+
                 //Start the audit log for the logged in user
                 Status status = dataAccess.createUserAuditLog(user, DateTime.Now);
                 Console.WriteLine("####-->> Login Status: " + status.getStatusCode());
@@ -1040,6 +1042,15 @@ namespace AFIS360
 
             //Disable the User Preference menu item
             userPreferenceToolStripMenuItem.Enabled = false;
+
+            //Disable the Export Data
+            exportDataToolStripMenuItem.Enabled = false;
+
+            //Disable the Import Data
+            importDataToolStripMenuItem.Enabled = false;
+
+            //Disable Multi-Match
+            advancedMatchToolStripMenuItem.Enabled = false;
 
             //Audit message for properly Logging out
             activityLog.setActivity("Gracefully logged out. \n"); 
@@ -1414,7 +1425,12 @@ namespace AFIS360
             dtpFindDOB.CustomFormat = " ";
             dtpFindDOB.Format = DateTimePickerFormat.Custom;
             checkBoxFindEmptyDOB.Checked = true;
+            //Disable Export Data
+            exportDataToolStripMenuItem.Enabled = false;
+            //Disable Import Data
+            importDataToolStripMenuItem.Enabled = false;
         }
+
 
 
         private void AFISMain_FormClosed(object sender, FormClosedEventArgs e)
@@ -1604,6 +1620,12 @@ namespace AFIS360
         {
             try
             {
+                progressBarSearchFind.Visible = true;
+                progressBarSearchFind.Minimum = 1;
+                progressBarSearchFind.Maximum = tlpFindResult.RowCount;
+                progressBarSearchFind.Value = 1;
+                progressBarSearchFind.Step = 1;
+
                 lblFindStatus.Text = "Searching....";
                 string fname = txtBoxFindFirstName.Text;
                 string lname = txtBoxFindLastName.Text;
@@ -1642,6 +1664,7 @@ namespace AFIS360
 
                 DataAccess dataAccess = new DataAccess();
                 List<PersonDetail> matchedPersons = dataAccess.findPersons(pDeatil);
+                Console.WriteLine("###-->> Data access complete @ = " + DateTime.Now);
 
                 this.Invoke((MethodInvoker)delegate
                 {
@@ -1657,6 +1680,8 @@ namespace AFIS360
                     //Build new controlls based on find ressults. Max results = 10 rows
                     for (int i = 0; i < this.tlpFindResult.RowCount - 1; i++)
                     {
+                        progressBarSearchFind.PerformStep();
+
                         if (matchedPersons.Count > i)
                         {
                             Console.WriteLine("Id = " + matchedPersons[i].getPersonId() + ", FirstName = " + matchedPersons[i].getFirstName() + ", LastName = " + matchedPersons[i].getLastName());
@@ -1716,6 +1741,7 @@ namespace AFIS360
                     }
                     lblFindStatus.Text = "# of Match found = " + matchedPersons.Count();
                 });
+                Console.WriteLine("###-->> Table creation complete @ = " + DateTime.Now);
             }
             catch (Exception exp)
             {
@@ -1788,127 +1814,10 @@ namespace AFIS360
             lblAuditReportDupReportStatus.Text = "Complete..";
         }
 
-        private void exportDataToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            ExportData advMatcher = new ExportData(activityLog);
-            advMatcher.Show(); //non-modal dialog
-
-
-//            Thread exportDataThread = new Thread(this.processExportData);
-//            exportDataThread.Name = "ExportDataThread";
-//            exportDataThread.Start();
-        }
-
-        private void processExportData()
-        {
-
-            string filename = "C:\\project\\temp\\csv\\test.csv";
-            try
-            {
-                DataAccess dataAccess = new DataAccess();
-                List<PersonDetail> persons = dataAccess.retrievePersonDetail("469261111");
-
-                using (var writer = new CsvFileWriter(filename))
-                {
-                    //add the headers
-                    List<string> columns = new List<string>();
-                    columns.Add("Person Id");
-                    columns.Add("First Name");
-                    columns.Add("Last Name");
-                    columns.Add("Middle Name");
-                    columns.Add("Prefix");
-                    columns.Add("Suffix");
-                    columns.Add("DOB");
-                    columns.Add("Street");
-                    columns.Add("City");
-                    columns.Add("State");
-                    columns.Add("Postal Code");
-                    columns.Add("Country");
-                    columns.Add("Profession");
-                    columns.Add("Father Name");
-                    columns.Add("Cell Nbr");
-                    columns.Add("Home Nbr");
-                    columns.Add("Work Nbr");
-                    columns.Add("Email");
-                    columns.Add("Photo");
-                    writer.WriteRow(columns);
-
-                    foreach (PersonDetail person in persons)
-                    {
-                        columns = new List<string>();
-                        columns.Add(person.getPersonId() ?? String.Empty);
-                        columns.Add(person.getFirstName() ?? String.Empty);
-                        columns.Add(person.getLastName() ?? String.Empty);
-                        columns.Add(person.getMiddleName() ?? String.Empty);
-                        columns.Add(person.getPrefix() ?? String.Empty);
-                        columns.Add(person.getSuffix() ?? String.Empty);
-                        columns.Add(person.getDOB().ToString() ?? String.Empty);
-                        columns.Add(person.getStreetAddress() ?? String.Empty);
-                        columns.Add(person.getCity() ?? String.Empty);
-                        columns.Add(person.getState() ?? String.Empty);
-                        columns.Add(person.getPostalCode() ?? String.Empty);
-                        columns.Add(person.getCountry() ?? String.Empty);
-                        columns.Add(person.getProfession() ?? String.Empty);
-                        columns.Add(person.getFatherName() ?? String.Empty);
-                        columns.Add(person.getCellNbr() ?? String.Empty);
-                        columns.Add(person.getHomePhoneNbr() ?? String.Empty);
-                        columns.Add(person.getWorkPhoneNbr() ?? String.Empty);
-                        columns.Add(person.getEmail() ?? String.Empty);
-                        System.Drawing.Image photo = person.getPassportPhoto();
-                        string photoStr = (photo != null) ? Program.ImageToBase64(person.getPassportPhoto(), System.Drawing.Imaging.ImageFormat.Bmp) : null;
-                        Console.WriteLine("###-->> Image in Base64String = " + photoStr);
-                        columns.Add(photoStr ?? String.Empty);
-                        writer.WriteRow(columns);
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(String.Format("Error writing to {0}.\r\n\r\n{1}", filename, ex.Message));
-            }
-            finally
-            {
-                Cursor = Cursors.Default;
-            }
-            //            return false;
-        }//end processExportData
-
         private void importDataToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Thread importDataThread = new Thread(this.processImportData);
-            importDataThread.Name = "ImportDataThread";
-            importDataThread.Start();
-        }
-
-
-        private void processImportData()
-        {
-            string filename = "C:\\project\\temp\\csv\\test.csv";
-            try
-            {
-                List<string> columns = new List<string>();
-                using (var reader = new CsvFileReader(filename))
-                {
-                    while (reader.ReadRow(columns))
-                    {
-//                        columns.ToArray();
-                        foreach(string column in columns)
-                        {
-                            Console.Write("###-->> column = " + column + " ");
-                        }
-                        Console.WriteLine("\n");
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(String.Format("Error reading from {0}.\r\n\r\n{1}", filename, ex.Message));
-            }
-            finally
-            {
-                Cursor = Cursors.Default;
-            }
-
+            ImportData importData = new ImportData(activityLog);
+            importData.Show(); //non-modal dialog
         }
 
         private void btnFindClear_Click(object sender, EventArgs e)
@@ -1916,6 +1825,18 @@ namespace AFIS360
             //Clear all the controlls of the table with past result
             this.tlpFindResult.Controls.Clear();
             this.lblFindStatus.Text = null;
+        }
+
+        private void selectExportToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ExportData exportData = new ExportData(activityLog);
+            exportData.Show(); //non-modal dialog
+        }
+
+        private void batchExportToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            BatchExport batchExport = new BatchExport(activityLog);
+            batchExport.Show(); //non-modal dialog
         }
     }
 }

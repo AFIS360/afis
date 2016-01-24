@@ -92,7 +92,7 @@
             this.tlpAdvMatcherResult.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 68.93004F));
             this.tlpAdvMatcherResult.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 31.06996F));
             this.tlpAdvMatcherResult.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 286F));
-            this.tlpAdvMatcherResult.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 234F));
+            this.tlpAdvMatcherResult.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 236F));
             this.tlpAdvMatcherResult.Controls.Add(this.lblAdvMatcherPersonId, 0, 0);
             this.tlpAdvMatcherResult.Controls.Add(this.lblAdvMatcherFName, 1, 0);
             this.tlpAdvMatcherResult.Controls.Add(this.lblAdvMatcherLName, 2, 0);
@@ -141,7 +141,7 @@
             this.lblAdvMatcherPersonId.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.lblAdvMatcherPersonId.AutoSize = true;
             this.lblAdvMatcherPersonId.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblAdvMatcherPersonId.Location = new System.Drawing.Point(288, 18);
+            this.lblAdvMatcherPersonId.Location = new System.Drawing.Point(287, 18);
             this.lblAdvMatcherPersonId.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
             this.lblAdvMatcherPersonId.Name = "lblAdvMatcherPersonId";
             this.lblAdvMatcherPersonId.Size = new System.Drawing.Size(40, 30);
@@ -153,7 +153,7 @@
             this.lblAdvMatcherFName.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.lblAdvMatcherFName.AutoSize = true;
             this.lblAdvMatcherFName.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblAdvMatcherFName.Location = new System.Drawing.Point(679, 18);
+            this.lblAdvMatcherFName.Location = new System.Drawing.Point(677, 18);
             this.lblAdvMatcherFName.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
             this.lblAdvMatcherFName.Name = "lblAdvMatcherFName";
             this.lblAdvMatcherFName.Size = new System.Drawing.Size(150, 30);
@@ -165,7 +165,7 @@
             this.lblAdvMatcherLName.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.lblAdvMatcherLName.AutoSize = true;
             this.lblAdvMatcherLName.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblAdvMatcherLName.Location = new System.Drawing.Point(963, 18);
+            this.lblAdvMatcherLName.Location = new System.Drawing.Point(961, 18);
             this.lblAdvMatcherLName.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
             this.lblAdvMatcherLName.Name = "lblAdvMatcherLName";
             this.lblAdvMatcherLName.Size = new System.Drawing.Size(146, 30);
@@ -177,7 +177,7 @@
             this.lblAdvMatcherScore.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.lblAdvMatcherScore.AutoSize = true;
             this.lblAdvMatcherScore.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblAdvMatcherScore.Location = new System.Drawing.Point(1255, 18);
+            this.lblAdvMatcherScore.Location = new System.Drawing.Point(1254, 18);
             this.lblAdvMatcherScore.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
             this.lblAdvMatcherScore.Name = "lblAdvMatcherScore";
             this.lblAdvMatcherScore.Size = new System.Drawing.Size(85, 30);
@@ -492,6 +492,8 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(12F, 25F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.AutoScroll = true;
+            this.AutoSize = true;
             this.ClientSize = new System.Drawing.Size(2070, 1137);
             this.Controls.Add(this.grpBoxAdvMatcher);
             this.Controls.Add(this.menuStrip1);
