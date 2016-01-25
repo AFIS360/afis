@@ -1810,6 +1810,9 @@ namespace AFIS360
                     string access_usermgmt_tab = (string)ds.Rows[i]["access_usermgmt_tab"];
                     string access_audit_tab = (string)ds.Rows[i]["access_audit_tab"];
                     string access_find_tab = (string)ds.Rows[i]["access_find_tab"];
+                    string access_data_import = (string)ds.Rows[i]["access_data_import"];
+                    string access_data_export = (string)ds.Rows[i]["access_data_export"];
+                    string access_multi_match = (string)ds.Rows[i]["access_multi_match"];
 
                     accessCntrl = new AccessControl();
                     accessCntrl.setAccessLoginTab(access_login_tab);
@@ -1818,6 +1821,9 @@ namespace AFIS360
                     accessCntrl.setAccessUserMgmtTab(access_usermgmt_tab);
                     accessCntrl.setAccessAuditTab(access_audit_tab);
                     accessCntrl.setAccessFindTab(access_find_tab);
+                    accessCntrl.setAccessDataImport(access_data_import);
+                    accessCntrl.setAccessDataExport(access_data_export);
+                    accessCntrl.setAccessMultiMatch(access_multi_match);
 
                     i = i + 1;
                 }

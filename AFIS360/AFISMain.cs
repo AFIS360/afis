@@ -908,13 +908,6 @@ namespace AFIS360
                 //Enable the userPreferenceToolstripMenuItem
                 userPreferenceToolStripMenuItem.Enabled = true;
 
-                //Enable the Export Data
-                exportDataToolStripMenuItem.Enabled = true;
-
-                //Enable the Import Data
-                importDataToolStripMenuItem.Enabled = true;
-
-
                 //Start the audit log for the logged in user
                 Status status = dataAccess.createUserAuditLog(user, DateTime.Now);
                 Console.WriteLine("####-->> Login Status: " + status.getStatusCode());
@@ -947,12 +940,10 @@ namespace AFIS360
             if (accessCntrl.hasAccessToMatchTab())
             {
                 tabControlAFIS.TabPages.Add(tabMatch);
-                advancedMatchToolStripMenuItem.Enabled = true;
             }
             else
             {
                 tabControlAFIS.TabPages.Remove(tabMatch);
-                advancedMatchToolStripMenuItem.Enabled = false;
             }
             if (accessCntrl.hasAccessToUserMgmtTab())
             {
@@ -985,6 +976,30 @@ namespace AFIS360
             else
             {
                 tabControlAFIS.TabPages.Remove(tabFind);
+            }
+            if (accessCntrl.hasAccessToDataImport())
+            {
+                importDataToolStripMenuItem.Enabled = true;
+            }
+            else
+            {
+                importDataToolStripMenuItem.Enabled = false;
+            }
+            if (accessCntrl.hasAccessToDataExport())
+            {
+                exportDataToolStripMenuItem.Enabled = true;
+            }
+            else
+            {
+                exportDataToolStripMenuItem.Enabled = false;
+            }
+            if (accessCntrl.hasAccessToMultiMatch())
+            {
+                advancedMatchToolStripMenuItem.Enabled = true;
+            }
+            else
+            {
+                advancedMatchToolStripMenuItem.Enabled = false;
             }
 
         }//end applyRolebasedAccessCntrl
