@@ -49,7 +49,6 @@ namespace AFIS360
 
             try
             {
-
                 //check if a valid export file has been selected
                 if (string.IsNullOrEmpty(txtBoxImportDataInputFile.Text))
                 {
@@ -59,13 +58,15 @@ namespace AFIS360
 
                 List<string> columns = new List<string>();
                 DataAccess dataAccess = new DataAccess();
+                Int32 recordsInfile = 0;
+                Int32 recordsInportedSuccessfully = 0;
+                Int32 recordsFailedToImport = 0;
+
                 using (var reader = new CsvFileReader(filename))
                 {
-                    int headerRow = 0;
-
                     while (reader.ReadRow(columns))
                     {
-                        if (headerRow > 0) //skip the Header Row
+                        if (recordsInfile > 0) //skip the Header Row
                         {
                             progBarImportDataImportProgress.PerformStep();
                             PersonDetail pDetail = new PersonDetail();
@@ -123,13 +124,25 @@ namespace AFIS360
 
                             Console.WriteLine("###-->> PersonDetail = " + pDetail.getPersonId() + ", " + pDetail.getFirstName() + ", " + pDetail.getLastName());
                             Status status = dataAccess.storePersonDetailwithFingerprints(person, pDetail);
-                            Console.WriteLine("Status = " + status.getStatusDesc());
+                            if (status.getStatusCode() == Status.STATUS_SUCCESSFUL)
+                            {
+                                recordsInportedSuccessfully++;
+                            } else
+                            {
+                                recordsFailedToImport++;
+                            }
+                            Console.WriteLine("###-->> Status = " + status.getStatusDesc() + ". # of Successful import = " + recordsInportedSuccessfully + ", Failed import = " + recordsFailedToImport);
                         }//end if
-                        headerRow++;
+                        recordsInfile++;
                     }//end while
-                    progBarImportDataImportProgress.Maximum = headerRow;
+                    progBarImportDataImportProgress.Maximum = recordsInfile;
                     progBarImportDataImportProgress.PerformStep();
                 }
+                Int32 totalImportedRecords = progBarImportDataImportProgress.Maximum - 1; //subtracting header
+                activityLog.setActivity("Batch Import from a file - " + filename + ". Total # of records imported = " + totalImportedRecords + "\n");
+                lblImportDataTotalRecCount.Text = Convert.ToString(recordsInportedSuccessfully + recordsFailedToImport);
+                lblDataImportSuccessCount.Text = Convert.ToString(recordsInportedSuccessfully);
+                lblImportDataFailedCount.Text = Convert.ToString(recordsFailedToImport);
             }
             catch (Exception ex)
             {

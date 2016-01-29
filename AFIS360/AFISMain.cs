@@ -65,7 +65,6 @@ namespace AFIS360
             string homePhoneNbr = txtEnrollHomePNbr.Text;
             string email = txtEnrollEmail.Text;
             System.Drawing.Image passportPhoto = picEnrollPassportPhoto.Image;
-//            string statusStr = null;
             Status status = null;
 
             try
@@ -117,8 +116,8 @@ namespace AFIS360
                 MyPerson person;
                 if (imgsFromPicBox.Count > 0)
                 {
-                        //get person with fingerprints
-                        person = Program.Enroll(imgsFromPicBox, fname, id);
+                    //get person with fingerprints
+                    person = Program.Enroll(imgsFromPicBox, fname, id);
                 }
                 else
                 {
@@ -127,13 +126,9 @@ namespace AFIS360
                     person.PersonId = id;
                 }
                 //store person with fingerprint images
-                //                dataAccess.storeFingerprints(person);
                 status = dataAccess.storePersonDetailwithFingerprints(person, personDetail);
 
                 //store person without fingerprint images but fingerptint templates. Match will be performed against the template
-                //                dataAccess.storeFingerprintTemplates(person);
-
-                //                status = "Enrollment of " + fname + " (Id = " + id + ") completed successfully.";
                 if (status.getStatusCode().Equals(Status.STATUS_SUCCESSFUL))
                 {
                     lblEnrollStatusMsg.ForeColor = System.Drawing.Color.Green;
@@ -146,7 +141,6 @@ namespace AFIS360
             }
             catch (Exception exp)
             {
-//                statusStr = "Enrollment of " + fname + " (Id = " + id + ") is unsuccessful. Reason is - " + exp.Message + ".";
                 status.setStatusCode(Status.STATUS_FAILURE);
                 status.setStatusDesc("Enrollment of " + fname + " (Id = " + id + ") is unsuccessful. Reason is - " + exp.Message + ".");
                 activityLog.setActivity(status.getStatusDesc() + "\n");
@@ -875,6 +869,7 @@ namespace AFIS360
                     clearUserMgmtTab();
                     clearReportTab();
                     clearFindTab();
+                    clearAccessControlsSelection();
                 }
 
                 Console.WriteLine("User.Id = " + user.getPersonId());
@@ -1118,10 +1113,6 @@ namespace AFIS360
             //create new User
             Status status = new DataAccess().createAFISUser(user);
 
-            //create Default AppConfig for this user 
-            //            Status statusAppConfig = new DataAccess().createUserDefaultAppConfig(user);
-            //            Console.WriteLine("###-->> statusConfig = " + statusAppConfig.getStatusDesc());
-
             if (status.getStatusCode().Equals(Status.STATUS_SUCCESSFUL))
             {
                 lblUserMgmtStatusMsg.ForeColor = System.Drawing.Color.Green;
@@ -1134,7 +1125,6 @@ namespace AFIS360
 
             }
             lblUserMgmtStatusMsg.Text = status.getStatusDesc();
-
         }
 
 
@@ -1444,9 +1434,19 @@ namespace AFIS360
             exportDataToolStripMenuItem.Enabled = false;
             //Disable Import Data
             importDataToolStripMenuItem.Enabled = false;
+            //load Access Control list
+            loadAccessControls();
         }
 
-
+        private void loadAccessControls()
+        {
+            DataAccess dataAccess = new DataAccess();
+            List<AccessControl> accessCntrls = dataAccess.getAccessControls();
+            foreach(AccessControl accessCntrl in accessCntrls)
+            {
+                this.listUserMgmtRole.Items.Add(accessCntrl.getRole());
+            }
+        }
 
         private void AFISMain_FormClosed(object sender, FormClosedEventArgs e)
         {
@@ -1591,10 +1591,6 @@ namespace AFIS360
                     Console.WriteLine("####-->> person = " + person);
                     Console.WriteLine("####-->> person.name = " + person.Name);
 
-                //update fingerprint image
-                //                    dataAccess.updateFingerprints(person);
-                //update fingerprint templates
-                //                    dataAccess.updateFingerprintTemplates(person);
                 }else
                 {
                     person = new MyPerson();
@@ -1602,17 +1598,14 @@ namespace AFIS360
                     person.PersonId = personDetail.getPersonId();
                 }
                 status = dataAccess.updatePersonDetailWithFingerprints(person, personDetail);
-//                status = "Enrollment update of " + fname + " (Id = " + id + ") completed successfully.";
                 lblEnrollStatusMsg.ForeColor = System.Drawing.Color.Green;
                 activityLog.setActivity(status.getStatusDesc() + "\n");
             }
             catch (Exception exp)
             {
-//                status = "Enrollment update of " + fname + " (Id = " + id + ") is unsuccessful. Reason is - " + exp.Message + ".";
                 activityLog.setActivity(status.getStatusDesc() + "\n");
                 lblEnrollStatusMsg.ForeColor = System.Drawing.Color.Red;
                 Console.WriteLine("###--->> exp.StackTrace = " + exp.StackTrace);
-                //                throw exp;
             }
             lblEnrollStatusMsg.Text = status.getStatusDesc();
 
@@ -1852,6 +1845,129 @@ namespace AFIS360
         {
             BatchExport batchExport = new BatchExport(activityLog);
             batchExport.Show(); //non-modal dialog
+        }
+
+        private void btnUserMgmtRoleCreate_Click(object sender, EventArgs e)
+        {
+            string roleName = txtBoxUserMgmtRoleName.Text;
+            if (string.IsNullOrEmpty(roleName))
+            {
+                MessageBox.Show("Role name field is required.", "Warning Message", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            string accessLogin = chkBoxUserMgmtLogin.Checked ? "Y" : "N";
+            string accessEnrollment = chkBoxUserMgmtEnrollment.Checked ? "Y" : "N";
+            string accessMatch = chkBoxUserMgmtMatch.Checked ? "Y" : "N";
+            string accessUserMgmt = chkBoxUserMgmtUserMgmt.Checked ? "Y" : "N";
+            string accessAuditReport = chkBoxUserMgmtAuditReport.Checked ? "Y" : "N";
+            string accessSearchFind = chkBoxUserMgmtFindSearch.Checked ? "Y" : "N";
+            string accessDataImport = chkBoxUserMgmtDataImport.Checked ? "Y" : "N";
+            string accessDataExport = chkBoxUserMgmtDataExport.Checked ? "Y" : "N";
+            string accessMultiMatch= chkBoxUserMgmtMultiMatch.Checked ? "Y" : "N";
+
+            AccessControl accessCntrl = new AccessControl();
+            accessCntrl.setRole(roleName);
+            accessCntrl.setAccessLoginTab(accessLogin);
+            accessCntrl.setAccessEnrollTab(accessEnrollment);
+            accessCntrl.setAccessMatchTab(accessMatch);
+            accessCntrl.setAccessUserMgmtTab(accessUserMgmt);
+            accessCntrl.setAccessAuditTab(accessAuditReport);
+            accessCntrl.setAccessFindTab(accessSearchFind);
+            accessCntrl.setAccessDataImport(accessDataImport);
+            accessCntrl.setAccessDataExport(accessDataExport);
+            accessCntrl.setAccessMultiMatch(accessMultiMatch);
+
+            Status status = new DataAccess().storeAccessControl(accessCntrl);
+            if (status.getStatusCode().Equals(Status.STATUS_SUCCESSFUL))
+            {
+                lblUserMgmtRoleStatusMsg.ForeColor = System.Drawing.Color.Green;
+                lblUserMgmtRoleStatusMsg.Text = status.getStatusDesc();
+                loadAccessControls(); //reload the access controls
+                activityLog.setActivity(status.getStatusDesc() + "\n");
+            }
+            else
+            {
+                lblUserMgmtRoleStatusMsg.ForeColor = System.Drawing.Color.Red;
+                lblUserMgmtRoleStatusMsg.Text = status.getStatusDesc();
+                activityLog.setActivity(status.getStatusDesc() + "\n");
+            }
+        }
+
+        private void txtBoxUserMgmtRoleName_Leave(object sender, EventArgs e)
+        {
+            DataAccess dataAccess = new DataAccess();
+            AccessControl accessCntrl = dataAccess.getAcessCntrl(txtBoxUserMgmtRoleName.Text);
+            if(accessCntrl != null)
+            {
+                chkBoxUserMgmtLogin.Checked = accessCntrl.getAccessLoginTab() == "Y" ? true : false;
+                chkBoxUserMgmtEnrollment.Checked = accessCntrl.getAccessEnrollTab() == "Y" ? true : false;
+                chkBoxUserMgmtMatch.Checked = accessCntrl.getAccessMatchTab() == "Y" ? true : false;
+                chkBoxUserMgmtUserMgmt.Checked = accessCntrl.getAccessUserMgmtTab() == "Y" ? true : false;
+                chkBoxUserMgmtAuditReport.Checked = accessCntrl.getAccessAuditTab() == "Y" ? true : false;
+                chkBoxUserMgmtFindSearch.Checked = accessCntrl.getAccessFindTab() == "Y" ? true : false;
+                chkBoxUserMgmtDataImport.Checked = accessCntrl.getAccessDataImport() == "Y" ? true : false;
+                chkBoxUserMgmtDataExport.Checked = accessCntrl.getAccessDataExport() == "Y" ? true : false;
+                chkBoxUserMgmtMultiMatch.Checked = accessCntrl.getAccessMultiMatch() == "Y" ? true : false;
+            }
+        }
+
+        private void clearAccessControlsSelection()
+        {
+            txtBoxUserMgmtRoleName.Text = null;
+            chkBoxUserMgmtLogin.Checked = false;
+            chkBoxUserMgmtEnrollment.Checked = false;
+            chkBoxUserMgmtMatch.Checked = false;
+            chkBoxUserMgmtUserMgmt.Checked = false;
+            chkBoxUserMgmtAuditReport.Checked = false;
+            chkBoxUserMgmtFindSearch.Checked = false;
+            chkBoxUserMgmtDataImport.Checked = false;
+            chkBoxUserMgmtDataExport.Checked = false;
+            chkBoxUserMgmtMultiMatch.Checked = false;
+            lblUserMgmtRoleStatusMsg.Text = null;
+        }
+
+        private void btnUserMgmtRoleClear_Click(object sender, EventArgs e)
+        {
+            clearAccessControlsSelection();
+        }
+
+        private void btnUserMgmtRoleUpdate_Click(object sender, EventArgs e)
+        {
+            string roleName = txtBoxUserMgmtRoleName.Text;
+            if (string.IsNullOrEmpty(roleName))
+            {
+                MessageBox.Show("Role name field is required.", "Warning Message", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            AccessControl accessCntrl = new AccessControl();
+            accessCntrl.setRole(roleName);
+            accessCntrl.setAccessLoginTab(chkBoxUserMgmtLogin.Checked ? "Y" : "N");
+            accessCntrl.setAccessEnrollTab(chkBoxUserMgmtEnrollment.Checked ? "Y" : "N");
+            accessCntrl.setAccessMatchTab(chkBoxUserMgmtMatch.Checked ? "Y" : "N");
+            accessCntrl.setAccessUserMgmtTab(chkBoxUserMgmtUserMgmt.Checked ? "Y" : "N");
+            accessCntrl.setAccessAuditTab(chkBoxUserMgmtAuditReport.Checked ? "Y" : "N");
+            accessCntrl.setAccessFindTab(chkBoxUserMgmtFindSearch.Checked ? "Y" : "N");
+            accessCntrl.setAccessDataImport(chkBoxUserMgmtDataImport.Checked ? "Y" : "N");
+            accessCntrl.setAccessDataExport(chkBoxUserMgmtDataExport.Checked ? "Y" : "N");
+            accessCntrl.setAccessMultiMatch(chkBoxUserMgmtMultiMatch.Checked ? "Y" : "N");
+
+            DataAccess dataAccess = new DataAccess();
+            Status status = dataAccess.updateAccessControl(accessCntrl);
+            Console.WriteLine("###-->> Status = " + status.getStatusDesc());
+            if (status.getStatusCode().Equals(Status.STATUS_SUCCESSFUL))
+            {
+                lblUserMgmtRoleStatusMsg.ForeColor = System.Drawing.Color.Green;
+                lblUserMgmtRoleStatusMsg.Text = status.getStatusDesc();
+                activityLog.setActivity(status.getStatusDesc() + "\n");
+            }
+            else
+            {
+                lblUserMgmtRoleStatusMsg.ForeColor = System.Drawing.Color.Red;
+                lblUserMgmtRoleStatusMsg.Text = status.getStatusDesc();
+                activityLog.setActivity(status.getStatusDesc() + "\n");
+            }
         }
     }
 }

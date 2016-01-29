@@ -153,6 +153,122 @@ namespace AFIS360
             return status;
         }//end storePersonDetailwithFingerprints
 
+        public Status storeAccessControl(AccessControl accessCntrl)
+        {
+            string connStr = getConnectionStringByName("MySQL_AFIS_conn");
+            MySqlConnection conn = new MySqlConnection(connStr);
+            MySqlCommand cmd;
+            Status status = null;
+            conn.Open();
+            try
+            {
+                cmd = conn.CreateCommand();
+                cmd.CommandText = "INSERT INTO access_cntrl(role, access_login_tab, access_enroll_tab, access_match_tab, access_usermgmt_tab, " +
+                                  "access_audit_tab, access_find_tab, access_data_import, access_data_export, access_multi_match) VALUES " + 
+                                  "(@role,@access_login_tab,@access_enroll_tab,@access_match_tab,@access_usermgmt_tab,@access_audit_tab, " +
+                                  "@access_find_tab,@access_data_import,@access_data_export,@access_multi_match)";
+                cmd.Parameters.AddWithValue("@role", accessCntrl.getRole());
+                cmd.Parameters.AddWithValue("@access_login_tab", accessCntrl.getAccessLoginTab());
+                cmd.Parameters.AddWithValue("@access_enroll_tab", accessCntrl.getAccessEnrollTab());
+                cmd.Parameters.AddWithValue("@access_match_tab", accessCntrl.getAccessMatchTab());
+                cmd.Parameters.AddWithValue("@access_usermgmt_tab", accessCntrl.getAccessUserMgmtTab());
+                cmd.Parameters.AddWithValue("@access_audit_tab", accessCntrl.getAccessAuditTab());
+                cmd.Parameters.AddWithValue("@access_find_tab", accessCntrl.getAccessFindTab());
+                cmd.Parameters.AddWithValue("@access_data_import", accessCntrl.getAccessDataImport());
+                cmd.Parameters.AddWithValue("@access_data_export", accessCntrl.getAccessDataExport());
+                cmd.Parameters.AddWithValue("@access_multi_match", accessCntrl.getAccessMultiMatch());
+                cmd.ExecuteNonQuery();
+                Console.WriteLine("###-->> Access Contrl created successfully.....");
+
+                //Successful status
+                status = new Status();
+                status.setStatusCode(Status.STATUS_SUCCESSFUL);
+                status.setStatusDesc("Access Control (" + accessCntrl.getRole() + ") is created successfully.");
+            }
+            catch (Exception exp)
+            {
+                //Successful status
+                status = new Status();
+                status.setStatusCode(Status.STATUS_FAILURE);
+                status.setStatusDesc("Failed to create Access Control (" + accessCntrl.getRole() + "). Reason is - " + exp.Message + ".");
+            }
+            finally
+            {
+                if (conn.State == System.Data.ConnectionState.Open)
+                {
+                    conn.Close();
+                }
+            }
+
+            return status;
+        }//end storeFingerprints
+
+        public List<AccessControl> getAccessControls()
+        {
+            string connStr = getConnectionStringByName("MySQL_AFIS_conn");
+            MySqlConnection conn = new MySqlConnection(connStr);
+            MySqlCommand cmd;
+            List<AccessControl> accessCntrls;
+            DataTable ds;
+            conn.Open();
+            try
+            {
+                accessCntrls = new List<AccessControl>();
+                cmd = conn.CreateCommand();
+
+                cmd.CommandText = "SELECT * FROM afis.access_cntrl";
+                MySqlDataAdapter da = new MySqlDataAdapter(cmd);
+                ds = new DataTable();
+                da.Fill(ds);
+                IEnumerator rows = ds.Rows.GetEnumerator();
+                Int32 i = 0;
+
+                while (rows.MoveNext())
+                {
+                    AccessControl accessCntrl = new AccessControl();
+                    string role = (string)ds.Rows[i]["role"];
+                    Console.WriteLine("###-->># of matched role = " + role);
+                    string access_login_tab = (string)ds.Rows[i]["access_login_tab"];
+                    string access_enroll_tab = (string)ds.Rows[i]["access_enroll_tab"];
+                    string access_match_tab = (string)ds.Rows[i]["access_match_tab"];
+                    string access_usermgmt_tab = (string)ds.Rows[i]["access_usermgmt_tab"];
+                    string access_audit_tab = (string)ds.Rows[i]["access_audit_tab"];
+                    string access_find_tab = (string)ds.Rows[i]["access_find_tab"];
+                    string access_data_import = (string)ds.Rows[i]["access_data_import"];
+                    string access_data_export = (string)ds.Rows[i]["access_data_export"];
+                    string access_multi_match = (string)ds.Rows[i]["access_multi_match"];
+
+                    accessCntrl.setRole(role);
+                    accessCntrl.setAccessLoginTab(access_login_tab);
+                    accessCntrl.setAccessEnrollTab(access_enroll_tab);
+                    accessCntrl.setAccessMatchTab(access_match_tab);
+                    accessCntrl.setAccessUserMgmtTab(access_usermgmt_tab);
+                    accessCntrl.setAccessAuditTab(access_audit_tab);
+                    accessCntrl.setAccessFindTab(access_find_tab);
+                    accessCntrl.setAccessDataImport(access_data_import);
+                    accessCntrl.setAccessDataExport(access_data_export);
+                    accessCntrl.setAccessMultiMatch(access_multi_match);
+                    accessCntrls.Add(accessCntrl);
+
+                    i = i + 1;
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+            finally
+            {
+                if (conn.State == System.Data.ConnectionState.Open)
+                {
+                    conn.Close();
+                }
+            }
+
+            return accessCntrls;
+        }//end getAccessControls
+
+
         /*
                 public void storeFingerprints(MyPerson person)
                 {
@@ -1573,6 +1689,54 @@ namespace AFIS360
             return status;
         }
 
+        public Status updateAccessControl(AccessControl accessCntrl)
+        {
+            string connStr = getConnectionStringByName("MySQL_AFIS_conn");
+            MySqlConnection conn = new MySqlConnection(connStr);
+            MySqlCommand cmd;
+            Status status = null;
+            conn.Open();
+
+            try
+            {
+                Console.WriteLine("###-->> Update Access Control....");
+                cmd = conn.CreateCommand();
+                cmd.CommandText = "UPDATE access_cntrl SET access_login_tab = @access_login_tab, access_enroll_tab = @access_enroll_tab, " +
+                                  "access_match_tab = @access_match_tab, access_usermgmt_tab = @access_usermgmt_tab, access_audit_tab = @access_audit_tab, " +
+                                  "access_find_tab = @access_find_tab, access_data_import = @access_data_import, access_data_export = @access_data_export, " +
+                                  "access_multi_match = @access_multi_match WHERE role = @role";
+                cmd.Parameters.AddWithValue("@role", accessCntrl.getRole());
+                cmd.Parameters.AddWithValue("@access_login_tab", accessCntrl.getAccessLoginTab());
+                cmd.Parameters.AddWithValue("@access_enroll_tab", accessCntrl.getAccessEnrollTab());
+                cmd.Parameters.AddWithValue("@access_match_tab", accessCntrl.getAccessMatchTab());
+                cmd.Parameters.AddWithValue("@access_usermgmt_tab", accessCntrl.getAccessUserMgmtTab());
+                cmd.Parameters.AddWithValue("@access_audit_tab", accessCntrl.getAccessAuditTab());
+                cmd.Parameters.AddWithValue("@access_find_tab", accessCntrl.getAccessFindTab());
+                cmd.Parameters.AddWithValue("@access_data_import", accessCntrl.getAccessDataImport());
+                cmd.Parameters.AddWithValue("@access_data_export", accessCntrl.getAccessDataExport());
+                cmd.Parameters.AddWithValue("@access_multi_match", accessCntrl.getAccessMultiMatch());
+
+                cmd.ExecuteNonQuery();
+
+                status = new Status();
+                status.setStatusCode(Status.STATUS_SUCCESSFUL);
+                status.setStatusDesc("Access Control (" + accessCntrl.getRole() + ") updated successfully.");
+            }
+            catch (Exception e)
+            {
+                status = new Status();
+                status.setStatusCode(Status.STATUS_FAILURE);
+                status.setStatusDesc("Update of Access Control (" + accessCntrl.getRole() + ") is not successful. Reason is - " + e.Message + ".");
+            }
+            finally
+            {
+                if (conn.State == System.Data.ConnectionState.Open)
+                {
+                    conn.Close();
+                }
+            }
+            return status;
+        }
 
         public Status updateAFISUserPassword(string username, string current_password, string new_password)
         {

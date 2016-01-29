@@ -59,6 +59,7 @@ namespace AFIS360
                 DataAccess dataAccess = new DataAccess();
                 Int32 personCount = dataAccess.getPersonCount();
                 Console.WriteLine("###-->>Total number of person records = " + personCount);
+                activityLog.setActivity("Batch Export to a file - " + fileName + ". Totall record exported = " + personCount + "\n");
 
                 progressBarBatchExport.Visible = true;
                 progressBarBatchExport.Minimum = 1;

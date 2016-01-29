@@ -8,6 +8,7 @@ namespace AFIS360
 {
     public class AccessControl
     {
+        private string role;
         private string access_login_tab;
         private string access_enroll_tab;
         private string access_match_tab;
@@ -17,6 +18,16 @@ namespace AFIS360
         private string access_data_import;
         private string access_data_export;
         private string access_multi_match;
+
+        public void setRole(string role)
+        {
+            this.role = role;
+        }
+
+        public string getRole()
+        {
+            return this.role;
+        }
 
         public void setAccessLoginTab(string access_login_tab)
         {

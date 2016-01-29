@@ -299,6 +299,8 @@ namespace AFIS360
                 }
 
                 progBarExportData.Maximum = selectedRows.Count;
+                activityLog.setActivity("Batch Export to a file - " + filename + ". Totall record exported = " + selectedRows.Count + "\n");
+
 
                 using (var writer = new CsvFileWriter(filename))
                 {
@@ -358,7 +360,7 @@ namespace AFIS360
                         string photoStr = (photo != null) ? Program.ImageToBase64(personDetail.getPassportPhoto(), System.Drawing.Imaging.ImageFormat.Bmp) : null;
                         columns.Add(photoStr ?? String.Empty);
                         writer.WriteRow(columns);
-                    }
+                    }//end foreach
                 }
             }
             catch (Exception ex)

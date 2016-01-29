@@ -39,13 +39,22 @@
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.menuToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.tlpTmportDataImportStat = new System.Windows.Forms.TableLayoutPanel();
+            this.lblImportDataTotalNoRecs = new System.Windows.Forms.Label();
+            this.lblImportDataImportedRecs = new System.Windows.Forms.Label();
+            this.lblImportDataFailedToImportRecs = new System.Windows.Forms.Label();
+            this.lblImportDataTotalRecCount = new System.Windows.Forms.Label();
+            this.lblDataImportSuccessCount = new System.Windows.Forms.Label();
+            this.lblImportDataFailedCount = new System.Windows.Forms.Label();
             this.grpBoxImportData.SuspendLayout();
             this.tlpImportData.SuspendLayout();
             this.menuStrip1.SuspendLayout();
+            this.tlpTmportDataImportStat.SuspendLayout();
             this.SuspendLayout();
             // 
             // grpBoxImportData
             // 
+            this.grpBoxImportData.Controls.Add(this.tlpTmportDataImportStat);
             this.grpBoxImportData.Controls.Add(this.tlpImportData);
             this.grpBoxImportData.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.grpBoxImportData.Location = new System.Drawing.Point(57, 67);
@@ -60,7 +69,7 @@
             this.tlpImportData.ColumnCount = 3;
             this.tlpImportData.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 26.07959F));
             this.tlpImportData.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 73.92041F));
-            this.tlpImportData.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 244F));
+            this.tlpImportData.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 245F));
             this.tlpImportData.Controls.Add(this.lblImportDataBrowseFile, 0, 0);
             this.tlpImportData.Controls.Add(this.txtBoxImportDataInputFile, 1, 0);
             this.tlpImportData.Controls.Add(this.btnImportDataBrowse, 2, 0);
@@ -89,7 +98,7 @@
             // 
             this.txtBoxImportDataInputFile.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.txtBoxImportDataInputFile.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.125F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtBoxImportDataInputFile.Location = new System.Drawing.Point(312, 13);
+            this.txtBoxImportDataInputFile.Location = new System.Drawing.Point(311, 13);
             this.txtBoxImportDataInputFile.Name = "txtBoxImportDataInputFile";
             this.txtBoxImportDataInputFile.Size = new System.Drawing.Size(846, 38);
             this.txtBoxImportDataInputFile.TabIndex = 1;
@@ -97,7 +106,7 @@
             // btnImportDataBrowse
             // 
             this.btnImportDataBrowse.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.btnImportDataBrowse.Location = new System.Drawing.Point(1187, 3);
+            this.btnImportDataBrowse.Location = new System.Drawing.Point(1186, 3);
             this.btnImportDataBrowse.Name = "btnImportDataBrowse";
             this.btnImportDataBrowse.Size = new System.Drawing.Size(203, 57);
             this.btnImportDataBrowse.TabIndex = 2;
@@ -118,7 +127,7 @@
             // 
             // progBarImportDataImportProgress
             // 
-            this.progBarImportDataImportProgress.Location = new System.Drawing.Point(312, 67);
+            this.progBarImportDataImportProgress.Location = new System.Drawing.Point(311, 67);
             this.progBarImportDataImportProgress.Name = "progBarImportDataImportProgress";
             this.progBarImportDataImportProgress.Size = new System.Drawing.Size(846, 55);
             this.progBarImportDataImportProgress.TabIndex = 4;
@@ -149,6 +158,90 @@
             this.exitToolStripMenuItem.Text = "Exit";
             this.exitToolStripMenuItem.Click += new System.EventHandler(this.exitToolStripMenuItem_Click);
             // 
+            // tlpTmportDataImportStat
+            // 
+            this.tlpTmportDataImportStat.CellBorderStyle = System.Windows.Forms.TableLayoutPanelCellBorderStyle.Single;
+            this.tlpTmportDataImportStat.ColumnCount = 3;
+            this.tlpTmportDataImportStat.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 44.35666F));
+            this.tlpTmportDataImportStat.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 55.64334F));
+            this.tlpTmportDataImportStat.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 539F));
+            this.tlpTmportDataImportStat.Controls.Add(this.lblImportDataFailedCount, 2, 1);
+            this.tlpTmportDataImportStat.Controls.Add(this.lblDataImportSuccessCount, 1, 1);
+            this.tlpTmportDataImportStat.Controls.Add(this.lblImportDataTotalNoRecs, 0, 0);
+            this.tlpTmportDataImportStat.Controls.Add(this.lblImportDataImportedRecs, 1, 0);
+            this.tlpTmportDataImportStat.Controls.Add(this.lblImportDataFailedToImportRecs, 2, 0);
+            this.tlpTmportDataImportStat.Controls.Add(this.lblImportDataTotalRecCount, 0, 1);
+            this.tlpTmportDataImportStat.Location = new System.Drawing.Point(35, 241);
+            this.tlpTmportDataImportStat.Name = "tlpTmportDataImportStat";
+            this.tlpTmportDataImportStat.RowCount = 2;
+            this.tlpTmportDataImportStat.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tlpTmportDataImportStat.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 59F));
+            this.tlpTmportDataImportStat.Size = new System.Drawing.Size(1426, 134);
+            this.tlpTmportDataImportStat.TabIndex = 2;
+            // 
+            // lblImportDataTotalNoRecs
+            // 
+            this.lblImportDataTotalNoRecs.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.lblImportDataTotalNoRecs.AutoSize = true;
+            this.lblImportDataTotalNoRecs.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.125F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblImportDataTotalNoRecs.Location = new System.Drawing.Point(21, 21);
+            this.lblImportDataTotalNoRecs.Name = "lblImportDataTotalNoRecs";
+            this.lblImportDataTotalNoRecs.Size = new System.Drawing.Size(350, 31);
+            this.lblImportDataTotalNoRecs.TabIndex = 0;
+            this.lblImportDataTotalNoRecs.Text = "Total # of Records on File";
+            // 
+            // lblImportDataImportedRecs
+            // 
+            this.lblImportDataImportedRecs.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.lblImportDataImportedRecs.AutoSize = true;
+            this.lblImportDataImportedRecs.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.125F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblImportDataImportedRecs.Location = new System.Drawing.Point(400, 21);
+            this.lblImportDataImportedRecs.Name = "lblImportDataImportedRecs";
+            this.lblImportDataImportedRecs.Size = new System.Drawing.Size(476, 31);
+            this.lblImportDataImportedRecs.TabIndex = 1;
+            this.lblImportDataImportedRecs.Text = "# of Records Imported Successfully";
+            // 
+            // lblImportDataFailedToImportRecs
+            // 
+            this.lblImportDataFailedToImportRecs.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.lblImportDataFailedToImportRecs.AutoSize = true;
+            this.lblImportDataFailedToImportRecs.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.125F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblImportDataFailedToImportRecs.Location = new System.Drawing.Point(979, 21);
+            this.lblImportDataFailedToImportRecs.Name = "lblImportDataFailedToImportRecs";
+            this.lblImportDataFailedToImportRecs.Size = new System.Drawing.Size(352, 31);
+            this.lblImportDataFailedToImportRecs.TabIndex = 2;
+            this.lblImportDataFailedToImportRecs.Text = "# of Records not Imported";
+            // 
+            // lblImportDataTotalRecCount
+            // 
+            this.lblImportDataTotalRecCount.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.lblImportDataTotalRecCount.AutoSize = true;
+            this.lblImportDataTotalRecCount.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.125F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblImportDataTotalRecCount.Location = new System.Drawing.Point(196, 88);
+            this.lblImportDataTotalRecCount.Name = "lblImportDataTotalRecCount";
+            this.lblImportDataTotalRecCount.Size = new System.Drawing.Size(0, 31);
+            this.lblImportDataTotalRecCount.TabIndex = 3;
+            // 
+            // lblDataImportSuccessCount
+            // 
+            this.lblDataImportSuccessCount.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.lblDataImportSuccessCount.AutoSize = true;
+            this.lblDataImportSuccessCount.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.125F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblDataImportSuccessCount.Location = new System.Drawing.Point(638, 88);
+            this.lblDataImportSuccessCount.Name = "lblDataImportSuccessCount";
+            this.lblDataImportSuccessCount.Size = new System.Drawing.Size(0, 31);
+            this.lblDataImportSuccessCount.TabIndex = 4;
+            // 
+            // lblImportDataFailedCount
+            // 
+            this.lblImportDataFailedCount.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.lblImportDataFailedCount.AutoSize = true;
+            this.lblImportDataFailedCount.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.125F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblImportDataFailedCount.Location = new System.Drawing.Point(1155, 88);
+            this.lblImportDataFailedCount.Name = "lblImportDataFailedCount";
+            this.lblImportDataFailedCount.Size = new System.Drawing.Size(0, 31);
+            this.lblImportDataFailedCount.TabIndex = 5;
+            // 
             // ImportData
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(12F, 25F);
@@ -167,6 +260,8 @@
             this.tlpImportData.PerformLayout();
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
+            this.tlpTmportDataImportStat.ResumeLayout(false);
+            this.tlpTmportDataImportStat.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -184,5 +279,12 @@
         private System.Windows.Forms.ToolStripMenuItem menuToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem exitToolStripMenuItem;
         private System.Windows.Forms.ProgressBar progBarImportDataImportProgress;
+        private System.Windows.Forms.TableLayoutPanel tlpTmportDataImportStat;
+        private System.Windows.Forms.Label lblImportDataFailedCount;
+        private System.Windows.Forms.Label lblDataImportSuccessCount;
+        private System.Windows.Forms.Label lblImportDataTotalNoRecs;
+        private System.Windows.Forms.Label lblImportDataImportedRecs;
+        private System.Windows.Forms.Label lblImportDataFailedToImportRecs;
+        private System.Windows.Forms.Label lblImportDataTotalRecCount;
     }
 }
