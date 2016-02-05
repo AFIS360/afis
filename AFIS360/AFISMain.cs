@@ -1980,7 +1980,7 @@ namespace AFIS360
 
             if (Program.getPerson(txtEnrollId.Text) != null)
             {
-                PhysicalChar physicalChar = new PhysicalChar(activityLog, txtEnrollId.Text);
+                PhysicalCharForm physicalChar = new PhysicalCharForm(activityLog, txtEnrollId.Text);
                 physicalChar.ShowDialog();
             } else
             {
@@ -1988,8 +1988,28 @@ namespace AFIS360
                 return;
             }
 
-
         }//end btnEnrollPhysicalChar_Click_1
+
+
+        private void btnEnrollCriminalRec_Click(object sender, EventArgs e)
+        {
+            if (string.IsNullOrEmpty(txtEnrollId.Text))
+            {
+                MessageBox.Show("Person ID field is required. Person must be enrolled before entering Physical Charististics.", "Warning Message", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            if (Program.getPerson(txtEnrollId.Text) != null)
+            {
+                PhysicalCharForm physicalChar = new PhysicalCharForm(activityLog, txtEnrollId.Text);
+                physicalChar.ShowDialog();
+            }
+            else
+            {
+                MessageBox.Show("Person (ID = " + txtEnrollId.Text + ") is not enrolled. Person must be enrolled before entering Physical Charististics.", "Warning Message", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+        }//end btnEnrollCriminalRec_Click
     }
 }
 

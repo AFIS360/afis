@@ -10,12 +10,12 @@ using System.Windows.Forms;
 
 namespace AFIS360
 {
-    public partial class PhysicalChar : Form
+    public partial class PhysicalCharForm : Form
     {
         private ActivityLog activityLog;
         private string personId;
 
-        public PhysicalChar(ActivityLog activityLog, string personId)
+        public PhysicalCharForm(ActivityLog activityLog, string personId)
         {
             InitializeComponent();
             this.activityLog = activityLog;
