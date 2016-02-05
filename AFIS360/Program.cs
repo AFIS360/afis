@@ -387,6 +387,13 @@ namespace AFIS360
         }//end Base64ToImage
 
 
+        public static PersonDetail getPerson(string personId)
+        {
+            DataAccess dataAccess = new DataAccess();
+            PersonDetail personDetail = dataAccess.retrievePersonDetail(personId).FirstOrDefault();
+            return personDetail;
+        }
+
         [STAThread]
         static void Main(string[] args)
         {

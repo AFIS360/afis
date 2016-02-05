@@ -52,7 +52,7 @@ namespace AFIS360
             string prefix = txtEnrollPrefix.Text;
             string suffix = txtEnrollSuffix.Text;
             DateTime dobTemp = dtpEnrollDOB.Value;
-            DateTime dob = Convert.ToDateTime(dobTemp.ToString("MM/dd/yyy"));
+            DateTime dob = Convert.ToDateTime(dobTemp.ToString("MM/dd/yyyy"));
             string streeAddr = txtEnrollAddrLine.Text;
             string city = txtEnrollCity.Text;
             string postalCode = txtEnrollPostalCode.Text;
@@ -98,7 +98,6 @@ namespace AFIS360
                     MessageBox.Show("Person ID field is required.", "Warning Message", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     return;
                 }
-
 
                 //store person's fingerprints
                 ICollection<KeyValuePair<String, System.Drawing.Image>> imgsFromPicBox = new Dictionary<String, System.Drawing.Image>();
@@ -1969,6 +1968,28 @@ namespace AFIS360
                 activityLog.setActivity(status.getStatusDesc() + "\n");
             }
         }
+
+
+        private void btnEnrollPhysicalChar_Click_1(object sender, EventArgs e)
+        {
+            if (string.IsNullOrEmpty(txtEnrollId.Text))
+            {
+                MessageBox.Show("Person ID field is required. Person must be enrolled before entering Physical Charististics.", "Warning Message", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            if (Program.getPerson(txtEnrollId.Text) != null)
+            {
+                PhysicalChar physicalChar = new PhysicalChar(activityLog, txtEnrollId.Text);
+                physicalChar.ShowDialog();
+            } else
+            {
+                MessageBox.Show("Person (ID = " + txtEnrollId.Text + ") is not enrolled. Person must be enrolled before entering Physical Charististics.", "Warning Message", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+
+        }//end btnEnrollPhysicalChar_Click_1
     }
 }
 

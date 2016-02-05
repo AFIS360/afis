@@ -37,11 +37,11 @@ namespace AFIS360
                         using (MySqlCommand cmd = conn.CreateCommand())
                         {
                             byte[] oSerializedPassportPhoto;
-                            cmd.CommandText = "INSERT INTO person(person_id, fname, lname, mname, name_prefix, name_suffix," +
-                                              "DOB, addr_street, addr_city, addr_postal_code, addr_state, addr_country, profession," +
-                                              "father_name, cell_nbr, home_phone, office_phone, email_addr, photo)" +
-                                              "VALUES(@person_id, @fname, @lname, @mname, @name_prefix, @name_suffix," +
-                                              "@DOB, @addr_street, @addr_city, @addr_postal_code, @addr_state, @addr_country, @profession," +
+                            cmd.CommandText = "INSERT INTO person(person_id, fname, lname, mname, name_prefix, name_suffix, " +
+                                              "DOB, addr_street, addr_city, addr_postal_code, addr_state, addr_country, profession, " +
+                                              "father_name, cell_nbr, home_phone, office_phone, email_addr, photo) " +
+                                              "VALUES(@person_id, @fname, @lname, @mname, @name_prefix, @name_suffix, " +
+                                              "@DOB, @addr_street, @addr_city, @addr_postal_code, @addr_state, @addr_country, @profession, " +
                                               "@father_name, @cell_nbr, @home_phone, @office_phone, @email_addr, @photo)";
                             cmd.Transaction = trans;
 
@@ -167,6 +167,7 @@ namespace AFIS360
                                   "access_audit_tab, access_find_tab, access_data_import, access_data_export, access_multi_match) VALUES " + 
                                   "(@role,@access_login_tab,@access_enroll_tab,@access_match_tab,@access_usermgmt_tab,@access_audit_tab, " +
                                   "@access_find_tab,@access_data_import,@access_data_export,@access_multi_match)";
+
                 cmd.Parameters.AddWithValue("@role", accessCntrl.getRole());
                 cmd.Parameters.AddWithValue("@access_login_tab", accessCntrl.getAccessLoginTab());
                 cmd.Parameters.AddWithValue("@access_enroll_tab", accessCntrl.getAccessEnrollTab());
@@ -268,6 +269,63 @@ namespace AFIS360
             return accessCntrls;
         }//end getAccessControls
 
+        public Status storePersonPhysicalCharacteristics(PersonPhysicalChar personPhysicalChar)
+        {
+            string connStr = getConnectionStringByName("MySQL_AFIS_conn");
+            MySqlConnection conn = new MySqlConnection(connStr);
+            MySqlCommand cmd;
+            Status status = null;
+            conn.Open();
+            try
+            {
+                cmd = conn.CreateCommand();
+                cmd.CommandText = "INSERT INTO physical_char(person_id, height, weight, eye_color, hair_color, complexion, " +
+                                  "birth_mark, id_mark, build_type, gender, death_date, created_by, creation_date, updated_by, updated_date) VALUES " +
+                                  "(@person_id, @height, @weight, @eye_color, @hair_color, @complexion, " +
+                                  "@birth_mark, @id_mark, @build_type, @gender, @death_date, @created_by, @creation_date, @updated_by, @updated_date)";
+
+                cmd.Parameters.AddWithValue("@person_id", personPhysicalChar.PersonId);
+                cmd.Parameters.AddWithValue("@height", personPhysicalChar.Height);
+                cmd.Parameters.AddWithValue("@weight", personPhysicalChar.Weight);
+                cmd.Parameters.AddWithValue("@eye_color", personPhysicalChar.EyeColor);
+                cmd.Parameters.AddWithValue("@hair_color", personPhysicalChar.HairColor); 
+                cmd.Parameters.AddWithValue("@complexion", personPhysicalChar.Complexion);
+                cmd.Parameters.AddWithValue("@birth_mark", personPhysicalChar.BirthMark);
+                cmd.Parameters.AddWithValue("@id_mark", personPhysicalChar.IdMark);
+                cmd.Parameters.AddWithValue("@build_type", personPhysicalChar.BuindType);
+                cmd.Parameters.AddWithValue("@gender", personPhysicalChar.Gender);
+                cmd.Parameters.AddWithValue("@death_date", personPhysicalChar.DOD);
+                cmd.Parameters.AddWithValue("@created_by", personPhysicalChar.CreatedBy);
+                cmd.Parameters.AddWithValue("@creation_date", personPhysicalChar.CreationDateTime);
+                cmd.Parameters.AddWithValue("@updated_by", personPhysicalChar.UpdatedBy);
+                cmd.Parameters.AddWithValue("@updated_date", personPhysicalChar.UpdateDateTime);                
+ 
+                cmd.ExecuteNonQuery();
+                Console.WriteLine("###-->> Physical Characteristics created successfully.....");
+
+                //Successful status
+                status = new Status();
+                status.setStatusCode(Status.STATUS_SUCCESSFUL);
+                status.setStatusDesc("Physical Characteristics (Person Id = " + personPhysicalChar.PersonId + ") is created successfully.");
+            }
+            catch (MySqlException exp)
+            {
+                Console.WriteLine("###-->> Exception = " + exp.StackTrace);
+                //Successful status
+                status = new Status();
+                status.setStatusCode(Status.STATUS_FAILURE);
+                status.setStatusDesc("Failed to store Physical Characteristics (Person Id = " + personPhysicalChar.PersonId + "). Reason is - " + exp.Message + ".");
+            }
+            finally
+            {
+                if (conn.State == System.Data.ConnectionState.Open)
+                {
+                    conn.Close();
+                }
+            }
+
+            return status;
+        }//end storeFingerprints
 
         /*
                 public void storeFingerprints(MyPerson person)
@@ -805,6 +863,57 @@ namespace AFIS360
 
             return personsDetail;
         }
+
+        public PersonPhysicalChar retrievePersonPhysicalCharacteristics(string personId)
+        {
+            string connStr = getConnectionStringByName("MySQL_AFIS_conn");
+            MySqlConnection conn = new MySqlConnection(connStr);
+            MySqlCommand cmd;
+            PersonPhysicalChar personsPhysicalChar = null;
+            DataTable ds;
+            conn.Open();
+            try
+            {
+                cmd = conn.CreateCommand();
+                cmd.CommandText = "SELECT * FROM afis.physical_char p where p.person_id = @person_id";
+                cmd.Parameters.AddWithValue("@person_id", personId);
+                MySqlDataAdapter da = new MySqlDataAdapter(cmd);
+                ds = new DataTable();
+                da.Fill(ds);
+
+                IEnumerator rows = ds.Rows.GetEnumerator();
+                
+                if(rows.MoveNext())
+                {
+                    personsPhysicalChar = new PersonPhysicalChar();
+                    personsPhysicalChar.PersonId = (string)ds.Rows[0]["person_id"];
+                    personsPhysicalChar.Height = (double)ds.Rows[0]["height"];
+                    personsPhysicalChar.Weight = (double)ds.Rows[0]["weight"];
+                    personsPhysicalChar.EyeColor = (string)ds.Rows[0]["eye_color"];
+                    personsPhysicalChar.HairColor = (string)ds.Rows[0]["hair_color"];
+                    personsPhysicalChar.Complexion = (string)ds.Rows[0]["complexion"];
+                    personsPhysicalChar.BirthMark = (string)ds.Rows[0]["birth_mark"];
+                    personsPhysicalChar.IdMark = (string)ds.Rows[0]["id_mark"];
+                    personsPhysicalChar.BuindType = (string)ds.Rows[0]["build_type"];
+                    personsPhysicalChar.Gender = (string)ds.Rows[0]["gender"];
+                    personsPhysicalChar.DOD = (DateTime)ds.Rows[0]["death_date"];
+                }
+            }
+            catch (Exception exp)
+            {
+                Console.WriteLine(exp.StackTrace);
+            }
+            finally
+            {
+                if (conn.State == System.Data.ConnectionState.Open)
+                {
+                    conn.Close();
+                }
+            }
+
+            return personsPhysicalChar;
+        }//end retrievePersonPhysicalCharacteristics
+
 
         public List<PersonDetail> findPersons(PersonDetail personDetail)
         {
@@ -1650,6 +1759,59 @@ namespace AFIS360
             }
             return status;
         }
+
+        public Status updatePersonPhysicalCharacteristics(PersonPhysicalChar personPhysicalChar)
+        {
+            string connStr = getConnectionStringByName("MySQL_AFIS_conn");
+            MySqlConnection conn = new MySqlConnection(connStr);
+            MySqlCommand cmd;
+            Status status = null;
+            conn.Open();
+
+            try
+            {
+                cmd = conn.CreateCommand();
+                cmd.CommandText = "UPDATE physical_char SET height = @height, weight = @weight, eye_color = @eye_color, " +
+                                  "hair_color = @hair_color, complexion = @complexion, birth_mark = @birth_mark, id_mark = @id_mark, " +
+                                  "build_type = @build_type, gender = @gender, death_date = @death_date, updated_by = @updated_by, updated_date = @updated_date WHERE person_id = @person_id";
+                cmd.Parameters.AddWithValue("@person_id", personPhysicalChar.PersonId);
+                cmd.Parameters.AddWithValue("@height", personPhysicalChar.Height);
+                cmd.Parameters.AddWithValue("@weight", personPhysicalChar.Weight);
+                cmd.Parameters.AddWithValue("@eye_color", personPhysicalChar.EyeColor);
+                cmd.Parameters.AddWithValue("@hair_color", personPhysicalChar.HairColor);
+                cmd.Parameters.AddWithValue("@complexion", personPhysicalChar.Complexion);
+                cmd.Parameters.AddWithValue("@birth_mark", personPhysicalChar.BirthMark);
+                cmd.Parameters.AddWithValue("@id_mark", personPhysicalChar.IdMark);
+                cmd.Parameters.AddWithValue("@build_type", personPhysicalChar.BuindType);
+                cmd.Parameters.AddWithValue("@gender", personPhysicalChar.Gender);
+                cmd.Parameters.AddWithValue("@death_date", personPhysicalChar.DOD);
+                cmd.Parameters.AddWithValue("@updated_by", personPhysicalChar.UpdatedBy);
+                cmd.Parameters.AddWithValue("@updated_date", personPhysicalChar.UpdateDateTime);
+
+
+                cmd.ExecuteNonQuery();
+
+                status = new Status();
+                status.setStatusCode(Status.STATUS_SUCCESSFUL);
+                status.setStatusDesc("Person's (PersonId = " + personPhysicalChar.PersonId + ") Physical Characteristics updated successfully.");
+            }
+            catch (Exception exp)
+            {
+                status = new Status();
+                status.setStatusCode(Status.STATUS_FAILURE);
+                status.setStatusDesc("Update of Person's (PersonId = " + personPhysicalChar.PersonId + ") Physical Characteristics is not successful. Reason is - " + exp.Message + ".");
+                Console.WriteLine(exp);
+            }
+            finally
+            {
+                if (conn.State == System.Data.ConnectionState.Open)
+                {
+                    conn.Close();
+                }
+            }
+            return status;
+        }
+
 
         public Status updateUserPref(AppConfig appConfig)
         {

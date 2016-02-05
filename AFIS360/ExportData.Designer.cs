@@ -118,11 +118,11 @@
             this.grpBoxExportData.Controls.Add(this.tlpExportDataResult);
             this.grpBoxExportData.Controls.Add(this.tlpExportData);
             this.grpBoxExportData.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.grpBoxExportData.Location = new System.Drawing.Point(70, 63);
+            this.grpBoxExportData.Location = new System.Drawing.Point(71, 63);
             this.grpBoxExportData.Margin = new System.Windows.Forms.Padding(4);
             this.grpBoxExportData.Name = "grpBoxExportData";
             this.grpBoxExportData.Padding = new System.Windows.Forms.Padding(4);
-            this.grpBoxExportData.Size = new System.Drawing.Size(2164, 1121);
+            this.grpBoxExportData.Size = new System.Drawing.Size(2220, 1195);
             this.grpBoxExportData.TabIndex = 0;
             this.grpBoxExportData.TabStop = false;
             this.grpBoxExportData.Text = "Export Data";
@@ -136,7 +136,7 @@
             this.tlpExportDataFindExportClear.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 207F));
             this.tlpExportDataFindExportClear.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 181F));
             this.tlpExportDataFindExportClear.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 181F));
-            this.tlpExportDataFindExportClear.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 446F));
+            this.tlpExportDataFindExportClear.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 447F));
             this.tlpExportDataFindExportClear.Controls.Add(this.txtBoxExportDataExportFolder, 2, 0);
             this.tlpExportDataFindExportClear.Controls.Add(this.btnExportDataFind, 0, 0);
             this.tlpExportDataFindExportClear.Controls.Add(this.lblExportDataExportFolder, 1, 0);
@@ -144,7 +144,7 @@
             this.tlpExportDataFindExportClear.Controls.Add(this.btnExportDataExport, 4, 0);
             this.tlpExportDataFindExportClear.Controls.Add(this.btnExportDataExportFileBrowse, 3, 0);
             this.tlpExportDataFindExportClear.Controls.Add(this.progBarExportData, 6, 0);
-            this.tlpExportDataFindExportClear.Location = new System.Drawing.Point(20, 414);
+            this.tlpExportDataFindExportClear.Location = new System.Drawing.Point(66, 417);
             this.tlpExportDataFindExportClear.Name = "tlpExportDataFindExportClear";
             this.tlpExportDataFindExportClear.RowCount = 1;
             this.tlpExportDataFindExportClear.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
@@ -155,7 +155,7 @@
             // 
             this.txtBoxExportDataExportFolder.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.txtBoxExportDataExportFolder.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.125F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtBoxExportDataExportFolder.Location = new System.Drawing.Point(435, 14);
+            this.txtBoxExportDataExportFolder.Location = new System.Drawing.Point(434, 14);
             this.txtBoxExportDataExportFolder.Name = "txtBoxExportDataExportFolder";
             this.txtBoxExportDataExportFolder.Size = new System.Drawing.Size(591, 38);
             this.txtBoxExportDataExportFolder.TabIndex = 5;
@@ -178,7 +178,7 @@
             this.lblExportDataExportFolder.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.lblExportDataExportFolder.AutoSize = true;
             this.lblExportDataExportFolder.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.125F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblExportDataExportFolder.Location = new System.Drawing.Point(261, 17);
+            this.lblExportDataExportFolder.Location = new System.Drawing.Point(260, 17);
             this.lblExportDataExportFolder.Name = "lblExportDataExportFolder";
             this.lblExportDataExportFolder.Size = new System.Drawing.Size(163, 31);
             this.lblExportDataExportFolder.TabIndex = 4;
@@ -188,7 +188,7 @@
             // 
             this.btnExportDataClear.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.btnExportDataClear.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnExportDataClear.Location = new System.Drawing.Point(1450, 8);
+            this.btnExportDataClear.Location = new System.Drawing.Point(1449, 8);
             this.btnExportDataClear.Margin = new System.Windows.Forms.Padding(6);
             this.btnExportDataClear.Name = "btnExportDataClear";
             this.btnExportDataClear.Size = new System.Drawing.Size(150, 50);
@@ -201,7 +201,7 @@
             // 
             this.btnExportDataExport.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.btnExportDataExport.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnExportDataExport.Location = new System.Drawing.Point(1269, 8);
+            this.btnExportDataExport.Location = new System.Drawing.Point(1268, 8);
             this.btnExportDataExport.Margin = new System.Windows.Forms.Padding(6);
             this.btnExportDataExport.Name = "btnExportDataExport";
             this.btnExportDataExport.Size = new System.Drawing.Size(150, 50);
@@ -213,7 +213,7 @@
             // btnExportDataExportFileBrowse
             // 
             this.btnExportDataExportFileBrowse.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.125F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnExportDataExportFileBrowse.Location = new System.Drawing.Point(1059, 3);
+            this.btnExportDataExportFileBrowse.Location = new System.Drawing.Point(1058, 3);
             this.btnExportDataExportFileBrowse.Name = "btnExportDataExportFileBrowse";
             this.btnExportDataExportFileBrowse.Size = new System.Drawing.Size(183, 55);
             this.btnExportDataExportFileBrowse.TabIndex = 6;
@@ -223,7 +223,7 @@
             // 
             // progBarExportData
             // 
-            this.progBarExportData.Location = new System.Drawing.Point(1628, 3);
+            this.progBarExportData.Location = new System.Drawing.Point(1627, 3);
             this.progBarExportData.Name = "progBarExportData";
             this.progBarExportData.Size = new System.Drawing.Size(432, 60);
             this.progBarExportData.TabIndex = 7;
@@ -237,7 +237,7 @@
             this.tlpExportDataResult.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 396F));
             this.tlpExportDataResult.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 371F));
             this.tlpExportDataResult.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 297F));
-            this.tlpExportDataResult.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 362F));
+            this.tlpExportDataResult.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 364F));
             this.tlpExportDataResult.Controls.Add(this.chkBoxExportDataRes1, 0, 1);
             this.tlpExportDataResult.Controls.Add(this.chkBoxExportDataRes2, 0, 2);
             this.tlpExportDataResult.Controls.Add(this.lblExportDataResHeaderPersonId, 1, 0);
@@ -264,7 +264,7 @@
             this.tlpExportDataResult.Controls.Add(this.lnklblExportDataPersonId_9, 1, 9);
             this.tlpExportDataResult.Controls.Add(this.lnklblExportDataPersonId_10, 1, 10);
             this.tlpExportDataResult.Controls.Add(this.chkBoxExportDataSelectAll, 0, 0);
-            this.tlpExportDataResult.Location = new System.Drawing.Point(20, 502);
+            this.tlpExportDataResult.Location = new System.Drawing.Point(66, 506);
             this.tlpExportDataResult.Margin = new System.Windows.Forms.Padding(4);
             this.tlpExportDataResult.Name = "tlpExportDataResult";
             this.tlpExportDataResult.RowCount = 11;
@@ -279,7 +279,7 @@
             this.tlpExportDataResult.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 48F));
             this.tlpExportDataResult.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 56F));
             this.tlpExportDataResult.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 56F));
-            this.tlpExportDataResult.Size = new System.Drawing.Size(2072, 592);
+            this.tlpExportDataResult.Size = new System.Drawing.Size(2072, 587);
             this.tlpExportDataResult.TabIndex = 1;
             // 
             // chkBoxExportDataRes1
@@ -287,7 +287,7 @@
             this.chkBoxExportDataRes1.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.chkBoxExportDataRes1.AutoSize = true;
             this.chkBoxExportDataRes1.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.125F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.chkBoxExportDataRes1.Location = new System.Drawing.Point(91, 63);
+            this.chkBoxExportDataRes1.Location = new System.Drawing.Point(90, 60);
             this.chkBoxExportDataRes1.Margin = new System.Windows.Forms.Padding(4);
             this.chkBoxExportDataRes1.Name = "chkBoxExportDataRes1";
             this.chkBoxExportDataRes1.Size = new System.Drawing.Size(28, 27);
@@ -300,7 +300,7 @@
             this.chkBoxExportDataRes2.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.chkBoxExportDataRes2.AutoSize = true;
             this.chkBoxExportDataRes2.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.125F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.chkBoxExportDataRes2.Location = new System.Drawing.Point(91, 115);
+            this.chkBoxExportDataRes2.Location = new System.Drawing.Point(90, 110);
             this.chkBoxExportDataRes2.Margin = new System.Windows.Forms.Padding(4);
             this.chkBoxExportDataRes2.Name = "chkBoxExportDataRes2";
             this.chkBoxExportDataRes2.Size = new System.Drawing.Size(28, 27);
@@ -312,7 +312,7 @@
             // 
             this.lblExportDataResHeaderPersonId.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.lblExportDataResHeaderPersonId.AutoSize = true;
-            this.lblExportDataResHeaderPersonId.Location = new System.Drawing.Point(341, 7);
+            this.lblExportDataResHeaderPersonId.Location = new System.Drawing.Point(340, 6);
             this.lblExportDataResHeaderPersonId.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblExportDataResHeaderPersonId.Name = "lblExportDataResHeaderPersonId";
             this.lblExportDataResHeaderPersonId.Size = new System.Drawing.Size(167, 37);
@@ -323,7 +323,7 @@
             // 
             this.lblExportDataResHeaderFName.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.lblExportDataResHeaderFName.AutoSize = true;
-            this.lblExportDataResHeaderFName.Location = new System.Drawing.Point(746, 7);
+            this.lblExportDataResHeaderFName.Location = new System.Drawing.Point(744, 6);
             this.lblExportDataResHeaderFName.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblExportDataResHeaderFName.Name = "lblExportDataResHeaderFName";
             this.lblExportDataResHeaderFName.Size = new System.Drawing.Size(185, 37);
@@ -334,7 +334,7 @@
             // 
             this.lblExportDataResHeaderLName.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.lblExportDataResHeaderLName.AutoSize = true;
-            this.lblExportDataResHeaderLName.Location = new System.Drawing.Point(1132, 7);
+            this.lblExportDataResHeaderLName.Location = new System.Drawing.Point(1130, 6);
             this.lblExportDataResHeaderLName.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblExportDataResHeaderLName.Name = "lblExportDataResHeaderLName";
             this.lblExportDataResHeaderLName.Size = new System.Drawing.Size(182, 37);
@@ -345,7 +345,7 @@
             // 
             this.lblExportDataResHeaderState.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.lblExportDataResHeaderState.AutoSize = true;
-            this.lblExportDataResHeaderState.Location = new System.Drawing.Point(1510, 7);
+            this.lblExportDataResHeaderState.Location = new System.Drawing.Point(1508, 6);
             this.lblExportDataResHeaderState.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblExportDataResHeaderState.Name = "lblExportDataResHeaderState";
             this.lblExportDataResHeaderState.Size = new System.Drawing.Size(96, 37);
@@ -356,7 +356,7 @@
             // 
             this.lblExportDataResHeaderCountry.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.lblExportDataResHeaderCountry.AutoSize = true;
-            this.lblExportDataResHeaderCountry.Location = new System.Drawing.Point(1821, 7);
+            this.lblExportDataResHeaderCountry.Location = new System.Drawing.Point(1820, 6);
             this.lblExportDataResHeaderCountry.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblExportDataResHeaderCountry.Name = "lblExportDataResHeaderCountry";
             this.lblExportDataResHeaderCountry.Size = new System.Drawing.Size(136, 37);
@@ -368,7 +368,7 @@
             this.chkBoxExportDataRes3.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.chkBoxExportDataRes3.AutoSize = true;
             this.chkBoxExportDataRes3.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.125F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.chkBoxExportDataRes3.Location = new System.Drawing.Point(91, 168);
+            this.chkBoxExportDataRes3.Location = new System.Drawing.Point(90, 163);
             this.chkBoxExportDataRes3.Margin = new System.Windows.Forms.Padding(4);
             this.chkBoxExportDataRes3.Name = "chkBoxExportDataRes3";
             this.chkBoxExportDataRes3.Size = new System.Drawing.Size(28, 27);
@@ -381,7 +381,7 @@
             this.chkBoxExportDataRes4.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.chkBoxExportDataRes4.AutoSize = true;
             this.chkBoxExportDataRes4.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.125F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.chkBoxExportDataRes4.Location = new System.Drawing.Point(91, 223);
+            this.chkBoxExportDataRes4.Location = new System.Drawing.Point(90, 218);
             this.chkBoxExportDataRes4.Margin = new System.Windows.Forms.Padding(4);
             this.chkBoxExportDataRes4.Name = "chkBoxExportDataRes4";
             this.chkBoxExportDataRes4.Size = new System.Drawing.Size(28, 27);
@@ -394,7 +394,7 @@
             this.chkBoxExportDataRes5.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.chkBoxExportDataRes5.AutoSize = true;
             this.chkBoxExportDataRes5.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.125F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.chkBoxExportDataRes5.Location = new System.Drawing.Point(91, 277);
+            this.chkBoxExportDataRes5.Location = new System.Drawing.Point(90, 272);
             this.chkBoxExportDataRes5.Margin = new System.Windows.Forms.Padding(4);
             this.chkBoxExportDataRes5.Name = "chkBoxExportDataRes5";
             this.chkBoxExportDataRes5.Size = new System.Drawing.Size(28, 27);
@@ -407,7 +407,7 @@
             this.chkBoxExportDataRes6.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.chkBoxExportDataRes6.AutoSize = true;
             this.chkBoxExportDataRes6.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.125F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.chkBoxExportDataRes6.Location = new System.Drawing.Point(91, 331);
+            this.chkBoxExportDataRes6.Location = new System.Drawing.Point(90, 326);
             this.chkBoxExportDataRes6.Margin = new System.Windows.Forms.Padding(4);
             this.chkBoxExportDataRes6.Name = "chkBoxExportDataRes6";
             this.chkBoxExportDataRes6.Size = new System.Drawing.Size(28, 27);
@@ -420,7 +420,7 @@
             this.chkBoxExportDataRes7.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.chkBoxExportDataRes7.AutoSize = true;
             this.chkBoxExportDataRes7.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.125F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.chkBoxExportDataRes7.Location = new System.Drawing.Point(91, 386);
+            this.chkBoxExportDataRes7.Location = new System.Drawing.Point(90, 381);
             this.chkBoxExportDataRes7.Margin = new System.Windows.Forms.Padding(4);
             this.chkBoxExportDataRes7.Name = "chkBoxExportDataRes7";
             this.chkBoxExportDataRes7.Size = new System.Drawing.Size(28, 27);
@@ -433,7 +433,7 @@
             this.chkBoxExportDataRes8.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.chkBoxExportDataRes8.AutoSize = true;
             this.chkBoxExportDataRes8.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.125F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.chkBoxExportDataRes8.Location = new System.Drawing.Point(91, 438);
+            this.chkBoxExportDataRes8.Location = new System.Drawing.Point(90, 433);
             this.chkBoxExportDataRes8.Margin = new System.Windows.Forms.Padding(4);
             this.chkBoxExportDataRes8.Name = "chkBoxExportDataRes8";
             this.chkBoxExportDataRes8.Size = new System.Drawing.Size(28, 27);
@@ -446,7 +446,7 @@
             this.chkBoxExportDataRes9.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.chkBoxExportDataRes9.AutoSize = true;
             this.chkBoxExportDataRes9.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.125F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.chkBoxExportDataRes9.Location = new System.Drawing.Point(91, 491);
+            this.chkBoxExportDataRes9.Location = new System.Drawing.Point(90, 486);
             this.chkBoxExportDataRes9.Margin = new System.Windows.Forms.Padding(4);
             this.chkBoxExportDataRes9.Name = "chkBoxExportDataRes9";
             this.chkBoxExportDataRes9.Size = new System.Drawing.Size(28, 27);
@@ -459,7 +459,7 @@
             this.chkBoxExportDataRes10.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.chkBoxExportDataRes10.AutoSize = true;
             this.chkBoxExportDataRes10.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.125F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.chkBoxExportDataRes10.Location = new System.Drawing.Point(91, 549);
+            this.chkBoxExportDataRes10.Location = new System.Drawing.Point(90, 544);
             this.chkBoxExportDataRes10.Margin = new System.Windows.Forms.Padding(4);
             this.chkBoxExportDataRes10.Name = "chkBoxExportDataRes10";
             this.chkBoxExportDataRes10.Size = new System.Drawing.Size(28, 27);
@@ -472,7 +472,7 @@
             this.lnklblExportDataPersonId_1.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.lnklblExportDataPersonId_1.AutoSize = true;
             this.lnklblExportDataPersonId_1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lnklblExportDataPersonId_1.Location = new System.Drawing.Point(216, 62);
+            this.lnklblExportDataPersonId_1.Location = new System.Drawing.Point(215, 58);
             this.lnklblExportDataPersonId_1.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
             this.lnklblExportDataPersonId_1.Name = "lnklblExportDataPersonId_1";
             this.lnklblExportDataPersonId_1.Size = new System.Drawing.Size(0, 30);
@@ -484,7 +484,7 @@
             this.lnklblExportDataPersonId_2.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.lnklblExportDataPersonId_2.AutoSize = true;
             this.lnklblExportDataPersonId_2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lnklblExportDataPersonId_2.Location = new System.Drawing.Point(216, 114);
+            this.lnklblExportDataPersonId_2.Location = new System.Drawing.Point(215, 109);
             this.lnklblExportDataPersonId_2.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
             this.lnklblExportDataPersonId_2.Name = "lnklblExportDataPersonId_2";
             this.lnklblExportDataPersonId_2.Size = new System.Drawing.Size(0, 30);
@@ -496,7 +496,7 @@
             this.lnklblExportDataPersonId_3.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.lnklblExportDataPersonId_3.AutoSize = true;
             this.lnklblExportDataPersonId_3.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lnklblExportDataPersonId_3.Location = new System.Drawing.Point(216, 167);
+            this.lnklblExportDataPersonId_3.Location = new System.Drawing.Point(215, 162);
             this.lnklblExportDataPersonId_3.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
             this.lnklblExportDataPersonId_3.Name = "lnklblExportDataPersonId_3";
             this.lnklblExportDataPersonId_3.Size = new System.Drawing.Size(0, 30);
@@ -508,7 +508,7 @@
             this.lnklblExportDataPersonId_4.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.lnklblExportDataPersonId_4.AutoSize = true;
             this.lnklblExportDataPersonId_4.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lnklblExportDataPersonId_4.Location = new System.Drawing.Point(216, 222);
+            this.lnklblExportDataPersonId_4.Location = new System.Drawing.Point(215, 217);
             this.lnklblExportDataPersonId_4.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
             this.lnklblExportDataPersonId_4.Name = "lnklblExportDataPersonId_4";
             this.lnklblExportDataPersonId_4.Size = new System.Drawing.Size(0, 30);
@@ -520,7 +520,7 @@
             this.lnklblExportDataPersonId_5.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.lnklblExportDataPersonId_5.AutoSize = true;
             this.lnklblExportDataPersonId_5.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lnklblExportDataPersonId_5.Location = new System.Drawing.Point(216, 276);
+            this.lnklblExportDataPersonId_5.Location = new System.Drawing.Point(215, 271);
             this.lnklblExportDataPersonId_5.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
             this.lnklblExportDataPersonId_5.Name = "lnklblExportDataPersonId_5";
             this.lnklblExportDataPersonId_5.Size = new System.Drawing.Size(0, 30);
@@ -532,7 +532,7 @@
             this.lnklblExportDataPersonId_6.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.lnklblExportDataPersonId_6.AutoSize = true;
             this.lnklblExportDataPersonId_6.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lnklblExportDataPersonId_6.Location = new System.Drawing.Point(216, 330);
+            this.lnklblExportDataPersonId_6.Location = new System.Drawing.Point(215, 325);
             this.lnklblExportDataPersonId_6.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
             this.lnklblExportDataPersonId_6.Name = "lnklblExportDataPersonId_6";
             this.lnklblExportDataPersonId_6.Size = new System.Drawing.Size(0, 30);
@@ -544,7 +544,7 @@
             this.lnklblExportDataPersonId_7.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.lnklblExportDataPersonId_7.AutoSize = true;
             this.lnklblExportDataPersonId_7.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lnklblExportDataPersonId_7.Location = new System.Drawing.Point(216, 385);
+            this.lnklblExportDataPersonId_7.Location = new System.Drawing.Point(215, 380);
             this.lnklblExportDataPersonId_7.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
             this.lnklblExportDataPersonId_7.Name = "lnklblExportDataPersonId_7";
             this.lnklblExportDataPersonId_7.Size = new System.Drawing.Size(0, 30);
@@ -556,7 +556,7 @@
             this.lnklblExportDataPersonId_8.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.lnklblExportDataPersonId_8.AutoSize = true;
             this.lnklblExportDataPersonId_8.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lnklblExportDataPersonId_8.Location = new System.Drawing.Point(216, 437);
+            this.lnklblExportDataPersonId_8.Location = new System.Drawing.Point(215, 432);
             this.lnklblExportDataPersonId_8.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
             this.lnklblExportDataPersonId_8.Name = "lnklblExportDataPersonId_8";
             this.lnklblExportDataPersonId_8.Size = new System.Drawing.Size(0, 30);
@@ -568,7 +568,7 @@
             this.lnklblExportDataPersonId_9.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.lnklblExportDataPersonId_9.AutoSize = true;
             this.lnklblExportDataPersonId_9.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lnklblExportDataPersonId_9.Location = new System.Drawing.Point(216, 490);
+            this.lnklblExportDataPersonId_9.Location = new System.Drawing.Point(215, 485);
             this.lnklblExportDataPersonId_9.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
             this.lnklblExportDataPersonId_9.Name = "lnklblExportDataPersonId_9";
             this.lnklblExportDataPersonId_9.Size = new System.Drawing.Size(0, 30);
@@ -580,7 +580,7 @@
             this.lnklblExportDataPersonId_10.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.lnklblExportDataPersonId_10.AutoSize = true;
             this.lnklblExportDataPersonId_10.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lnklblExportDataPersonId_10.Location = new System.Drawing.Point(216, 547);
+            this.lnklblExportDataPersonId_10.Location = new System.Drawing.Point(215, 542);
             this.lnklblExportDataPersonId_10.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
             this.lnklblExportDataPersonId_10.Name = "lnklblExportDataPersonId_10";
             this.lnklblExportDataPersonId_10.Size = new System.Drawing.Size(0, 30);
@@ -606,7 +606,7 @@
             this.tlpExportData.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 216F));
             this.tlpExportData.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 516F));
             this.tlpExportData.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 218F));
-            this.tlpExportData.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 451F));
+            this.tlpExportData.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 452F));
             this.tlpExportData.Controls.Add(this.lblExportDataMName, 0, 3);
             this.tlpExportData.Controls.Add(this.lblExportDataLName, 0, 2);
             this.tlpExportData.Controls.Add(this.lblExportDataFName, 0, 1);
@@ -643,7 +643,7 @@
             this.tlpExportData.Controls.Add(this.txtBoxExportDataEmail, 5, 3);
             this.tlpExportData.Controls.Add(this.txtBoxExportDataProfession, 5, 4);
             this.tlpExportData.Controls.Add(this.txtBoxExportDataFatherName, 5, 5);
-            this.tlpExportData.Location = new System.Drawing.Point(20, 79);
+            this.tlpExportData.Location = new System.Drawing.Point(64, 79);
             this.tlpExportData.Margin = new System.Windows.Forms.Padding(4);
             this.tlpExportData.Name = "tlpExportData";
             this.tlpExportData.RowCount = 6;
@@ -697,7 +697,7 @@
             this.lblExportDataStatus.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.lblExportDataStatus.AutoSize = true;
             this.lblExportDataStatus.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblExportDataStatus.Location = new System.Drawing.Point(894, 277);
+            this.lblExportDataStatus.Location = new System.Drawing.Point(893, 277);
             this.lblExportDataStatus.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
             this.lblExportDataStatus.Name = "lblExportDataStatus";
             this.lblExportDataStatus.Size = new System.Drawing.Size(92, 30);
@@ -733,7 +733,7 @@
             this.lblExportDataCity.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.lblExportDataCity.AutoSize = true;
             this.lblExportDataCity.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.125F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblExportDataCity.Location = new System.Drawing.Point(676, 61);
+            this.lblExportDataCity.Location = new System.Drawing.Point(675, 61);
             this.lblExportDataCity.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblExportDataCity.Name = "lblExportDataCity";
             this.lblExportDataCity.Size = new System.Drawing.Size(70, 31);
@@ -745,7 +745,7 @@
             this.lblExportDataState.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.lblExportDataState.AutoSize = true;
             this.lblExportDataState.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.125F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblExportDataState.Location = new System.Drawing.Point(676, 115);
+            this.lblExportDataState.Location = new System.Drawing.Point(675, 115);
             this.lblExportDataState.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblExportDataState.Name = "lblExportDataState";
             this.lblExportDataState.Size = new System.Drawing.Size(200, 31);
@@ -757,7 +757,7 @@
             this.lblExportDataPostalCode.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.lblExportDataPostalCode.AutoSize = true;
             this.lblExportDataPostalCode.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.125F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblExportDataPostalCode.Location = new System.Drawing.Point(676, 171);
+            this.lblExportDataPostalCode.Location = new System.Drawing.Point(675, 171);
             this.lblExportDataPostalCode.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblExportDataPostalCode.Name = "lblExportDataPostalCode";
             this.lblExportDataPostalCode.Size = new System.Drawing.Size(170, 31);
@@ -769,7 +769,7 @@
             this.lblExportDataCountry.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.lblExportDataCountry.AutoSize = true;
             this.lblExportDataCountry.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.125F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblExportDataCountry.Location = new System.Drawing.Point(676, 224);
+            this.lblExportDataCountry.Location = new System.Drawing.Point(675, 224);
             this.lblExportDataCountry.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblExportDataCountry.Name = "lblExportDataCountry";
             this.lblExportDataCountry.Size = new System.Drawing.Size(118, 31);
@@ -793,7 +793,7 @@
             this.lblExportDataCellNbr.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.lblExportDataCellNbr.AutoSize = true;
             this.lblExportDataCellNbr.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.125F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblExportDataCellNbr.Location = new System.Drawing.Point(1408, 10);
+            this.lblExportDataCellNbr.Location = new System.Drawing.Point(1407, 10);
             this.lblExportDataCellNbr.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblExportDataCellNbr.Name = "lblExportDataCellNbr";
             this.lblExportDataCellNbr.Size = new System.Drawing.Size(120, 31);
@@ -805,7 +805,7 @@
             this.lblExportDataHomeNbr.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.lblExportDataHomeNbr.AutoSize = true;
             this.lblExportDataHomeNbr.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.125F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblExportDataHomeNbr.Location = new System.Drawing.Point(1408, 61);
+            this.lblExportDataHomeNbr.Location = new System.Drawing.Point(1407, 61);
             this.lblExportDataHomeNbr.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblExportDataHomeNbr.Name = "lblExportDataHomeNbr";
             this.lblExportDataHomeNbr.Size = new System.Drawing.Size(145, 31);
@@ -817,7 +817,7 @@
             this.lblExportDataWorkNbr.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.lblExportDataWorkNbr.AutoSize = true;
             this.lblExportDataWorkNbr.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.125F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblExportDataWorkNbr.Location = new System.Drawing.Point(1408, 115);
+            this.lblExportDataWorkNbr.Location = new System.Drawing.Point(1407, 115);
             this.lblExportDataWorkNbr.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblExportDataWorkNbr.Name = "lblExportDataWorkNbr";
             this.lblExportDataWorkNbr.Size = new System.Drawing.Size(136, 31);
@@ -829,7 +829,7 @@
             this.lblExportDataEmail.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.lblExportDataEmail.AutoSize = true;
             this.lblExportDataEmail.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.125F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblExportDataEmail.Location = new System.Drawing.Point(1408, 171);
+            this.lblExportDataEmail.Location = new System.Drawing.Point(1407, 171);
             this.lblExportDataEmail.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblExportDataEmail.Name = "lblExportDataEmail";
             this.lblExportDataEmail.Size = new System.Drawing.Size(89, 31);
@@ -841,7 +841,7 @@
             this.lblExportDataProfession.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.lblExportDataProfession.AutoSize = true;
             this.lblExportDataProfession.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.125F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblExportDataProfession.Location = new System.Drawing.Point(1408, 224);
+            this.lblExportDataProfession.Location = new System.Drawing.Point(1407, 224);
             this.lblExportDataProfession.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblExportDataProfession.Name = "lblExportDataProfession";
             this.lblExportDataProfession.Size = new System.Drawing.Size(151, 31);
@@ -853,7 +853,7 @@
             this.lblExportDataFatherName.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.lblExportDataFatherName.AutoSize = true;
             this.lblExportDataFatherName.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.125F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblExportDataFatherName.Location = new System.Drawing.Point(1408, 277);
+            this.lblExportDataFatherName.Location = new System.Drawing.Point(1407, 277);
             this.lblExportDataFatherName.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblExportDataFatherName.Name = "lblExportDataFatherName";
             this.lblExportDataFatherName.Size = new System.Drawing.Size(199, 31);
@@ -867,7 +867,7 @@
             this.chkBoxExportDataDOB.Checked = true;
             this.chkBoxExportDataDOB.CheckState = System.Windows.Forms.CheckState.Checked;
             this.chkBoxExportDataDOB.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.125F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.chkBoxExportDataDOB.Location = new System.Drawing.Point(676, 275);
+            this.chkBoxExportDataDOB.Location = new System.Drawing.Point(675, 275);
             this.chkBoxExportDataDOB.Margin = new System.Windows.Forms.Padding(4);
             this.chkBoxExportDataDOB.Name = "chkBoxExportDataDOB";
             this.chkBoxExportDataDOB.Size = new System.Drawing.Size(184, 35);
@@ -880,7 +880,7 @@
             // 
             this.txtBoxExportDataPersonId.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.txtBoxExportDataPersonId.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.125F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtBoxExportDataPersonId.Location = new System.Drawing.Point(231, 6);
+            this.txtBoxExportDataPersonId.Location = new System.Drawing.Point(230, 6);
             this.txtBoxExportDataPersonId.Margin = new System.Windows.Forms.Padding(4);
             this.txtBoxExportDataPersonId.Name = "txtBoxExportDataPersonId";
             this.txtBoxExportDataPersonId.Size = new System.Drawing.Size(426, 38);
@@ -890,7 +890,7 @@
             // 
             this.txtBoxExportDataFName.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.txtBoxExportDataFName.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.125F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtBoxExportDataFName.Location = new System.Drawing.Point(231, 57);
+            this.txtBoxExportDataFName.Location = new System.Drawing.Point(230, 57);
             this.txtBoxExportDataFName.Margin = new System.Windows.Forms.Padding(4);
             this.txtBoxExportDataFName.Name = "txtBoxExportDataFName";
             this.txtBoxExportDataFName.Size = new System.Drawing.Size(426, 38);
@@ -900,7 +900,7 @@
             // 
             this.txtBoxExportDataLName.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.txtBoxExportDataLName.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.125F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtBoxExportDataLName.Location = new System.Drawing.Point(231, 112);
+            this.txtBoxExportDataLName.Location = new System.Drawing.Point(230, 112);
             this.txtBoxExportDataLName.Margin = new System.Windows.Forms.Padding(4);
             this.txtBoxExportDataLName.Name = "txtBoxExportDataLName";
             this.txtBoxExportDataLName.Size = new System.Drawing.Size(426, 38);
@@ -910,7 +910,7 @@
             // 
             this.txtBoxExportDataMName.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.txtBoxExportDataMName.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.125F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtBoxExportDataMName.Location = new System.Drawing.Point(231, 168);
+            this.txtBoxExportDataMName.Location = new System.Drawing.Point(230, 168);
             this.txtBoxExportDataMName.Margin = new System.Windows.Forms.Padding(4);
             this.txtBoxExportDataMName.Name = "txtBoxExportDataMName";
             this.txtBoxExportDataMName.Size = new System.Drawing.Size(426, 38);
@@ -920,7 +920,7 @@
             // 
             this.txtBoxExportDataPrefix.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.txtBoxExportDataPrefix.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.125F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtBoxExportDataPrefix.Location = new System.Drawing.Point(231, 221);
+            this.txtBoxExportDataPrefix.Location = new System.Drawing.Point(230, 221);
             this.txtBoxExportDataPrefix.Margin = new System.Windows.Forms.Padding(4);
             this.txtBoxExportDataPrefix.Name = "txtBoxExportDataPrefix";
             this.txtBoxExportDataPrefix.Size = new System.Drawing.Size(426, 38);
@@ -930,7 +930,7 @@
             // 
             this.dtpExportDataDOB.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.dtpExportDataDOB.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.dtpExportDataDOB.Location = new System.Drawing.Point(231, 275);
+            this.dtpExportDataDOB.Location = new System.Drawing.Point(230, 275);
             this.dtpExportDataDOB.Margin = new System.Windows.Forms.Padding(4);
             this.dtpExportDataDOB.Name = "dtpExportDataDOB";
             this.dtpExportDataDOB.Size = new System.Drawing.Size(426, 35);
@@ -940,7 +940,7 @@
             // 
             this.txtBoxExportDataAddrLine.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.txtBoxExportDataAddrLine.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.125F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtBoxExportDataAddrLine.Location = new System.Drawing.Point(892, 6);
+            this.txtBoxExportDataAddrLine.Location = new System.Drawing.Point(891, 6);
             this.txtBoxExportDataAddrLine.Margin = new System.Windows.Forms.Padding(4);
             this.txtBoxExportDataAddrLine.Name = "txtBoxExportDataAddrLine";
             this.txtBoxExportDataAddrLine.Size = new System.Drawing.Size(494, 38);
@@ -951,7 +951,7 @@
             this.lblExportDataStreetAddr.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.lblExportDataStreetAddr.AutoSize = true;
             this.lblExportDataStreetAddr.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.125F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblExportDataStreetAddr.Location = new System.Drawing.Point(676, 10);
+            this.lblExportDataStreetAddr.Location = new System.Drawing.Point(675, 10);
             this.lblExportDataStreetAddr.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblExportDataStreetAddr.Name = "lblExportDataStreetAddr";
             this.lblExportDataStreetAddr.Size = new System.Drawing.Size(180, 31);
@@ -962,7 +962,7 @@
             // 
             this.txtBoxExportDataCity.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.txtBoxExportDataCity.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.125F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtBoxExportDataCity.Location = new System.Drawing.Point(892, 57);
+            this.txtBoxExportDataCity.Location = new System.Drawing.Point(891, 57);
             this.txtBoxExportDataCity.Margin = new System.Windows.Forms.Padding(4);
             this.txtBoxExportDataCity.Name = "txtBoxExportDataCity";
             this.txtBoxExportDataCity.Size = new System.Drawing.Size(494, 38);
@@ -972,7 +972,7 @@
             // 
             this.txtBoxExportDataState.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.txtBoxExportDataState.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.125F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtBoxExportDataState.Location = new System.Drawing.Point(892, 112);
+            this.txtBoxExportDataState.Location = new System.Drawing.Point(891, 112);
             this.txtBoxExportDataState.Margin = new System.Windows.Forms.Padding(4);
             this.txtBoxExportDataState.Name = "txtBoxExportDataState";
             this.txtBoxExportDataState.Size = new System.Drawing.Size(494, 38);
@@ -982,7 +982,7 @@
             // 
             this.txtBoxExportDataPostalCode.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.txtBoxExportDataPostalCode.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.125F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtBoxExportDataPostalCode.Location = new System.Drawing.Point(892, 168);
+            this.txtBoxExportDataPostalCode.Location = new System.Drawing.Point(891, 168);
             this.txtBoxExportDataPostalCode.Margin = new System.Windows.Forms.Padding(4);
             this.txtBoxExportDataPostalCode.Name = "txtBoxExportDataPostalCode";
             this.txtBoxExportDataPostalCode.Size = new System.Drawing.Size(494, 38);
@@ -992,7 +992,7 @@
             // 
             this.txtBoxExportDataCountry.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.txtBoxExportDataCountry.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.125F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtBoxExportDataCountry.Location = new System.Drawing.Point(892, 221);
+            this.txtBoxExportDataCountry.Location = new System.Drawing.Point(891, 221);
             this.txtBoxExportDataCountry.Margin = new System.Windows.Forms.Padding(4);
             this.txtBoxExportDataCountry.Name = "txtBoxExportDataCountry";
             this.txtBoxExportDataCountry.Size = new System.Drawing.Size(494, 38);
@@ -1002,7 +1002,7 @@
             // 
             this.txtBoxExportDataCellNbr.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.txtBoxExportDataCellNbr.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.125F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtBoxExportDataCellNbr.Location = new System.Drawing.Point(1626, 6);
+            this.txtBoxExportDataCellNbr.Location = new System.Drawing.Point(1625, 6);
             this.txtBoxExportDataCellNbr.Margin = new System.Windows.Forms.Padding(4);
             this.txtBoxExportDataCellNbr.Name = "txtBoxExportDataCellNbr";
             this.txtBoxExportDataCellNbr.Size = new System.Drawing.Size(434, 38);
@@ -1012,7 +1012,7 @@
             // 
             this.txtBoxExportDataHomeNbr.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.txtBoxExportDataHomeNbr.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.125F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtBoxExportDataHomeNbr.Location = new System.Drawing.Point(1626, 57);
+            this.txtBoxExportDataHomeNbr.Location = new System.Drawing.Point(1625, 57);
             this.txtBoxExportDataHomeNbr.Margin = new System.Windows.Forms.Padding(4);
             this.txtBoxExportDataHomeNbr.Name = "txtBoxExportDataHomeNbr";
             this.txtBoxExportDataHomeNbr.Size = new System.Drawing.Size(434, 38);
@@ -1022,7 +1022,7 @@
             // 
             this.txtBoxExportDataWorkNbr.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.txtBoxExportDataWorkNbr.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.125F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtBoxExportDataWorkNbr.Location = new System.Drawing.Point(1626, 112);
+            this.txtBoxExportDataWorkNbr.Location = new System.Drawing.Point(1625, 112);
             this.txtBoxExportDataWorkNbr.Margin = new System.Windows.Forms.Padding(4);
             this.txtBoxExportDataWorkNbr.Name = "txtBoxExportDataWorkNbr";
             this.txtBoxExportDataWorkNbr.Size = new System.Drawing.Size(434, 38);
@@ -1032,7 +1032,7 @@
             // 
             this.txtBoxExportDataEmail.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.txtBoxExportDataEmail.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.125F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtBoxExportDataEmail.Location = new System.Drawing.Point(1626, 168);
+            this.txtBoxExportDataEmail.Location = new System.Drawing.Point(1625, 168);
             this.txtBoxExportDataEmail.Margin = new System.Windows.Forms.Padding(4);
             this.txtBoxExportDataEmail.Name = "txtBoxExportDataEmail";
             this.txtBoxExportDataEmail.Size = new System.Drawing.Size(434, 38);
@@ -1042,7 +1042,7 @@
             // 
             this.txtBoxExportDataProfession.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.txtBoxExportDataProfession.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.125F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtBoxExportDataProfession.Location = new System.Drawing.Point(1626, 221);
+            this.txtBoxExportDataProfession.Location = new System.Drawing.Point(1625, 221);
             this.txtBoxExportDataProfession.Margin = new System.Windows.Forms.Padding(4);
             this.txtBoxExportDataProfession.Name = "txtBoxExportDataProfession";
             this.txtBoxExportDataProfession.Size = new System.Drawing.Size(434, 38);
@@ -1052,7 +1052,7 @@
             // 
             this.txtBoxExportDataFatherName.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.txtBoxExportDataFatherName.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.125F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtBoxExportDataFatherName.Location = new System.Drawing.Point(1626, 273);
+            this.txtBoxExportDataFatherName.Location = new System.Drawing.Point(1625, 273);
             this.txtBoxExportDataFatherName.Margin = new System.Windows.Forms.Padding(4);
             this.txtBoxExportDataFatherName.Name = "txtBoxExportDataFatherName";
             this.txtBoxExportDataFatherName.Size = new System.Drawing.Size(434, 38);
@@ -1065,7 +1065,7 @@
             this.menuExportDataToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(2294, 40);
+            this.menuStrip1.Size = new System.Drawing.Size(2365, 40);
             this.menuStrip1.TabIndex = 1;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -1080,7 +1080,7 @@
             // exitToolStripMenuItem
             // 
             this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
-            this.exitToolStripMenuItem.Size = new System.Drawing.Size(152, 38);
+            this.exitToolStripMenuItem.Size = new System.Drawing.Size(269, 38);
             this.exitToolStripMenuItem.Text = "Exit";
             this.exitToolStripMenuItem.Click += new System.EventHandler(this.exitToolStripMenuItem_Click);
             // 
@@ -1090,7 +1090,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoScroll = true;
             this.AutoSize = true;
-            this.ClientSize = new System.Drawing.Size(2294, 1256);
+            this.ClientSize = new System.Drawing.Size(2365, 1308);
             this.Controls.Add(this.grpBoxExportData);
             this.Controls.Add(this.menuStrip1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));

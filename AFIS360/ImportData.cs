@@ -1,4 +1,5 @@
 ﻿using CsvFile;
+using SourceAFIS.Simple;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -43,7 +44,7 @@ namespace AFIS360
             Console.WriteLine("###-->> filename = " + filename);
             progBarImportDataImportProgress.Visible = true;
             progBarImportDataImportProgress.Minimum = 1;
-            progBarImportDataImportProgress.Maximum = 1000000;
+            progBarImportDataImportProgress.Maximum = 1000;
             progBarImportDataImportProgress.Value = 1;
             progBarImportDataImportProgress.Step = 1;
 
@@ -69,6 +70,7 @@ namespace AFIS360
                         if (recordsInfile > 0) //skip the Header Row
                         {
                             progBarImportDataImportProgress.PerformStep();
+
                             PersonDetail pDetail = new PersonDetail();
                             MyPerson person = new MyPerson();
 
@@ -99,6 +101,78 @@ namespace AFIS360
                                 photo = Program.Base64ToImage(photoStr);
                             }
 
+                            List<Fingerprint> fingerprints = new List<Fingerprint>();
+                            //RT Fingerptint
+                            string rTStr = columns[19] != null ? columns[19] : "";
+                            System.Drawing.Image rTImg = !string.IsNullOrEmpty(rTStr) ? Program.Base64ToImage(rTStr) : null;
+                            MyFingerprint rTFp = new MyFingerprint();
+                            rTFp.Fingername = MyFingerprint.RightThumb;
+                            rTFp.AsBitmap = rTImg != null ? new System.Drawing.Bitmap(rTImg) : null;
+                            fingerprints.Add(rTFp);
+                            //RI Fingerprint
+                            string rIStr = columns[20] != null ? columns[20] : "";
+                            System.Drawing.Image rIImg = !string.IsNullOrEmpty(rIStr) ? Program.Base64ToImage(rIStr) : null;
+                            MyFingerprint rIFp = new MyFingerprint();
+                            rIFp.Fingername = MyFingerprint.RightIndex;
+                            rIFp.AsBitmap = rIImg != null ? new System.Drawing.Bitmap(rIImg) : null;
+                            fingerprints.Add(rIFp);
+                            //RM Fingerprint
+                            string rMStr = columns[21] != null ? columns[21] : "";
+                            System.Drawing.Image rMImg = !string.IsNullOrEmpty(rMStr) ? Program.Base64ToImage(rMStr) : null;
+                            MyFingerprint rMFp = new MyFingerprint();
+                            rMFp.Fingername = MyFingerprint.RightMiddle;
+                            rMFp.AsBitmap = rMImg != null ? new System.Drawing.Bitmap(rMImg) : null;
+                            fingerprints.Add(rMFp);
+                            //RR Fingerprint
+                            string rRStr = columns[22] != null ? columns[22] : "";
+                            System.Drawing.Image rRImg = !string.IsNullOrEmpty(rMStr) ? Program.Base64ToImage(rRStr) : null;
+                            MyFingerprint rRFp = new MyFingerprint();
+                            rRFp.Fingername = MyFingerprint.RightRing;
+                            rRFp.AsBitmap = rRImg != null ? new System.Drawing.Bitmap(rRImg) : null;
+                            fingerprints.Add(rRFp);
+                            //RL Fingerprint
+                            string rLStr = columns[23] != null ? columns[23] : "";
+                            System.Drawing.Image rLImg = !string.IsNullOrEmpty(rLStr) ? Program.Base64ToImage(rLStr) : null;
+                            MyFingerprint rLFp = new MyFingerprint();
+                            rLFp.Fingername = MyFingerprint.RightLittle;
+                            rLFp.AsBitmap = rLImg != null ? new System.Drawing.Bitmap(rLImg) : null;
+                            fingerprints.Add(rLFp);
+                            //LT Fingerprint
+                            string lTStr = columns[24] != null ? columns[24] : "";
+                            System.Drawing.Image lTImg = !string.IsNullOrEmpty(lTStr) ? Program.Base64ToImage(lTStr) : null;
+                            MyFingerprint lTFp = new MyFingerprint();
+                            lTFp.Fingername = MyFingerprint.LeftThumb;
+                            lTFp.AsBitmap = lTImg != null ? new System.Drawing.Bitmap(lTImg) : null;
+                            fingerprints.Add(lTFp);
+                            //LI Fingerprint
+                            string lIStr = columns[25] != null ? columns[25] : "";
+                            System.Drawing.Image lIImg = !string.IsNullOrEmpty(lIStr) ? Program.Base64ToImage(lIStr) : null;
+                            MyFingerprint lIFp = new MyFingerprint();
+                            lIFp.Fingername = MyFingerprint.LeftIndex;
+                            lIFp.AsBitmap = lIImg != null ? new System.Drawing.Bitmap(lIImg) : null;
+                            fingerprints.Add(lIFp);
+                            //LM Fingerprint
+                            string lMStr = columns[26] != null ? columns[26] : "";
+                            System.Drawing.Image lMImg = !string.IsNullOrEmpty(lMStr) ? Program.Base64ToImage(lMStr) : null;
+                            MyFingerprint lMFp = new MyFingerprint();
+                            lMFp.Fingername = MyFingerprint.LeftMiddle;
+                            lMFp.AsBitmap = lMImg != null ? new System.Drawing.Bitmap(lMImg) : null;
+                            fingerprints.Add(lMFp);
+                            //LR Fingerprint
+                            string lRStr = columns[27] != null ? columns[27] : "";
+                            System.Drawing.Image lRImg = !string.IsNullOrEmpty(lRStr) ? Program.Base64ToImage(lRStr) : null;
+                            MyFingerprint lRFp = new MyFingerprint();
+                            lRFp.Fingername = MyFingerprint.LeftRing;
+                            lRFp.AsBitmap = lRImg != null ? new System.Drawing.Bitmap(lRImg) : null;
+                            fingerprints.Add(lRFp);
+                            //LL Fingerprint
+                            string lLStr = columns[28] != null ? columns[28] : "";
+                            System.Drawing.Image lLImg = !string.IsNullOrEmpty(lLStr) ? Program.Base64ToImage(lLStr) : null;
+                            MyFingerprint lLFp = new MyFingerprint();
+                            lLFp.Fingername = MyFingerprint.LeftLittle;
+                            lLFp.AsBitmap = lLImg != null ? new System.Drawing.Bitmap(lLImg) : null;
+                            fingerprints.Add(lLFp);
+
                             pDetail.setPersonId(personId);
                             pDetail.setFirstName(firstName);
                             pDetail.setLastName(lastName);
@@ -119,8 +193,30 @@ namespace AFIS360
                             pDetail.setEmail(email);
                             pDetail.setPassportPhoto(photo);
 
-                            person.PersonId = personId;
-                            person.Name = firstName;
+                            //store person's fingerprints
+                            ICollection<KeyValuePair<String, System.Drawing.Image>> fps = new Dictionary<String, System.Drawing.Image>();
+                            if (rTImg != null) fps.Add(new KeyValuePair<string, System.Drawing.Image>(MyFingerprint.RightThumb, rTImg));
+                            if (rIImg != null) fps.Add(new KeyValuePair<string, System.Drawing.Image>(MyFingerprint.RightIndex, rIImg));
+                            if (rMImg != null) fps.Add(new KeyValuePair<string, System.Drawing.Image>(MyFingerprint.RightMiddle, rMImg));
+                            if (rRImg != null) fps.Add(new KeyValuePair<string, System.Drawing.Image>(MyFingerprint.RightRing, rRImg));
+                            if (rLImg != null) fps.Add(new KeyValuePair<string, System.Drawing.Image>(MyFingerprint.RightLittle, rLImg));
+                            if (lTImg != null) fps.Add(new KeyValuePair<string, System.Drawing.Image>(MyFingerprint.LeftThumb, lTImg));
+                            if (lIImg != null) fps.Add(new KeyValuePair<string, System.Drawing.Image>(MyFingerprint.LeftIndex, lIImg));
+                            if (lMImg != null) fps.Add(new KeyValuePair<string, System.Drawing.Image>(MyFingerprint.LeftMiddle, lMImg));
+                            if (lRImg != null) fps.Add(new KeyValuePair<string, System.Drawing.Image>(MyFingerprint.LeftRing, lRImg));
+                            if (lLImg != null) fps.Add(new KeyValuePair<string, System.Drawing.Image>(MyFingerprint.LeftLittle, lLImg));
+
+                            if (fps.Count > 0)
+                            {
+                                //get person with fingerprints
+                                person = Program.Enroll(fps, firstName, personId);
+                            }
+                            else
+                            {
+                                person = new MyPerson();
+                                person.Name = firstName;
+                                person.PersonId = personId;
+                            }
 
                             Console.WriteLine("###-->> PersonDetail = " + pDetail.getPersonId() + ", " + pDetail.getFirstName() + ", " + pDetail.getLastName());
                             Status status = dataAccess.storePersonDetailwithFingerprints(person, pDetail);

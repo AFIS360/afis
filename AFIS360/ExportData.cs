@@ -1,4 +1,5 @@
 ﻿using CsvFile;
+using SourceAFIS.Simple;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -327,6 +328,16 @@ namespace AFIS360
                     columns.Add("Work Nbr");
                     columns.Add("Email");
                     columns.Add("Photo");
+                    columns.Add("RT");
+                    columns.Add("RI");
+                    columns.Add("RM");
+                    columns.Add("RR");
+                    columns.Add("RL");
+                    columns.Add("LT");
+                    columns.Add("LI");
+                    columns.Add("LM");
+                    columns.Add("LR");
+                    columns.Add("LL");
                     writer.WriteRow(columns);
 
                     foreach (KeyValuePair<string, bool> selectedRow in selectedRows)
@@ -336,6 +347,8 @@ namespace AFIS360
                         string personId = selectedRow.Key;
                         bool rowSelected = selectedRow.Value;
                         PersonDetail personDetail = getPersonDetail(personId);
+                        MyPerson person = new DataAccess().retrievePersonFingerprintsById(personId).FirstOrDefault();
+                        List<Fingerprint> fingerprints = person.Fingerprints;
 
                         columns = new List<string>();
                         columns.Add(personDetail.getPersonId() ?? String.Empty);
@@ -356,9 +369,51 @@ namespace AFIS360
                         columns.Add(personDetail.getHomePhoneNbr() ?? String.Empty);
                         columns.Add(personDetail.getWorkPhoneNbr() ?? String.Empty);
                         columns.Add(personDetail.getEmail() ?? String.Empty);
+                        //Passport photo
                         System.Drawing.Image photo = personDetail.getPassportPhoto();
                         string photoStr = (photo != null) ? Program.ImageToBase64(personDetail.getPassportPhoto(), System.Drawing.Imaging.ImageFormat.Bmp) : null;
                         columns.Add(photoStr ?? String.Empty);
+                        //RT fingerprint
+                        System.Drawing.Image rT = getFingerprintImage(fingerprints, MyFingerprint.RightThumb);
+                        string rTStr = (rT != null) ? Program.ImageToBase64(rT, System.Drawing.Imaging.ImageFormat.Bmp) : null;
+                        columns.Add(rTStr ?? String.Empty);
+                        //RI fingerprint
+                        System.Drawing.Image rI = getFingerprintImage(fingerprints, MyFingerprint.RightIndex);
+                        string rIStr = (rI != null) ? Program.ImageToBase64(rI, System.Drawing.Imaging.ImageFormat.Bmp) : null;
+                        columns.Add(rIStr ?? String.Empty);
+                        //RM fingerprint
+                        System.Drawing.Image rM = getFingerprintImage(fingerprints, MyFingerprint.RightMiddle);
+                        string rMStr = (rM != null) ? Program.ImageToBase64(rM, System.Drawing.Imaging.ImageFormat.Bmp) : null;
+                        columns.Add(rMStr ?? String.Empty);
+                        //RR fingerprint
+                        System.Drawing.Image rR = getFingerprintImage(fingerprints, MyFingerprint.RightRing);
+                        string rRStr = (rR != null) ? Program.ImageToBase64(rR, System.Drawing.Imaging.ImageFormat.Bmp) : null;
+                        columns.Add(rRStr ?? String.Empty);
+                        //RL fingerprint
+                        System.Drawing.Image rL = getFingerprintImage(fingerprints, MyFingerprint.RightLittle);
+                        string rLStr = (rL != null) ? Program.ImageToBase64(rL, System.Drawing.Imaging.ImageFormat.Bmp) : null;
+                        columns.Add(rLStr ?? String.Empty);
+                        //LT fingerprint
+                        System.Drawing.Image lT = getFingerprintImage(fingerprints, MyFingerprint.LeftThumb);
+                        string lTStr = (lT != null) ? Program.ImageToBase64(lT, System.Drawing.Imaging.ImageFormat.Bmp) : null;
+                        columns.Add(lTStr ?? String.Empty);
+                        //LI fingerprint
+                        System.Drawing.Image lI = getFingerprintImage(fingerprints, MyFingerprint.LeftIndex);
+                        string lIStr = (lI != null) ? Program.ImageToBase64(lI, System.Drawing.Imaging.ImageFormat.Bmp) : null;
+                        columns.Add(lIStr ?? String.Empty);
+                        //LM fingerprint
+                        System.Drawing.Image lM = getFingerprintImage(fingerprints, MyFingerprint.LeftMiddle);
+                        string lMStr = (lM != null) ? Program.ImageToBase64(lM, System.Drawing.Imaging.ImageFormat.Bmp) : null;
+                        columns.Add(lMStr ?? String.Empty);
+                        //LR fingerprint
+                        System.Drawing.Image lR = getFingerprintImage(fingerprints, MyFingerprint.LeftRing);
+                        string lRStr = (lR != null) ? Program.ImageToBase64(lR, System.Drawing.Imaging.ImageFormat.Bmp) : null;
+                        columns.Add(lRStr ?? String.Empty);
+                        //LL fingerprint
+                        System.Drawing.Image lL = getFingerprintImage(fingerprints, MyFingerprint.LeftLittle);
+                        string lLStr = (lL != null) ? Program.ImageToBase64(lL, System.Drawing.Imaging.ImageFormat.Bmp) : null;
+                        columns.Add(lLStr ?? String.Empty);
+
                         writer.WriteRow(columns);
                     }//end foreach
                 }
@@ -373,6 +428,26 @@ namespace AFIS360
                 Cursor = Cursors.Default;
             }
         }//end processToExportData
+
+        private System.Drawing.Image getFingerprintImage(List<Fingerprint> fingerprints, string fingerprintName)
+        {
+            System.Drawing.Image fingerprint = null;
+
+            for (int i = 0; i < fingerprints.Count; i++)
+            {
+                MyFingerprint fp = (MyFingerprint)fingerprints.ElementAt(i);
+
+                if (fp.Fingername != null)
+                {
+                    if (fp.Fingername.Equals(fingerprintName))
+                    {
+                        fingerprint = fp.AsBitmap;
+                        return fingerprint;
+                    }
+                }
+            }
+            return fingerprint;
+        }
 
         private PersonDetail getPersonDetail(string personId)
         {
