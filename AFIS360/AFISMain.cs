@@ -1980,8 +1980,8 @@ namespace AFIS360
 
             if (Program.getPerson(txtEnrollId.Text) != null)
             {
-                PhysicalCharForm physicalChar = new PhysicalCharForm(activityLog, txtEnrollId.Text);
-                physicalChar.ShowDialog();
+                PhysicalCharForm physicalCharForm = new PhysicalCharForm(activityLog, txtEnrollId.Text);
+                physicalCharForm.ShowDialog();
             } else
             {
                 MessageBox.Show("Person (ID = " + txtEnrollId.Text + ") is not enrolled. Person must be enrolled before entering Physical Charististics.", "Warning Message", MessageBoxButtons.OK, MessageBoxIcon.Warning);
@@ -1995,18 +1995,20 @@ namespace AFIS360
         {
             if (string.IsNullOrEmpty(txtEnrollId.Text))
             {
-                MessageBox.Show("Person ID field is required. Person must be enrolled before entering Physical Charististics.", "Warning Message", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show("Person ID field is required. Person must be enrolled before entering Criminal Record.", "Warning Message", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
 
-            if (Program.getPerson(txtEnrollId.Text) != null)
+            PersonDetail personDetail = Program.getPerson(txtEnrollId.Text);
+
+            if (personDetail != null)
             {
-                PhysicalCharForm physicalChar = new PhysicalCharForm(activityLog, txtEnrollId.Text);
-                physicalChar.ShowDialog();
+                CriminalRecordForm criminalRecForm = new CriminalRecordForm(activityLog, personDetail);
+                criminalRecForm.ShowDialog();
             }
             else
             {
-                MessageBox.Show("Person (ID = " + txtEnrollId.Text + ") is not enrolled. Person must be enrolled before entering Physical Charististics.", "Warning Message", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show("Person (ID = " + txtEnrollId.Text + ") is not enrolled. Person must be enrolled before entering Criminal Record.", "Warning Message", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
         }//end btnEnrollCriminalRec_Click
