@@ -28,5 +28,10 @@ namespace AFIS360
             this.lblCriminalRecFName.Text = personDetail.getFirstName();
             this.lblCriminalRecLName.Text = personDetail.getLastName();
         }
+
+        private void exitToolStripMenuItemCriminalRec_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
     }
 }

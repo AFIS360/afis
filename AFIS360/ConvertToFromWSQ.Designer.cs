@@ -92,7 +92,7 @@
             // 
             // btnWSQCInputFileLocation
             // 
-            this.btnWSQCInputFileLocation.Location = new System.Drawing.Point(364, 157);
+            this.btnWSQCInputFileLocation.Location = new System.Drawing.Point(364, 161);
             this.btnWSQCInputFileLocation.Margin = new System.Windows.Forms.Padding(2);
             this.btnWSQCInputFileLocation.Name = "btnWSQCInputFileLocation";
             this.btnWSQCInputFileLocation.Size = new System.Drawing.Size(74, 26);
@@ -148,7 +148,7 @@
             // 
             // btnWSQCOutputFileLocation
             // 
-            this.btnWSQCOutputFileLocation.Location = new System.Drawing.Point(364, 350);
+            this.btnWSQCOutputFileLocation.Location = new System.Drawing.Point(364, 355);
             this.btnWSQCOutputFileLocation.Margin = new System.Windows.Forms.Padding(2);
             this.btnWSQCOutputFileLocation.Name = "btnWSQCOutputFileLocation";
             this.btnWSQCOutputFileLocation.Size = new System.Drawing.Size(74, 28);

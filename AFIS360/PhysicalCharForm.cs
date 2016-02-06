@@ -240,5 +240,10 @@ namespace AFIS360
             }
             base.OnKeyPress(e);
         }
+
+        private void exitToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
     }
 }
