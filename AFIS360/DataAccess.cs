@@ -204,6 +204,109 @@ namespace AFIS360
             return status;
         }//end storeFingerprints
 
+        public Status storeCriminalRecord(CriminalRecord criminalRec)
+        {
+            string connStr = getConnectionStringByName("MySQL_AFIS_conn");
+            MySqlConnection conn = new MySqlConnection(connStr);
+            MySqlCommand cmd;
+            Status status = null;
+            byte[] oSerializedCrimeDetail;
+            conn.Open();
+            try
+            {
+                cmd = conn.CreateCommand();
+                cmd.CommandText = "INSERT INTO criminal_rec(person_id, crime_detail, crime_date, crime_location, court, " +
+                                  "statute, court_addr, case_id, sentenced_date, release_date, arrest_date, arrest_agency, " +
+                                  "status, parole_date, criminal_alert_level, criminal_alert_msg, created_by, creation_date, " +
+                                  "updated_by, update_date) VALUES " +
+                                  "(@person_id, @crime_detail, @crime_date, @crime_location, @court, " +
+                                  "@statute, @court_addr, @case_id, @sentenced_date, @release_date, @arrest_date, @arrest_agency, " +
+                                  "@status, @parole_date, @criminal_alert_level, @criminal_alert_msg, @created_by, @creation_date, " +
+                                  "@updated_by, @update_date)";
+
+                Console.WriteLine("###-->> criminalRec.PersonId = " + criminalRec.PersonId);
+                Console.WriteLine("###-->> criminalRec.CrimeDate = " + criminalRec.CrimeDate);
+                Console.WriteLine("###-->> criminalRec.CrimeLocation = " + criminalRec.CrimeLocation);
+                Console.WriteLine("###-->> criminalRec.Court = " + criminalRec.Court);
+                Console.WriteLine("###-->> criminalRec.Statute = " + criminalRec.Statute);
+                Console.WriteLine("###-->> criminalRec.CourtyAddress = " + criminalRec.CourtyAddress);
+                Console.WriteLine("###-->> criminalRec.CaseNbr = " + criminalRec.CaseId);
+                Console.WriteLine("###-->> criminalRec.SentencedDate = " + criminalRec.SentencedDate);
+                Console.WriteLine("###-->> criminalRec.ReleaseDate = " + criminalRec.ReleaseDate);
+                Console.WriteLine("###-->> criminalRec.ArrestDate = " + criminalRec.ArrestDate);
+                Console.WriteLine("###-->> criminalRec.ArrestAgency = " + criminalRec.ArrestAgency);
+                Console.WriteLine("###-->> criminalRec.Status = " + criminalRec.Status);
+                Console.WriteLine("###-->> criminalRec.ParoleDate = " + criminalRec.ParoleDate);
+                Console.WriteLine("###-->> criminalRec.CriminalAlertLevel = " + criminalRec.CriminalAlertLevel);
+                Console.WriteLine("###-->> criminalRec.CriminalAlertMsg = " + criminalRec.CriminalAlertMsg);
+                Console.WriteLine("###-->> criminalRec.CreatedBy = " + criminalRec.CreatedBy);
+                Console.WriteLine("###-->> criminalRec.CreationDateTime = " + criminalRec.CreationDateTime);
+                Console.WriteLine("###-->> criminalRec.UpdatedBy = " + criminalRec.UpdatedBy);
+                Console.WriteLine("###-->> criminalRec.UpdateDateTime = " + criminalRec.UpdateDateTime);
+                Console.WriteLine("###-->> criminalRec.CrimeDetail = " + criminalRec.CrimeDetail);
+
+
+                cmd.Parameters.AddWithValue("@person_id", criminalRec.PersonId);
+                cmd.Parameters.AddWithValue("@crime_date", criminalRec.CrimeDate);
+                cmd.Parameters.AddWithValue("@crime_location", criminalRec.CrimeLocation);
+                cmd.Parameters.AddWithValue("@court", criminalRec.Court);
+                cmd.Parameters.AddWithValue("@statute", criminalRec.Statute);
+                cmd.Parameters.AddWithValue("@court_addr", criminalRec.CourtyAddress);
+                cmd.Parameters.AddWithValue("@case_id", criminalRec.CaseId);
+                cmd.Parameters.AddWithValue("@sentenced_date", criminalRec.SentencedDate);
+                cmd.Parameters.AddWithValue("@release_date", criminalRec.ReleaseDate);
+                cmd.Parameters.AddWithValue("@arrest_date", criminalRec.ArrestDate);
+                cmd.Parameters.AddWithValue("@arrest_agency", criminalRec.ArrestAgency);
+                cmd.Parameters.AddWithValue("@status", criminalRec.Status);
+                cmd.Parameters.AddWithValue("@parole_date", criminalRec.ParoleDate);
+                cmd.Parameters.AddWithValue("@criminal_alert_level", criminalRec.CriminalAlertLevel);
+                cmd.Parameters.AddWithValue("@criminal_alert_msg", criminalRec.CriminalAlertMsg);
+                cmd.Parameters.AddWithValue("@created_by", criminalRec.CreatedBy);
+                cmd.Parameters.AddWithValue("@creation_date", criminalRec.CreationDateTime);
+                cmd.Parameters.AddWithValue("@updated_by", criminalRec.UpdatedBy);
+                cmd.Parameters.AddWithValue("@update_date", criminalRec.UpdateDateTime);
+
+                if (criminalRec.CrimeDetail != null)
+                {
+                    using (MemoryStream stream = new MemoryStream())
+                    {
+                        BinaryFormatter oBFormatter = new BinaryFormatter();
+                        oBFormatter.Serialize(stream, criminalRec.CrimeDetail);
+                        oSerializedCrimeDetail = stream.ToArray();
+                    }
+                    cmd.Parameters.AddWithValue("@crime_detail", oSerializedCrimeDetail);
+                }
+                else
+                {
+                    cmd.Parameters.AddWithValue("@crime_detail", null);
+                }
+                cmd.ExecuteNonQuery();
+
+                //Successful status
+                status = new Status();
+                status.setStatusCode(Status.STATUS_SUCCESSFUL);
+                status.setStatusDesc("Criminal Record (Case Id = " + criminalRec.CaseId + ") is created successfully.");
+            }
+            catch (Exception exp)
+            {
+                //Successful status
+                status = new Status();
+                status.setStatusCode(Status.STATUS_FAILURE);
+                status.setStatusDesc("Failed to create Criminal Record (Case Id = " + criminalRec.CaseId + "). Reason is - " + exp.Message + ".");
+                Console.WriteLine("###--->> Exception = " + exp);
+            }
+            finally
+            {
+                if (conn.State == System.Data.ConnectionState.Open)
+                {
+                    conn.Close();
+                }
+            }
+
+            return status;
+        }//end storeCriminalRecord
+
+
         public List<AccessControl> getAccessControls()
         {
             string connStr = getConnectionStringByName("MySQL_AFIS_conn");
@@ -268,6 +371,58 @@ namespace AFIS360
 
             return accessCntrls;
         }//end getAccessControls
+
+        public List<CriminalRecord> getCriminalRecords(string personId)
+        {
+            string connStr = getConnectionStringByName("MySQL_AFIS_conn");
+            MySqlConnection conn = new MySqlConnection(connStr);
+            MySqlCommand cmd;
+            List<CriminalRecord> criminalRecs;
+            DataTable ds;
+            conn.Open();
+            try
+            {
+                criminalRecs = new List<CriminalRecord>();
+                cmd = conn.CreateCommand();
+
+                cmd.CommandText = "SELECT * FROM afis.criminal_rec WHERE person_id = @person_id";
+                cmd.Parameters.AddWithValue("@person_id", personId);
+
+                MySqlDataAdapter da = new MySqlDataAdapter(cmd);
+                ds = new DataTable();
+                da.Fill(ds);
+                IEnumerator rows = ds.Rows.GetEnumerator();
+                Int32 i = 0;
+
+                while (rows.MoveNext())
+                {
+                    CriminalRecord criminalRec = new CriminalRecord();
+
+                    criminalRec.PersonId = (string)ds.Rows[i]["person_id"];
+                    criminalRec.CrimeDate = (DateTime)ds.Rows[i]["crime_date"];
+                    criminalRec.CrimeLocation = (string)ds.Rows[i]["crime_location"];
+                    criminalRec.CaseId = (string)ds.Rows[i]["case_id"];
+
+                    criminalRecs.Add(criminalRec);
+
+                    i = i + 1;
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+            finally
+            {
+                if (conn.State == System.Data.ConnectionState.Open)
+                {
+                    conn.Close();
+                }
+            }
+
+            return criminalRecs;
+        }//end getCriminalRecords
+
 
         public Status storePersonPhysicalCharacteristics(PersonPhysicalChar personPhysicalChar)
         {

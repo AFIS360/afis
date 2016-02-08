@@ -11,23 +11,14 @@ namespace AFIS360
 
         private string personId;
         private string crimeDetail;
-        private string crimeType;
-        private string crimeCode;
         private DateTime crimeDate;
         private string crimeLocation;
-        private string disposition;
-        private DateTime dispositionDate;
-        private string dispositionCode;
         private string court;
         private string statute;
-        private string county;
-        private string caseNbr;
+        private string courtAddress;
+        private string caseId;
         private DateTime sentencedDate;
-        private string incarceration;
-        private string probation;
-        private DateTime earlyReleaseDate;
         private DateTime releaseDate;
-        private DateTime lateReleaseDate;
         private DateTime arrestDate;
         private string arrestAgency;
         private string status;
@@ -47,18 +38,6 @@ namespace AFIS360
             set { crimeDetail = value; }
         }
 
-        public string CrimeType
-        {
-            get { return crimeType; }
-            set { crimeType = value; }
-        }
-
-        public string CrimeCode
-        {
-            get { return crimeCode; }
-            set { crimeCode = value; }
-        }
-
         public DateTime CrimeDate
         {
             get { return crimeDate; }
@@ -69,24 +48,6 @@ namespace AFIS360
         {
             get { return crimeLocation; }
             set { crimeLocation = value; }
-        }
-
-        public string Disposition
-        {
-            get { return disposition; }
-            set { disposition = value; }
-        }
-
-        public string DispositionCode
-        {
-            get { return dispositionCode; }
-            set { dispositionCode = value; }
-        }
-
-        public DateTime DispositionDate
-        {
-            get { return dispositionDate; }
-            set { dispositionDate = value; }
         }
 
         public string Court
@@ -101,16 +62,16 @@ namespace AFIS360
             set { statute = value; }
         }
 
-        public string County
+        public string CourtyAddress
         {
-            get { return county; }
-            set { county = value; }
+            get { return courtAddress; }
+            set { courtAddress = value; }
         }
 
-        public string CaseNbr
+        public string CaseId
         {
-            get { return caseNbr; }
-            set { caseNbr = value; }
+            get { return caseId; }
+            set { caseId = value; }
         }
 
         public DateTime SentencedDate
@@ -119,33 +80,10 @@ namespace AFIS360
             set { sentencedDate = value; }
         }
 
-        public string Incarceration
-        {
-            get { return incarceration; }
-            set { incarceration = value; }
-        }
-
-        public string Probation
-        {
-            get { return probation; }
-            set { probation = value; }
-        }
-
-        public DateTime EarlyReleaseDate
-        {
-            get { return earlyReleaseDate; }
-            set { earlyReleaseDate = value; }
-        }
-
         public DateTime ReleaseDate
         {
             get { return releaseDate; }
             set { releaseDate = value; }
-        }
-        public DateTime LateReleaseDate
-        {
-            get { return lateReleaseDate; }
-            set { lateReleaseDate = value; }
         }
 
         public DateTime ArrestDate

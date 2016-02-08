@@ -13,13 +13,13 @@ namespace AFIS360
     public partial class PhysicalCharForm : Form
     {
         private ActivityLog activityLog;
-        private string personId;
+        private PersonDetail personDetail;
 
-        public PhysicalCharForm(ActivityLog activityLog, string personId)
+        public PhysicalCharForm(ActivityLog activityLog, PersonDetail personDetail)
         {
             InitializeComponent();
             this.activityLog = activityLog;
-            this.personId = personId;
+            this.personDetail = personDetail;
         }
 
 
@@ -164,10 +164,13 @@ namespace AFIS360
         private void PhysicalChar_Load(object sender, EventArgs e)
         {
             //retrieve Person Physical Char if exists
-            PersonPhysicalChar personPhysicalChar = new DataAccess().retrievePersonPhysicalCharacteristics(personId);
+            PersonPhysicalChar personPhysicalChar = new DataAccess().retrievePersonPhysicalCharacteristics(personDetail.getPersonId());
             Console.WriteLine("###-->> personPhysicalChar = " + personPhysicalChar);
 
-            lblPhysicalCharPersonIdValue.Text = personId;
+            lblPhysicalCharPersonIdValue.Text = personDetail.getPersonId();
+            lblPhysicalCharFName.Text = personDetail.getFirstName();
+            lblPhysicalCharLName.Text = personDetail.getLastName();
+
 
             if (personPhysicalChar != null)
             {

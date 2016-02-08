@@ -30,6 +30,8 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(PhysicalCharForm));
             this.tlpPhysicalCharBirthMark = new System.Windows.Forms.TableLayoutPanel();
+            this.lblPhysicalCharLName = new System.Windows.Forms.Label();
+            this.lblPhysicalCharFName = new System.Windows.Forms.Label();
             this.lblPhycicalCharPersonId = new System.Windows.Forms.Label();
             this.lblPhysicalCharHeight = new System.Windows.Forms.Label();
             this.lblPhysicalCharWeight = new System.Windows.Forms.Label();
@@ -70,12 +72,14 @@
             // 
             // tlpPhysicalCharBirthMark
             // 
-            this.tlpPhysicalCharBirthMark.CellBorderStyle = System.Windows.Forms.TableLayoutPanelCellBorderStyle.Outset;
+            this.tlpPhysicalCharBirthMark.CellBorderStyle = System.Windows.Forms.TableLayoutPanelCellBorderStyle.Single;
             this.tlpPhysicalCharBirthMark.ColumnCount = 4;
             this.tlpPhysicalCharBirthMark.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.00423F));
             this.tlpPhysicalCharBirthMark.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 66.99577F));
-            this.tlpPhysicalCharBirthMark.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 107F));
-            this.tlpPhysicalCharBirthMark.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 238F));
+            this.tlpPhysicalCharBirthMark.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 133F));
+            this.tlpPhysicalCharBirthMark.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 214F));
+            this.tlpPhysicalCharBirthMark.Controls.Add(this.lblPhysicalCharLName, 3, 0);
+            this.tlpPhysicalCharBirthMark.Controls.Add(this.lblPhysicalCharFName, 2, 0);
             this.tlpPhysicalCharBirthMark.Controls.Add(this.lblPhycicalCharPersonId, 0, 0);
             this.tlpPhysicalCharBirthMark.Controls.Add(this.lblPhysicalCharHeight, 0, 1);
             this.tlpPhysicalCharBirthMark.Controls.Add(this.lblPhysicalCharWeight, 2, 1);
@@ -99,7 +103,7 @@
             this.tlpPhysicalCharBirthMark.Controls.Add(this.txtBoxPhycicalCharIdMark, 3, 4);
             this.tlpPhysicalCharBirthMark.Controls.Add(this.dtpPhysicalCharDeathDate, 3, 5);
             this.tlpPhysicalCharBirthMark.Location = new System.Drawing.Point(40, 33);
-            this.tlpPhysicalCharBirthMark.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.tlpPhysicalCharBirthMark.Margin = new System.Windows.Forms.Padding(2);
             this.tlpPhysicalCharBirthMark.Name = "tlpPhysicalCharBirthMark";
             this.tlpPhysicalCharBirthMark.RowCount = 6;
             this.tlpPhysicalCharBirthMark.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50.63291F));
@@ -111,12 +115,36 @@
             this.tlpPhysicalCharBirthMark.Size = new System.Drawing.Size(662, 258);
             this.tlpPhysicalCharBirthMark.TabIndex = 0;
             // 
+            // lblPhysicalCharLName
+            // 
+            this.lblPhysicalCharLName.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.lblPhysicalCharLName.AutoSize = true;
+            this.lblPhysicalCharLName.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblPhysicalCharLName.Location = new System.Drawing.Point(448, 11);
+            this.lblPhysicalCharLName.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lblPhysicalCharLName.Name = "lblPhysicalCharLName";
+            this.lblPhysicalCharLName.Size = new System.Drawing.Size(17, 16);
+            this.lblPhysicalCharLName.TabIndex = 13;
+            this.lblPhysicalCharLName.Text = "F";
+            // 
+            // lblPhysicalCharFName
+            // 
+            this.lblPhysicalCharFName.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.lblPhysicalCharFName.AutoSize = true;
+            this.lblPhysicalCharFName.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblPhysicalCharFName.Location = new System.Drawing.Point(314, 11);
+            this.lblPhysicalCharFName.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lblPhysicalCharFName.Name = "lblPhysicalCharFName";
+            this.lblPhysicalCharFName.Size = new System.Drawing.Size(17, 16);
+            this.lblPhysicalCharFName.TabIndex = 12;
+            this.lblPhysicalCharFName.Text = "F";
+            // 
             // lblPhycicalCharPersonId
             // 
             this.lblPhycicalCharPersonId.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.lblPhycicalCharPersonId.AutoSize = true;
             this.lblPhycicalCharPersonId.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.125F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblPhycicalCharPersonId.Location = new System.Drawing.Point(4, 10);
+            this.lblPhycicalCharPersonId.Location = new System.Drawing.Point(3, 11);
             this.lblPhycicalCharPersonId.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblPhycicalCharPersonId.Name = "lblPhycicalCharPersonId";
             this.lblPhycicalCharPersonId.Size = new System.Drawing.Size(84, 17);
@@ -128,7 +156,7 @@
             this.lblPhysicalCharHeight.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.lblPhysicalCharHeight.AutoSize = true;
             this.lblPhysicalCharHeight.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.125F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblPhysicalCharHeight.Location = new System.Drawing.Point(4, 46);
+            this.lblPhysicalCharHeight.Location = new System.Drawing.Point(3, 49);
             this.lblPhysicalCharHeight.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblPhysicalCharHeight.Name = "lblPhysicalCharHeight";
             this.lblPhysicalCharHeight.Size = new System.Drawing.Size(85, 17);
@@ -140,7 +168,7 @@
             this.lblPhysicalCharWeight.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.lblPhysicalCharWeight.AutoSize = true;
             this.lblPhysicalCharWeight.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.125F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblPhysicalCharWeight.Location = new System.Drawing.Point(314, 46);
+            this.lblPhysicalCharWeight.Location = new System.Drawing.Point(314, 49);
             this.lblPhysicalCharWeight.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblPhysicalCharWeight.Name = "lblPhysicalCharWeight";
             this.lblPhysicalCharWeight.Size = new System.Drawing.Size(85, 17);
@@ -152,7 +180,7 @@
             this.lblPhysicalCharEyeColor.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.lblPhysicalCharEyeColor.AutoSize = true;
             this.lblPhysicalCharEyeColor.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.125F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblPhysicalCharEyeColor.Location = new System.Drawing.Point(4, 86);
+            this.lblPhysicalCharEyeColor.Location = new System.Drawing.Point(3, 90);
             this.lblPhysicalCharEyeColor.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblPhysicalCharEyeColor.Name = "lblPhysicalCharEyeColor";
             this.lblPhysicalCharEyeColor.Size = new System.Drawing.Size(73, 17);
@@ -164,7 +192,7 @@
             this.lblPhysicalCharHairColor.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.lblPhysicalCharHairColor.AutoSize = true;
             this.lblPhysicalCharHairColor.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.125F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblPhysicalCharHairColor.Location = new System.Drawing.Point(314, 86);
+            this.lblPhysicalCharHairColor.Location = new System.Drawing.Point(314, 90);
             this.lblPhysicalCharHairColor.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblPhysicalCharHairColor.Name = "lblPhysicalCharHairColor";
             this.lblPhysicalCharHairColor.Size = new System.Drawing.Size(75, 17);
@@ -176,7 +204,7 @@
             this.lblPhysicalCharComplexion.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.lblPhysicalCharComplexion.AutoSize = true;
             this.lblPhysicalCharComplexion.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.125F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblPhysicalCharComplexion.Location = new System.Drawing.Point(4, 128);
+            this.lblPhysicalCharComplexion.Location = new System.Drawing.Point(3, 131);
             this.lblPhysicalCharComplexion.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblPhysicalCharComplexion.Name = "lblPhysicalCharComplexion";
             this.lblPhysicalCharComplexion.Size = new System.Drawing.Size(84, 17);
@@ -188,7 +216,7 @@
             this.lblPhysicalCharBuildType.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.lblPhysicalCharBuildType.AutoSize = true;
             this.lblPhysicalCharBuildType.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.125F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblPhysicalCharBuildType.Location = new System.Drawing.Point(314, 128);
+            this.lblPhysicalCharBuildType.Location = new System.Drawing.Point(314, 131);
             this.lblPhysicalCharBuildType.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblPhysicalCharBuildType.Name = "lblPhysicalCharBuildType";
             this.lblPhysicalCharBuildType.Size = new System.Drawing.Size(79, 17);
@@ -200,7 +228,7 @@
             this.lblPhysicalCharBirthMark.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.lblPhysicalCharBirthMark.AutoSize = true;
             this.lblPhysicalCharBirthMark.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.125F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblPhysicalCharBirthMark.Location = new System.Drawing.Point(4, 162);
+            this.lblPhysicalCharBirthMark.Location = new System.Drawing.Point(3, 164);
             this.lblPhysicalCharBirthMark.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblPhysicalCharBirthMark.Name = "lblPhysicalCharBirthMark";
             this.lblPhysicalCharBirthMark.Size = new System.Drawing.Size(80, 51);
@@ -212,10 +240,10 @@
             this.lblPhysicalCharIdMark.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.lblPhysicalCharIdMark.AutoSize = true;
             this.lblPhysicalCharIdMark.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.125F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblPhysicalCharIdMark.Location = new System.Drawing.Point(314, 171);
+            this.lblPhysicalCharIdMark.Location = new System.Drawing.Point(314, 173);
             this.lblPhysicalCharIdMark.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblPhysicalCharIdMark.Name = "lblPhysicalCharIdMark";
-            this.lblPhysicalCharIdMark.Size = new System.Drawing.Size(93, 34);
+            this.lblPhysicalCharIdMark.Size = new System.Drawing.Size(128, 34);
             this.lblPhysicalCharIdMark.TabIndex = 7;
             this.lblPhysicalCharIdMark.Text = "ID Mark (100 chars max):";
             // 
@@ -224,7 +252,7 @@
             this.lblPhysicalCharGender.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.lblPhysicalCharGender.AutoSize = true;
             this.lblPhysicalCharGender.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.125F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblPhysicalCharGender.Location = new System.Drawing.Point(4, 229);
+            this.lblPhysicalCharGender.Location = new System.Drawing.Point(3, 230);
             this.lblPhysicalCharGender.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblPhysicalCharGender.Name = "lblPhysicalCharGender";
             this.lblPhysicalCharGender.Size = new System.Drawing.Size(60, 17);
@@ -236,7 +264,7 @@
             this.lblPhysicalCharDeathDate.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.lblPhysicalCharDeathDate.AutoSize = true;
             this.lblPhysicalCharDeathDate.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.125F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblPhysicalCharDeathDate.Location = new System.Drawing.Point(314, 229);
+            this.lblPhysicalCharDeathDate.Location = new System.Drawing.Point(314, 230);
             this.lblPhysicalCharDeathDate.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblPhysicalCharDeathDate.Name = "lblPhysicalCharDeathDate";
             this.lblPhysicalCharDeathDate.Size = new System.Drawing.Size(84, 17);
@@ -248,7 +276,7 @@
             this.lblPhysicalCharPersonIdValue.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.lblPhysicalCharPersonIdValue.AutoSize = true;
             this.lblPhysicalCharPersonIdValue.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.125F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblPhysicalCharPersonIdValue.Location = new System.Drawing.Point(107, 10);
+            this.lblPhysicalCharPersonIdValue.Location = new System.Drawing.Point(106, 11);
             this.lblPhysicalCharPersonIdValue.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblPhysicalCharPersonIdValue.Name = "lblPhysicalCharPersonIdValue";
             this.lblPhysicalCharPersonIdValue.Size = new System.Drawing.Size(0, 17);
@@ -258,8 +286,8 @@
             // 
             this.txtPhysicalCharHeight.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.txtPhysicalCharHeight.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.125F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtPhysicalCharHeight.Location = new System.Drawing.Point(107, 43);
-            this.txtPhysicalCharHeight.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txtPhysicalCharHeight.Location = new System.Drawing.Point(106, 46);
+            this.txtPhysicalCharHeight.Margin = new System.Windows.Forms.Padding(2);
             this.txtPhysicalCharHeight.MaxLength = 6;
             this.txtPhysicalCharHeight.Name = "txtPhysicalCharHeight";
             this.txtPhysicalCharHeight.Size = new System.Drawing.Size(68, 23);
@@ -271,8 +299,8 @@
             // 
             this.txtBoxPhysicalCharWeight.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.txtBoxPhysicalCharWeight.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.125F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtBoxPhysicalCharWeight.Location = new System.Drawing.Point(423, 43);
-            this.txtBoxPhysicalCharWeight.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txtBoxPhysicalCharWeight.Location = new System.Drawing.Point(448, 46);
+            this.txtBoxPhysicalCharWeight.Margin = new System.Windows.Forms.Padding(2);
             this.txtBoxPhysicalCharWeight.MaxLength = 6;
             this.txtBoxPhysicalCharWeight.Name = "txtBoxPhysicalCharWeight";
             this.txtBoxPhysicalCharWeight.Size = new System.Drawing.Size(68, 23);
@@ -295,8 +323,8 @@
             "Gray",
             "Hazel",
             "Other"});
-            this.comboBoxPhysicalCharEyeColor.Location = new System.Drawing.Point(107, 82);
-            this.comboBoxPhysicalCharEyeColor.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.comboBoxPhysicalCharEyeColor.Location = new System.Drawing.Point(106, 86);
+            this.comboBoxPhysicalCharEyeColor.Margin = new System.Windows.Forms.Padding(2);
             this.comboBoxPhysicalCharEyeColor.Name = "comboBoxPhysicalCharEyeColor";
             this.comboBoxPhysicalCharEyeColor.Size = new System.Drawing.Size(112, 24);
             this.comboBoxPhysicalCharEyeColor.TabIndex = 2;
@@ -314,8 +342,8 @@
             "Olive",
             "Bkack",
             "Other"});
-            this.comboBoxPhysicalCharComplexion.Location = new System.Drawing.Point(107, 125);
-            this.comboBoxPhysicalCharComplexion.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.comboBoxPhysicalCharComplexion.Location = new System.Drawing.Point(106, 127);
+            this.comboBoxPhysicalCharComplexion.Margin = new System.Windows.Forms.Padding(2);
             this.comboBoxPhysicalCharComplexion.Name = "comboBoxPhysicalCharComplexion";
             this.comboBoxPhysicalCharComplexion.Size = new System.Drawing.Size(112, 24);
             this.comboBoxPhysicalCharComplexion.TabIndex = 4;
@@ -324,12 +352,12 @@
             // 
             this.txtBoxPhysicalCharBirthMark.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.txtBoxPhysicalCharBirthMark.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.125F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtBoxPhysicalCharBirthMark.Location = new System.Drawing.Point(107, 162);
-            this.txtBoxPhysicalCharBirthMark.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txtBoxPhysicalCharBirthMark.Location = new System.Drawing.Point(106, 164);
+            this.txtBoxPhysicalCharBirthMark.Margin = new System.Windows.Forms.Padding(2);
             this.txtBoxPhysicalCharBirthMark.MaxLength = 100;
             this.txtBoxPhysicalCharBirthMark.Multiline = true;
             this.txtBoxPhysicalCharBirthMark.Name = "txtBoxPhysicalCharBirthMark";
-            this.txtBoxPhysicalCharBirthMark.Size = new System.Drawing.Size(201, 51);
+            this.txtBoxPhysicalCharBirthMark.Size = new System.Drawing.Size(203, 51);
             this.txtBoxPhysicalCharBirthMark.TabIndex = 6;
             // 
             // comboBoxPhycicalCharGender
@@ -341,8 +369,8 @@
             "Male",
             "Female",
             "Other"});
-            this.comboBoxPhycicalCharGender.Location = new System.Drawing.Point(107, 226);
-            this.comboBoxPhycicalCharGender.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.comboBoxPhycicalCharGender.Location = new System.Drawing.Point(106, 226);
+            this.comboBoxPhycicalCharGender.Margin = new System.Windows.Forms.Padding(2);
             this.comboBoxPhycicalCharGender.Name = "comboBoxPhycicalCharGender";
             this.comboBoxPhycicalCharGender.Size = new System.Drawing.Size(112, 24);
             this.comboBoxPhycicalCharGender.TabIndex = 8;
@@ -362,8 +390,8 @@
             "Red",
             "White",
             "Other"});
-            this.comboBoxPhysicalCharHairColor.Location = new System.Drawing.Point(423, 82);
-            this.comboBoxPhysicalCharHairColor.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.comboBoxPhysicalCharHairColor.Location = new System.Drawing.Point(448, 86);
+            this.comboBoxPhysicalCharHairColor.Margin = new System.Windows.Forms.Padding(2);
             this.comboBoxPhysicalCharHairColor.Name = "comboBoxPhysicalCharHairColor";
             this.comboBoxPhysicalCharHairColor.Size = new System.Drawing.Size(112, 24);
             this.comboBoxPhysicalCharHairColor.TabIndex = 3;
@@ -379,8 +407,8 @@
             "Over weight",
             "Fat",
             "Other"});
-            this.comboBoxPhysicalCharBuildType.Location = new System.Drawing.Point(423, 125);
-            this.comboBoxPhysicalCharBuildType.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.comboBoxPhysicalCharBuildType.Location = new System.Drawing.Point(448, 127);
+            this.comboBoxPhysicalCharBuildType.Margin = new System.Windows.Forms.Padding(2);
             this.comboBoxPhysicalCharBuildType.Name = "comboBoxPhysicalCharBuildType";
             this.comboBoxPhysicalCharBuildType.Size = new System.Drawing.Size(112, 24);
             this.comboBoxPhysicalCharBuildType.TabIndex = 5;
@@ -389,8 +417,8 @@
             // 
             this.txtBoxPhycicalCharIdMark.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.txtBoxPhycicalCharIdMark.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.125F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtBoxPhycicalCharIdMark.Location = new System.Drawing.Point(423, 162);
-            this.txtBoxPhycicalCharIdMark.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txtBoxPhycicalCharIdMark.Location = new System.Drawing.Point(448, 164);
+            this.txtBoxPhycicalCharIdMark.Margin = new System.Windows.Forms.Padding(2);
             this.txtBoxPhycicalCharIdMark.MaxLength = 100;
             this.txtBoxPhycicalCharIdMark.Multiline = true;
             this.txtBoxPhycicalCharIdMark.Name = "txtBoxPhycicalCharIdMark";
@@ -401,10 +429,10 @@
             // 
             this.dtpPhysicalCharDeathDate.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.dtpPhysicalCharDeathDate.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.125F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.dtpPhysicalCharDeathDate.Location = new System.Drawing.Point(423, 226);
-            this.dtpPhysicalCharDeathDate.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.dtpPhysicalCharDeathDate.Location = new System.Drawing.Point(448, 227);
+            this.dtpPhysicalCharDeathDate.Margin = new System.Windows.Forms.Padding(2);
             this.dtpPhysicalCharDeathDate.Name = "dtpPhysicalCharDeathDate";
-            this.dtpPhysicalCharDeathDate.Size = new System.Drawing.Size(224, 23);
+            this.dtpPhysicalCharDeathDate.Size = new System.Drawing.Size(209, 23);
             this.dtpPhysicalCharDeathDate.TabIndex = 9;
             // 
             // tlpPhysicalCharStatusMsg
@@ -413,7 +441,7 @@
             this.tlpPhysicalCharStatusMsg.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.tlpPhysicalCharStatusMsg.Controls.Add(this.lblPhysicalCharStatusMsg, 0, 0);
             this.tlpPhysicalCharStatusMsg.Location = new System.Drawing.Point(40, 306);
-            this.tlpPhysicalCharStatusMsg.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.tlpPhysicalCharStatusMsg.Margin = new System.Windows.Forms.Padding(2);
             this.tlpPhysicalCharStatusMsg.Name = "tlpPhysicalCharStatusMsg";
             this.tlpPhysicalCharStatusMsg.RowCount = 1;
             this.tlpPhysicalCharStatusMsg.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
@@ -438,13 +466,13 @@
             this.tlpPhysicalCharButtons.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 48.60814F));
             this.tlpPhysicalCharButtons.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 51.39186F));
             this.tlpPhysicalCharButtons.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 110F));
-            this.tlpPhysicalCharButtons.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 110F));
+            this.tlpPhysicalCharButtons.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 111F));
             this.tlpPhysicalCharButtons.Controls.Add(this.btnPhysicalCharClose, 3, 0);
             this.tlpPhysicalCharButtons.Controls.Add(this.btnPhysicalCharUpdate, 1, 0);
             this.tlpPhysicalCharButtons.Controls.Add(this.btnPhysicalCharEnter, 0, 0);
             this.tlpPhysicalCharButtons.Controls.Add(this.btnPhysicalCharClear, 2, 0);
             this.tlpPhysicalCharButtons.Location = new System.Drawing.Point(165, 365);
-            this.tlpPhysicalCharButtons.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.tlpPhysicalCharButtons.Margin = new System.Windows.Forms.Padding(2);
             this.tlpPhysicalCharButtons.Name = "tlpPhysicalCharButtons";
             this.tlpPhysicalCharButtons.RowCount = 1;
             this.tlpPhysicalCharButtons.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
@@ -455,8 +483,8 @@
             // 
             this.btnPhysicalCharClose.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.btnPhysicalCharClose.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnPhysicalCharClose.Location = new System.Drawing.Point(334, 3);
-            this.btnPhysicalCharClose.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnPhysicalCharClose.Location = new System.Drawing.Point(333, 3);
+            this.btnPhysicalCharClose.Margin = new System.Windows.Forms.Padding(2);
             this.btnPhysicalCharClose.Name = "btnPhysicalCharClose";
             this.btnPhysicalCharClose.Size = new System.Drawing.Size(102, 42);
             this.btnPhysicalCharClose.TabIndex = 3;
@@ -468,8 +496,8 @@
             // 
             this.btnPhysicalCharUpdate.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.btnPhysicalCharUpdate.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnPhysicalCharUpdate.Location = new System.Drawing.Point(110, 3);
-            this.btnPhysicalCharUpdate.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnPhysicalCharUpdate.Location = new System.Drawing.Point(109, 3);
+            this.btnPhysicalCharUpdate.Margin = new System.Windows.Forms.Padding(2);
             this.btnPhysicalCharUpdate.Name = "btnPhysicalCharUpdate";
             this.btnPhysicalCharUpdate.Size = new System.Drawing.Size(100, 42);
             this.btnPhysicalCharUpdate.TabIndex = 1;
@@ -482,7 +510,7 @@
             this.btnPhysicalCharEnter.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.btnPhysicalCharEnter.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnPhysicalCharEnter.Location = new System.Drawing.Point(2, 3);
-            this.btnPhysicalCharEnter.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnPhysicalCharEnter.Margin = new System.Windows.Forms.Padding(2);
             this.btnPhysicalCharEnter.Name = "btnPhysicalCharEnter";
             this.btnPhysicalCharEnter.Size = new System.Drawing.Size(99, 42);
             this.btnPhysicalCharEnter.TabIndex = 0;
@@ -494,8 +522,8 @@
             // 
             this.btnPhysicalCharClear.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.btnPhysicalCharClear.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnPhysicalCharClear.Location = new System.Drawing.Point(224, 3);
-            this.btnPhysicalCharClear.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnPhysicalCharClear.Location = new System.Drawing.Point(223, 3);
+            this.btnPhysicalCharClear.Margin = new System.Windows.Forms.Padding(2);
             this.btnPhysicalCharClear.Name = "btnPhysicalCharClear";
             this.btnPhysicalCharClear.Size = new System.Drawing.Size(100, 42);
             this.btnPhysicalCharClear.TabIndex = 2;
@@ -524,7 +552,7 @@
             // exitToolStripMenuItem
             // 
             this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
-            this.exitToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.exitToolStripMenuItem.Size = new System.Drawing.Size(92, 22);
             this.exitToolStripMenuItem.Text = "Exit";
             this.exitToolStripMenuItem.Click += new System.EventHandler(this.exitToolStripMenuItem_Click);
             // 
@@ -539,7 +567,7 @@
             this.Controls.Add(this.menuStripPhysicalChar);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MainMenuStrip = this.menuStripPhysicalChar;
-            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "PhysicalCharForm";
             this.Text = "Physical Characteristics";
             this.Load += new System.EventHandler(this.PhysicalChar_Load);
@@ -590,5 +618,7 @@
         private System.Windows.Forms.MenuStrip menuStripPhysicalChar;
         private System.Windows.Forms.ToolStripMenuItem menuToolStripMenuItemPhysicalChar;
         private System.Windows.Forms.ToolStripMenuItem exitToolStripMenuItem;
+        private System.Windows.Forms.Label lblPhysicalCharLName;
+        private System.Windows.Forms.Label lblPhysicalCharFName;
     }
 }

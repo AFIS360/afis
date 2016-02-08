@@ -1978,9 +1978,11 @@ namespace AFIS360
                 return;
             }
 
-            if (Program.getPerson(txtEnrollId.Text) != null)
+            PersonDetail personDetail = Program.getPerson(txtEnrollId.Text);
+
+            if (personDetail != null)
             {
-                PhysicalCharForm physicalCharForm = new PhysicalCharForm(activityLog, txtEnrollId.Text);
+                PhysicalCharForm physicalCharForm = new PhysicalCharForm(activityLog, personDetail);
                 physicalCharForm.ShowDialog();
             } else
             {
