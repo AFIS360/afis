@@ -25,7 +25,7 @@ namespace AFIS360
         public static User user = null;
         public static ActivityLog activityLog = null;
         public static AppConfig appConfig = null;
-
+        public static ClientSetup clientSetup = null;
 
         public AFISMain()
         {
@@ -36,11 +36,12 @@ namespace AFIS360
             tabControlAFIS.TabPages.Remove(tabUserMgmt);
             tabControlAFIS.TabPages.Remove(tabAuditReport);
             tabControlAFIS.TabPages.Remove(tabFind);
+            tabControlAFIS.TabPages.Remove(tabClientSetup);
             menuStrip.Visible = true;
             btnUserMgmtUpdate.Enabled = false;
             //set the default image for match picBox
             if (picMatch.Image == null) picMatch.Image = System.Drawing.Image.FromFile(ConfigurationManager.AppSettings["defaultImageForMatch"]);
-      }
+        }
 
 
         private void btnEnroll_Click(object sender, EventArgs e)
@@ -649,7 +650,7 @@ namespace AFIS360
             txtEnrollMName.Clear();
             txtEnrollPrefix.Clear();
             txtEnrollSuffix.Clear();
-            dtpEnrollDOB.Value = dtpEnrollDOB.MinDate;
+            dtpEnrollDOB.Value = DateTime.Now;
             txtEnrollFatherName.Clear();
             txtEnrollAddrLine.Clear();
             txtEnrollCity.Clear();
@@ -869,6 +870,7 @@ namespace AFIS360
                     clearReportTab();
                     clearFindTab();
                     clearAccessControlsSelection();
+                    clearClientSetupTab();
                 }
 
                 Console.WriteLine("User.Id = " + user.getPersonId());
@@ -931,6 +933,7 @@ namespace AFIS360
             {
                 tabControlAFIS.TabPages.Remove(tabEnroll);
             }
+
             if (accessCntrl.hasAccessToMatchTab())
             {
                 tabControlAFIS.TabPages.Add(tabMatch);
@@ -939,6 +942,7 @@ namespace AFIS360
             {
                 tabControlAFIS.TabPages.Remove(tabMatch);
             }
+
             if (accessCntrl.hasAccessToUserMgmtTab())
             {
                 tabControlAFIS.TabPages.Add(tabUserMgmt);
@@ -947,6 +951,7 @@ namespace AFIS360
             {
                 tabControlAFIS.TabPages.Remove(tabUserMgmt);
             }
+
             if (accessCntrl.hasAccessToAuditTab())
             {
                 tabControlAFIS.TabPages.Add(tabAuditReport);
@@ -955,6 +960,7 @@ namespace AFIS360
             {
                 tabControlAFIS.TabPages.Remove(tabAuditReport);
             }
+
             if (accessCntrl.hasAccessToLoginTab())
             {
                 tabControlAFIS.TabPages.Remove(tabLogin);
@@ -963,6 +969,7 @@ namespace AFIS360
             {
                 tabControlAFIS.TabPages.Remove(tabLogin);
             }
+
             if (accessCntrl.hasAccessToFindTab())
             {
                 tabControlAFIS.TabPages.Add(tabFind);
@@ -971,6 +978,15 @@ namespace AFIS360
             {
                 tabControlAFIS.TabPages.Remove(tabFind);
             }
+
+            if (accessCntrl.hasAccessToClientSetup())
+            {
+                tabControlAFIS.TabPages.Add(tabClientSetup);
+            }else
+            {
+                tabControlAFIS.TabPages.Remove(tabClientSetup);
+            }
+
             if (accessCntrl.hasAccessToDataImport())
             {
                 importDataToolStripMenuItem.Enabled = true;
@@ -979,6 +995,7 @@ namespace AFIS360
             {
                 importDataToolStripMenuItem.Enabled = false;
             }
+
             if (accessCntrl.hasAccessToDataExport())
             {
                 exportDataToolStripMenuItem.Enabled = true;
@@ -987,6 +1004,7 @@ namespace AFIS360
             {
                 exportDataToolStripMenuItem.Enabled = false;
             }
+
             if (accessCntrl.hasAccessToMultiMatch())
             {
                 advancedMatchToolStripMenuItem.Enabled = true;
@@ -1033,6 +1051,7 @@ namespace AFIS360
             tabControlAFIS.TabPages.Remove(tabUserMgmt);
             tabControlAFIS.TabPages.Remove(tabAuditReport);
             tabControlAFIS.TabPages.Remove(tabFind);
+            tabControlAFIS.TabPages.Remove(tabClientSetup);
 
             txtLoginId.Clear();
             txtLoginPass.Clear();
@@ -1139,27 +1158,53 @@ namespace AFIS360
 
         private void tabControlAFIS_Selected(object sender, TabControlEventArgs e)
         {
-            Console.WriteLine("####--> Tab Changed. Current Tab = " + e.TabPage.Text);
+            if(e.TabPage != null)
+            {
+                Console.WriteLine("####--> Tab Changed. Current Tab = " + e.TabPage.Text);
 
-            if (e.TabPage.Text.Equals("Enroll"))
-            {
-                this.ActiveControl = txtEnrollId;
-                txtEnrollId.Select();
-            }
-            else if (e.TabPage.Text.Equals("Match"))
-            {
-                Console.WriteLine("####--> Setting focus on txtMatchVisitorNbr");
-                picMatch.Select();
-            }
-            else if (e.TabPage.Text.Equals("User Mgmt"))
-            {
-                Console.WriteLine("####--> Setting focus on txtUserMgmtId");
-                txtUserMgmtId.Select();
-            }
-            else if (e.TabPage.Text.Equals("Login"))
-            {
-                Console.WriteLine("####--> Setting focus on txtLoginId");
-                txtLoginId.Select();
+                if (e.TabPage.Text.Equals("Enroll"))
+                {
+                    //                this.ActiveControl = txtEnrollId;
+                    txtEnrollId.Select();
+                    txtEnrollId.Focus();
+                }
+                else if (e.TabPage.Text.Equals("Match"))
+                {
+                    Console.WriteLine("####--> Setting focus on txtMatchVisitorNbr");
+                    picMatch.Select();
+                    picMatch.Focus();
+                }
+                else if (e.TabPage.Text.Equals("User/Role Mgmt"))
+                {
+                    Console.WriteLine("####--> Setting focus on txtUserMgmtId");
+                    txtUserMgmtId.Select();
+                    txtUserMgmtId.Focus();
+                }
+                else if (e.TabPage.Text.Equals("Login"))
+                {
+                    Console.WriteLine("####--> Setting focus on txtLoginId");
+                    txtLoginId.Select();
+                    txtLoginId.Focus();
+                }
+                else if (e.TabPage.Text.Equals("Audit/Report"))
+                {
+                    Console.WriteLine("####--> Setting focus on txtAuditReportUserId");
+                    txtAuditReportUserId.Select();
+                    txtAuditReportUserId.Focus();
+                }
+                else if (e.TabPage.Text.Equals("Search/Find"))
+                {
+                    Console.WriteLine("####--> Setting focus on txtBoxFindFirstName");
+                    txtBoxFindFirstName.Select();
+                    txtBoxFindFirstName.Focus();
+
+                }
+                else if (e.TabPage.Text.Equals("Client Setup"))
+                {
+                    Console.WriteLine("####--> Setting focus on txtBoxClientSetupLegalName");
+                    txtBoxClientSetupLegalName.Select();
+                    txtBoxClientSetupLegalName.Focus();
+                }
             }
         }
 
@@ -1435,6 +1480,8 @@ namespace AFIS360
             importDataToolStripMenuItem.Enabled = false;
             //load Access Control list
             loadAccessControls();
+            //load Client Setup
+            loadClientSetup();
         }
 
         private void loadAccessControls()
@@ -1446,6 +1493,13 @@ namespace AFIS360
                 this.listUserMgmtRole.Items.Add(accessCntrl.getRole());
             }
         }
+
+        private void loadClientSetup()
+        {
+            DataAccess dataAccess = new DataAccess();
+            clientSetup = dataAccess.getClientSetup();
+        }
+
 
         private void AFISMain_FormClosed(object sender, FormClosedEventArgs e)
         {
@@ -1863,7 +1917,8 @@ namespace AFIS360
             string accessSearchFind = chkBoxUserMgmtFindSearch.Checked ? "Y" : "N";
             string accessDataImport = chkBoxUserMgmtDataImport.Checked ? "Y" : "N";
             string accessDataExport = chkBoxUserMgmtDataExport.Checked ? "Y" : "N";
-            string accessMultiMatch= chkBoxUserMgmtMultiMatch.Checked ? "Y" : "N";
+            string accessMultiMatch = chkBoxUserMgmtMultiMatch.Checked ? "Y" : "N";
+            string accessClientSetup = chkBoxUserMgmtClientSetup.Checked ? "Y" : "N";
 
             AccessControl accessCntrl = new AccessControl();
             accessCntrl.setRole(roleName);
@@ -1876,6 +1931,7 @@ namespace AFIS360
             accessCntrl.setAccessDataImport(accessDataImport);
             accessCntrl.setAccessDataExport(accessDataExport);
             accessCntrl.setAccessMultiMatch(accessMultiMatch);
+            accessCntrl.setAccessClientSetup(accessClientSetup);
 
             Status status = new DataAccess().storeAccessControl(accessCntrl);
             if (status.getStatusCode().Equals(Status.STATUS_SUCCESSFUL))
@@ -1908,6 +1964,7 @@ namespace AFIS360
                 chkBoxUserMgmtDataImport.Checked = accessCntrl.getAccessDataImport() == "Y" ? true : false;
                 chkBoxUserMgmtDataExport.Checked = accessCntrl.getAccessDataExport() == "Y" ? true : false;
                 chkBoxUserMgmtMultiMatch.Checked = accessCntrl.getAccessMultiMatch() == "Y" ? true : false;
+                chkBoxUserMgmtClientSetup.Checked = accessCntrl.getAccessClientSetup() == "Y" ? true : false;
             }
         }
 
@@ -1923,6 +1980,7 @@ namespace AFIS360
             chkBoxUserMgmtDataImport.Checked = false;
             chkBoxUserMgmtDataExport.Checked = false;
             chkBoxUserMgmtMultiMatch.Checked = false;
+            chkBoxUserMgmtClientSetup.Checked = false;
             lblUserMgmtRoleStatusMsg.Text = null;
         }
 
@@ -1951,6 +2009,7 @@ namespace AFIS360
             accessCntrl.setAccessDataImport(chkBoxUserMgmtDataImport.Checked ? "Y" : "N");
             accessCntrl.setAccessDataExport(chkBoxUserMgmtDataExport.Checked ? "Y" : "N");
             accessCntrl.setAccessMultiMatch(chkBoxUserMgmtMultiMatch.Checked ? "Y" : "N");
+            accessCntrl.setAccessClientSetup(chkBoxUserMgmtClientSetup.Checked ? "Y" : "N");
 
             DataAccess dataAccess = new DataAccess();
             Status status = dataAccess.updateAccessControl(accessCntrl);
@@ -2014,6 +2073,76 @@ namespace AFIS360
                 return;
             }
         }//end btnEnrollCriminalRec_Click
+
+
+        private void btnClientSetupSave_Click(object sender, EventArgs e)
+        {
+            Status status = null;
+
+            try
+            {
+                if (string.IsNullOrEmpty(txtBoxClientSetupLegalName.Text))
+                {
+                    MessageBox.Show("Client's Legal name field is required, cannot be empty.", "Warning Message", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
+
+                Console.WriteLine("###-->> Adding Client Setup Record....");
+                ClientSetup clientSetup = new ClientSetup();
+                clientSetup.ClientId = txtBoxClientSetupLegalName.Text + DateTime.Now.ToString("yyyy-dd-MM");
+                clientSetup.LegalName = txtBoxClientSetupLegalName.Text;
+                clientSetup.AddressLine = txtBoxClientSetupAddressLine.Text;
+                clientSetup.City = txtBoxClientSetupCity.Text;
+                clientSetup.State = txtBoxClientSetupState.Text;
+                clientSetup.PostalCode = txtBoxClientSetupPostalCode.Text;
+                clientSetup.Country = txtBoxClientSetupCountry.Text;
+                clientSetup.CreatedBy = AFISMain.user.getPersonId();
+                clientSetup.CreationDateTime = DateTime.Now;
+                clientSetup.UpdatedBy = null;
+                clientSetup.UpdateDateTime = null;
+
+                DataAccess dataAccess = new DataAccess();
+                status = dataAccess.storeClientSetup(clientSetup);
+
+                Console.WriteLine("###-->> Status = " + status.getStatusDesc());
+
+                if (status.getStatusCode().Equals(Status.STATUS_SUCCESSFUL))
+                {
+                    lblClientSetupStatusMsg.ForeColor = System.Drawing.Color.Green;
+                    activityLog.setActivity(status.getStatusDesc() + "\n");
+                }
+                else
+                {
+                    activityLog.setActivity(status.getStatusDesc() + "\n");
+                    lblClientSetupStatusMsg.ForeColor = System.Drawing.Color.Red;
+                }
+
+                lblClientSetupStatusMsg.Text = status.getStatusDesc();
+            }
+            catch (Exception exp)
+            {
+                activityLog.setActivity(status.getStatusDesc() + "\n");
+                lblClientSetupStatusMsg.ForeColor = System.Drawing.Color.Red;
+                Console.WriteLine(exp);
+            }
+
+        }
+
+        private void btnClientSetupClear_Click(object sender, EventArgs e)
+        {
+            clearClientSetupTab();
+        }
+
+        private void clearClientSetupTab()
+        {
+            txtBoxClientSetupLegalName.Text = null;
+            txtBoxClientSetupAddressLine.Text = null;
+            txtBoxClientSetupCity.Text = null;
+            txtBoxClientSetupState.Text = null;
+            txtBoxClientSetupPostalCode.Text = null;
+            txtBoxClientSetupCountry.Text = null;
+            lblClientSetupStatusMsg.Text = null;
+        }
     }
 }
 

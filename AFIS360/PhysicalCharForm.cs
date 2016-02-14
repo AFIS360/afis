@@ -36,7 +36,7 @@ namespace AFIS360
                 personPhysicalChar.EyeColor = !string.IsNullOrEmpty((string)comboBoxPhysicalCharEyeColor.SelectedItem) ? (string)comboBoxPhysicalCharEyeColor.SelectedItem : "";
                 personPhysicalChar.HairColor = !string.IsNullOrEmpty((string)comboBoxPhysicalCharHairColor.SelectedItem) ? (string)comboBoxPhysicalCharHairColor.SelectedItem : "";
                 personPhysicalChar.Complexion = !string.IsNullOrEmpty((string)comboBoxPhysicalCharComplexion.SelectedItem) ? (string)comboBoxPhysicalCharComplexion.SelectedItem : "";
-                personPhysicalChar.BuindType = !string.IsNullOrEmpty((string)comboBoxPhysicalCharBuildType.SelectedItem) ? (string)comboBoxPhysicalCharBuildType.SelectedItem : "";
+                personPhysicalChar.BuildType = !string.IsNullOrEmpty((string)comboBoxPhysicalCharBuildType.SelectedItem) ? (string)comboBoxPhysicalCharBuildType.SelectedItem : "";
                 personPhysicalChar.BirthMark = !string.IsNullOrEmpty(txtBoxPhysicalCharBirthMark.Text) ? txtBoxPhysicalCharBirthMark.Text : "";
                 personPhysicalChar.IdMark = !string.IsNullOrEmpty(txtBoxPhycicalCharIdMark.Text) ? txtBoxPhycicalCharIdMark.Text : "";
                 personPhysicalChar.Gender = !string.IsNullOrEmpty((string)comboBoxPhycicalCharGender.SelectedItem) ? (string)comboBoxPhycicalCharGender.SelectedItem : "";
@@ -53,7 +53,7 @@ namespace AFIS360
                 }
 
                 Console.WriteLine("###-->> detail: Height =  " + personPhysicalChar.Height + ", Weight = " + personPhysicalChar.Weight + ", Eye Color = " + personPhysicalChar.EyeColor);
-                Console.WriteLine("###-->> detail: Hair Color =  " + personPhysicalChar.HairColor + ", Complexion = " + personPhysicalChar.Complexion + ", Build Type = " + personPhysicalChar.BuindType);
+                Console.WriteLine("###-->> detail: Hair Color =  " + personPhysicalChar.HairColor + ", Complexion = " + personPhysicalChar.Complexion + ", Build Type = " + personPhysicalChar.BuildType);
                 Console.WriteLine("###-->> detail: Birth Mark =  " + personPhysicalChar.BirthMark + ", ID mark = " + personPhysicalChar.IdMark + ", Gender = " + personPhysicalChar.Gender + ", DOD = " + personPhysicalChar.DOD);
                 Console.WriteLine("###-->> detail: Created By =  " + personPhysicalChar.CreatedBy + ", Creation Date = " + personPhysicalChar.CreationDateTime + ", Updated By = " + personPhysicalChar.UpdatedBy + ", Updated Date = " + personPhysicalChar.UpdateDateTime);
 
@@ -96,7 +96,7 @@ namespace AFIS360
                 personPhysicalChar.EyeColor = !string.IsNullOrEmpty((string)comboBoxPhysicalCharEyeColor.SelectedItem) ? (string)comboBoxPhysicalCharEyeColor.SelectedItem : "";
                 personPhysicalChar.HairColor = !string.IsNullOrEmpty((string)comboBoxPhysicalCharHairColor.SelectedItem) ? (string)comboBoxPhysicalCharHairColor.SelectedItem : "";
                 personPhysicalChar.Complexion = !string.IsNullOrEmpty((string)comboBoxPhysicalCharComplexion.SelectedItem) ? (string)comboBoxPhysicalCharComplexion.SelectedItem : "";
-                personPhysicalChar.BuindType = !string.IsNullOrEmpty((string)comboBoxPhysicalCharBuildType.SelectedItem) ? (string)comboBoxPhysicalCharBuildType.SelectedItem : "";
+                personPhysicalChar.BuildType = !string.IsNullOrEmpty((string)comboBoxPhysicalCharBuildType.SelectedItem) ? (string)comboBoxPhysicalCharBuildType.SelectedItem : "";
                 personPhysicalChar.BirthMark = !string.IsNullOrEmpty(txtBoxPhysicalCharBirthMark.Text) ? txtBoxPhysicalCharBirthMark.Text : "";
                 personPhysicalChar.IdMark = !string.IsNullOrEmpty(txtBoxPhycicalCharIdMark.Text) ? txtBoxPhycicalCharIdMark.Text : "";
                 personPhysicalChar.Gender = !string.IsNullOrEmpty((string)comboBoxPhycicalCharGender.SelectedItem) ? (string)comboBoxPhycicalCharGender.SelectedItem : "" ;
@@ -113,7 +113,7 @@ namespace AFIS360
                 }
 
                 Console.WriteLine("###-->> detail: Height =  " + personPhysicalChar.Height + ", Weight = " + personPhysicalChar.Weight + ", Eye Color = " + personPhysicalChar.EyeColor);
-                Console.WriteLine("###-->> detail: Hair Color =  " + personPhysicalChar.HairColor + ", Complexion = " + personPhysicalChar.Complexion + ", Build Type = " + personPhysicalChar.BuindType);
+                Console.WriteLine("###-->> detail: Hair Color =  " + personPhysicalChar.HairColor + ", Complexion = " + personPhysicalChar.Complexion + ", Build Type = " + personPhysicalChar.BuildType);
                 Console.WriteLine("###-->> detail: Birth Mark =  " + personPhysicalChar.BirthMark + ", ID mark = " + personPhysicalChar.IdMark + ", Gender = " + personPhysicalChar.Gender + ", DOD = " + personPhysicalChar.DOD);
                 Console.WriteLine("###-->> detail: Created By =  " + personPhysicalChar.CreatedBy + ", Creation Date = " + personPhysicalChar.CreationDateTime + ", Updated By = " + personPhysicalChar.UpdatedBy + ", Updated Date = " + personPhysicalChar.UpdateDateTime);
 
@@ -179,7 +179,7 @@ namespace AFIS360
                 comboBoxPhysicalCharEyeColor.SelectedItem = !string.IsNullOrEmpty(personPhysicalChar.EyeColor) ? personPhysicalChar.EyeColor : "";
                 comboBoxPhysicalCharHairColor.SelectedItem = !string.IsNullOrEmpty(personPhysicalChar.HairColor) ? personPhysicalChar.HairColor : "";
                 comboBoxPhysicalCharComplexion.SelectedItem = !string.IsNullOrEmpty(personPhysicalChar.Complexion) ? personPhysicalChar.Complexion : "";
-                comboBoxPhysicalCharBuildType.SelectedItem = !string.IsNullOrEmpty(personPhysicalChar.BuindType) ? personPhysicalChar.BuindType : "";
+                comboBoxPhysicalCharBuildType.SelectedItem = !string.IsNullOrEmpty(personPhysicalChar.BuildType) ? personPhysicalChar.BuildType : "";
                 txtBoxPhysicalCharBirthMark.Text = !string.IsNullOrEmpty(personPhysicalChar.BirthMark) ? personPhysicalChar.BirthMark : "";
                 txtBoxPhycicalCharIdMark.Text = !string.IsNullOrEmpty(personPhysicalChar.IdMark) ? personPhysicalChar.IdMark : "";
                 comboBoxPhycicalCharGender.SelectedItem = !string.IsNullOrEmpty(personPhysicalChar.Gender) ? personPhysicalChar.Gender : "";

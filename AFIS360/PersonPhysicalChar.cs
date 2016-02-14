@@ -56,7 +56,7 @@ namespace AFIS360
             set { complexion = value; }
         }
 
-        public string BuindType
+        public string BuildType
         {
             get { return buildType; }
             set { buildType = value; }

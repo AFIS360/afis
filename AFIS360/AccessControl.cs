@@ -18,6 +18,7 @@ namespace AFIS360
         private string access_data_import;
         private string access_data_export;
         private string access_multi_match;
+        private string access_client_setup;
 
         public void setRole(string role)
         {
@@ -192,6 +193,25 @@ namespace AFIS360
         public bool hasAccessToMultiMatch()
         {
             if (this.access_multi_match.Equals("Y"))
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+        public void setAccessClientSetup(string access_client_setup)
+        {
+            this.access_client_setup = access_client_setup;
+        }
+        public string getAccessClientSetup()
+        {
+            return this.access_client_setup;
+        }
+        public bool hasAccessToClientSetup()
+        {
+            if (this.access_client_setup.Equals("Y"))
             {
                 return true;
             }

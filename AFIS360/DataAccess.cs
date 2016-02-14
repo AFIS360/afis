@@ -164,9 +164,9 @@ namespace AFIS360
             {
                 cmd = conn.CreateCommand();
                 cmd.CommandText = "INSERT INTO access_cntrl(role, access_login_tab, access_enroll_tab, access_match_tab, access_usermgmt_tab, " +
-                                  "access_audit_tab, access_find_tab, access_data_import, access_data_export, access_multi_match) VALUES " + 
+                                  "access_audit_tab, access_find_tab, access_data_import, access_data_export, access_multi_match, access_client_setup) VALUES " + 
                                   "(@role,@access_login_tab,@access_enroll_tab,@access_match_tab,@access_usermgmt_tab,@access_audit_tab, " +
-                                  "@access_find_tab,@access_data_import,@access_data_export,@access_multi_match)";
+                                  "@access_find_tab,@access_data_import,@access_data_export,@access_multi_match,@access_client_setup)";
 
                 cmd.Parameters.AddWithValue("@role", accessCntrl.getRole());
                 cmd.Parameters.AddWithValue("@access_login_tab", accessCntrl.getAccessLoginTab());
@@ -178,6 +178,8 @@ namespace AFIS360
                 cmd.Parameters.AddWithValue("@access_data_import", accessCntrl.getAccessDataImport());
                 cmd.Parameters.AddWithValue("@access_data_export", accessCntrl.getAccessDataExport());
                 cmd.Parameters.AddWithValue("@access_multi_match", accessCntrl.getAccessMultiMatch());
+                cmd.Parameters.AddWithValue("@access_client_setup", accessCntrl.getAccessClientSetup());
+
                 cmd.ExecuteNonQuery();
                 Console.WriteLine("###-->> Access Contrl created successfully.....");
 
@@ -192,6 +194,7 @@ namespace AFIS360
                 status = new Status();
                 status.setStatusCode(Status.STATUS_FAILURE);
                 status.setStatusDesc("Failed to create Access Control (" + accessCntrl.getRole() + "). Reason is - " + exp.Message + ".");
+                Console.WriteLine("###-->> Exception = " + exp);
             }
             finally
             {
@@ -217,11 +220,11 @@ namespace AFIS360
                 cmd = conn.CreateCommand();
                 cmd.CommandText = "INSERT INTO criminal_rec(person_id, crime_detail, crime_date, crime_location, court, " +
                                   "statute, court_addr, case_id, sentenced_date, release_date, arrest_date, arrest_agency, " +
-                                  "status, parole_date, criminal_alert_level, criminal_alert_msg, created_by, creation_date, " +
+                                  "status, parole_date, criminal_alert_level, criminal_alert_msg, ref_doc_loc, created_by, creation_date, " +
                                   "updated_by, update_date) VALUES " +
                                   "(@person_id, @crime_detail, @crime_date, @crime_location, @court, " +
                                   "@statute, @court_addr, @case_id, @sentenced_date, @release_date, @arrest_date, @arrest_agency, " +
-                                  "@status, @parole_date, @criminal_alert_level, @criminal_alert_msg, @created_by, @creation_date, " +
+                                  "@status, @parole_date, @criminal_alert_level, @criminal_alert_msg, @ref_doc_loc, @created_by, @creation_date, " +
                                   "@updated_by, @update_date)";
 
                 Console.WriteLine("###-->> criminalRec.PersonId = " + criminalRec.PersonId);
@@ -229,7 +232,7 @@ namespace AFIS360
                 Console.WriteLine("###-->> criminalRec.CrimeLocation = " + criminalRec.CrimeLocation);
                 Console.WriteLine("###-->> criminalRec.Court = " + criminalRec.Court);
                 Console.WriteLine("###-->> criminalRec.Statute = " + criminalRec.Statute);
-                Console.WriteLine("###-->> criminalRec.CourtyAddress = " + criminalRec.CourtyAddress);
+                Console.WriteLine("###-->> criminalRec.CourtyAddress = " + criminalRec.CourtAddress);
                 Console.WriteLine("###-->> criminalRec.CaseNbr = " + criminalRec.CaseId);
                 Console.WriteLine("###-->> criminalRec.SentencedDate = " + criminalRec.SentencedDate);
                 Console.WriteLine("###-->> criminalRec.ReleaseDate = " + criminalRec.ReleaseDate);
@@ -239,6 +242,7 @@ namespace AFIS360
                 Console.WriteLine("###-->> criminalRec.ParoleDate = " + criminalRec.ParoleDate);
                 Console.WriteLine("###-->> criminalRec.CriminalAlertLevel = " + criminalRec.CriminalAlertLevel);
                 Console.WriteLine("###-->> criminalRec.CriminalAlertMsg = " + criminalRec.CriminalAlertMsg);
+                Console.WriteLine("###-->> criminalRec.RefDocLocation = " + criminalRec.RefDocLocation);
                 Console.WriteLine("###-->> criminalRec.CreatedBy = " + criminalRec.CreatedBy);
                 Console.WriteLine("###-->> criminalRec.CreationDateTime = " + criminalRec.CreationDateTime);
                 Console.WriteLine("###-->> criminalRec.UpdatedBy = " + criminalRec.UpdatedBy);
@@ -251,7 +255,7 @@ namespace AFIS360
                 cmd.Parameters.AddWithValue("@crime_location", criminalRec.CrimeLocation);
                 cmd.Parameters.AddWithValue("@court", criminalRec.Court);
                 cmd.Parameters.AddWithValue("@statute", criminalRec.Statute);
-                cmd.Parameters.AddWithValue("@court_addr", criminalRec.CourtyAddress);
+                cmd.Parameters.AddWithValue("@court_addr", criminalRec.CourtAddress);
                 cmd.Parameters.AddWithValue("@case_id", criminalRec.CaseId);
                 cmd.Parameters.AddWithValue("@sentenced_date", criminalRec.SentencedDate);
                 cmd.Parameters.AddWithValue("@release_date", criminalRec.ReleaseDate);
@@ -261,6 +265,7 @@ namespace AFIS360
                 cmd.Parameters.AddWithValue("@parole_date", criminalRec.ParoleDate);
                 cmd.Parameters.AddWithValue("@criminal_alert_level", criminalRec.CriminalAlertLevel);
                 cmd.Parameters.AddWithValue("@criminal_alert_msg", criminalRec.CriminalAlertMsg);
+                cmd.Parameters.AddWithValue("@ref_doc_loc", criminalRec.RefDocLocation);
                 cmd.Parameters.AddWithValue("@created_by", criminalRec.CreatedBy);
                 cmd.Parameters.AddWithValue("@creation_date", criminalRec.CreationDateTime);
                 cmd.Parameters.AddWithValue("@updated_by", criminalRec.UpdatedBy);
@@ -293,6 +298,57 @@ namespace AFIS360
                 status = new Status();
                 status.setStatusCode(Status.STATUS_FAILURE);
                 status.setStatusDesc("Failed to create Criminal Record (Case Id = " + criminalRec.CaseId + "). Reason is - " + exp.Message + ".");
+                Console.WriteLine("###--->> Exception = " + exp);
+            }
+            finally
+            {
+                if (conn.State == System.Data.ConnectionState.Open)
+                {
+                    conn.Close();
+                }
+            }
+
+            return status;
+        }//end storeCriminalRecord
+
+        public Status storeClientSetup(ClientSetup clientSetup)
+        {
+            string connStr = getConnectionStringByName("MySQL_AFIS_conn");
+            MySqlConnection conn = new MySqlConnection(connStr);
+            MySqlCommand cmd;
+            Status status = null;
+            conn.Open();
+            try
+            {
+                cmd = conn.CreateCommand();
+                cmd.CommandText = "INSERT INTO client_setup(client_id, legal_name, addr_line, city, state, postal_code, country, created_by, creation_date, updated_by, update_date) VALUES " +
+                                  "(@client_id, @legal_name, @addr_line, @city, @state, @postal_code, @country, @created_by, @creation_date, @updated_by, @update_date)";
+
+                cmd.Parameters.AddWithValue("@client_id", clientSetup.ClientId);
+                cmd.Parameters.AddWithValue("@legal_name", clientSetup.LegalName);
+                cmd.Parameters.AddWithValue("@addr_line", clientSetup.AddressLine);
+                cmd.Parameters.AddWithValue("@city", clientSetup.City);
+                cmd.Parameters.AddWithValue("@state", clientSetup.State);
+                cmd.Parameters.AddWithValue("@postal_code", clientSetup.PostalCode);
+                cmd.Parameters.AddWithValue("@country", clientSetup.Country);
+                cmd.Parameters.AddWithValue("@created_by", clientSetup.CreatedBy);
+                cmd.Parameters.AddWithValue("@creation_date", clientSetup.CreationDateTime);
+                cmd.Parameters.AddWithValue("@updated_by", clientSetup.UpdatedBy);
+                cmd.Parameters.AddWithValue("@update_date", clientSetup.UpdateDateTime);
+
+                cmd.ExecuteNonQuery();
+
+                //Successful status
+                status = new Status();
+                status.setStatusCode(Status.STATUS_SUCCESSFUL);
+                status.setStatusDesc("Client Setup Record (Client Id = " + clientSetup.ClientId + ") is created successfully.");
+            }
+            catch (Exception exp)
+            {
+                //Successful status
+                status = new Status();
+                status.setStatusCode(Status.STATUS_FAILURE);
+                status.setStatusDesc("Failed to create Client Setup Record (Case Id = " + clientSetup.ClientId + "). Reason is - " + exp.Message + ".");
                 Console.WriteLine("###--->> Exception = " + exp);
             }
             finally
@@ -372,12 +428,82 @@ namespace AFIS360
             return accessCntrls;
         }//end getAccessControls
 
+        public ClientSetup getClientSetup()
+        {
+            string connStr = getConnectionStringByName("MySQL_AFIS_conn");
+            MySqlConnection conn = new MySqlConnection(connStr);
+            MySqlCommand cmd;
+            ClientSetup clientSetup;
+            DataTable ds;
+            conn.Open();
+            try
+            {
+                clientSetup = new ClientSetup();
+                cmd = conn.CreateCommand();
+
+                cmd.CommandText = "SELECT * FROM afis.client_setup";
+                MySqlDataAdapter da = new MySqlDataAdapter(cmd);
+                ds = new DataTable();
+                da.Fill(ds);
+                IEnumerator rows = ds.Rows.GetEnumerator();
+
+                string client_id = (string)ds.Rows[0]["client_id"];
+                string legal_name = (string)ds.Rows[0]["legal_name"];
+                string addr_line = (string)ds.Rows[0]["addr_line"];
+                string city = (string)ds.Rows[0]["city"];
+                string state = (string)ds.Rows[0]["state"];
+                string postal_code = (string)ds.Rows[0]["postal_code"];
+                string country = (string)ds.Rows[0]["country"];
+
+                clientSetup.ClientId = client_id;
+                clientSetup.LegalName = legal_name;
+                clientSetup.AddressLine = addr_line;
+                clientSetup.City = city;
+                clientSetup.State = state;
+                clientSetup.PostalCode = postal_code;
+                clientSetup.Country = country;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+            finally
+            {
+                if (conn.State == System.Data.ConnectionState.Open)
+                {
+                    conn.Close();
+                }
+            }
+
+            return clientSetup;
+        }//end getClientSetup
+
+        public CriminalRecord getCriminalRecord(string personId, string caseId)
+        {
+            CriminalRecord criminalRecord = null;
+
+            List <CriminalRecord> criminalRecs = getCriminalRecords(personId);
+            if(criminalRecs != null)
+            {
+                foreach (CriminalRecord criminalRec in criminalRecs)
+                {
+                    if (criminalRec.CaseId == caseId)
+                    {
+                        criminalRecord = criminalRec;
+                    }
+                }
+            }
+
+            return criminalRecord;
+        }
+
+
         public List<CriminalRecord> getCriminalRecords(string personId)
         {
             string connStr = getConnectionStringByName("MySQL_AFIS_conn");
             MySqlConnection conn = new MySqlConnection(connStr);
             MySqlCommand cmd;
-            List<CriminalRecord> criminalRecs;
+            List<CriminalRecord> criminalRecs = null;
             DataTable ds;
             conn.Open();
             try
@@ -397,20 +523,60 @@ namespace AFIS360
                 while (rows.MoveNext())
                 {
                     CriminalRecord criminalRec = new CriminalRecord();
-
+                    Console.WriteLine("###-->> person_id = " + ds.Rows[i]["person_id"]);
                     criminalRec.PersonId = (string)ds.Rows[i]["person_id"];
+                    Console.WriteLine("###-->> crime_date = " + ds.Rows[i]["crime_date"]);
                     criminalRec.CrimeDate = (DateTime)ds.Rows[i]["crime_date"];
+                    Console.WriteLine("###-->> crime_location = " + ds.Rows[i]["crime_location"]);
                     criminalRec.CrimeLocation = (string)ds.Rows[i]["crime_location"];
+                    Console.WriteLine("###-->> case_id = " + ds.Rows[i]["case_id"]);
                     criminalRec.CaseId = (string)ds.Rows[i]["case_id"];
+                    Console.WriteLine("###-->> court = " + ds.Rows[i]["court"]);
+                    criminalRec.Court = ds.Rows[i]["court"] != null ? (string)ds.Rows[i]["court"] : null;
+                    Console.WriteLine("###-->> court_addr = " + ds.Rows[i]["court_addr"]);
+                    criminalRec.CourtAddress = (string)ds.Rows[i]["court_addr"];
+                    Console.WriteLine("###-->> statute = " + ds.Rows[i]["statute"]);
+                    criminalRec.Statute = (string)ds.Rows[i]["statute"];
+                    Console.WriteLine("###-->> court_addr = " + ds.Rows[i]["court_addr"]);
+                    criminalRec.CourtAddress = (string)ds.Rows[i]["court_addr"];
+                    Console.WriteLine("###-->> arrest_date = " + ds.Rows[i]["arrest_date"]);
+                    criminalRec.ArrestDate = (DateTime)ds.Rows[i]["arrest_date"];
+                    Console.WriteLine("###-->> arrest_agency = " + ds.Rows[i]["arrest_agency"]);
+                    criminalRec.ArrestAgency = (string)ds.Rows[i]["arrest_agency"];
+                    Console.WriteLine("###-->> sentenced_date = " + ds.Rows[i]["sentenced_date"]);
+                    criminalRec.SentencedDate = (DateTime)ds.Rows[i]["sentenced_date"];
+                    Console.WriteLine("###-->> release_date = " + ds.Rows[i]["release_date"]);
+                    criminalRec.ReleaseDate = (DateTime)ds.Rows[i]["release_date"];
+                    Console.WriteLine("###-->> parole_date = " + ds.Rows[i]["parole_date"]);
+                    criminalRec.ParoleDate = (DateTime)ds.Rows[i]["parole_date"];
+                    Console.WriteLine("###-->> status = " + ds.Rows[i]["status"]);
+                    criminalRec.Status = (string)ds.Rows[i]["status"];
+                    Console.WriteLine("###-->> criminal_alert_level = " + ds.Rows[i]["criminal_alert_level"]);
+                    criminalRec.CriminalAlertLevel = (string)ds.Rows[i]["criminal_alert_level"];
+                    Console.WriteLine("###-->> criminal_alert_msg = " + ds.Rows[i]["criminal_alert_msg"]);
+                    criminalRec.CriminalAlertMsg = (string)ds.Rows[i]["criminal_alert_msg"];
+                    criminalRec.RefDocLocation = !string.IsNullOrEmpty((string)ds.Rows[i]["ref_doc_loc"]) ? (string)ds.Rows[i]["ref_doc_loc"] : "";
+
+                    if (ds.Rows[i]["crime_detail"] != DBNull.Value)
+                    {
+                        using (MemoryStream oStr = new MemoryStream((byte[])ds.Rows[i]["crime_detail"]))
+                        {
+                            BinaryFormatter oBFormatter = new BinaryFormatter();
+                            oStr.Position = 0;
+                            string crime_detail = (string)oBFormatter.Deserialize(oStr);
+                            criminalRec.CrimeDetail = crime_detail;
+                        }
+                    }
+
 
                     criminalRecs.Add(criminalRec);
 
                     i = i + 1;
                 }
             }
-            catch (Exception)
+            catch (Exception exp)
             {
-                throw;
+                Console.WriteLine("###-->> Exception = " + exp);
             }
             finally
             {
@@ -447,7 +613,7 @@ namespace AFIS360
                 cmd.Parameters.AddWithValue("@complexion", personPhysicalChar.Complexion);
                 cmd.Parameters.AddWithValue("@birth_mark", personPhysicalChar.BirthMark);
                 cmd.Parameters.AddWithValue("@id_mark", personPhysicalChar.IdMark);
-                cmd.Parameters.AddWithValue("@build_type", personPhysicalChar.BuindType);
+                cmd.Parameters.AddWithValue("@build_type", personPhysicalChar.BuildType);
                 cmd.Parameters.AddWithValue("@gender", personPhysicalChar.Gender);
                 cmd.Parameters.AddWithValue("@death_date", personPhysicalChar.DOD);
                 cmd.Parameters.AddWithValue("@created_by", personPhysicalChar.CreatedBy);
@@ -1049,7 +1215,7 @@ namespace AFIS360
                     personsPhysicalChar.Complexion = (string)ds.Rows[0]["complexion"];
                     personsPhysicalChar.BirthMark = (string)ds.Rows[0]["birth_mark"];
                     personsPhysicalChar.IdMark = (string)ds.Rows[0]["id_mark"];
-                    personsPhysicalChar.BuindType = (string)ds.Rows[0]["build_type"];
+                    personsPhysicalChar.BuildType = (string)ds.Rows[0]["build_type"];
                     personsPhysicalChar.Gender = (string)ds.Rows[0]["gender"];
                     personsPhysicalChar.DOD = (DateTime)ds.Rows[0]["death_date"];
                 }
@@ -1937,7 +2103,7 @@ namespace AFIS360
                 cmd.Parameters.AddWithValue("@complexion", personPhysicalChar.Complexion);
                 cmd.Parameters.AddWithValue("@birth_mark", personPhysicalChar.BirthMark);
                 cmd.Parameters.AddWithValue("@id_mark", personPhysicalChar.IdMark);
-                cmd.Parameters.AddWithValue("@build_type", personPhysicalChar.BuindType);
+                cmd.Parameters.AddWithValue("@build_type", personPhysicalChar.BuildType);
                 cmd.Parameters.AddWithValue("@gender", personPhysicalChar.Gender);
                 cmd.Parameters.AddWithValue("@death_date", personPhysicalChar.DOD);
                 cmd.Parameters.AddWithValue("@updated_by", personPhysicalChar.UpdatedBy);
@@ -1955,6 +2121,83 @@ namespace AFIS360
                 status = new Status();
                 status.setStatusCode(Status.STATUS_FAILURE);
                 status.setStatusDesc("Update of Person's (PersonId = " + personPhysicalChar.PersonId + ") Physical Characteristics is not successful. Reason is - " + exp.Message + ".");
+                Console.WriteLine(exp);
+            }
+            finally
+            {
+                if (conn.State == System.Data.ConnectionState.Open)
+                {
+                    conn.Close();
+                }
+            }
+            return status;
+        }
+
+        public Status updatePersonCriminalRecord(CriminalRecord criminalRec)
+        {
+            string connStr = getConnectionStringByName("MySQL_AFIS_conn");
+            MySqlConnection conn = new MySqlConnection(connStr);
+            MySqlCommand cmd;
+            Status status = null;
+            byte[] oSerializedCrimeDetail;
+            conn.Open();
+
+            try
+            {
+                cmd = conn.CreateCommand();
+                cmd.CommandText = "UPDATE criminal_rec SET person_id = @person_id, crime_detail = @crime_detail, crime_date = @crime_date, " +
+                                  "crime_location = @crime_location, court = @court, statute = @statute, court_addr = @court_addr, " +
+                                  "case_id = @case_id, sentenced_date = @sentenced_date, release_date = @release_date, arrest_date = @arrest_date, " +
+                                  "arrest_agency = @arrest_agency, status = @status, parole_date = @parole_date, criminal_alert_level = @criminal_alert_level, " + 
+                                  "criminal_alert_msg = @criminal_alert_msg, ref_doc_loc = @ref_doc_loc, updated_by = @updated_by, update_date = @update_date " +
+                                  "WHERE person_id = @person_id AND case_id = @case_id";
+
+                cmd.Parameters.AddWithValue("@person_id", criminalRec.PersonId);
+                cmd.Parameters.AddWithValue("@crime_date", criminalRec.CrimeDate);
+                cmd.Parameters.AddWithValue("@crime_location", criminalRec.CrimeLocation);
+                cmd.Parameters.AddWithValue("@court", criminalRec.Court);
+                cmd.Parameters.AddWithValue("@statute", criminalRec.Statute);
+                cmd.Parameters.AddWithValue("@court_addr", criminalRec.CourtAddress);
+                cmd.Parameters.AddWithValue("@case_id", criminalRec.CaseId);
+                cmd.Parameters.AddWithValue("@sentenced_date", criminalRec.SentencedDate);
+                cmd.Parameters.AddWithValue("@release_date", criminalRec.ReleaseDate);
+                cmd.Parameters.AddWithValue("@arrest_date", criminalRec.ArrestDate);
+                cmd.Parameters.AddWithValue("@arrest_agency", criminalRec.ArrestAgency);
+                cmd.Parameters.AddWithValue("@status", criminalRec.Status);
+                cmd.Parameters.AddWithValue("@parole_date", criminalRec.ParoleDate);
+                cmd.Parameters.AddWithValue("@criminal_alert_level", criminalRec.CriminalAlertLevel);
+                cmd.Parameters.AddWithValue("@criminal_alert_msg", criminalRec.CriminalAlertMsg);
+                cmd.Parameters.AddWithValue("@ref_doc_loc", criminalRec.RefDocLocation);
+                cmd.Parameters.AddWithValue("@updated_by", criminalRec.UpdatedBy);
+                cmd.Parameters.AddWithValue("@update_date", criminalRec.UpdateDateTime);
+
+                if (criminalRec.CrimeDetail != null)
+                {
+                    using (MemoryStream stream = new MemoryStream())
+                    {
+                        BinaryFormatter oBFormatter = new BinaryFormatter();
+                        oBFormatter.Serialize(stream, criminalRec.CrimeDetail);
+                        oSerializedCrimeDetail = stream.ToArray();
+                    }
+                    cmd.Parameters.AddWithValue("@crime_detail", oSerializedCrimeDetail);
+                }
+                else
+                {
+                    cmd.Parameters.AddWithValue("@crime_detail", null);
+                }
+
+
+                cmd.ExecuteNonQuery();
+
+                status = new Status();
+                status.setStatusCode(Status.STATUS_SUCCESSFUL);
+                status.setStatusDesc("Person's (PersonId = " + criminalRec.PersonId + ") Criminal record (Case Id = " + criminalRec.CaseId + ") is updated successfully.");
+            }
+            catch (Exception exp)
+            {
+                status = new Status();
+                status.setStatusCode(Status.STATUS_FAILURE);
+                status.setStatusDesc("Update of Person's (PersonId = " + criminalRec.PersonId + ") Criminal record (Case Id = " + criminalRec.CaseId + ") is not successful. Reason is - " + exp.Message + ".");
                 Console.WriteLine(exp);
             }
             finally
@@ -2021,7 +2264,7 @@ namespace AFIS360
                 cmd.CommandText = "UPDATE access_cntrl SET access_login_tab = @access_login_tab, access_enroll_tab = @access_enroll_tab, " +
                                   "access_match_tab = @access_match_tab, access_usermgmt_tab = @access_usermgmt_tab, access_audit_tab = @access_audit_tab, " +
                                   "access_find_tab = @access_find_tab, access_data_import = @access_data_import, access_data_export = @access_data_export, " +
-                                  "access_multi_match = @access_multi_match WHERE role = @role";
+                                  "access_multi_match = @access_multi_match, access_client_setup = @access_client_setup WHERE role = @role";
                 cmd.Parameters.AddWithValue("@role", accessCntrl.getRole());
                 cmd.Parameters.AddWithValue("@access_login_tab", accessCntrl.getAccessLoginTab());
                 cmd.Parameters.AddWithValue("@access_enroll_tab", accessCntrl.getAccessEnrollTab());
@@ -2032,6 +2275,7 @@ namespace AFIS360
                 cmd.Parameters.AddWithValue("@access_data_import", accessCntrl.getAccessDataImport());
                 cmd.Parameters.AddWithValue("@access_data_export", accessCntrl.getAccessDataExport());
                 cmd.Parameters.AddWithValue("@access_multi_match", accessCntrl.getAccessMultiMatch());
+                cmd.Parameters.AddWithValue("@access_client_setup", accessCntrl.getAccessClientSetup());
 
                 cmd.ExecuteNonQuery();
 
@@ -2294,6 +2538,7 @@ namespace AFIS360
                     string access_data_import = (string)ds.Rows[i]["access_data_import"];
                     string access_data_export = (string)ds.Rows[i]["access_data_export"];
                     string access_multi_match = (string)ds.Rows[i]["access_multi_match"];
+                    string access_client_setup = (string)ds.Rows[i]["access_client_setup"];
 
                     accessCntrl = new AccessControl();
                     accessCntrl.setAccessLoginTab(access_login_tab);
@@ -2305,6 +2550,7 @@ namespace AFIS360
                     accessCntrl.setAccessDataImport(access_data_import);
                     accessCntrl.setAccessDataExport(access_data_export);
                     accessCntrl.setAccessMultiMatch(access_multi_match);
+                    accessCntrl.setAccessClientSetup(access_client_setup);
 
                     i = i + 1;
                 }

@@ -25,6 +25,7 @@ namespace AFIS360
         private DateTime paroleDate;
         private string criminalAlertLevel;
         private string criminalAlertMsg;
+        private string refDocLocation;
 
         public string PersonId
         {
@@ -62,7 +63,7 @@ namespace AFIS360
             set { statute = value; }
         }
 
-        public string CourtyAddress
+        public string CourtAddress
         {
             get { return courtAddress; }
             set { courtAddress = value; }
@@ -120,6 +121,12 @@ namespace AFIS360
         {
             get { return criminalAlertMsg; }
             set { criminalAlertMsg = value; }
+        }
+
+        public string RefDocLocation
+        {
+            get { return refDocLocation; }
+            set { refDocLocation = value; }
         }
     }
 }

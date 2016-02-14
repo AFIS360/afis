@@ -18,20 +18,26 @@ namespace AFIS360
             List<PersonDetail> personDetailList = new DataAccess().retrievePersonDetail(personId);
             Console.WriteLine("# of Persons found = " + personDetailList.Count());
             PersonDetail personDetail = personDetailList.FirstOrDefault();
+            //Paragraph Title Font
+            iTextSharp.text.Font paragraphTitleFont = FontFactory.GetFont("Arial", 16);
+            iTextSharp.text.Font paragraphSubTitleFont = FontFactory.GetFont("Arial", 14);
 
-            Document doc = new Document(iTextSharp.text.PageSize.LETTER, 10, 10, 42, 35);
+            Document doc = new Document(iTextSharp.text.PageSize.LETTER, 30, 30, 42, 35);
             string datetimePref = DateTime.Now.ToString("yyyy-MM-dd-HH-mm-ss");
             string pdfPath = ConfigurationManager.AppSettings["PersonReportPath"] + "-" + datetimePref + ".pdf";
             PdfWriter pdfWriter = PdfWriter.GetInstance(doc, new FileStream(pdfPath, FileMode.Create));
+            PdfWriterEvents writerEvent = new PdfWriterEvents(ConfigurationManager.AppSettings["WatermarkConfidential"]);
+            pdfWriter.PageEvent = writerEvent;
             doc.Open();
 
             //add title
             doc.AddTitle("Person Detail Report");
             doc.AddHeader("Person Detail Report", "Person Detail Report");
 
-            Paragraph paragraphCompanyInfo = new Paragraph("RAB (Rapid Action Battalion)\n");
-            paragraphCompanyInfo.Add("Station: " + user.getStationId() + ", " + user.getStationedCity() + "\n");
-            paragraphCompanyInfo.Add(user.getStationedCountry() + "\n");
+            Paragraph paragraphCompanyInfo = new Paragraph(AFISMain.clientSetup.LegalName +  "\n", paragraphTitleFont);
+            paragraphCompanyInfo.Add(AFISMain.clientSetup.AddressLine + "\n");
+            paragraphCompanyInfo.Add(AFISMain.clientSetup.City + ", " + AFISMain.clientSetup.State + " " + AFISMain.clientSetup.PostalCode + "\n");
+            paragraphCompanyInfo.Add(AFISMain.clientSetup.Country + "\n");
             paragraphCompanyInfo.Alignment = Element.ALIGN_LEFT;
 
             iTextSharp.text.Font contentFont = iTextSharp.text.FontFactory.GetFont("Webdings", 20, iTextSharp.text.Font.BOLD);
@@ -40,7 +46,7 @@ namespace AFIS360
 
             Paragraph paragraphReportSubTitle = new Paragraph();
             paragraphReportSubTitle.Add("By: " + user.getFirstName() + " " + user.getLastName() + ", ID: " + user.getPersonId() + "\n");
-            paragraphReportSubTitle.Add("At: " + DateTime.Now.ToString() + "\n\n");
+            paragraphReportSubTitle.Add("At: " + DateTime.Now.ToString() + "\n");
             paragraphReportSubTitle.Alignment = Element.ALIGN_CENTER;
 
             doc.Add(paragraphCompanyInfo);
@@ -59,21 +65,70 @@ namespace AFIS360
                 }
 
                 //Adding the person detail
-                Paragraph paragraphReportBody = new Paragraph();
-                paragraphReportBody.Add("ID: " + personDetail.getPersonId() + "\n");
-                paragraphReportBody.Add("Name: " + " " + personDetail.getPrefix() + " " + personDetail.getFirstName() + " " + personDetail.getMiddleName() + " " + personDetail.getLastName() + " " + personDetail.getSuffix() + "\n");
-                paragraphReportBody.Add("Date of Birth (DOB): " + ((DateTime)personDetail.getDOB()).ToString("yyyy-MM-dd") + "\n");
-                paragraphReportBody.Add("Father's Name: " + personDetail.getFatherName() + "\n");
-                paragraphReportBody.Add("Address: " + personDetail.getStreetAddress() + ", " + personDetail.getCity() + ", " + personDetail.getState() + " " + personDetail.getPostalCode() + ", " + personDetail.getCountry() + "\n");
-                paragraphReportBody.Add("Profession: " + personDetail.getProfession() + "\n");
-                paragraphReportBody.Add("Cell#: " + personDetail.getCellNbr() + ", Home Phone#: " + personDetail.getHomePhoneNbr() + ", Work Phone#: " + personDetail.getWorkPhoneNbr() + "\n");
-                paragraphReportBody.Add("Email: " + personDetail.getEmail() + "\n\n");
-                doc.Add(paragraphReportBody);
+                Paragraph paragraphDemographyTitle = new Paragraph("Demographic Information:\n", paragraphTitleFont);
+                doc.Add(paragraphDemographyTitle);
+                Paragraph paragraphDemographyDetail = new Paragraph();
+                paragraphDemographyDetail.Add("ID: " + personDetail.getPersonId() + "\n");
+                paragraphDemographyDetail.Add("Name: " + " " + personDetail.getPrefix() + " " + personDetail.getFirstName() + " " + personDetail.getMiddleName() + " " + personDetail.getLastName() + " " + personDetail.getSuffix() + "\n");
+                paragraphDemographyDetail.Add("Date of Birth (DOB): " + ((DateTime)personDetail.getDOB()).ToString("yyyy-MM-dd") + "\n");
+                paragraphDemographyDetail.Add("Father's Name: " + personDetail.getFatherName() + "\n");
+                paragraphDemographyDetail.Add("Address: " + personDetail.getStreetAddress() + ", " + personDetail.getCity() + ", " + personDetail.getState() + " " + personDetail.getPostalCode() + ", " + personDetail.getCountry() + "\n");
+                paragraphDemographyDetail.Add("Profession: " + personDetail.getProfession() + "\n");
+                paragraphDemographyDetail.Add("Cell#: " + personDetail.getCellNbr() + ", Home Phone#: " + personDetail.getHomePhoneNbr() + ", Work Phone#: " + personDetail.getWorkPhoneNbr() + "\n");
+                paragraphDemographyDetail.Add("Email: " + personDetail.getEmail() + "\n\n");
+                doc.Add(paragraphDemographyDetail);
             }
 
+            //Adding Person's Physical Characteristocs
+            DataAccess dataAccess = new DataAccess();
+            PersonPhysicalChar personPhysicalChar = dataAccess.retrievePersonPhysicalCharacteristics(personId);
+            if(personPhysicalChar != null)
+            {
+                Paragraph paragraphPhysicalCharTitle = new Paragraph("Physical Characteristics:\n", paragraphTitleFont);
+                doc.Add(paragraphPhysicalCharTitle);
+                Paragraph paragraphPhysicalChar = new Paragraph();
+                paragraphPhysicalChar.Add("Height: " + personPhysicalChar.Height + ", Weight: " + personPhysicalChar.Weight + ", Eye Color: " + personPhysicalChar.EyeColor);
+                paragraphPhysicalChar.Add(", Hair Color: " + personPhysicalChar.HairColor + "\n");
+                paragraphPhysicalChar.Add("Complexion: " + personPhysicalChar.Complexion + ", Build Type: " + personPhysicalChar.BuildType);
+                paragraphPhysicalChar.Add(", Birth Mark: " + personPhysicalChar.BirthMark + ", Other Identifiable Mark: " + personPhysicalChar.IdMark + "\n");
+                string dod = personPhysicalChar.DOD.ToString("yyyy") == "9998" ? "N/A" : personPhysicalChar.DOD.ToString("yyyy-MM-dd");
+                paragraphPhysicalChar.Add("Gender: " + personPhysicalChar.Gender + ", Date Of Death: " + dod + "\n\n");
+                doc.Add(paragraphPhysicalChar);
+            }
+
+            //Adding Person's Criminal records
+            List<CriminalRecord> criminalRecs = dataAccess.getCriminalRecords(personId);
+            Console.WriteLine("###-->> # of Criminal recotds = " + criminalRecs.Count);
+            if(criminalRecs.Count > 0)
+            {
+                Paragraph paragraphCriminalRecs = new Paragraph("Criminal Records:\n", paragraphTitleFont);
+                doc.Add(paragraphCriminalRecs);
+                foreach(CriminalRecord criminalRec in criminalRecs)
+                {
+                    Paragraph paragraphCriminalRecCaseId = new Paragraph("Case ID - " + criminalRec.CaseId + ":", paragraphSubTitleFont);
+                    doc.Add(paragraphCriminalRecCaseId);
+                    Paragraph paragraphCriminalRec = new Paragraph();
+                    string crimeDate = criminalRec.CrimeDate.ToString("yyyy") == "9998" ? "N/A" : criminalRec.CrimeDate.ToString("yyyy-MM-dd");
+                    string arrestDate = criminalRec.ArrestDate.ToString("yyyy") == "9998" ? "N/A" : criminalRec.ArrestDate.ToString("yyyy-MM-dd");
+                    string sentenceDate = criminalRec.SentencedDate.ToString("yyyy") == "9998" ? "N/A" : criminalRec.SentencedDate.ToString("yyyy-MM-dd");
+                    string releaseDate = criminalRec.ReleaseDate.ToString("yyyy") == "9998" ? "N/A" : criminalRec.ReleaseDate.ToString("yyyy-MM-dd");
+                    string paroleDate = criminalRec.ParoleDate.ToString("yyyy") == "9998" ? "N/A" : criminalRec.ParoleDate.ToString("yyyy-MM-dd");
+
+                    paragraphCriminalRec.Add("Crime Date: " + crimeDate + ", Crime Location: " + criminalRec.CrimeLocation + "\n");
+                    paragraphCriminalRec.Add("Court: " + criminalRec.Court + ", Court Address: " + criminalRec.CourtAddress + ", Statute: " + criminalRec.Statute + "\n");
+                    paragraphCriminalRec.Add("Arret Date: " + arrestDate + ", Arrest Agency: " + criminalRec.ArrestAgency + "\n");
+                    paragraphCriminalRec.Add("Sentence Date: " + sentenceDate + ", Release Date: " + releaseDate + ", Parole date: " + paroleDate + "\n");
+                    paragraphCriminalRec.Add("Criminal Alert Level: " + criminalRec.CriminalAlertLevel + ", Criminal Alert Message: " + criminalRec.CriminalAlertMsg + "\n");
+                    paragraphCriminalRec.Add("Crime Detail: " + criminalRec.CrimeDetail + "\n");
+                    doc.Add(paragraphCriminalRec);
+                }
+                Paragraph paragraphNewLine = new Paragraph();
+                paragraphNewLine.Add("\n");
+                doc.Add(paragraphNewLine);
+            }
+            
             //add table for fingerprints
-            Paragraph paragraphFingerprints = new Paragraph();
-            paragraphFingerprints.Add("Fingerprint(s):\n\n");
+            Paragraph paragraphFingerprints = new Paragraph("Fingerprint(s):\n\n", paragraphTitleFont);
             doc.Add(paragraphFingerprints);
 
             PdfPTable fingerprintsTable = new PdfPTable(5);
@@ -348,7 +403,6 @@ namespace AFIS360
             }//end-if - persons
 
             //add Table for fingerprints
-
             doc.Add(fingerprintsTable);
 
             doc.Close();
@@ -363,6 +417,9 @@ namespace AFIS360
 
             List<AuditLog> auditLogs = new DataAccess().getAuditLogs(userId, startDate, endDate);
             Console.WriteLine("# of AuditLog = " + auditLogs.Count());
+            //Paragraph Title Font
+            iTextSharp.text.Font paragraphTitleFont = FontFactory.GetFont("Arial", 16);
+            iTextSharp.text.Font paragraphSubTitleFont = FontFactory.GetFont("Arial", 14);
 
             Document doc = new Document(iTextSharp.text.PageSize.LETTER, 10, 10, 42, 35);
             string datetimePref = DateTime.Now.ToString("yyyy-MM-dd-HH-mm-ss");
@@ -374,10 +431,12 @@ namespace AFIS360
             doc.AddTitle("User Access Report");
             doc.AddHeader("Daily Report", "User Access Report");
 
-            Paragraph paragraphCompanyInfo = new Paragraph("RAB (Rapid Action Battalion)\n");
-            paragraphCompanyInfo.Add("Station: " + user.getStationId() + ", " + user.getStationedCity() + "\n");
-            paragraphCompanyInfo.Add(user.getStationedCountry() + "\n");
+            Paragraph paragraphCompanyInfo = new Paragraph(AFISMain.clientSetup.LegalName + "\n", paragraphTitleFont);
+            paragraphCompanyInfo.Add(AFISMain.clientSetup.AddressLine + "\n");
+            paragraphCompanyInfo.Add(AFISMain.clientSetup.City + ", " + AFISMain.clientSetup.State + " " + AFISMain.clientSetup.PostalCode + "\n");
+            paragraphCompanyInfo.Add(AFISMain.clientSetup.Country + "\n");
             paragraphCompanyInfo.Alignment = Element.ALIGN_LEFT;
+
 
             iTextSharp.text.Font contentFont = iTextSharp.text.FontFactory.GetFont("Webdings", 20, iTextSharp.text.Font.BOLD);
             Paragraph paragraphReportTitle = new Paragraph("Login Access Report\n", contentFont);

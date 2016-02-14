@@ -88,6 +88,7 @@
     <Compile Include="BatchExport.Designer.cs">
       <DependentUpon>BatchExport.cs</DependentUpon>
     </Compile>
+    <Compile Include="ClientSetup.cs" />
     <Compile Include="ConvertToFromWSQ.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -136,6 +137,7 @@
     <Compile Include="PasswordReset.Designer.cs">
       <DependentUpon>PasswordReset.cs</DependentUpon>
     </Compile>
+    <Compile Include="PdfWriterEvents.cs" />
     <Compile Include="PersonDetail.cs" />
     <Compile Include="PersonPhysicalChar.cs" />
     <Compile Include="PhysicalCharForm.cs">

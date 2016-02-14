@@ -59,12 +59,19 @@
             this.richTxtBoxCriminalRecCrimeDetail = new System.Windows.Forms.RichTextBox();
             this.grpBoxAdditionalAttachment = new System.Windows.Forms.GroupBox();
             this.btnCriminalRecAttachment = new System.Windows.Forms.Button();
-            this.txtBoxCriminalRecAttachment = new System.Windows.Forms.TextBox();
+            this.txtBoxCriminalRecRefDocLoc = new System.Windows.Forms.TextBox();
             this.grpBoxCriminalRecCrimeRec = new System.Windows.Forms.GroupBox();
+            this.tlpCriminalRecCrimeRec = new System.Windows.Forms.TableLayoutPanel();
+            this.lblCriminalRecCrimeDate = new System.Windows.Forms.Label();
+            this.txtBoxCriminalRecCrimeLoc = new System.Windows.Forms.TextBox();
+            this.lblCriminalRecCrimeLoc = new System.Windows.Forms.Label();
+            this.lblCriminalRecCaseId = new System.Windows.Forms.Label();
+            this.txtBoxCriminalRecCaseId = new System.Windows.Forms.TextBox();
+            this.dtpCriminalRecCrimeDate = new System.Windows.Forms.DateTimePicker();
             this.tlpCriminalRecButtons = new System.Windows.Forms.TableLayoutPanel();
-            this.btnCriminalRecClose = new System.Windows.Forms.Button();
-            this.btnCriminalRecClear = new System.Windows.Forms.Button();
             this.btnCriminalRecInsert = new System.Windows.Forms.Button();
+            this.btnCriminalRecClear = new System.Windows.Forms.Button();
+            this.btnCriminalRecClose = new System.Windows.Forms.Button();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.menuToolStripMenuItemCriminalRec = new System.Windows.Forms.ToolStripMenuItem();
             this.exitToolStripMenuItemCriminalRec = new System.Windows.Forms.ToolStripMenuItem();
@@ -74,15 +81,9 @@
             this.lblCriminalRecAlertMsg = new System.Windows.Forms.Label();
             this.txtBoxCriminalRecAlertMsg = new System.Windows.Forms.TextBox();
             this.comboBoxCriminalRecAlertLevel = new System.Windows.Forms.ComboBox();
-            this.tlpCriminalRecCrimeRec = new System.Windows.Forms.TableLayoutPanel();
-            this.lblCriminalRecCaseId = new System.Windows.Forms.Label();
-            this.txtBoxCriminalRecCaseId = new System.Windows.Forms.TextBox();
-            this.lblCriminalRecCrimeLoc = new System.Windows.Forms.Label();
-            this.txtBoxCriminalRecCrimeLoc = new System.Windows.Forms.TextBox();
-            this.lblCriminalRecCrimeDate = new System.Windows.Forms.Label();
-            this.dtpCriminalRecCrimeDate = new System.Windows.Forms.DateTimePicker();
-            this.tlpCriminalRecAddStatus = new System.Windows.Forms.TableLayoutPanel();
-            this.lblCriminalRecAddStatusMsg = new System.Windows.Forms.Label();
+            this.tlpCriminalRecStatus = new System.Windows.Forms.TableLayoutPanel();
+            this.lblCriminalRecAddEditStatusMsg = new System.Windows.Forms.Label();
+            this.btnCriminalRecEdit = new System.Windows.Forms.Button();
             this.tlpCriminalRecordDetail.SuspendLayout();
             this.grpBoxCrimeRec.SuspendLayout();
             this.tlpCriminalRecCourt.SuspendLayout();
@@ -91,12 +92,12 @@
             this.grpBoxCriminalRecCrimeDetail.SuspendLayout();
             this.grpBoxAdditionalAttachment.SuspendLayout();
             this.grpBoxCriminalRecCrimeRec.SuspendLayout();
+            this.tlpCriminalRecCrimeRec.SuspendLayout();
             this.tlpCriminalRecButtons.SuspendLayout();
             this.menuStrip1.SuspendLayout();
             this.grpBoxCriminalRecAlert.SuspendLayout();
             this.tlpCriminalRecAlertLevel.SuspendLayout();
-            this.tlpCriminalRecCrimeRec.SuspendLayout();
-            this.tlpCriminalRecAddStatus.SuspendLayout();
+            this.tlpCriminalRecStatus.SuspendLayout();
             this.SuspendLayout();
             // 
             // tlpCriminalRecordDetail
@@ -105,7 +106,7 @@
             this.tlpCriminalRecordDetail.ColumnCount = 3;
             this.tlpCriminalRecordDetail.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 47.91086F));
             this.tlpCriminalRecordDetail.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 52.08914F));
-            this.tlpCriminalRecordDetail.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 188F));
+            this.tlpCriminalRecordDetail.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 192F));
             this.tlpCriminalRecordDetail.Controls.Add(this.lblCriminalRecPersonId, 0, 0);
             this.tlpCriminalRecordDetail.Controls.Add(this.lblCriminalRecFName, 1, 0);
             this.tlpCriminalRecordDetail.Controls.Add(this.lblCriminalRecLName, 2, 0);
@@ -122,20 +123,20 @@
             this.lblCriminalRecPersonId.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.lblCriminalRecPersonId.AutoSize = true;
             this.lblCriminalRecPersonId.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.125F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblCriminalRecPersonId.Location = new System.Drawing.Point(5, 4);
+            this.lblCriminalRecPersonId.Location = new System.Drawing.Point(5, 1);
             this.lblCriminalRecPersonId.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblCriminalRecPersonId.Name = "lblCriminalRecPersonId";
-            this.lblCriminalRecPersonId.Size = new System.Drawing.Size(0, 17);
-            this.lblCriminalRecPersonId.TabIndex = 1;
+            this.lblCriminalRecPersonId.Size = new System.Drawing.Size(0, 24);
+            this.lblCriminalRecPersonId.TabIndex = 2;
             // 
             // lblCriminalRecFName
             // 
             this.lblCriminalRecFName.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.lblCriminalRecFName.AutoSize = true;
             this.lblCriminalRecFName.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.125F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblCriminalRecFName.Location = new System.Drawing.Point(176, 4);
+            this.lblCriminalRecFName.Location = new System.Drawing.Point(174, 1);
             this.lblCriminalRecFName.Name = "lblCriminalRecFName";
-            this.lblCriminalRecFName.Size = new System.Drawing.Size(0, 17);
+            this.lblCriminalRecFName.Size = new System.Drawing.Size(0, 24);
             this.lblCriminalRecFName.TabIndex = 2;
             // 
             // lblCriminalRecLName
@@ -143,9 +144,9 @@
             this.lblCriminalRecLName.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.lblCriminalRecLName.AutoSize = true;
             this.lblCriminalRecLName.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.125F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblCriminalRecLName.Location = new System.Drawing.Point(363, 4);
+            this.lblCriminalRecLName.Location = new System.Drawing.Point(359, 1);
             this.lblCriminalRecLName.Name = "lblCriminalRecLName";
-            this.lblCriminalRecLName.Size = new System.Drawing.Size(0, 17);
+            this.lblCriminalRecLName.Size = new System.Drawing.Size(0, 24);
             this.lblCriminalRecLName.TabIndex = 3;
             // 
             // grpBoxCrimeRec
@@ -154,7 +155,7 @@
             this.grpBoxCrimeRec.Location = new System.Drawing.Point(53, 221);
             this.grpBoxCrimeRec.Name = "grpBoxCrimeRec";
             this.grpBoxCrimeRec.Size = new System.Drawing.Size(594, 142);
-            this.grpBoxCrimeRec.TabIndex = 2;
+            this.grpBoxCrimeRec.TabIndex = 1;
             this.grpBoxCrimeRec.TabStop = false;
             this.grpBoxCrimeRec.Text = "Court and Statute";
             // 
@@ -181,28 +182,28 @@
             // txtBoxCriminalRecStatute
             // 
             this.txtBoxCriminalRecStatute.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.txtBoxCriminalRecStatute.Location = new System.Drawing.Point(78, 73);
+            this.txtBoxCriminalRecStatute.Location = new System.Drawing.Point(78, 69);
             this.txtBoxCriminalRecStatute.MaxLength = 100;
             this.txtBoxCriminalRecStatute.Name = "txtBoxCriminalRecStatute";
-            this.txtBoxCriminalRecStatute.Size = new System.Drawing.Size(463, 23);
+            this.txtBoxCriminalRecStatute.Size = new System.Drawing.Size(463, 38);
             this.txtBoxCriminalRecStatute.TabIndex = 2;
             // 
             // txtBoxCriminalRecCourtAddr
             // 
             this.txtBoxCriminalRecCourtAddr.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.txtBoxCriminalRecCourtAddr.Location = new System.Drawing.Point(78, 38);
+            this.txtBoxCriminalRecCourtAddr.Location = new System.Drawing.Point(78, 36);
             this.txtBoxCriminalRecCourtAddr.MaxLength = 100;
             this.txtBoxCriminalRecCourtAddr.Name = "txtBoxCriminalRecCourtAddr";
-            this.txtBoxCriminalRecCourtAddr.Size = new System.Drawing.Size(463, 23);
+            this.txtBoxCriminalRecCourtAddr.Size = new System.Drawing.Size(463, 38);
             this.txtBoxCriminalRecCourtAddr.TabIndex = 1;
             // 
             // lblCriminalRecCourt
             // 
             this.lblCriminalRecCourt.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.lblCriminalRecCourt.AutoSize = true;
-            this.lblCriminalRecCourt.Location = new System.Drawing.Point(3, 8);
+            this.lblCriminalRecCourt.Location = new System.Drawing.Point(3, 0);
             this.lblCriminalRecCourt.Name = "lblCriminalRecCourt";
-            this.lblCriminalRecCourt.Size = new System.Drawing.Size(46, 17);
+            this.lblCriminalRecCourt.Size = new System.Drawing.Size(64, 33);
             this.lblCriminalRecCourt.TabIndex = 0;
             this.lblCriminalRecCourt.Text = "Court:";
             // 
@@ -210,9 +211,9 @@
             // 
             this.lblCriminalRecCourtAddr.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.lblCriminalRecCourtAddr.AutoSize = true;
-            this.lblCriminalRecCourtAddr.Location = new System.Drawing.Point(3, 41);
+            this.lblCriminalRecCourtAddr.Location = new System.Drawing.Point(3, 33);
             this.lblCriminalRecCourtAddr.Name = "lblCriminalRecCourtAddr";
-            this.lblCriminalRecCourtAddr.Size = new System.Drawing.Size(64, 17);
+            this.lblCriminalRecCourtAddr.Size = new System.Drawing.Size(66, 33);
             this.lblCriminalRecCourtAddr.TabIndex = 1;
             this.lblCriminalRecCourtAddr.Text = "Address:";
             // 
@@ -220,9 +221,9 @@
             // 
             this.lblCriminalRecStatute.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.lblCriminalRecStatute.AutoSize = true;
-            this.lblCriminalRecStatute.Location = new System.Drawing.Point(3, 76);
+            this.lblCriminalRecStatute.Location = new System.Drawing.Point(3, 66);
             this.lblCriminalRecStatute.Name = "lblCriminalRecStatute";
-            this.lblCriminalRecStatute.Size = new System.Drawing.Size(57, 17);
+            this.lblCriminalRecStatute.Size = new System.Drawing.Size(63, 38);
             this.lblCriminalRecStatute.TabIndex = 2;
             this.lblCriminalRecStatute.Text = "Statute:";
             // 
@@ -243,9 +244,9 @@
             "Trial Court",
             "Tribunals",
             "Youth Court"});
-            this.comboBoxCriminalRecCourt.Location = new System.Drawing.Point(78, 6);
+            this.comboBoxCriminalRecCourt.Location = new System.Drawing.Point(78, 3);
             this.comboBoxCriminalRecCourt.Name = "comboBoxCriminalRecCourt";
-            this.comboBoxCriminalRecCourt.Size = new System.Drawing.Size(295, 24);
+            this.comboBoxCriminalRecCourt.Size = new System.Drawing.Size(295, 39);
             this.comboBoxCriminalRecCourt.TabIndex = 0;
             // 
             // grpBoxCrimeRecArrest
@@ -254,7 +255,7 @@
             this.grpBoxCrimeRecArrest.Location = new System.Drawing.Point(53, 370);
             this.grpBoxCrimeRecArrest.Name = "grpBoxCrimeRecArrest";
             this.grpBoxCrimeRecArrest.Size = new System.Drawing.Size(594, 246);
-            this.grpBoxCrimeRecArrest.TabIndex = 3;
+            this.grpBoxCrimeRecArrest.TabIndex = 2;
             this.grpBoxCrimeRecArrest.TabStop = false;
             this.grpBoxCrimeRecArrest.Text = "Arrest and Sentence";
             // 
@@ -291,9 +292,9 @@
             // 
             this.lblCriminalRecCurrentStatus.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.lblCriminalRecCurrentStatus.AutoSize = true;
-            this.lblCriminalRecCurrentStatus.Location = new System.Drawing.Point(3, 176);
+            this.lblCriminalRecCurrentStatus.Location = new System.Drawing.Point(3, 167);
             this.lblCriminalRecCurrentStatus.Name = "lblCriminalRecCurrentStatus";
-            this.lblCriminalRecCurrentStatus.Size = new System.Drawing.Size(103, 17);
+            this.lblCriminalRecCurrentStatus.Size = new System.Drawing.Size(112, 36);
             this.lblCriminalRecCurrentStatus.TabIndex = 11;
             this.lblCriminalRecCurrentStatus.Text = "Current Status:";
             // 
@@ -301,9 +302,9 @@
             // 
             this.lblCriminalRecArrestAgency.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.lblCriminalRecArrestAgency.AutoSize = true;
-            this.lblCriminalRecArrestAgency.Location = new System.Drawing.Point(3, 43);
+            this.lblCriminalRecArrestAgency.Location = new System.Drawing.Point(3, 36);
             this.lblCriminalRecArrestAgency.Name = "lblCriminalRecArrestAgency";
-            this.lblCriminalRecArrestAgency.Size = new System.Drawing.Size(101, 17);
+            this.lblCriminalRecArrestAgency.Size = new System.Drawing.Size(113, 32);
             this.lblCriminalRecArrestAgency.TabIndex = 2;
             this.lblCriminalRecArrestAgency.Text = "Arrest Agency:";
             // 
@@ -311,35 +312,35 @@
             // 
             this.lblCriminalRecArrestDate.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.lblCriminalRecArrestDate.AutoSize = true;
-            this.lblCriminalRecArrestDate.Location = new System.Drawing.Point(3, 9);
+            this.lblCriminalRecArrestDate.Location = new System.Drawing.Point(3, 0);
             this.lblCriminalRecArrestDate.Name = "lblCriminalRecArrestDate";
-            this.lblCriminalRecArrestDate.Size = new System.Drawing.Size(84, 17);
+            this.lblCriminalRecArrestDate.Size = new System.Drawing.Size(94, 36);
             this.lblCriminalRecArrestDate.TabIndex = 0;
             this.lblCriminalRecArrestDate.Text = "Arrest Date:";
             // 
             // dtpCriminalRecArrestDate
             // 
             this.dtpCriminalRecArrestDate.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.dtpCriminalRecArrestDate.Location = new System.Drawing.Point(124, 6);
+            this.dtpCriminalRecArrestDate.Location = new System.Drawing.Point(124, 3);
             this.dtpCriminalRecArrestDate.Name = "dtpCriminalRecArrestDate";
-            this.dtpCriminalRecArrestDate.Size = new System.Drawing.Size(420, 23);
+            this.dtpCriminalRecArrestDate.Size = new System.Drawing.Size(420, 38);
             this.dtpCriminalRecArrestDate.TabIndex = 0;
             // 
             // dtpCriminalRecSentenceDate
             // 
             this.dtpCriminalRecSentenceDate.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.dtpCriminalRecSentenceDate.Location = new System.Drawing.Point(124, 73);
+            this.dtpCriminalRecSentenceDate.Location = new System.Drawing.Point(124, 71);
             this.dtpCriminalRecSentenceDate.Name = "dtpCriminalRecSentenceDate";
-            this.dtpCriminalRecSentenceDate.Size = new System.Drawing.Size(420, 23);
+            this.dtpCriminalRecSentenceDate.Size = new System.Drawing.Size(420, 38);
             this.dtpCriminalRecSentenceDate.TabIndex = 2;
             // 
             // lblCriminalRecReleaseDate
             // 
             this.lblCriminalRecReleaseDate.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.lblCriminalRecReleaseDate.AutoSize = true;
-            this.lblCriminalRecReleaseDate.Location = new System.Drawing.Point(3, 109);
+            this.lblCriminalRecReleaseDate.Location = new System.Drawing.Point(3, 101);
             this.lblCriminalRecReleaseDate.Name = "lblCriminalRecReleaseDate";
-            this.lblCriminalRecReleaseDate.Size = new System.Drawing.Size(98, 17);
+            this.lblCriminalRecReleaseDate.Size = new System.Drawing.Size(114, 34);
             this.lblCriminalRecReleaseDate.TabIndex = 4;
             this.lblCriminalRecReleaseDate.Text = "Release Date:";
             // 
@@ -347,36 +348,36 @@
             // 
             this.lblCriminalRecSectenceDate.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.lblCriminalRecSectenceDate.AutoSize = true;
-            this.lblCriminalRecSectenceDate.Location = new System.Drawing.Point(3, 76);
+            this.lblCriminalRecSectenceDate.Location = new System.Drawing.Point(3, 68);
             this.lblCriminalRecSectenceDate.Name = "lblCriminalRecSectenceDate";
-            this.lblCriminalRecSectenceDate.Size = new System.Drawing.Size(106, 17);
+            this.lblCriminalRecSectenceDate.Size = new System.Drawing.Size(114, 33);
             this.lblCriminalRecSectenceDate.TabIndex = 6;
             this.lblCriminalRecSectenceDate.Text = "Sentence Date:";
             // 
             // dtpCriminalRecReleaseDate
             // 
             this.dtpCriminalRecReleaseDate.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.dtpCriminalRecReleaseDate.Location = new System.Drawing.Point(124, 106);
+            this.dtpCriminalRecReleaseDate.Location = new System.Drawing.Point(124, 104);
             this.dtpCriminalRecReleaseDate.Name = "dtpCriminalRecReleaseDate";
-            this.dtpCriminalRecReleaseDate.Size = new System.Drawing.Size(420, 23);
+            this.dtpCriminalRecReleaseDate.Size = new System.Drawing.Size(420, 38);
             this.dtpCriminalRecReleaseDate.TabIndex = 3;
             // 
             // lblCriminalRecParoleDate
             // 
             this.lblCriminalRecParoleDate.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.lblCriminalRecParoleDate.AutoSize = true;
-            this.lblCriminalRecParoleDate.Location = new System.Drawing.Point(3, 142);
+            this.lblCriminalRecParoleDate.Location = new System.Drawing.Point(3, 135);
             this.lblCriminalRecParoleDate.Name = "lblCriminalRecParoleDate";
-            this.lblCriminalRecParoleDate.Size = new System.Drawing.Size(87, 17);
+            this.lblCriminalRecParoleDate.Size = new System.Drawing.Size(99, 32);
             this.lblCriminalRecParoleDate.TabIndex = 8;
             this.lblCriminalRecParoleDate.Text = "Parole Date:";
             // 
             // dtpCriminalRecParoleDate
             // 
             this.dtpCriminalRecParoleDate.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.dtpCriminalRecParoleDate.Location = new System.Drawing.Point(124, 139);
+            this.dtpCriminalRecParoleDate.Location = new System.Drawing.Point(124, 138);
             this.dtpCriminalRecParoleDate.Name = "dtpCriminalRecParoleDate";
-            this.dtpCriminalRecParoleDate.Size = new System.Drawing.Size(420, 23);
+            this.dtpCriminalRecParoleDate.Size = new System.Drawing.Size(420, 38);
             this.dtpCriminalRecParoleDate.TabIndex = 4;
             // 
             // comboBoxCriminalRecStatus
@@ -392,10 +393,12 @@
             "Scaped",
             "In Parole",
             "In Custody",
-            "In Remind"});
-            this.comboBoxCriminalRecStatus.Location = new System.Drawing.Point(124, 174);
+            "In Remind",
+            "Still Scaped",
+            "Under Investigation"});
+            this.comboBoxCriminalRecStatus.Location = new System.Drawing.Point(124, 170);
             this.comboBoxCriminalRecStatus.Name = "comboBoxCriminalRecStatus";
-            this.comboBoxCriminalRecStatus.Size = new System.Drawing.Size(292, 24);
+            this.comboBoxCriminalRecStatus.Size = new System.Drawing.Size(292, 39);
             this.comboBoxCriminalRecStatus.TabIndex = 5;
             // 
             // comboBoxCriminalRecArrestAgency
@@ -413,9 +416,9 @@
             "RAB",
             "S.W.A.T.",
             "Other"});
-            this.comboBoxCriminalRecArrestAgency.Location = new System.Drawing.Point(124, 40);
+            this.comboBoxCriminalRecArrestAgency.Location = new System.Drawing.Point(124, 39);
             this.comboBoxCriminalRecArrestAgency.Name = "comboBoxCriminalRecArrestAgency";
-            this.comboBoxCriminalRecArrestAgency.Size = new System.Drawing.Size(292, 24);
+            this.comboBoxCriminalRecArrestAgency.Size = new System.Drawing.Size(292, 39);
             this.comboBoxCriminalRecArrestAgency.TabIndex = 1;
             // 
             // grpBoxCriminalRecCrimeDetail
@@ -424,7 +427,7 @@
             this.grpBoxCriminalRecCrimeDetail.Location = new System.Drawing.Point(682, 67);
             this.grpBoxCriminalRecCrimeDetail.Name = "grpBoxCriminalRecCrimeDetail";
             this.grpBoxCriminalRecCrimeDetail.Size = new System.Drawing.Size(401, 272);
-            this.grpBoxCriminalRecCrimeDetail.TabIndex = 4;
+            this.grpBoxCriminalRecCrimeDetail.TabIndex = 3;
             this.grpBoxCriminalRecCrimeDetail.TabStop = false;
             this.grpBoxCriminalRecCrimeDetail.Text = "Crime Detail";
             // 
@@ -439,13 +442,13 @@
             // grpBoxAdditionalAttachment
             // 
             this.grpBoxAdditionalAttachment.Controls.Add(this.btnCriminalRecAttachment);
-            this.grpBoxAdditionalAttachment.Controls.Add(this.txtBoxCriminalRecAttachment);
+            this.grpBoxAdditionalAttachment.Controls.Add(this.txtBoxCriminalRecRefDocLoc);
             this.grpBoxAdditionalAttachment.Location = new System.Drawing.Point(682, 357);
             this.grpBoxAdditionalAttachment.Name = "grpBoxAdditionalAttachment";
             this.grpBoxAdditionalAttachment.Size = new System.Drawing.Size(401, 79);
-            this.grpBoxAdditionalAttachment.TabIndex = 5;
+            this.grpBoxAdditionalAttachment.TabIndex = 4;
             this.grpBoxAdditionalAttachment.TabStop = false;
-            this.grpBoxAdditionalAttachment.Text = "Attachment";
+            this.grpBoxAdditionalAttachment.Text = "Reference Document Path";
             // 
             // btnCriminalRecAttachment
             // 
@@ -455,13 +458,14 @@
             this.btnCriminalRecAttachment.TabIndex = 1;
             this.btnCriminalRecAttachment.Text = "Browse";
             this.btnCriminalRecAttachment.UseVisualStyleBackColor = true;
+            this.btnCriminalRecAttachment.Click += new System.EventHandler(this.btnCriminalRecAttachment_Click);
             // 
-            // txtBoxCriminalRecAttachment
+            // txtBoxCriminalRecRefDocLoc
             // 
-            this.txtBoxCriminalRecAttachment.Location = new System.Drawing.Point(17, 35);
-            this.txtBoxCriminalRecAttachment.Name = "txtBoxCriminalRecAttachment";
-            this.txtBoxCriminalRecAttachment.Size = new System.Drawing.Size(280, 23);
-            this.txtBoxCriminalRecAttachment.TabIndex = 0;
+            this.txtBoxCriminalRecRefDocLoc.Location = new System.Drawing.Point(17, 35);
+            this.txtBoxCriminalRecRefDocLoc.Name = "txtBoxCriminalRecRefDocLoc";
+            this.txtBoxCriminalRecRefDocLoc.Size = new System.Drawing.Size(280, 38);
+            this.txtBoxCriminalRecRefDocLoc.TabIndex = 0;
             // 
             // grpBoxCriminalRecCrimeRec
             // 
@@ -470,55 +474,111 @@
             this.grpBoxCriminalRecCrimeRec.Location = new System.Drawing.Point(53, 32);
             this.grpBoxCriminalRecCrimeRec.Name = "grpBoxCriminalRecCrimeRec";
             this.grpBoxCriminalRecCrimeRec.Size = new System.Drawing.Size(594, 175);
-            this.grpBoxCriminalRecCrimeRec.TabIndex = 6;
+            this.grpBoxCriminalRecCrimeRec.TabIndex = 0;
             this.grpBoxCriminalRecCrimeRec.TabStop = false;
             this.grpBoxCriminalRecCrimeRec.Text = "Crime Record";
             // 
+            // tlpCriminalRecCrimeRec
+            // 
+            this.tlpCriminalRecCrimeRec.ColumnCount = 2;
+            this.tlpCriminalRecCrimeRec.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 31.09091F));
+            this.tlpCriminalRecCrimeRec.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 68.90909F));
+            this.tlpCriminalRecCrimeRec.Controls.Add(this.lblCriminalRecCrimeDate, 0, 2);
+            this.tlpCriminalRecCrimeRec.Controls.Add(this.txtBoxCriminalRecCrimeLoc, 1, 1);
+            this.tlpCriminalRecCrimeRec.Controls.Add(this.lblCriminalRecCrimeLoc, 0, 1);
+            this.tlpCriminalRecCrimeRec.Controls.Add(this.lblCriminalRecCaseId, 0, 0);
+            this.tlpCriminalRecCrimeRec.Controls.Add(this.txtBoxCriminalRecCaseId, 1, 0);
+            this.tlpCriminalRecCrimeRec.Controls.Add(this.dtpCriminalRecCrimeDate, 1, 2);
+            this.tlpCriminalRecCrimeRec.Location = new System.Drawing.Point(24, 60);
+            this.tlpCriminalRecCrimeRec.Name = "tlpCriminalRecCrimeRec";
+            this.tlpCriminalRecCrimeRec.RowCount = 3;
+            this.tlpCriminalRecCrimeRec.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tlpCriminalRecCrimeRec.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tlpCriminalRecCrimeRec.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 38F));
+            this.tlpCriminalRecCrimeRec.Size = new System.Drawing.Size(550, 100);
+            this.tlpCriminalRecCrimeRec.TabIndex = 0;
+            // 
+            // lblCriminalRecCrimeDate
+            // 
+            this.lblCriminalRecCrimeDate.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.lblCriminalRecCrimeDate.AutoSize = true;
+            this.lblCriminalRecCrimeDate.Location = new System.Drawing.Point(3, 65);
+            this.lblCriminalRecCrimeDate.Name = "lblCriminalRecCrimeDate";
+            this.lblCriminalRecCrimeDate.Size = new System.Drawing.Size(159, 31);
+            this.lblCriminalRecCrimeDate.TabIndex = 2;
+            this.lblCriminalRecCrimeDate.Text = "Crime Date:";
+            // 
+            // txtBoxCriminalRecCrimeLoc
+            // 
+            this.txtBoxCriminalRecCrimeLoc.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.txtBoxCriminalRecCrimeLoc.Location = new System.Drawing.Point(174, 34);
+            this.txtBoxCriminalRecCrimeLoc.MaxLength = 100;
+            this.txtBoxCriminalRecCrimeLoc.Name = "txtBoxCriminalRecCrimeLoc";
+            this.txtBoxCriminalRecCrimeLoc.Size = new System.Drawing.Size(367, 38);
+            this.txtBoxCriminalRecCrimeLoc.TabIndex = 2;
+            // 
+            // lblCriminalRecCrimeLoc
+            // 
+            this.lblCriminalRecCrimeLoc.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.lblCriminalRecCrimeLoc.AutoSize = true;
+            this.lblCriminalRecCrimeLoc.Location = new System.Drawing.Point(3, 31);
+            this.lblCriminalRecCrimeLoc.Name = "lblCriminalRecCrimeLoc";
+            this.lblCriminalRecCrimeLoc.Size = new System.Drawing.Size(125, 31);
+            this.lblCriminalRecCrimeLoc.TabIndex = 1;
+            this.lblCriminalRecCrimeLoc.Text = "Crime Location:";
+            // 
+            // lblCriminalRecCaseId
+            // 
+            this.lblCriminalRecCaseId.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.lblCriminalRecCaseId.AutoSize = true;
+            this.lblCriminalRecCaseId.Location = new System.Drawing.Point(3, 0);
+            this.lblCriminalRecCaseId.Name = "lblCriminalRecCaseId";
+            this.lblCriminalRecCaseId.Size = new System.Drawing.Size(139, 31);
+            this.lblCriminalRecCaseId.TabIndex = 0;
+            this.lblCriminalRecCaseId.Text = "Case ID *:";
+            // 
+            // txtBoxCriminalRecCaseId
+            // 
+            this.txtBoxCriminalRecCaseId.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.txtBoxCriminalRecCaseId.Location = new System.Drawing.Point(174, 3);
+            this.txtBoxCriminalRecCaseId.MaxLength = 45;
+            this.txtBoxCriminalRecCaseId.Name = "txtBoxCriminalRecCaseId";
+            this.txtBoxCriminalRecCaseId.Size = new System.Drawing.Size(367, 38);
+            this.txtBoxCriminalRecCaseId.TabIndex = 1;
+            this.txtBoxCriminalRecCaseId.Leave += new System.EventHandler(this.txtBoxCriminalRecCaseId_Leave);
+            // 
+            // dtpCriminalRecCrimeDate
+            // 
+            this.dtpCriminalRecCrimeDate.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.dtpCriminalRecCrimeDate.Location = new System.Drawing.Point(174, 65);
+            this.dtpCriminalRecCrimeDate.Name = "dtpCriminalRecCrimeDate";
+            this.dtpCriminalRecCrimeDate.Size = new System.Drawing.Size(367, 38);
+            this.dtpCriminalRecCrimeDate.TabIndex = 3;
+            // 
             // tlpCriminalRecButtons
             // 
-            this.tlpCriminalRecButtons.ColumnCount = 3;
+            this.tlpCriminalRecButtons.ColumnCount = 4;
             this.tlpCriminalRecButtons.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 49.60318F));
             this.tlpCriminalRecButtons.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50.39682F));
-            this.tlpCriminalRecButtons.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 133F));
+            this.tlpCriminalRecButtons.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 94F));
+            this.tlpCriminalRecButtons.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 111F));
+            this.tlpCriminalRecButtons.Controls.Add(this.btnCriminalRecEdit, 0, 0);
             this.tlpCriminalRecButtons.Controls.Add(this.btnCriminalRecInsert, 0, 0);
-            this.tlpCriminalRecButtons.Controls.Add(this.btnCriminalRecClear, 1, 0);
-            this.tlpCriminalRecButtons.Controls.Add(this.btnCriminalRecClose, 2, 0);
-            this.tlpCriminalRecButtons.Location = new System.Drawing.Point(428, 671);
+            this.tlpCriminalRecButtons.Controls.Add(this.btnCriminalRecClose, 3, 0);
+            this.tlpCriminalRecButtons.Controls.Add(this.btnCriminalRecClear, 2, 0);
+            this.tlpCriminalRecButtons.Location = new System.Drawing.Point(382, 671);
             this.tlpCriminalRecButtons.Name = "tlpCriminalRecButtons";
             this.tlpCriminalRecButtons.RowCount = 1;
             this.tlpCriminalRecButtons.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 49F));
-            this.tlpCriminalRecButtons.Size = new System.Drawing.Size(380, 53);
-            this.tlpCriminalRecButtons.TabIndex = 7;
-            // 
-            // btnCriminalRecClose
-            // 
-            this.btnCriminalRecClose.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.btnCriminalRecClose.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnCriminalRecClose.Location = new System.Drawing.Point(249, 11);
-            this.btnCriminalRecClose.Name = "btnCriminalRecClose";
-            this.btnCriminalRecClose.Size = new System.Drawing.Size(128, 30);
-            this.btnCriminalRecClose.TabIndex = 2;
-            this.btnCriminalRecClose.Text = "Close";
-            this.btnCriminalRecClose.UseVisualStyleBackColor = true;
-            this.btnCriminalRecClose.Click += new System.EventHandler(this.btnCriminalRecClose_Click);
-            // 
-            // btnCriminalRecClear
-            // 
-            this.btnCriminalRecClear.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.btnCriminalRecClear.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnCriminalRecClear.Location = new System.Drawing.Point(129, 11);
-            this.btnCriminalRecClear.Name = "btnCriminalRecClear";
-            this.btnCriminalRecClear.Size = new System.Drawing.Size(110, 30);
-            this.btnCriminalRecClear.TabIndex = 1;
-            this.btnCriminalRecClear.Text = "Clear";
-            this.btnCriminalRecClear.UseVisualStyleBackColor = true;
-            this.btnCriminalRecClear.Click += new System.EventHandler(this.btnCriminalRecClear_Click);
+            this.tlpCriminalRecButtons.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tlpCriminalRecButtons.Size = new System.Drawing.Size(446, 53);
+            this.tlpCriminalRecButtons.TabIndex = 6;
             // 
             // btnCriminalRecInsert
             // 
             this.btnCriminalRecInsert.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.btnCriminalRecInsert.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnCriminalRecInsert.Location = new System.Drawing.Point(6, 11);
+            this.btnCriminalRecInsert.Location = new System.Drawing.Point(5, 11);
             this.btnCriminalRecInsert.Name = "btnCriminalRecInsert";
             this.btnCriminalRecInsert.Size = new System.Drawing.Size(109, 30);
             this.btnCriminalRecInsert.TabIndex = 0;
@@ -526,13 +586,38 @@
             this.btnCriminalRecInsert.UseVisualStyleBackColor = true;
             this.btnCriminalRecInsert.Click += new System.EventHandler(this.btnCriminalRecInsert_Click);
             // 
+            // btnCriminalRecClear
+            // 
+            this.btnCriminalRecClear.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.btnCriminalRecClear.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnCriminalRecClear.Location = new System.Drawing.Point(243, 11);
+            this.btnCriminalRecClear.Name = "btnCriminalRecClear";
+            this.btnCriminalRecClear.Size = new System.Drawing.Size(88, 30);
+            this.btnCriminalRecClear.TabIndex = 2;
+            this.btnCriminalRecClear.Text = "Clear";
+            this.btnCriminalRecClear.UseVisualStyleBackColor = true;
+            this.btnCriminalRecClear.Click += new System.EventHandler(this.btnCriminalRecClear_Click);
+            // 
+            // btnCriminalRecClose
+            // 
+            this.btnCriminalRecClose.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.btnCriminalRecClose.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnCriminalRecClose.Location = new System.Drawing.Point(340, 11);
+            this.btnCriminalRecClose.Name = "btnCriminalRecClose";
+            this.btnCriminalRecClose.Size = new System.Drawing.Size(100, 30);
+            this.btnCriminalRecClose.TabIndex = 3;
+            this.btnCriminalRecClose.Text = "Close";
+            this.btnCriminalRecClose.UseVisualStyleBackColor = true;
+            this.btnCriminalRecClose.Click += new System.EventHandler(this.btnCriminalRecClose_Click);
+            // 
             // menuStrip1
             // 
+            this.menuStrip1.ImageScalingSize = new System.Drawing.Size(32, 32);
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.menuToolStripMenuItemCriminalRec});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(1142, 24);
+            this.menuStrip1.Size = new System.Drawing.Size(1142, 40);
             this.menuStrip1.TabIndex = 8;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -541,13 +626,13 @@
             this.menuToolStripMenuItemCriminalRec.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.exitToolStripMenuItemCriminalRec});
             this.menuToolStripMenuItemCriminalRec.Name = "menuToolStripMenuItemCriminalRec";
-            this.menuToolStripMenuItemCriminalRec.Size = new System.Drawing.Size(50, 20);
+            this.menuToolStripMenuItemCriminalRec.Size = new System.Drawing.Size(90, 36);
             this.menuToolStripMenuItemCriminalRec.Text = "Menu";
             // 
             // exitToolStripMenuItemCriminalRec
             // 
             this.exitToolStripMenuItemCriminalRec.Name = "exitToolStripMenuItemCriminalRec";
-            this.exitToolStripMenuItemCriminalRec.Size = new System.Drawing.Size(92, 22);
+            this.exitToolStripMenuItemCriminalRec.Size = new System.Drawing.Size(152, 38);
             this.exitToolStripMenuItemCriminalRec.Text = "Exit";
             this.exitToolStripMenuItemCriminalRec.Click += new System.EventHandler(this.exitToolStripMenuItemCriminalRec_Click);
             // 
@@ -557,7 +642,7 @@
             this.grpBoxCriminalRecAlert.Location = new System.Drawing.Point(682, 453);
             this.grpBoxCriminalRecAlert.Name = "grpBoxCriminalRecAlert";
             this.grpBoxCriminalRecAlert.Size = new System.Drawing.Size(401, 115);
-            this.grpBoxCriminalRecAlert.TabIndex = 9;
+            this.grpBoxCriminalRecAlert.TabIndex = 5;
             this.grpBoxCriminalRecAlert.TabStop = false;
             this.grpBoxCriminalRecAlert.Text = "Alert Note";
             // 
@@ -582,9 +667,9 @@
             // 
             this.lblCriminalRecAlertLevel.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.lblCriminalRecAlertLevel.AutoSize = true;
-            this.lblCriminalRecAlertLevel.Location = new System.Drawing.Point(3, 5);
+            this.lblCriminalRecAlertLevel.Location = new System.Drawing.Point(3, 0);
             this.lblCriminalRecAlertLevel.Name = "lblCriminalRecAlertLevel";
-            this.lblCriminalRecAlertLevel.Size = new System.Drawing.Size(79, 17);
+            this.lblCriminalRecAlertLevel.Size = new System.Drawing.Size(79, 28);
             this.lblCriminalRecAlertLevel.TabIndex = 0;
             this.lblCriminalRecAlertLevel.Text = "Alert Level:";
             // 
@@ -592,9 +677,9 @@
             // 
             this.lblCriminalRecAlertMsg.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.lblCriminalRecAlertMsg.AutoSize = true;
-            this.lblCriminalRecAlertMsg.Location = new System.Drawing.Point(3, 40);
+            this.lblCriminalRecAlertMsg.Location = new System.Drawing.Point(3, 28);
             this.lblCriminalRecAlertMsg.Name = "lblCriminalRecAlertMsg";
-            this.lblCriminalRecAlertMsg.Size = new System.Drawing.Size(69, 34);
+            this.lblCriminalRecAlertMsg.Size = new System.Drawing.Size(79, 59);
             this.lblCriminalRecAlertMsg.TabIndex = 1;
             this.lblCriminalRecAlertMsg.Text = "Alert Message:";
             // 
@@ -620,112 +705,48 @@
             "Wanted"});
             this.comboBoxCriminalRecAlertLevel.Location = new System.Drawing.Point(95, 3);
             this.comboBoxCriminalRecAlertLevel.Name = "comboBoxCriminalRecAlertLevel";
-            this.comboBoxCriminalRecAlertLevel.Size = new System.Drawing.Size(257, 24);
+            this.comboBoxCriminalRecAlertLevel.Size = new System.Drawing.Size(257, 39);
             this.comboBoxCriminalRecAlertLevel.TabIndex = 0;
             // 
-            // tlpCriminalRecCrimeRec
+            // tlpCriminalRecStatus
             // 
-            this.tlpCriminalRecCrimeRec.ColumnCount = 2;
-            this.tlpCriminalRecCrimeRec.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 31.09091F));
-            this.tlpCriminalRecCrimeRec.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 68.90909F));
-            this.tlpCriminalRecCrimeRec.Controls.Add(this.lblCriminalRecCrimeDate, 0, 2);
-            this.tlpCriminalRecCrimeRec.Controls.Add(this.txtBoxCriminalRecCrimeLoc, 1, 1);
-            this.tlpCriminalRecCrimeRec.Controls.Add(this.lblCriminalRecCrimeLoc, 0, 1);
-            this.tlpCriminalRecCrimeRec.Controls.Add(this.lblCriminalRecCaseId, 0, 0);
-            this.tlpCriminalRecCrimeRec.Controls.Add(this.txtBoxCriminalRecCaseId, 1, 0);
-            this.tlpCriminalRecCrimeRec.Controls.Add(this.dtpCriminalRecCrimeDate, 1, 2);
-            this.tlpCriminalRecCrimeRec.Location = new System.Drawing.Point(24, 60);
-            this.tlpCriminalRecCrimeRec.Name = "tlpCriminalRecCrimeRec";
-            this.tlpCriminalRecCrimeRec.RowCount = 3;
-            this.tlpCriminalRecCrimeRec.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tlpCriminalRecCrimeRec.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tlpCriminalRecCrimeRec.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 38F));
-            this.tlpCriminalRecCrimeRec.Size = new System.Drawing.Size(550, 100);
-            this.tlpCriminalRecCrimeRec.TabIndex = 0;
+            this.tlpCriminalRecStatus.ColumnCount = 1;
+            this.tlpCriminalRecStatus.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tlpCriminalRecStatus.Controls.Add(this.lblCriminalRecAddEditStatusMsg, 0, 0);
+            this.tlpCriminalRecStatus.Location = new System.Drawing.Point(77, 622);
+            this.tlpCriminalRecStatus.Name = "tlpCriminalRecStatus";
+            this.tlpCriminalRecStatus.RowCount = 1;
+            this.tlpCriminalRecStatus.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tlpCriminalRecStatus.Size = new System.Drawing.Size(1006, 26);
+            this.tlpCriminalRecStatus.TabIndex = 10;
             // 
-            // lblCriminalRecCaseId
+            // lblCriminalRecAddEditStatusMsg
             // 
-            this.lblCriminalRecCaseId.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.lblCriminalRecCaseId.AutoSize = true;
-            this.lblCriminalRecCaseId.Location = new System.Drawing.Point(3, 7);
-            this.lblCriminalRecCaseId.Name = "lblCriminalRecCaseId";
-            this.lblCriminalRecCaseId.Size = new System.Drawing.Size(70, 17);
-            this.lblCriminalRecCaseId.TabIndex = 0;
-            this.lblCriminalRecCaseId.Text = "Case ID *:";
+            this.lblCriminalRecAddEditStatusMsg.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.lblCriminalRecAddEditStatusMsg.AutoSize = true;
+            this.lblCriminalRecAddEditStatusMsg.Location = new System.Drawing.Point(3, 0);
+            this.lblCriminalRecAddEditStatusMsg.Name = "lblCriminalRecAddEditStatusMsg";
+            this.lblCriminalRecAddEditStatusMsg.Size = new System.Drawing.Size(0, 26);
+            this.lblCriminalRecAddEditStatusMsg.TabIndex = 0;
             // 
-            // txtBoxCriminalRecCaseId
+            // btnCriminalRecEdit
             // 
-            this.txtBoxCriminalRecCaseId.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.txtBoxCriminalRecCaseId.Location = new System.Drawing.Point(174, 4);
-            this.txtBoxCriminalRecCaseId.MaxLength = 45;
-            this.txtBoxCriminalRecCaseId.Name = "txtBoxCriminalRecCaseId";
-            this.txtBoxCriminalRecCaseId.Size = new System.Drawing.Size(367, 23);
-            this.txtBoxCriminalRecCaseId.TabIndex = 0;
-            // 
-            // lblCriminalRecCrimeLoc
-            // 
-            this.lblCriminalRecCrimeLoc.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.lblCriminalRecCrimeLoc.AutoSize = true;
-            this.lblCriminalRecCrimeLoc.Location = new System.Drawing.Point(3, 38);
-            this.lblCriminalRecCrimeLoc.Name = "lblCriminalRecCrimeLoc";
-            this.lblCriminalRecCrimeLoc.Size = new System.Drawing.Size(106, 17);
-            this.lblCriminalRecCrimeLoc.TabIndex = 2;
-            this.lblCriminalRecCrimeLoc.Text = "Crime Location:";
-            // 
-            // txtBoxCriminalRecCrimeLoc
-            // 
-            this.txtBoxCriminalRecCrimeLoc.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.txtBoxCriminalRecCrimeLoc.Location = new System.Drawing.Point(174, 35);
-            this.txtBoxCriminalRecCrimeLoc.MaxLength = 100;
-            this.txtBoxCriminalRecCrimeLoc.Name = "txtBoxCriminalRecCrimeLoc";
-            this.txtBoxCriminalRecCrimeLoc.Size = new System.Drawing.Size(367, 23);
-            this.txtBoxCriminalRecCrimeLoc.TabIndex = 1;
-            // 
-            // lblCriminalRecCrimeDate
-            // 
-            this.lblCriminalRecCrimeDate.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.lblCriminalRecCrimeDate.AutoSize = true;
-            this.lblCriminalRecCrimeDate.Location = new System.Drawing.Point(3, 72);
-            this.lblCriminalRecCrimeDate.Name = "lblCriminalRecCrimeDate";
-            this.lblCriminalRecCrimeDate.Size = new System.Drawing.Size(82, 17);
-            this.lblCriminalRecCrimeDate.TabIndex = 4;
-            this.lblCriminalRecCrimeDate.Text = "Crime Date:";
-            // 
-            // dtpCriminalRecCrimeDate
-            // 
-            this.dtpCriminalRecCrimeDate.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.dtpCriminalRecCrimeDate.Location = new System.Drawing.Point(174, 69);
-            this.dtpCriminalRecCrimeDate.Name = "dtpCriminalRecCrimeDate";
-            this.dtpCriminalRecCrimeDate.Size = new System.Drawing.Size(367, 23);
-            this.dtpCriminalRecCrimeDate.TabIndex = 2;
-            // 
-            // tlpCriminalRecAddStatus
-            // 
-            this.tlpCriminalRecAddStatus.ColumnCount = 1;
-            this.tlpCriminalRecAddStatus.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tlpCriminalRecAddStatus.Controls.Add(this.lblCriminalRecAddStatusMsg, 0, 0);
-            this.tlpCriminalRecAddStatus.Location = new System.Drawing.Point(77, 622);
-            this.tlpCriminalRecAddStatus.Name = "tlpCriminalRecAddStatus";
-            this.tlpCriminalRecAddStatus.RowCount = 1;
-            this.tlpCriminalRecAddStatus.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tlpCriminalRecAddStatus.Size = new System.Drawing.Size(1006, 26);
-            this.tlpCriminalRecAddStatus.TabIndex = 10;
-            // 
-            // lblCriminalRecAddStatusMsg
-            // 
-            this.lblCriminalRecAddStatusMsg.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.lblCriminalRecAddStatusMsg.AutoSize = true;
-            this.lblCriminalRecAddStatusMsg.Location = new System.Drawing.Point(3, 4);
-            this.lblCriminalRecAddStatusMsg.Name = "lblCriminalRecAddStatusMsg";
-            this.lblCriminalRecAddStatusMsg.Size = new System.Drawing.Size(0, 17);
-            this.lblCriminalRecAddStatusMsg.TabIndex = 0;
+            this.btnCriminalRecEdit.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.btnCriminalRecEdit.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnCriminalRecEdit.Location = new System.Drawing.Point(125, 11);
+            this.btnCriminalRecEdit.Name = "btnCriminalRecEdit";
+            this.btnCriminalRecEdit.Size = new System.Drawing.Size(109, 30);
+            this.btnCriminalRecEdit.TabIndex = 1;
+            this.btnCriminalRecEdit.Text = "Edit Record";
+            this.btnCriminalRecEdit.UseVisualStyleBackColor = true;
+            this.btnCriminalRecEdit.Click += new System.EventHandler(this.btnCriminalRecEditButton_Click);
             // 
             // CriminalRecordForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(16F, 31F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1142, 746);
-            this.Controls.Add(this.tlpCriminalRecAddStatus);
+            this.Controls.Add(this.tlpCriminalRecStatus);
             this.Controls.Add(this.grpBoxCriminalRecAlert);
             this.Controls.Add(this.tlpCriminalRecButtons);
             this.Controls.Add(this.grpBoxCriminalRecCrimeRec);
@@ -753,16 +774,16 @@
             this.grpBoxAdditionalAttachment.ResumeLayout(false);
             this.grpBoxAdditionalAttachment.PerformLayout();
             this.grpBoxCriminalRecCrimeRec.ResumeLayout(false);
+            this.tlpCriminalRecCrimeRec.ResumeLayout(false);
+            this.tlpCriminalRecCrimeRec.PerformLayout();
             this.tlpCriminalRecButtons.ResumeLayout(false);
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             this.grpBoxCriminalRecAlert.ResumeLayout(false);
             this.tlpCriminalRecAlertLevel.ResumeLayout(false);
             this.tlpCriminalRecAlertLevel.PerformLayout();
-            this.tlpCriminalRecCrimeRec.ResumeLayout(false);
-            this.tlpCriminalRecCrimeRec.PerformLayout();
-            this.tlpCriminalRecAddStatus.ResumeLayout(false);
-            this.tlpCriminalRecAddStatus.PerformLayout();
+            this.tlpCriminalRecStatus.ResumeLayout(false);
+            this.tlpCriminalRecStatus.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -798,7 +819,7 @@
         private System.Windows.Forms.RichTextBox richTxtBoxCriminalRecCrimeDetail;
         private System.Windows.Forms.GroupBox grpBoxAdditionalAttachment;
         private System.Windows.Forms.Button btnCriminalRecAttachment;
-        private System.Windows.Forms.TextBox txtBoxCriminalRecAttachment;
+        private System.Windows.Forms.TextBox txtBoxCriminalRecRefDocLoc;
         private System.Windows.Forms.GroupBox grpBoxCriminalRecCrimeRec;
         private System.Windows.Forms.TableLayoutPanel tlpCriminalRecButtons;
         private System.Windows.Forms.Button btnCriminalRecClose;
@@ -822,7 +843,8 @@
         private System.Windows.Forms.Label lblCriminalRecCaseId;
         private System.Windows.Forms.TextBox txtBoxCriminalRecCaseId;
         private System.Windows.Forms.DateTimePicker dtpCriminalRecCrimeDate;
-        private System.Windows.Forms.TableLayoutPanel tlpCriminalRecAddStatus;
-        private System.Windows.Forms.Label lblCriminalRecAddStatusMsg;
+        private System.Windows.Forms.TableLayoutPanel tlpCriminalRecStatus;
+        private System.Windows.Forms.Label lblCriminalRecAddEditStatusMsg;
+        private System.Windows.Forms.Button btnCriminalRecEdit;
     }
 }
