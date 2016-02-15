@@ -433,7 +433,7 @@ namespace AFIS360
             string connStr = getConnectionStringByName("MySQL_AFIS_conn");
             MySqlConnection conn = new MySqlConnection(connStr);
             MySqlCommand cmd;
-            ClientSetup clientSetup;
+            ClientSetup clientSetup = null;
             DataTable ds;
             conn.Open();
             try
@@ -445,23 +445,27 @@ namespace AFIS360
                 MySqlDataAdapter da = new MySqlDataAdapter(cmd);
                 ds = new DataTable();
                 da.Fill(ds);
-                IEnumerator rows = ds.Rows.GetEnumerator();
 
-                string client_id = (string)ds.Rows[0]["client_id"];
-                string legal_name = (string)ds.Rows[0]["legal_name"];
-                string addr_line = (string)ds.Rows[0]["addr_line"];
-                string city = (string)ds.Rows[0]["city"];
-                string state = (string)ds.Rows[0]["state"];
-                string postal_code = (string)ds.Rows[0]["postal_code"];
-                string country = (string)ds.Rows[0]["country"];
+                if(ds.Rows.Count > 0)
+                {
+                    IEnumerator rows = ds.Rows.GetEnumerator();
+                    string client_id = (string)ds.Rows[0]["client_id"];
+                    string legal_name = (string)ds.Rows[0]["legal_name"];
+                    string addr_line = (string)ds.Rows[0]["addr_line"];
+                    string city = (string)ds.Rows[0]["city"];
+                    string state = (string)ds.Rows[0]["state"];
+                    string postal_code = (string)ds.Rows[0]["postal_code"];
+                    string country = (string)ds.Rows[0]["country"];
 
-                clientSetup.ClientId = client_id;
-                clientSetup.LegalName = legal_name;
-                clientSetup.AddressLine = addr_line;
-                clientSetup.City = city;
-                clientSetup.State = state;
-                clientSetup.PostalCode = postal_code;
-                clientSetup.Country = country;
+                    clientSetup = new ClientSetup();
+                    clientSetup.ClientId = client_id;
+                    clientSetup.LegalName = legal_name;
+                    clientSetup.AddressLine = addr_line;
+                    clientSetup.City = city;
+                    clientSetup.State = state;
+                    clientSetup.PostalCode = postal_code;
+                    clientSetup.Country = country;
+                }
             }
             catch (Exception)
             {
