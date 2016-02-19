@@ -1482,6 +1482,9 @@ namespace AFIS360
             loadAccessControls();
             //load Client Setup
             loadClientSetup();
+
+            //load the all fingerprint templates from the Database
+            Program.loadFingerptintTemplates();
         }
 
         private void loadAccessControls()

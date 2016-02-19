@@ -1636,6 +1636,7 @@ namespace AFIS360
                 da.Fill(ds);
                 IEnumerator rows = ds.Rows.GetEnumerator();
                 Int32 i = 0;
+                Console.WriteLine("###-->> DataAccess:retrievePersonFingerprintTemplates() - Loading fingerprint telplates..");
 
                 while (rows.MoveNext())
                 {
@@ -2643,14 +2644,14 @@ namespace AFIS360
                 if (id == null || id.Length == 0)  //get audit logs for all users
                 {
                     cmd.CommandText = "SELECT * FROM afis.audit_log WHERE " +
-                                       "DATE(login_date_time) BETWEEN @startDateStr AND  @endDateStr";
+                                       "DATE(login_date_time) BETWEEN @startDateStr AND  @endDateStr ORDER BY login_date_time DESC";
                     cmd.Parameters.AddWithValue("@startDateStr", startDateStr);
                     cmd.Parameters.AddWithValue("@endDateStr", endDateStr);
                 } else //get the audit logs for certail users
                 {
                     cmd.CommandText = "SELECT * FROM afis.audit_log WHERE " +
                                       "user_id = @user_id and " +
-                                      "DATE(login_date_time) BETWEEN @startDateStr AND  @endDateStr";
+                                      "DATE(login_date_time) BETWEEN @startDateStr AND  @endDateStr ORDER BY login_date_time DESC";
                     cmd.Parameters.AddWithValue("@user_id", id);
                     cmd.Parameters.AddWithValue("@startDateStr", startDateStr);
                     cmd.Parameters.AddWithValue("@endDateStr", endDateStr);

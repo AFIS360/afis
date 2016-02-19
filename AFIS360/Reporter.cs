@@ -26,8 +26,12 @@ namespace AFIS360
             string datetimePref = DateTime.Now.ToString("yyyy-MM-dd-HH-mm-ss");
             string pdfPath = ConfigurationManager.AppSettings["PersonReportPath"] + "-" + datetimePref + ".pdf";
             PdfWriter pdfWriter = PdfWriter.GetInstance(doc, new FileStream(pdfPath, FileMode.Create));
+            //Event for Watermark
             PdfWriterEvents writerEvent = new PdfWriterEvents(ConfigurationManager.AppSettings["WatermarkConfidential"]);
             pdfWriter.PageEvent = writerEvent;
+            //Event for Page number
+            PageEventHelper pageEventHelper = new PageEventHelper();
+            pdfWriter.PageEvent = pageEventHelper;
             doc.Open();
 
             //add title
@@ -425,6 +429,8 @@ namespace AFIS360
             string datetimePref = DateTime.Now.ToString("yyyy-MM-dd-HH-mm-ss");
             string pdfPath = ConfigurationManager.AppSettings["CustUserReportPath"] + "-" + datetimePref + ".pdf";
             PdfWriter pdfWriter = PdfWriter.GetInstance(doc, new FileStream(pdfPath, FileMode.Create));
+            PageEventHelper pageEventHelper = new PageEventHelper();
+            pdfWriter.PageEvent = pageEventHelper;
             doc.Open();
 
             //add title
@@ -455,8 +461,8 @@ namespace AFIS360
             float[] widths = new float[] { 25f, 40f, 40f, 40f, 40f, 100f };
             accessReportTable.SetWidths(widths);
 
-            PdfPCell headerCellRecNo = new PdfPCell(new Phrase("RecNo"));
-            PdfPCell headerCellID = new PdfPCell(new Phrase("ID"));
+            PdfPCell headerCellRecNo = new PdfPCell(new Phrase("Serial No."));
+            PdfPCell headerCellID = new PdfPCell(new Phrase("User ID"));
             PdfPCell headerCellName = new PdfPCell(new Phrase("Name"));
             PdfPCell headerCellLoginDateTime = new PdfPCell(new Phrase("Login Date time"));
             PdfPCell headerCellLogoutDateTime = new PdfPCell(new Phrase("Logout Date time"));

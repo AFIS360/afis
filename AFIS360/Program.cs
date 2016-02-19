@@ -19,7 +19,7 @@ namespace AFIS360
     {
     
         // Initialize path to images
-        static readonly string ImagePath = Path.Combine(Path.Combine("..", ".."), "images");
+//        static readonly string ImagePath = Path.Combine(Path.Combine("..", ".."), "images");
 
         // Shared AfisEngine instance (cannot be shared between different threads though)
         static AfisEngine Afis;
@@ -179,9 +179,11 @@ namespace AFIS360
             // Match visitor with unknown identity
             MyPerson probe = getProbe(fpPath, visitorId);
 
-            // Load all people fron database
-            DataAccess dataAccess = new DataAccess();
-            persons = dataAccess.retrievePersonFingerprintTemplates();
+            if(persons == null)
+            {
+                DataAccess dataAccess = new DataAccess();
+                persons = dataAccess.retrievePersonFingerprintTemplates();
+            } 
 
             Console.WriteLine("###-->> Loading persons from DB. Total persons = " + persons.Count());
 
@@ -221,9 +223,12 @@ namespace AFIS360
             // Match visitor with unknown identity
             MyPerson probe = getProbe(fingerName, fingerImage, visitorId);
 
-            // Load all people fron database
-            DataAccess dataAccess = new DataAccess();
-            persons = dataAccess.retrievePersonFingerprintTemplates();
+            if (persons == null)
+            {
+                // Load all people fron database
+                DataAccess dataAccess = new DataAccess();
+                persons = dataAccess.retrievePersonFingerprintTemplates();
+            }
 
             Console.WriteLine("###-->> Loading persons from DB. Total persons = " + persons.Count());
 
@@ -322,9 +327,12 @@ namespace AFIS360
             MyPerson probe = getProbe(fpPath, visitorId);
 
             Console.WriteLine("###-->> persons object = " + persons);
-            // Load all people fron database
-            DataAccess dataAccess = new DataAccess();
-            persons = dataAccess.retrievePersonFingerprintTemplates();
+            if (persons == null)
+            {
+                // Load all people fron database
+                DataAccess dataAccess = new DataAccess();
+                persons = dataAccess.retrievePersonFingerprintTemplates();
+            }
             Console.WriteLine("###-->> Loading persons from DB. Total persons = " + persons.Count());
 
             // Look up the probe using Threshold = 10
@@ -392,6 +400,13 @@ namespace AFIS360
             DataAccess dataAccess = new DataAccess();
             PersonDetail personDetail = dataAccess.retrievePersonDetail(personId).FirstOrDefault();
             return personDetail;
+        }
+
+        public static void loadFingerptintTemplates()
+        {
+            DataAccess dataAccess = new DataAccess();
+            persons = dataAccess.retrievePersonFingerprintTemplates();
+            Console.WriteLine("###-->> # of Fingerprints loaded = " + persons.Count);
         }
 
         [STAThread]
