@@ -417,6 +417,8 @@ namespace AFIS360
                         writer.WriteRow(columns);
                     }//end foreach
                 }
+                //set the status - exportcomplete
+                lblExportDataStatus.Text = "Export Complete.";
             }
             catch (Exception ex)
             {
