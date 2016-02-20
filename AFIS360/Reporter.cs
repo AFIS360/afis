@@ -538,6 +538,8 @@ namespace AFIS360
         public static void generateDuplicateFingerprintReport(User user, ICollection<KeyValuePair<String, MyPerson>> dupMatches)
         {
             Console.WriteLine("###-->> Current Thread = " + System.Threading.Thread.CurrentThread.Name);
+            //Paragraph Title Font
+            iTextSharp.text.Font paragraphTitleFont = FontFactory.GetFont("Arial", 16);
 
             Document doc = new Document(iTextSharp.text.PageSize.LETTER, 10, 10, 42, 35);
             string datetimePref = DateTime.Now.ToString("yyyy-MM-dd-HH-mm-ss");
@@ -549,9 +551,10 @@ namespace AFIS360
             doc.AddTitle("Duplicate Fingerprint Report");
             doc.AddHeader("Monthly Report", "Duplicate Fingerprint Report");
 
-            Paragraph paragraphCompanyInfo = new Paragraph("RAB (Rapid Action Battalion)\n");
-            paragraphCompanyInfo.Add("Station: " + user.getStationId() + ", " + user.getStationedCity() + "\n");
-            paragraphCompanyInfo.Add(user.getStationedCountry() + "\n");
+            Paragraph paragraphCompanyInfo = new Paragraph(AFISMain.clientSetup.LegalName + "\n", paragraphTitleFont);
+            paragraphCompanyInfo.Add(AFISMain.clientSetup.AddressLine + "\n");
+            paragraphCompanyInfo.Add(AFISMain.clientSetup.City + ", " + AFISMain.clientSetup.State + " " + AFISMain.clientSetup.PostalCode + "\n");
+            paragraphCompanyInfo.Add(AFISMain.clientSetup.Country + "\n");
             paragraphCompanyInfo.Alignment = Element.ALIGN_LEFT;
 
             iTextSharp.text.Font contentFont = iTextSharp.text.FontFactory.GetFont("Webdings", 20, iTextSharp.text.Font.BOLD);
