@@ -12,15 +12,14 @@ using System.Collections;
 using Wsqm;
 using System.Configuration;
 using System.Drawing.Imaging;
+using AFIS360.Scheduler;
+
 
 namespace AFIS360
 {
     class Program
     {
     
-        // Initialize path to images
-//        static readonly string ImagePath = Path.Combine(Path.Combine("..", ".."), "images");
-
         // Shared AfisEngine instance (cannot be shared between different threads though)
         static AfisEngine Afis;
 
@@ -183,9 +182,12 @@ namespace AFIS360
             {
                 DataAccess dataAccess = new DataAccess();
                 persons = dataAccess.retrievePersonFingerprintTemplates();
-            } 
+                Console.WriteLine("###-->> Loading persons from DB. Total persons = " + persons.Count());
+            } else
+            {
+                Console.WriteLine("###-->> Loading persons from Cache. Total persons = " + persons.Count());
+            }
 
-            Console.WriteLine("###-->> Loading persons from DB. Total persons = " + persons.Count());
 
             // Look up the probe using Threshold = 10
             Afis.Threshold = threshold;
@@ -228,9 +230,13 @@ namespace AFIS360
                 // Load all people fron database
                 DataAccess dataAccess = new DataAccess();
                 persons = dataAccess.retrievePersonFingerprintTemplates();
+                Console.WriteLine("###-->> Loading persons from DB. Total persons = " + persons.Count());
+            }
+            else
+            {
+                Console.WriteLine("###-->> Loading persons from Cache. Total persons = " + persons.Count());
             }
 
-            Console.WriteLine("###-->> Loading persons from DB. Total persons = " + persons.Count());
 
             // Look up the probe using Threshold = 10
             Afis.Threshold = threshold;
@@ -332,8 +338,12 @@ namespace AFIS360
                 // Load all people fron database
                 DataAccess dataAccess = new DataAccess();
                 persons = dataAccess.retrievePersonFingerprintTemplates();
+                Console.WriteLine("###-->> Loading persons from DB. Total persons = " + persons.Count());
             }
-            Console.WriteLine("###-->> Loading persons from DB. Total persons = " + persons.Count());
+            else
+            {
+                Console.WriteLine("###-->> Loading persons from Cache. Total persons = " + persons.Count());
+            }
 
             // Look up the probe using Threshold = 10
             Afis.Threshold = threshold;
@@ -415,6 +425,7 @@ namespace AFIS360
             Afis = new AfisEngine();
             AFISMain afis = new AFISMain();
             afis.ShowDialog();
+
         }// end Main
 
     }//end Program

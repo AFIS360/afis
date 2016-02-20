@@ -110,6 +110,7 @@
     <Compile Include="ExportData.Designer.cs">
       <DependentUpon>ExportData.cs</DependentUpon>
     </Compile>
+    <Compile Include="FingerprintTemplateLoaderJob.cs" />
     <Compile Include="ImportData.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -155,6 +156,8 @@
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
     <Compile Include="Reporter.cs" />
+    <Compile Include="Scheduler\Job.cs" />
+    <Compile Include="Scheduler\JobManager.cs" />
     <Compile Include="Status.cs" />
     <Compile Include="User.cs" />
     <Compile Include="UserPref.cs">
@@ -236,9 +239,9 @@
     <Folder Include="reports\" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\CsvFile\CsvFileTest.csproj">
+    <ProjectReference Include="..\..\CsvFile\CsvFile.csproj">
       <Project>{7fe06d88-b5a6-4249-9d6a-ed2862848173}</Project>
-      <Name>CsvFileTest</Name>
+      <Name>CsvFile</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\WSQ\Wsqm.csproj">
       <Project>{9a7f3e52-8783-433b-9af2-536e1d0ee50c}</Project>

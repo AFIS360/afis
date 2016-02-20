@@ -7,7 +7,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AFIS360", "AFIS360\AFIS360.
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Wsqm", "..\WSQ\Wsqm.csproj", "{9A7F3E52-8783-433B-9AF2-536E1D0EE50C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CsvFileTest", "..\CsvFile\CsvFileTest.csproj", "{7FE06D88-B5A6-4249-9D6A-ED2862848173}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CsvFile", "..\CsvFile\CsvFile.csproj", "{7FE06D88-B5A6-4249-9D6A-ED2862848173}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

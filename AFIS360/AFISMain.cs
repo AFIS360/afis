@@ -15,6 +15,7 @@ using System.Configuration;
 using System.Text.RegularExpressions;
 using System.Threading;
 using CsvFile;
+using AFIS360.Scheduler;
 
 namespace AFIS360
 {
@@ -26,6 +27,7 @@ namespace AFIS360
         public static ActivityLog activityLog = null;
         public static AppConfig appConfig = null;
         public static ClientSetup clientSetup = null;
+        public static JobManager jobManager = null;
 
         public AFISMain()
         {
@@ -1484,7 +1486,11 @@ namespace AFIS360
             loadClientSetup();
 
             //load the all fingerprint templates from the Database
-            Program.loadFingerptintTemplates();
+//            Program.loadFingerptintTemplates();
+
+            //Start Scheduler to load fingerprints on an interval
+            jobManager = new JobManager();
+            jobManager.ExecuteAllJobs();
         }
 
         private void loadAccessControls()
@@ -1515,6 +1521,9 @@ namespace AFIS360
                 Status status = dataAccess.updateUserAuditLog(user, DateTime.Now, 0, activityLog);
                 Console.WriteLine("####-->> Status code = " + status.getStatusCode());
             }
+
+            //Stop the loading of the Fingerprint templates
+            jobManager.KillAllJobs();
         }
 
 
