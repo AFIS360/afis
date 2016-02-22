@@ -298,8 +298,9 @@
             this.tlpClientSetupStatusMsg = new System.Windows.Forms.TableLayoutPanel();
             this.lblClientSetupStatusMsg = new System.Windows.Forms.Label();
             this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
-            this.btnClientSetupClear = new System.Windows.Forms.Button();
+            this.btnClientSetupUpdate = new System.Windows.Forms.Button();
             this.btnClientSetupSave = new System.Windows.Forms.Button();
+            this.btnClientSetupClear = new System.Windows.Forms.Button();
             this.tlpClientSetupDemography = new System.Windows.Forms.TableLayoutPanel();
             this.lblClientSetupCountry = new System.Windows.Forms.Label();
             this.txtBoxClientSetupLegalName = new System.Windows.Forms.TextBox();
@@ -333,6 +334,9 @@
             this.lblTimer = new System.Windows.Forms.Label();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.timer1 = new System.Windows.Forms.Timer(this.components);
+            this.tlpClientSetupDataRefresh = new System.Windows.Forms.TableLayoutPanel();
+            this.lblClientSetupDataRefreshInterval = new System.Windows.Forms.Label();
+            this.txtBoxClientSetupDataRefresh = new System.Windows.Forms.TextBox();
             this.tabControlAFIS.SuspendLayout();
             this.tabLogin.SuspendLayout();
             this.tplFooter.SuspendLayout();
@@ -396,6 +400,7 @@
             this.tableLayoutPanel3.SuspendLayout();
             this.tlpClientSetupDemography.SuspendLayout();
             this.menuStrip.SuspendLayout();
+            this.tlpClientSetupDataRefresh.SuspendLayout();
             this.SuspendLayout();
             // 
             // tabControlAFIS
@@ -441,7 +446,7 @@
             this.tplFooter.ColumnCount = 3;
             this.tplFooter.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 37.47017F));
             this.tplFooter.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 62.52983F));
-            this.tplFooter.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 699F));
+            this.tplFooter.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 711F));
             this.tplFooter.Controls.Add(this.lblFooterSoftware, 0, 0);
             this.tplFooter.Controls.Add(this.lblFooterCopyright, 1, 0);
             this.tplFooter.Controls.Add(this.tlpFooterContact, 2, 0);
@@ -457,7 +462,7 @@
             // 
             this.lblFooterSoftware.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.lblFooterSoftware.AutoSize = true;
-            this.lblFooterSoftware.Location = new System.Drawing.Point(24, 18);
+            this.lblFooterSoftware.Location = new System.Drawing.Point(22, 18);
             this.lblFooterSoftware.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
             this.lblFooterSoftware.Name = "lblFooterSoftware";
             this.lblFooterSoftware.Size = new System.Drawing.Size(136, 31);
@@ -468,7 +473,7 @@
             // 
             this.lblFooterCopyright.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.lblFooterCopyright.AutoSize = true;
-            this.lblFooterCopyright.Location = new System.Drawing.Point(196, 2);
+            this.lblFooterCopyright.Location = new System.Drawing.Point(188, 2);
             this.lblFooterCopyright.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
             this.lblFooterCopyright.Name = "lblFooterCopyright";
             this.lblFooterCopyright.Size = new System.Drawing.Size(280, 62);
@@ -481,7 +486,7 @@
             this.tlpFooterContact.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.tlpFooterContact.Controls.Add(this.lblFooterAddress, 0, 0);
             this.tlpFooterContact.Controls.Add(this.lnklblFooterLKT, 0, 1);
-            this.tlpFooterContact.Location = new System.Drawing.Point(496, 8);
+            this.tlpFooterContact.Location = new System.Drawing.Point(484, 8);
             this.tlpFooterContact.Margin = new System.Windows.Forms.Padding(6);
             this.tlpFooterContact.Name = "tlpFooterContact";
             this.tlpFooterContact.RowCount = 2;
@@ -788,7 +793,7 @@
             this.tlpEnrollFingerprints.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 49.53887F));
             this.tlpEnrollFingerprints.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 357F));
             this.tlpEnrollFingerprints.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 364F));
-            this.tlpEnrollFingerprints.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 355F));
+            this.tlpEnrollFingerprints.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 363F));
             this.tlpEnrollFingerprints.Controls.Add(this.FpRT, 0, 0);
             this.tlpEnrollFingerprints.Controls.Add(this.picEnrollRT, 0, 1);
             this.tlpEnrollFingerprints.Controls.Add(this.lblFpRI, 1, 0);
@@ -825,7 +830,7 @@
             this.FpRT.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.FpRT.AutoSize = true;
             this.FpRT.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.FpRT.Location = new System.Drawing.Point(156, 2);
+            this.FpRT.Location = new System.Drawing.Point(154, 2);
             this.FpRT.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
             this.FpRT.Name = "FpRT";
             this.FpRT.Size = new System.Drawing.Size(50, 30);
@@ -836,7 +841,7 @@
             // 
             this.picEnrollRT.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.picEnrollRT.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.picEnrollRT.Location = new System.Drawing.Point(49, 48);
+            this.picEnrollRT.Location = new System.Drawing.Point(47, 48);
             this.picEnrollRT.Margin = new System.Windows.Forms.Padding(6);
             this.picEnrollRT.Name = "picEnrollRT";
             this.picEnrollRT.Size = new System.Drawing.Size(264, 206);
@@ -851,7 +856,7 @@
             this.lblFpRI.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.lblFpRI.AutoSize = true;
             this.lblFpRI.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblFpRI.Location = new System.Drawing.Point(520, 2);
+            this.lblFpRI.Location = new System.Drawing.Point(514, 2);
             this.lblFpRI.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
             this.lblFpRI.Name = "lblFpRI";
             this.lblFpRI.Size = new System.Drawing.Size(40, 30);
@@ -862,7 +867,7 @@
             // 
             this.picEnrollRI.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.picEnrollRI.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.picEnrollRI.Location = new System.Drawing.Point(408, 48);
+            this.picEnrollRI.Location = new System.Drawing.Point(402, 48);
             this.picEnrollRI.Margin = new System.Windows.Forms.Padding(6);
             this.picEnrollRI.Name = "picEnrollRI";
             this.picEnrollRI.Size = new System.Drawing.Size(264, 206);
@@ -877,7 +882,7 @@
             this.lblFpRM.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.lblFpRM.AutoSize = true;
             this.lblFpRM.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblFpRM.Location = new System.Drawing.Point(868, 2);
+            this.lblFpRM.Location = new System.Drawing.Point(860, 2);
             this.lblFpRM.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
             this.lblFpRM.Name = "lblFpRM";
             this.lblFpRM.Size = new System.Drawing.Size(56, 30);
@@ -888,7 +893,7 @@
             // 
             this.picEnrollRM.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.picEnrollRM.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.picEnrollRM.Location = new System.Drawing.Point(764, 48);
+            this.picEnrollRM.Location = new System.Drawing.Point(756, 48);
             this.picEnrollRM.Margin = new System.Windows.Forms.Padding(6);
             this.picEnrollRM.Name = "picEnrollRM";
             this.picEnrollRM.Size = new System.Drawing.Size(264, 206);
@@ -903,7 +908,7 @@
             this.lblFpRR.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.lblFpRR.AutoSize = true;
             this.lblFpRR.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblFpRR.Location = new System.Drawing.Point(1231, 2);
+            this.lblFpRR.Location = new System.Drawing.Point(1223, 2);
             this.lblFpRR.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
             this.lblFpRR.Name = "lblFpRR";
             this.lblFpRR.Size = new System.Drawing.Size(53, 30);
@@ -914,7 +919,7 @@
             // 
             this.picEnrollRR.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.picEnrollRR.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.picEnrollRR.Location = new System.Drawing.Point(1126, 48);
+            this.picEnrollRR.Location = new System.Drawing.Point(1118, 48);
             this.picEnrollRR.Margin = new System.Windows.Forms.Padding(6);
             this.picEnrollRR.Name = "picEnrollRR";
             this.picEnrollRR.Size = new System.Drawing.Size(264, 206);
@@ -929,7 +934,7 @@
             this.lblFpRL.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.lblFpRL.AutoSize = true;
             this.lblFpRL.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblFpRL.Location = new System.Drawing.Point(1595, 2);
+            this.lblFpRL.Location = new System.Drawing.Point(1591, 2);
             this.lblFpRL.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
             this.lblFpRL.Name = "lblFpRL";
             this.lblFpRL.Size = new System.Drawing.Size(48, 30);
@@ -940,7 +945,7 @@
             // 
             this.picEnrollLL.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.picEnrollLL.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.picEnrollLL.Location = new System.Drawing.Point(1487, 328);
+            this.picEnrollLL.Location = new System.Drawing.Point(1483, 328);
             this.picEnrollLL.Margin = new System.Windows.Forms.Padding(6);
             this.picEnrollLL.Name = "picEnrollLL";
             this.picEnrollLL.Size = new System.Drawing.Size(264, 202);
@@ -954,7 +959,7 @@
             // 
             this.picEnrollRL.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.picEnrollRL.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.picEnrollRL.Location = new System.Drawing.Point(1487, 48);
+            this.picEnrollRL.Location = new System.Drawing.Point(1483, 48);
             this.picEnrollRL.Margin = new System.Windows.Forms.Padding(6);
             this.picEnrollRL.Name = "picEnrollRL";
             this.picEnrollRL.Size = new System.Drawing.Size(264, 206);
@@ -968,7 +973,7 @@
             // 
             this.picEnrollLR.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.picEnrollLR.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.picEnrollLR.Location = new System.Drawing.Point(1126, 328);
+            this.picEnrollLR.Location = new System.Drawing.Point(1118, 328);
             this.picEnrollLR.Margin = new System.Windows.Forms.Padding(6);
             this.picEnrollLR.Name = "picEnrollLR";
             this.picEnrollLR.Size = new System.Drawing.Size(264, 202);
@@ -983,7 +988,7 @@
             this.lblLL.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.lblLL.AutoSize = true;
             this.lblLL.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblLL.Location = new System.Drawing.Point(1597, 271);
+            this.lblLL.Location = new System.Drawing.Point(1593, 271);
             this.lblLL.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
             this.lblLL.Name = "lblLL";
             this.lblLL.Size = new System.Drawing.Size(43, 30);
@@ -994,7 +999,7 @@
             // 
             this.picEnrollLM.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.picEnrollLM.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.picEnrollLM.Location = new System.Drawing.Point(764, 328);
+            this.picEnrollLM.Location = new System.Drawing.Point(756, 328);
             this.picEnrollLM.Margin = new System.Windows.Forms.Padding(6);
             this.picEnrollLM.Name = "picEnrollLM";
             this.picEnrollLM.Size = new System.Drawing.Size(264, 202);
@@ -1009,7 +1014,7 @@
             this.lblFpLT.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.lblFpLT.AutoSize = true;
             this.lblFpLT.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblFpLT.Location = new System.Drawing.Point(159, 271);
+            this.lblFpLT.Location = new System.Drawing.Point(157, 271);
             this.lblFpLT.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
             this.lblFpLT.Name = "lblFpLT";
             this.lblFpLT.Size = new System.Drawing.Size(45, 30);
@@ -1020,7 +1025,7 @@
             // 
             this.picEnrollLI.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.picEnrollLI.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.picEnrollLI.Location = new System.Drawing.Point(408, 328);
+            this.picEnrollLI.Location = new System.Drawing.Point(402, 328);
             this.picEnrollLI.Margin = new System.Windows.Forms.Padding(6);
             this.picEnrollLI.Name = "picEnrollLI";
             this.picEnrollLI.Size = new System.Drawing.Size(264, 202);
@@ -1035,7 +1040,7 @@
             this.lblFpLI.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.lblFpLI.AutoSize = true;
             this.lblFpLI.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblFpLI.Location = new System.Drawing.Point(522, 271);
+            this.lblFpLI.Location = new System.Drawing.Point(516, 271);
             this.lblFpLI.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
             this.lblFpLI.Name = "lblFpLI";
             this.lblFpLI.Size = new System.Drawing.Size(35, 30);
@@ -1046,7 +1051,7 @@
             // 
             this.picEnrollLT.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.picEnrollLT.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.picEnrollLT.Location = new System.Drawing.Point(49, 328);
+            this.picEnrollLT.Location = new System.Drawing.Point(47, 328);
             this.picEnrollLT.Margin = new System.Windows.Forms.Padding(6);
             this.picEnrollLT.Name = "picEnrollLT";
             this.picEnrollLT.Size = new System.Drawing.Size(264, 202);
@@ -1061,7 +1066,7 @@
             this.lblFpLM.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.lblFpLM.AutoSize = true;
             this.lblFpLM.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblFpLM.Location = new System.Drawing.Point(871, 271);
+            this.lblFpLM.Location = new System.Drawing.Point(863, 271);
             this.lblFpLM.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
             this.lblFpLM.Name = "lblFpLM";
             this.lblFpLM.Size = new System.Drawing.Size(51, 30);
@@ -1073,7 +1078,7 @@
             this.lblLR.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.lblLR.AutoSize = true;
             this.lblLR.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblLR.Location = new System.Drawing.Point(1234, 271);
+            this.lblLR.Location = new System.Drawing.Point(1226, 271);
             this.lblLR.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
             this.lblLR.Name = "lblLR";
             this.lblLR.Size = new System.Drawing.Size(48, 30);
@@ -1088,7 +1093,7 @@
             this.tlpEnrollDemographicInfo.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 206F));
             this.tlpEnrollDemographicInfo.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 422F));
             this.tlpEnrollDemographicInfo.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 202F));
-            this.tlpEnrollDemographicInfo.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 376F));
+            this.tlpEnrollDemographicInfo.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 380F));
             this.tlpEnrollDemographicInfo.Controls.Add(this.lblId, 0, 0);
             this.tlpEnrollDemographicInfo.Controls.Add(this.lblEnrollFName, 0, 1);
             this.tlpEnrollDemographicInfo.Controls.Add(this.txtEnrollId, 1, 0);
@@ -1166,7 +1171,7 @@
             // 
             this.txtEnrollId.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.txtEnrollId.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtEnrollId.Location = new System.Drawing.Point(211, 10);
+            this.txtEnrollId.Location = new System.Drawing.Point(209, 10);
             this.txtEnrollId.Margin = new System.Windows.Forms.Padding(6);
             this.txtEnrollId.Name = "txtEnrollId";
             this.txtEnrollId.Size = new System.Drawing.Size(350, 37);
@@ -1178,7 +1183,7 @@
             this.dtpEnrollDOB.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.dtpEnrollDOB.CalendarFont = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.dtpEnrollDOB.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.dtpEnrollDOB.Location = new System.Drawing.Point(803, 335);
+            this.dtpEnrollDOB.Location = new System.Drawing.Point(799, 335);
             this.dtpEnrollDOB.Margin = new System.Windows.Forms.Padding(6);
             this.dtpEnrollDOB.Name = "dtpEnrollDOB";
             this.dtpEnrollDOB.Size = new System.Drawing.Size(410, 32);
@@ -1188,7 +1193,7 @@
             // 
             this.txtEnrollFName.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.txtEnrollFName.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtEnrollFName.Location = new System.Drawing.Point(211, 72);
+            this.txtEnrollFName.Location = new System.Drawing.Point(209, 72);
             this.txtEnrollFName.Margin = new System.Windows.Forms.Padding(6);
             this.txtEnrollFName.Name = "txtEnrollFName";
             this.txtEnrollFName.Size = new System.Drawing.Size(350, 37);
@@ -1199,7 +1204,7 @@
             this.lblEnrollDOB.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.lblEnrollDOB.AutoSize = true;
             this.lblEnrollDOB.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblEnrollDOB.Location = new System.Drawing.Point(597, 336);
+            this.lblEnrollDOB.Location = new System.Drawing.Point(593, 336);
             this.lblEnrollDOB.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
             this.lblEnrollDOB.Name = "lblEnrollDOB";
             this.lblEnrollDOB.Size = new System.Drawing.Size(76, 30);
@@ -1234,7 +1239,7 @@
             // 
             this.txtEnrollLName.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.txtEnrollLName.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtEnrollLName.Location = new System.Drawing.Point(211, 140);
+            this.txtEnrollLName.Location = new System.Drawing.Point(209, 140);
             this.txtEnrollLName.Margin = new System.Windows.Forms.Padding(6);
             this.txtEnrollLName.Name = "txtEnrollLName";
             this.txtEnrollLName.Size = new System.Drawing.Size(350, 37);
@@ -1244,7 +1249,7 @@
             // 
             this.txtEnrollMName.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.txtEnrollMName.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtEnrollMName.Location = new System.Drawing.Point(211, 201);
+            this.txtEnrollMName.Location = new System.Drawing.Point(209, 201);
             this.txtEnrollMName.Margin = new System.Windows.Forms.Padding(6);
             this.txtEnrollMName.Name = "txtEnrollMName";
             this.txtEnrollMName.Size = new System.Drawing.Size(350, 37);
@@ -1266,7 +1271,7 @@
             // 
             this.txtEnrollPrefix.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.txtEnrollPrefix.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtEnrollPrefix.Location = new System.Drawing.Point(211, 262);
+            this.txtEnrollPrefix.Location = new System.Drawing.Point(209, 262);
             this.txtEnrollPrefix.Margin = new System.Windows.Forms.Padding(6);
             this.txtEnrollPrefix.Name = "txtEnrollPrefix";
             this.txtEnrollPrefix.Size = new System.Drawing.Size(350, 37);
@@ -1276,7 +1281,7 @@
             // 
             this.txtEnrollHomePNbr.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.txtEnrollHomePNbr.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtEnrollHomePNbr.Location = new System.Drawing.Point(1427, 72);
+            this.txtEnrollHomePNbr.Location = new System.Drawing.Point(1423, 72);
             this.txtEnrollHomePNbr.Margin = new System.Windows.Forms.Padding(6);
             this.txtEnrollHomePNbr.Name = "txtEnrollHomePNbr";
             this.txtEnrollHomePNbr.Size = new System.Drawing.Size(358, 37);
@@ -1298,7 +1303,7 @@
             // 
             this.txtEnrollSuffix.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.txtEnrollSuffix.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtEnrollSuffix.Location = new System.Drawing.Point(211, 332);
+            this.txtEnrollSuffix.Location = new System.Drawing.Point(209, 332);
             this.txtEnrollSuffix.Margin = new System.Windows.Forms.Padding(6);
             this.txtEnrollSuffix.Name = "txtEnrollSuffix";
             this.txtEnrollSuffix.Size = new System.Drawing.Size(350, 37);
@@ -1308,7 +1313,7 @@
             // 
             this.txtEnrollEmail.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.txtEnrollEmail.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtEnrollEmail.Location = new System.Drawing.Point(1427, 201);
+            this.txtEnrollEmail.Location = new System.Drawing.Point(1423, 201);
             this.txtEnrollEmail.Margin = new System.Windows.Forms.Padding(6);
             this.txtEnrollEmail.Name = "txtEnrollEmail";
             this.txtEnrollEmail.Size = new System.Drawing.Size(358, 37);
@@ -1318,7 +1323,7 @@
             // 
             this.txtEnrollFatherName.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.txtEnrollFatherName.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtEnrollFatherName.Location = new System.Drawing.Point(1427, 332);
+            this.txtEnrollFatherName.Location = new System.Drawing.Point(1423, 332);
             this.txtEnrollFatherName.Margin = new System.Windows.Forms.Padding(6);
             this.txtEnrollFatherName.Name = "txtEnrollFatherName";
             this.txtEnrollFatherName.Size = new System.Drawing.Size(358, 37);
@@ -1329,7 +1334,7 @@
             this.lblEnrollAddrLine.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.lblEnrollAddrLine.AutoSize = true;
             this.lblEnrollAddrLine.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblEnrollAddrLine.Location = new System.Drawing.Point(597, 14);
+            this.lblEnrollAddrLine.Location = new System.Drawing.Point(593, 14);
             this.lblEnrollAddrLine.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
             this.lblEnrollAddrLine.Name = "lblEnrollAddrLine";
             this.lblEnrollAddrLine.Size = new System.Drawing.Size(169, 30);
@@ -1340,7 +1345,7 @@
             // 
             this.txtEnrollAddrLine.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.txtEnrollAddrLine.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtEnrollAddrLine.Location = new System.Drawing.Point(803, 10);
+            this.txtEnrollAddrLine.Location = new System.Drawing.Point(799, 10);
             this.txtEnrollAddrLine.Margin = new System.Windows.Forms.Padding(6);
             this.txtEnrollAddrLine.Name = "txtEnrollAddrLine";
             this.txtEnrollAddrLine.Size = new System.Drawing.Size(386, 37);
@@ -1351,7 +1356,7 @@
             this.lblEnrollFatherName.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.lblEnrollFatherName.AutoSize = true;
             this.lblEnrollFatherName.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblEnrollFatherName.Location = new System.Drawing.Point(1225, 336);
+            this.lblEnrollFatherName.Location = new System.Drawing.Point(1221, 336);
             this.lblEnrollFatherName.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
             this.lblEnrollFatherName.Name = "lblEnrollFatherName";
             this.lblEnrollFatherName.Size = new System.Drawing.Size(188, 30);
@@ -1363,7 +1368,7 @@
             this.lblEnrollAddrCity.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.lblEnrollAddrCity.AutoSize = true;
             this.lblEnrollAddrCity.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblEnrollAddrCity.Location = new System.Drawing.Point(597, 76);
+            this.lblEnrollAddrCity.Location = new System.Drawing.Point(593, 76);
             this.lblEnrollAddrCity.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
             this.lblEnrollAddrCity.Name = "lblEnrollAddrCity";
             this.lblEnrollAddrCity.Size = new System.Drawing.Size(65, 30);
@@ -1375,7 +1380,7 @@
             this.lblEnrollHomePNbr.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.lblEnrollHomePNbr.AutoSize = true;
             this.lblEnrollHomePNbr.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblEnrollHomePNbr.Location = new System.Drawing.Point(1225, 76);
+            this.lblEnrollHomePNbr.Location = new System.Drawing.Point(1221, 76);
             this.lblEnrollHomePNbr.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
             this.lblEnrollHomePNbr.Name = "lblEnrollHomePNbr";
             this.lblEnrollHomePNbr.Size = new System.Drawing.Size(138, 30);
@@ -1387,7 +1392,7 @@
             this.lblEnrollState.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.lblEnrollState.AutoSize = true;
             this.lblEnrollState.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblEnrollState.Location = new System.Drawing.Point(597, 143);
+            this.lblEnrollState.Location = new System.Drawing.Point(593, 143);
             this.lblEnrollState.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
             this.lblEnrollState.Name = "lblEnrollState";
             this.lblEnrollState.Size = new System.Drawing.Size(186, 30);
@@ -1399,7 +1404,7 @@
             this.lblEnrollEmailAddr.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.lblEnrollEmailAddr.AutoSize = true;
             this.lblEnrollEmailAddr.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblEnrollEmailAddr.Location = new System.Drawing.Point(1225, 205);
+            this.lblEnrollEmailAddr.Location = new System.Drawing.Point(1221, 205);
             this.lblEnrollEmailAddr.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
             this.lblEnrollEmailAddr.Name = "lblEnrollEmailAddr";
             this.lblEnrollEmailAddr.Size = new System.Drawing.Size(94, 30);
@@ -1410,7 +1415,7 @@
             // 
             this.txtEnrollState.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.txtEnrollState.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtEnrollState.Location = new System.Drawing.Point(803, 140);
+            this.txtEnrollState.Location = new System.Drawing.Point(799, 140);
             this.txtEnrollState.Margin = new System.Windows.Forms.Padding(6);
             this.txtEnrollState.Name = "txtEnrollState";
             this.txtEnrollState.Size = new System.Drawing.Size(386, 37);
@@ -1421,7 +1426,7 @@
             this.lblEnrollPostalCode.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.lblEnrollPostalCode.AutoSize = true;
             this.lblEnrollPostalCode.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblEnrollPostalCode.Location = new System.Drawing.Point(597, 205);
+            this.lblEnrollPostalCode.Location = new System.Drawing.Point(593, 205);
             this.lblEnrollPostalCode.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
             this.lblEnrollPostalCode.Name = "lblEnrollPostalCode";
             this.lblEnrollPostalCode.Size = new System.Drawing.Size(159, 30);
@@ -1432,7 +1437,7 @@
             // 
             this.txtEnrollCellNbr.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.txtEnrollCellNbr.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtEnrollCellNbr.Location = new System.Drawing.Point(1427, 10);
+            this.txtEnrollCellNbr.Location = new System.Drawing.Point(1423, 10);
             this.txtEnrollCellNbr.Margin = new System.Windows.Forms.Padding(6);
             this.txtEnrollCellNbr.Name = "txtEnrollCellNbr";
             this.txtEnrollCellNbr.Size = new System.Drawing.Size(358, 37);
@@ -1443,7 +1448,7 @@
             this.lblEnrollCountry.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.lblEnrollCountry.AutoSize = true;
             this.lblEnrollCountry.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblEnrollCountry.Location = new System.Drawing.Point(597, 265);
+            this.lblEnrollCountry.Location = new System.Drawing.Point(593, 265);
             this.lblEnrollCountry.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
             this.lblEnrollCountry.Name = "lblEnrollCountry";
             this.lblEnrollCountry.Size = new System.Drawing.Size(110, 30);
@@ -1454,7 +1459,7 @@
             // 
             this.txtEnrollWorkPNbr.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.txtEnrollWorkPNbr.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtEnrollWorkPNbr.Location = new System.Drawing.Point(1427, 140);
+            this.txtEnrollWorkPNbr.Location = new System.Drawing.Point(1423, 140);
             this.txtEnrollWorkPNbr.Margin = new System.Windows.Forms.Padding(6);
             this.txtEnrollWorkPNbr.Name = "txtEnrollWorkPNbr";
             this.txtEnrollWorkPNbr.Size = new System.Drawing.Size(358, 37);
@@ -1464,7 +1469,7 @@
             // 
             this.txtEnrollCountry.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.txtEnrollCountry.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtEnrollCountry.Location = new System.Drawing.Point(803, 262);
+            this.txtEnrollCountry.Location = new System.Drawing.Point(799, 262);
             this.txtEnrollCountry.Margin = new System.Windows.Forms.Padding(6);
             this.txtEnrollCountry.Name = "txtEnrollCountry";
             this.txtEnrollCountry.Size = new System.Drawing.Size(386, 37);
@@ -1475,7 +1480,7 @@
             this.lblEnrollCellNbr.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.lblEnrollCellNbr.AutoSize = true;
             this.lblEnrollCellNbr.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblEnrollCellNbr.Location = new System.Drawing.Point(1225, 14);
+            this.lblEnrollCellNbr.Location = new System.Drawing.Point(1221, 14);
             this.lblEnrollCellNbr.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
             this.lblEnrollCellNbr.Name = "lblEnrollCellNbr";
             this.lblEnrollCellNbr.Size = new System.Drawing.Size(114, 30);
@@ -1487,7 +1492,7 @@
             this.lblEnrollWorkPNbr.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.lblEnrollWorkPNbr.AutoSize = true;
             this.lblEnrollWorkPNbr.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblEnrollWorkPNbr.Location = new System.Drawing.Point(1225, 143);
+            this.lblEnrollWorkPNbr.Location = new System.Drawing.Point(1221, 143);
             this.lblEnrollWorkPNbr.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
             this.lblEnrollWorkPNbr.Name = "lblEnrollWorkPNbr";
             this.lblEnrollWorkPNbr.Size = new System.Drawing.Size(130, 30);
@@ -1499,7 +1504,7 @@
             this.lblEnrollProfession.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.lblEnrollProfession.AutoSize = true;
             this.lblEnrollProfession.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblEnrollProfession.Location = new System.Drawing.Point(1225, 265);
+            this.lblEnrollProfession.Location = new System.Drawing.Point(1221, 265);
             this.lblEnrollProfession.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
             this.lblEnrollProfession.Name = "lblEnrollProfession";
             this.lblEnrollProfession.Size = new System.Drawing.Size(141, 30);
@@ -1510,7 +1515,7 @@
             // 
             this.txtEnrollProfession.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.txtEnrollProfession.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtEnrollProfession.Location = new System.Drawing.Point(1427, 262);
+            this.txtEnrollProfession.Location = new System.Drawing.Point(1423, 262);
             this.txtEnrollProfession.Margin = new System.Windows.Forms.Padding(6);
             this.txtEnrollProfession.Name = "txtEnrollProfession";
             this.txtEnrollProfession.Size = new System.Drawing.Size(358, 37);
@@ -1520,7 +1525,7 @@
             // 
             this.txtEnrollPostalCode.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.txtEnrollPostalCode.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtEnrollPostalCode.Location = new System.Drawing.Point(803, 201);
+            this.txtEnrollPostalCode.Location = new System.Drawing.Point(799, 201);
             this.txtEnrollPostalCode.Margin = new System.Windows.Forms.Padding(6);
             this.txtEnrollPostalCode.Name = "txtEnrollPostalCode";
             this.txtEnrollPostalCode.Size = new System.Drawing.Size(386, 37);
@@ -1530,7 +1535,7 @@
             // 
             this.txtEnrollCity.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.txtEnrollCity.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtEnrollCity.Location = new System.Drawing.Point(803, 72);
+            this.txtEnrollCity.Location = new System.Drawing.Point(799, 72);
             this.txtEnrollCity.Margin = new System.Windows.Forms.Padding(6);
             this.txtEnrollCity.Name = "txtEnrollCity";
             this.txtEnrollCity.Size = new System.Drawing.Size(386, 37);
@@ -1740,7 +1745,7 @@
             this.tplMatchFingerprints.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 48.88889F));
             this.tplMatchFingerprints.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 294F));
             this.tplMatchFingerprints.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 305F));
-            this.tplMatchFingerprints.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 334F));
+            this.tplMatchFingerprints.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 342F));
             this.tplMatchFingerprints.Controls.Add(this.lblMatchFpRT, 0, 0);
             this.tplMatchFingerprints.Controls.Add(this.picMatchRT, 0, 1);
             this.tplMatchFingerprints.Controls.Add(this.lblMatchFpRI, 1, 0);
@@ -1777,7 +1782,7 @@
             this.lblMatchFpRT.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.lblMatchFpRT.AutoSize = true;
             this.lblMatchFpRT.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblMatchFpRT.Location = new System.Drawing.Point(119, 12);
+            this.lblMatchFpRT.Location = new System.Drawing.Point(117, 12);
             this.lblMatchFpRT.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
             this.lblMatchFpRT.Name = "lblMatchFpRT";
             this.lblMatchFpRT.Size = new System.Drawing.Size(50, 30);
@@ -1788,7 +1793,7 @@
             // 
             this.picMatchRT.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.picMatchRT.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.picMatchRT.Location = new System.Drawing.Point(11, 66);
+            this.picMatchRT.Location = new System.Drawing.Point(9, 66);
             this.picMatchRT.Margin = new System.Windows.Forms.Padding(6);
             this.picMatchRT.Name = "picMatchRT";
             this.picMatchRT.Size = new System.Drawing.Size(266, 190);
@@ -1800,7 +1805,7 @@
             this.lblMatchFpRI.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.lblMatchFpRI.AutoSize = true;
             this.lblMatchFpRI.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblMatchFpRI.Location = new System.Drawing.Point(406, 12);
+            this.lblMatchFpRI.Location = new System.Drawing.Point(400, 12);
             this.lblMatchFpRI.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
             this.lblMatchFpRI.Name = "lblMatchFpRI";
             this.lblMatchFpRI.Size = new System.Drawing.Size(40, 30);
@@ -1811,7 +1816,7 @@
             // 
             this.picMatchRI.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.picMatchRI.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.picMatchRI.Location = new System.Drawing.Point(301, 66);
+            this.picMatchRI.Location = new System.Drawing.Point(295, 66);
             this.picMatchRI.Margin = new System.Windows.Forms.Padding(6);
             this.picMatchRI.Name = "picMatchRI";
             this.picMatchRI.Size = new System.Drawing.Size(250, 190);
@@ -1823,7 +1828,7 @@
             this.lblMatchFpRM.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.lblMatchFpRM.AutoSize = true;
             this.lblMatchFpRM.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblMatchFpRM.Location = new System.Drawing.Point(684, 12);
+            this.lblMatchFpRM.Location = new System.Drawing.Point(676, 12);
             this.lblMatchFpRM.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
             this.lblMatchFpRM.Name = "lblMatchFpRM";
             this.lblMatchFpRM.Size = new System.Drawing.Size(56, 30);
@@ -1834,7 +1839,7 @@
             // 
             this.picMatchRM.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.picMatchRM.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.picMatchRM.Location = new System.Drawing.Point(582, 66);
+            this.picMatchRM.Location = new System.Drawing.Point(574, 66);
             this.picMatchRM.Margin = new System.Windows.Forms.Padding(6);
             this.picMatchRM.Name = "picMatchRM";
             this.picMatchRM.Size = new System.Drawing.Size(260, 190);
@@ -1846,7 +1851,7 @@
             this.lblMatchFpRR.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.lblMatchFpRR.AutoSize = true;
             this.lblMatchFpRR.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblMatchFpRR.Location = new System.Drawing.Point(986, 12);
+            this.lblMatchFpRR.Location = new System.Drawing.Point(978, 12);
             this.lblMatchFpRR.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
             this.lblMatchFpRR.Name = "lblMatchFpRR";
             this.lblMatchFpRR.Size = new System.Drawing.Size(53, 30);
@@ -1857,7 +1862,7 @@
             // 
             this.picMatchRR.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.picMatchRR.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.picMatchRR.Location = new System.Drawing.Point(880, 66);
+            this.picMatchRR.Location = new System.Drawing.Point(872, 66);
             this.picMatchRR.Margin = new System.Windows.Forms.Padding(6);
             this.picMatchRR.Name = "picMatchRR";
             this.picMatchRR.Size = new System.Drawing.Size(264, 190);
@@ -1869,7 +1874,7 @@
             this.lblMatchFpRL.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.lblMatchFpRL.AutoSize = true;
             this.lblMatchFpRL.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblMatchFpRL.Location = new System.Drawing.Point(1309, 12);
+            this.lblMatchFpRL.Location = new System.Drawing.Point(1305, 12);
             this.lblMatchFpRL.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
             this.lblMatchFpRL.Name = "lblMatchFpRL";
             this.lblMatchFpRL.Size = new System.Drawing.Size(48, 30);
@@ -1880,7 +1885,7 @@
             // 
             this.picMatchRL.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.picMatchRL.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.picMatchRL.Location = new System.Drawing.Point(1201, 66);
+            this.picMatchRL.Location = new System.Drawing.Point(1197, 66);
             this.picMatchRL.Margin = new System.Windows.Forms.Padding(6);
             this.picMatchRL.Name = "picMatchRL";
             this.picMatchRL.Size = new System.Drawing.Size(264, 190);
@@ -1892,7 +1897,7 @@
             this.lblMatchFpLT.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.lblMatchFpLT.AutoSize = true;
             this.lblMatchFpLT.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblMatchFpLT.Location = new System.Drawing.Point(122, 276);
+            this.lblMatchFpLT.Location = new System.Drawing.Point(120, 276);
             this.lblMatchFpLT.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
             this.lblMatchFpLT.Name = "lblMatchFpLT";
             this.lblMatchFpLT.Size = new System.Drawing.Size(45, 30);
@@ -1903,7 +1908,7 @@
             // 
             this.picMatchLL.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.picMatchLL.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.picMatchLL.Location = new System.Drawing.Point(1201, 333);
+            this.picMatchLL.Location = new System.Drawing.Point(1197, 333);
             this.picMatchLL.Margin = new System.Windows.Forms.Padding(6);
             this.picMatchLL.Name = "picMatchLL";
             this.picMatchLL.Size = new System.Drawing.Size(264, 190);
@@ -1915,7 +1920,7 @@
             this.lblMatchFpLI.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.lblMatchFpLI.AutoSize = true;
             this.lblMatchFpLI.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblMatchFpLI.Location = new System.Drawing.Point(409, 276);
+            this.lblMatchFpLI.Location = new System.Drawing.Point(403, 276);
             this.lblMatchFpLI.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
             this.lblMatchFpLI.Name = "lblMatchFpLI";
             this.lblMatchFpLI.Size = new System.Drawing.Size(35, 30);
@@ -1926,7 +1931,7 @@
             // 
             this.picMatchLR.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.picMatchLR.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.picMatchLR.Location = new System.Drawing.Point(880, 333);
+            this.picMatchLR.Location = new System.Drawing.Point(872, 333);
             this.picMatchLR.Margin = new System.Windows.Forms.Padding(6);
             this.picMatchLR.Name = "picMatchLR";
             this.picMatchLR.Size = new System.Drawing.Size(264, 190);
@@ -1938,7 +1943,7 @@
             this.lblMatchFpLL.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.lblMatchFpLL.AutoSize = true;
             this.lblMatchFpLL.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblMatchFpLL.Location = new System.Drawing.Point(1312, 276);
+            this.lblMatchFpLL.Location = new System.Drawing.Point(1308, 276);
             this.lblMatchFpLL.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
             this.lblMatchFpLL.Name = "lblMatchFpLL";
             this.lblMatchFpLL.Size = new System.Drawing.Size(43, 30);
@@ -1949,7 +1954,7 @@
             // 
             this.picMatchLM.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.picMatchLM.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.picMatchLM.Location = new System.Drawing.Point(582, 333);
+            this.picMatchLM.Location = new System.Drawing.Point(574, 333);
             this.picMatchLM.Margin = new System.Windows.Forms.Padding(6);
             this.picMatchLM.Name = "picMatchLM";
             this.picMatchLM.Size = new System.Drawing.Size(260, 190);
@@ -1961,7 +1966,7 @@
             this.lblMatchFpLM.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.lblMatchFpLM.AutoSize = true;
             this.lblMatchFpLM.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblMatchFpLM.Location = new System.Drawing.Point(686, 276);
+            this.lblMatchFpLM.Location = new System.Drawing.Point(678, 276);
             this.lblMatchFpLM.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
             this.lblMatchFpLM.Name = "lblMatchFpLM";
             this.lblMatchFpLM.Size = new System.Drawing.Size(51, 30);
@@ -1972,7 +1977,7 @@
             // 
             this.picMatchLI.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.picMatchLI.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.picMatchLI.Location = new System.Drawing.Point(301, 333);
+            this.picMatchLI.Location = new System.Drawing.Point(295, 333);
             this.picMatchLI.Margin = new System.Windows.Forms.Padding(6);
             this.picMatchLI.Name = "picMatchLI";
             this.picMatchLI.Size = new System.Drawing.Size(250, 190);
@@ -1984,7 +1989,7 @@
             this.lblMatchFpLR.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.lblMatchFpLR.AutoSize = true;
             this.lblMatchFpLR.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblMatchFpLR.Location = new System.Drawing.Point(988, 276);
+            this.lblMatchFpLR.Location = new System.Drawing.Point(980, 276);
             this.lblMatchFpLR.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
             this.lblMatchFpLR.Name = "lblMatchFpLR";
             this.lblMatchFpLR.Size = new System.Drawing.Size(48, 30);
@@ -1995,7 +2000,7 @@
             // 
             this.picMatchLT.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.picMatchLT.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.picMatchLT.Location = new System.Drawing.Point(11, 333);
+            this.picMatchLT.Location = new System.Drawing.Point(9, 333);
             this.picMatchLT.Margin = new System.Windows.Forms.Padding(6);
             this.picMatchLT.Name = "picMatchLT";
             this.picMatchLT.Size = new System.Drawing.Size(266, 190);
@@ -2234,7 +2239,7 @@
             this.tlpUserMgmtRoleDetail.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50.67873F));
             this.tlpUserMgmtRoleDetail.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 294F));
             this.tlpUserMgmtRoleDetail.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 300F));
-            this.tlpUserMgmtRoleDetail.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 352F));
+            this.tlpUserMgmtRoleDetail.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 360F));
             this.tlpUserMgmtRoleDetail.Controls.Add(this.chkBoxUserMgmtLogin, 0, 0);
             this.tlpUserMgmtRoleDetail.Controls.Add(this.chkBoxUserMgmtEnrollment, 1, 0);
             this.tlpUserMgmtRoleDetail.Controls.Add(this.chkBoxUserMgmtMatch, 2, 0);
@@ -2272,7 +2277,7 @@
             this.chkBoxUserMgmtEnrollment.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.chkBoxUserMgmtEnrollment.AutoSize = true;
             this.chkBoxUserMgmtEnrollment.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.125F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.chkBoxUserMgmtEnrollment.Location = new System.Drawing.Point(207, 7);
+            this.chkBoxUserMgmtEnrollment.Location = new System.Drawing.Point(203, 7);
             this.chkBoxUserMgmtEnrollment.Margin = new System.Windows.Forms.Padding(4);
             this.chkBoxUserMgmtEnrollment.Name = "chkBoxUserMgmtEnrollment";
             this.chkBoxUserMgmtEnrollment.Size = new System.Drawing.Size(175, 35);
@@ -2285,7 +2290,7 @@
             this.chkBoxUserMgmtMatch.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.chkBoxUserMgmtMatch.AutoSize = true;
             this.chkBoxUserMgmtMatch.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.125F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.chkBoxUserMgmtMatch.Location = new System.Drawing.Point(414, 7);
+            this.chkBoxUserMgmtMatch.Location = new System.Drawing.Point(406, 7);
             this.chkBoxUserMgmtMatch.Margin = new System.Windows.Forms.Padding(4);
             this.chkBoxUserMgmtMatch.Name = "chkBoxUserMgmtMatch";
             this.chkBoxUserMgmtMatch.Size = new System.Drawing.Size(120, 35);
@@ -2298,7 +2303,7 @@
             this.chkBoxUserMgmtAuditReport.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.chkBoxUserMgmtAuditReport.AutoSize = true;
             this.chkBoxUserMgmtAuditReport.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.125F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.chkBoxUserMgmtAuditReport.Location = new System.Drawing.Point(1010, 7);
+            this.chkBoxUserMgmtAuditReport.Location = new System.Drawing.Point(1002, 7);
             this.chkBoxUserMgmtAuditReport.Margin = new System.Windows.Forms.Padding(4);
             this.chkBoxUserMgmtAuditReport.Name = "chkBoxUserMgmtAuditReport";
             this.chkBoxUserMgmtAuditReport.Size = new System.Drawing.Size(198, 35);
@@ -2311,7 +2316,7 @@
             this.chkBoxUserMgmtUserMgmt.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.chkBoxUserMgmtUserMgmt.AutoSize = true;
             this.chkBoxUserMgmtUserMgmt.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.125F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.chkBoxUserMgmtUserMgmt.Location = new System.Drawing.Point(709, 7);
+            this.chkBoxUserMgmtUserMgmt.Location = new System.Drawing.Point(701, 7);
             this.chkBoxUserMgmtUserMgmt.Margin = new System.Windows.Forms.Padding(4);
             this.chkBoxUserMgmtUserMgmt.Name = "chkBoxUserMgmtUserMgmt";
             this.chkBoxUserMgmtUserMgmt.Size = new System.Drawing.Size(242, 35);
@@ -2324,7 +2329,7 @@
             this.chkBoxUserMgmtMultiMatch.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.chkBoxUserMgmtMultiMatch.AutoSize = true;
             this.chkBoxUserMgmtMultiMatch.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.125F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.chkBoxUserMgmtMultiMatch.Location = new System.Drawing.Point(709, 57);
+            this.chkBoxUserMgmtMultiMatch.Location = new System.Drawing.Point(701, 57);
             this.chkBoxUserMgmtMultiMatch.Margin = new System.Windows.Forms.Padding(4);
             this.chkBoxUserMgmtMultiMatch.Name = "chkBoxUserMgmtMultiMatch";
             this.chkBoxUserMgmtMultiMatch.Size = new System.Drawing.Size(186, 35);
@@ -2337,7 +2342,7 @@
             this.chkBoxUserMgmtDataExport.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.chkBoxUserMgmtDataExport.AutoSize = true;
             this.chkBoxUserMgmtDataExport.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.125F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.chkBoxUserMgmtDataExport.Location = new System.Drawing.Point(414, 57);
+            this.chkBoxUserMgmtDataExport.Location = new System.Drawing.Point(406, 57);
             this.chkBoxUserMgmtDataExport.Margin = new System.Windows.Forms.Padding(4);
             this.chkBoxUserMgmtDataExport.Name = "chkBoxUserMgmtDataExport";
             this.chkBoxUserMgmtDataExport.Size = new System.Drawing.Size(189, 35);
@@ -2350,7 +2355,7 @@
             this.chkBoxUserMgmtDataImport.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.chkBoxUserMgmtDataImport.AutoSize = true;
             this.chkBoxUserMgmtDataImport.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.125F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.chkBoxUserMgmtDataImport.Location = new System.Drawing.Point(207, 57);
+            this.chkBoxUserMgmtDataImport.Location = new System.Drawing.Point(203, 57);
             this.chkBoxUserMgmtDataImport.Margin = new System.Windows.Forms.Padding(4);
             this.chkBoxUserMgmtDataImport.Name = "chkBoxUserMgmtDataImport";
             this.chkBoxUserMgmtDataImport.Size = new System.Drawing.Size(188, 35);
@@ -2366,7 +2371,7 @@
             this.chkBoxUserMgmtFindSearch.Location = new System.Drawing.Point(5, 57);
             this.chkBoxUserMgmtFindSearch.Margin = new System.Windows.Forms.Padding(4);
             this.chkBoxUserMgmtFindSearch.Name = "chkBoxUserMgmtFindSearch";
-            this.chkBoxUserMgmtFindSearch.Size = new System.Drawing.Size(193, 35);
+            this.chkBoxUserMgmtFindSearch.Size = new System.Drawing.Size(189, 35);
             this.chkBoxUserMgmtFindSearch.TabIndex = 7;
             this.chkBoxUserMgmtFindSearch.Text = "Search/Find";
             this.chkBoxUserMgmtFindSearch.UseVisualStyleBackColor = true;
@@ -2376,7 +2381,7 @@
             this.chkBoxUserMgmtClientSetup.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.chkBoxUserMgmtClientSetup.AutoSize = true;
             this.chkBoxUserMgmtClientSetup.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.125F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.chkBoxUserMgmtClientSetup.Location = new System.Drawing.Point(1010, 57);
+            this.chkBoxUserMgmtClientSetup.Location = new System.Drawing.Point(1002, 57);
             this.chkBoxUserMgmtClientSetup.Margin = new System.Windows.Forms.Padding(4);
             this.chkBoxUserMgmtClientSetup.Name = "chkBoxUserMgmtClientSetup";
             this.chkBoxUserMgmtClientSetup.Size = new System.Drawing.Size(194, 35);
@@ -2510,7 +2515,7 @@
             this.tlpUserMgmt.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 36.51685F));
             this.tlpUserMgmt.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 63.48315F));
             this.tlpUserMgmt.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 245F));
-            this.tlpUserMgmt.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 580F));
+            this.tlpUserMgmt.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 584F));
             this.tlpUserMgmt.Controls.Add(this.lblUserMgmtId, 0, 0);
             this.tlpUserMgmt.Controls.Add(this.txtUserMgmtId, 1, 0);
             this.tlpUserMgmt.Controls.Add(this.lblUserMgmtStatusMsg, 3, 6);
@@ -2569,10 +2574,10 @@
             // 
             this.txtUserMgmtId.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.txtUserMgmtId.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtUserMgmtId.Location = new System.Drawing.Point(201, 8);
+            this.txtUserMgmtId.Location = new System.Drawing.Point(199, 8);
             this.txtUserMgmtId.Margin = new System.Windows.Forms.Padding(6);
             this.txtUserMgmtId.Name = "txtUserMgmtId";
-            this.txtUserMgmtId.Size = new System.Drawing.Size(327, 37);
+            this.txtUserMgmtId.Size = new System.Drawing.Size(325, 37);
             this.txtUserMgmtId.TabIndex = 0;
             this.txtUserMgmtId.Leave += new System.EventHandler(this.txtUserMgmtId_Leave);
             // 
@@ -2581,7 +2586,7 @@
             this.lblUserMgmtStatusMsg.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.lblUserMgmtStatusMsg.AutoSize = true;
             this.lblUserMgmtStatusMsg.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.125F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblUserMgmtStatusMsg.Location = new System.Drawing.Point(785, 382);
+            this.lblUserMgmtStatusMsg.Location = new System.Drawing.Point(781, 382);
             this.lblUserMgmtStatusMsg.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
             this.lblUserMgmtStatusMsg.Name = "lblUserMgmtStatusMsg";
             this.lblUserMgmtStatusMsg.Size = new System.Drawing.Size(0, 31);
@@ -2592,7 +2597,7 @@
             this.lblUserMgmtStatus.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.lblUserMgmtStatus.AutoSize = true;
             this.lblUserMgmtStatus.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblUserMgmtStatus.Location = new System.Drawing.Point(540, 383);
+            this.lblUserMgmtStatus.Location = new System.Drawing.Point(536, 383);
             this.lblUserMgmtStatus.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
             this.lblUserMgmtStatus.Name = "lblUserMgmtStatus";
             this.lblUserMgmtStatus.Size = new System.Drawing.Size(99, 30);
@@ -2616,7 +2621,7 @@
             this.dtpUserMgmtServiceEndDate.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.dtpUserMgmtServiceEndDate.CalendarFont = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.dtpUserMgmtServiceEndDate.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.dtpUserMgmtServiceEndDate.Location = new System.Drawing.Point(785, 315);
+            this.dtpUserMgmtServiceEndDate.Location = new System.Drawing.Point(781, 315);
             this.dtpUserMgmtServiceEndDate.Margin = new System.Windows.Forms.Padding(6);
             this.dtpUserMgmtServiceEndDate.Name = "dtpUserMgmtServiceEndDate";
             this.dtpUserMgmtServiceEndDate.Size = new System.Drawing.Size(496, 37);
@@ -2626,10 +2631,10 @@
             // 
             this.txtUserMgmtFName.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.txtUserMgmtFName.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtUserMgmtFName.Location = new System.Drawing.Point(201, 67);
+            this.txtUserMgmtFName.Location = new System.Drawing.Point(199, 67);
             this.txtUserMgmtFName.Margin = new System.Windows.Forms.Padding(6);
             this.txtUserMgmtFName.Name = "txtUserMgmtFName";
-            this.txtUserMgmtFName.Size = new System.Drawing.Size(327, 37);
+            this.txtUserMgmtFName.Size = new System.Drawing.Size(325, 37);
             this.txtUserMgmtFName.TabIndex = 2;
             // 
             // lblUserMgmtServiceEndDate
@@ -2637,7 +2642,7 @@
             this.lblUserMgmtServiceEndDate.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.lblUserMgmtServiceEndDate.AutoSize = true;
             this.lblUserMgmtServiceEndDate.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblUserMgmtServiceEndDate.Location = new System.Drawing.Point(540, 318);
+            this.lblUserMgmtServiceEndDate.Location = new System.Drawing.Point(536, 318);
             this.lblUserMgmtServiceEndDate.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
             this.lblUserMgmtServiceEndDate.Name = "lblUserMgmtServiceEndDate";
             this.lblUserMgmtServiceEndDate.Size = new System.Drawing.Size(219, 30);
@@ -2649,7 +2654,7 @@
             this.dtpUserMgmtServiceStartDate.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.dtpUserMgmtServiceStartDate.CalendarFont = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.dtpUserMgmtServiceStartDate.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.dtpUserMgmtServiceStartDate.Location = new System.Drawing.Point(785, 252);
+            this.dtpUserMgmtServiceStartDate.Location = new System.Drawing.Point(781, 252);
             this.dtpUserMgmtServiceStartDate.Margin = new System.Windows.Forms.Padding(6);
             this.dtpUserMgmtServiceStartDate.Name = "dtpUserMgmtServiceStartDate";
             this.dtpUserMgmtServiceStartDate.Size = new System.Drawing.Size(496, 37);
@@ -2671,10 +2676,10 @@
             // 
             this.txtUserMgmtLName.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.txtUserMgmtLName.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtUserMgmtLName.Location = new System.Drawing.Point(201, 132);
+            this.txtUserMgmtLName.Location = new System.Drawing.Point(199, 132);
             this.txtUserMgmtLName.Margin = new System.Windows.Forms.Padding(6);
             this.txtUserMgmtLName.Name = "txtUserMgmtLName";
-            this.txtUserMgmtLName.Size = new System.Drawing.Size(327, 37);
+            this.txtUserMgmtLName.Size = new System.Drawing.Size(325, 37);
             this.txtUserMgmtLName.TabIndex = 3;
             // 
             // lblUserMgmtServiceStartDate
@@ -2682,7 +2687,7 @@
             this.lblUserMgmtServiceStartDate.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.lblUserMgmtServiceStartDate.AutoSize = true;
             this.lblUserMgmtServiceStartDate.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblUserMgmtServiceStartDate.Location = new System.Drawing.Point(540, 256);
+            this.lblUserMgmtServiceStartDate.Location = new System.Drawing.Point(536, 256);
             this.lblUserMgmtServiceStartDate.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
             this.lblUserMgmtServiceStartDate.Name = "lblUserMgmtServiceStartDate";
             this.lblUserMgmtServiceStartDate.Size = new System.Drawing.Size(228, 30);
@@ -2710,7 +2715,7 @@
             this.listUserMgmtActiveStatus.Items.AddRange(new object[] {
             "Active",
             "Inactive"});
-            this.listUserMgmtActiveStatus.Location = new System.Drawing.Point(785, 194);
+            this.listUserMgmtActiveStatus.Location = new System.Drawing.Point(781, 194);
             this.listUserMgmtActiveStatus.Margin = new System.Windows.Forms.Padding(6);
             this.listUserMgmtActiveStatus.Name = "listUserMgmtActiveStatus";
             this.listUserMgmtActiveStatus.Size = new System.Drawing.Size(358, 34);
@@ -2720,10 +2725,10 @@
             // 
             this.txtUserMgmtUsername.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.txtUserMgmtUsername.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtUserMgmtUsername.Location = new System.Drawing.Point(201, 192);
+            this.txtUserMgmtUsername.Location = new System.Drawing.Point(199, 192);
             this.txtUserMgmtUsername.Margin = new System.Windows.Forms.Padding(6);
             this.txtUserMgmtUsername.Name = "txtUserMgmtUsername";
-            this.txtUserMgmtUsername.Size = new System.Drawing.Size(327, 37);
+            this.txtUserMgmtUsername.Size = new System.Drawing.Size(325, 37);
             this.txtUserMgmtUsername.TabIndex = 4;
             // 
             // lblUserMgmtActivestatus
@@ -2731,7 +2736,7 @@
             this.lblUserMgmtActivestatus.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.lblUserMgmtActivestatus.AutoSize = true;
             this.lblUserMgmtActivestatus.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblUserMgmtActivestatus.Location = new System.Drawing.Point(540, 196);
+            this.lblUserMgmtActivestatus.Location = new System.Drawing.Point(536, 196);
             this.lblUserMgmtActivestatus.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
             this.lblUserMgmtActivestatus.Name = "lblUserMgmtActivestatus";
             this.lblUserMgmtActivestatus.Size = new System.Drawing.Size(186, 30);
@@ -2754,7 +2759,7 @@
             // 
             this.txtUserMgmtStationedCountry.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.txtUserMgmtStationedCountry.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtUserMgmtStationedCountry.Location = new System.Drawing.Point(785, 132);
+            this.txtUserMgmtStationedCountry.Location = new System.Drawing.Point(781, 132);
             this.txtUserMgmtStationedCountry.Margin = new System.Windows.Forms.Padding(6);
             this.txtUserMgmtStationedCountry.Name = "txtUserMgmtStationedCountry";
             this.txtUserMgmtStationedCountry.Size = new System.Drawing.Size(358, 37);
@@ -2764,10 +2769,10 @@
             // 
             this.txtUserMgmtPass.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.txtUserMgmtPass.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtUserMgmtPass.Location = new System.Drawing.Point(201, 252);
+            this.txtUserMgmtPass.Location = new System.Drawing.Point(199, 252);
             this.txtUserMgmtPass.Margin = new System.Windows.Forms.Padding(6);
             this.txtUserMgmtPass.Name = "txtUserMgmtPass";
-            this.txtUserMgmtPass.Size = new System.Drawing.Size(327, 37);
+            this.txtUserMgmtPass.Size = new System.Drawing.Size(325, 37);
             this.txtUserMgmtPass.TabIndex = 5;
             this.txtUserMgmtPass.UseSystemPasswordChar = true;
             // 
@@ -2776,7 +2781,7 @@
             this.lblUserMgmtStationedCountry.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.lblUserMgmtStationedCountry.AutoSize = true;
             this.lblUserMgmtStationedCountry.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblUserMgmtStationedCountry.Location = new System.Drawing.Point(540, 135);
+            this.lblUserMgmtStationedCountry.Location = new System.Drawing.Point(536, 135);
             this.lblUserMgmtStationedCountry.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
             this.lblUserMgmtStationedCountry.Name = "lblUserMgmtStationedCountry";
             this.lblUserMgmtStationedCountry.Size = new System.Drawing.Size(224, 30);
@@ -2787,7 +2792,7 @@
             // 
             this.txtUserMgmtStationedCity.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.txtUserMgmtStationedCity.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtUserMgmtStationedCity.Location = new System.Drawing.Point(785, 67);
+            this.txtUserMgmtStationedCity.Location = new System.Drawing.Point(781, 67);
             this.txtUserMgmtStationedCity.Margin = new System.Windows.Forms.Padding(6);
             this.txtUserMgmtStationedCity.Name = "txtUserMgmtStationedCity";
             this.txtUserMgmtStationedCity.Size = new System.Drawing.Size(358, 37);
@@ -2799,10 +2804,10 @@
             this.listUserMgmtRole.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.listUserMgmtRole.FormattingEnabled = true;
             this.listUserMgmtRole.ItemHeight = 30;
-            this.listUserMgmtRole.Location = new System.Drawing.Point(201, 316);
+            this.listUserMgmtRole.Location = new System.Drawing.Point(199, 316);
             this.listUserMgmtRole.Margin = new System.Windows.Forms.Padding(6);
             this.listUserMgmtRole.Name = "listUserMgmtRole";
-            this.listUserMgmtRole.Size = new System.Drawing.Size(327, 34);
+            this.listUserMgmtRole.Size = new System.Drawing.Size(325, 34);
             this.listUserMgmtRole.TabIndex = 6;
             // 
             // lblUserMgmtStationedCity
@@ -2810,7 +2815,7 @@
             this.lblUserMgmtStationedCity.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.lblUserMgmtStationedCity.AutoSize = true;
             this.lblUserMgmtStationedCity.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblUserMgmtStationedCity.Location = new System.Drawing.Point(540, 71);
+            this.lblUserMgmtStationedCity.Location = new System.Drawing.Point(536, 71);
             this.lblUserMgmtStationedCity.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
             this.lblUserMgmtStationedCity.Name = "lblUserMgmtStationedCity";
             this.lblUserMgmtStationedCity.Size = new System.Drawing.Size(179, 30);
@@ -2832,7 +2837,7 @@
             // txtUserMgmtStationedAddr
             // 
             this.txtUserMgmtStationedAddr.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtUserMgmtStationedAddr.Location = new System.Drawing.Point(785, 6);
+            this.txtUserMgmtStationedAddr.Location = new System.Drawing.Point(781, 6);
             this.txtUserMgmtStationedAddr.Margin = new System.Windows.Forms.Padding(6);
             this.txtUserMgmtStationedAddr.Name = "txtUserMgmtStationedAddr";
             this.txtUserMgmtStationedAddr.Size = new System.Drawing.Size(496, 37);
@@ -2842,7 +2847,7 @@
             // 
             this.txtUserMgmtStationId.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.txtUserMgmtStationId.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtUserMgmtStationId.Location = new System.Drawing.Point(201, 379);
+            this.txtUserMgmtStationId.Location = new System.Drawing.Point(199, 379);
             this.txtUserMgmtStationId.Margin = new System.Windows.Forms.Padding(6);
             this.txtUserMgmtStationId.Name = "txtUserMgmtStationId";
             this.txtUserMgmtStationId.Size = new System.Drawing.Size(160, 37);
@@ -2853,7 +2858,7 @@
             this.lblUserMgmtStationedAddr.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.lblUserMgmtStationedAddr.AutoSize = true;
             this.lblUserMgmtStationedAddr.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblUserMgmtStationedAddr.Location = new System.Drawing.Point(540, 11);
+            this.lblUserMgmtStationedAddr.Location = new System.Drawing.Point(536, 11);
             this.lblUserMgmtStationedAddr.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
             this.lblUserMgmtStationedAddr.Name = "lblUserMgmtStationedAddr";
             this.lblUserMgmtStationedAddr.Size = new System.Drawing.Size(228, 30);
@@ -3126,7 +3131,7 @@
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 53.78788F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 46.21212F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 820F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 440F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 444F));
             this.tableLayoutPanel1.Controls.Add(this.btnFindFind, 0, 0);
             this.tableLayoutPanel1.Controls.Add(this.btnFindClear, 1, 0);
             this.tableLayoutPanel1.Controls.Add(this.lblFindStatus, 3, 0);
@@ -3156,10 +3161,10 @@
             // 
             this.btnFindClear.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.btnFindClear.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.125F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnFindClear.Location = new System.Drawing.Point(196, 8);
+            this.btnFindClear.Location = new System.Drawing.Point(194, 8);
             this.btnFindClear.Margin = new System.Windows.Forms.Padding(4);
             this.btnFindClear.Name = "btnFindClear";
-            this.btnFindClear.Size = new System.Drawing.Size(156, 69);
+            this.btnFindClear.Size = new System.Drawing.Size(155, 69);
             this.btnFindClear.TabIndex = 11;
             this.btnFindClear.Text = "Clear";
             this.btnFindClear.UseVisualStyleBackColor = true;
@@ -3170,7 +3175,7 @@
             this.lblFindStatus.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.lblFindStatus.AutoSize = true;
             this.lblFindStatus.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblFindStatus.Location = new System.Drawing.Point(1183, 27);
+            this.lblFindStatus.Location = new System.Drawing.Point(1179, 27);
             this.lblFindStatus.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
             this.lblFindStatus.Name = "lblFindStatus";
             this.lblFindStatus.Size = new System.Drawing.Size(92, 30);
@@ -3180,7 +3185,7 @@
             // progressBarSearchFind
             // 
             this.progressBarSearchFind.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.progressBarSearchFind.Location = new System.Drawing.Point(361, 8);
+            this.progressBarSearchFind.Location = new System.Drawing.Point(357, 8);
             this.progressBarSearchFind.Margin = new System.Windows.Forms.Padding(4);
             this.progressBarSearchFind.Name = "progressBarSearchFind";
             this.progressBarSearchFind.Size = new System.Drawing.Size(788, 69);
@@ -3192,7 +3197,7 @@
             this.tlpFindResult.ColumnCount = 3;
             this.tlpFindResult.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 66.66666F));
             this.tlpFindResult.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
-            this.tlpFindResult.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 618F));
+            this.tlpFindResult.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 624F));
             this.tlpFindResult.Controls.Add(this.lblFindResID, 0, 0);
             this.tlpFindResult.Controls.Add(this.lblFindResFirstName, 1, 0);
             this.tlpFindResult.Controls.Add(this.lblFindResLastName, 2, 0);
@@ -3229,7 +3234,7 @@
             this.lblFindResID.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.lblFindResID.AutoSize = true;
             this.lblFindResID.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblFindResID.Location = new System.Drawing.Point(377, 13);
+            this.lblFindResID.Location = new System.Drawing.Point(375, 13);
             this.lblFindResID.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
             this.lblFindResID.Name = "lblFindResID";
             this.lblFindResID.Size = new System.Drawing.Size(40, 30);
@@ -3241,7 +3246,7 @@
             this.lblFindResFirstName.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.lblFindResFirstName.AutoSize = true;
             this.lblFindResFirstName.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblFindResFirstName.Location = new System.Drawing.Point(918, 13);
+            this.lblFindResFirstName.Location = new System.Drawing.Point(913, 13);
             this.lblFindResFirstName.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
             this.lblFindResFirstName.Name = "lblFindResFirstName";
             this.lblFindResFirstName.Size = new System.Drawing.Size(150, 30);
@@ -3253,7 +3258,7 @@
             this.lblFindResLastName.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.lblFindResLastName.AutoSize = true;
             this.lblFindResLastName.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblFindResLastName.Location = new System.Drawing.Point(1428, 13);
+            this.lblFindResLastName.Location = new System.Drawing.Point(1425, 13);
             this.lblFindResLastName.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
             this.lblFindResLastName.Name = "lblFindResLastName";
             this.lblFindResLastName.Size = new System.Drawing.Size(146, 30);
@@ -3777,6 +3782,7 @@
             // 
             // grpBoxClientSetup
             // 
+            this.grpBoxClientSetup.Controls.Add(this.tlpClientSetupDataRefresh);
             this.grpBoxClientSetup.Controls.Add(this.tlpClientSetupStatusMsg);
             this.grpBoxClientSetup.Controls.Add(this.tableLayoutPanel3);
             this.grpBoxClientSetup.Controls.Add(this.tlpClientSetupDemography);
@@ -3812,27 +3818,29 @@
             // 
             // tableLayoutPanel3
             // 
-            this.tableLayoutPanel3.ColumnCount = 2;
+            this.tableLayoutPanel3.ColumnCount = 3;
             this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel3.Controls.Add(this.btnClientSetupClear, 0, 0);
+            this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 235F));
+            this.tableLayoutPanel3.Controls.Add(this.btnClientSetupUpdate, 0, 0);
             this.tableLayoutPanel3.Controls.Add(this.btnClientSetupSave, 0, 0);
-            this.tableLayoutPanel3.Location = new System.Drawing.Point(515, 698);
+            this.tableLayoutPanel3.Controls.Add(this.btnClientSetupClear, 2, 0);
+            this.tableLayoutPanel3.Location = new System.Drawing.Point(430, 707);
             this.tableLayoutPanel3.Name = "tableLayoutPanel3";
             this.tableLayoutPanel3.RowCount = 1;
             this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel3.Size = new System.Drawing.Size(495, 76);
+            this.tableLayoutPanel3.Size = new System.Drawing.Size(715, 76);
             this.tableLayoutPanel3.TabIndex = 1;
             // 
-            // btnClientSetupClear
+            // btnClientSetupUpdate
             // 
-            this.btnClientSetupClear.Location = new System.Drawing.Point(250, 3);
-            this.btnClientSetupClear.Name = "btnClientSetupClear";
-            this.btnClientSetupClear.Size = new System.Drawing.Size(228, 70);
-            this.btnClientSetupClear.TabIndex = 1;
-            this.btnClientSetupClear.Text = "Clear";
-            this.btnClientSetupClear.UseVisualStyleBackColor = true;
-            this.btnClientSetupClear.Click += new System.EventHandler(this.btnClientSetupClear_Click);
+            this.btnClientSetupUpdate.Location = new System.Drawing.Point(243, 3);
+            this.btnClientSetupUpdate.Name = "btnClientSetupUpdate";
+            this.btnClientSetupUpdate.Size = new System.Drawing.Size(228, 70);
+            this.btnClientSetupUpdate.TabIndex = 2;
+            this.btnClientSetupUpdate.Text = "Update";
+            this.btnClientSetupUpdate.UseVisualStyleBackColor = true;
+            this.btnClientSetupUpdate.Click += new System.EventHandler(this.btnClientSetupUpdate_Click);
             // 
             // btnClientSetupSave
             // 
@@ -3840,15 +3848,25 @@
             this.btnClientSetupSave.Name = "btnClientSetupSave";
             this.btnClientSetupSave.Size = new System.Drawing.Size(228, 70);
             this.btnClientSetupSave.TabIndex = 0;
-            this.btnClientSetupSave.Text = "Save";
+            this.btnClientSetupSave.Text = "Create";
             this.btnClientSetupSave.UseVisualStyleBackColor = true;
             this.btnClientSetupSave.Click += new System.EventHandler(this.btnClientSetupSave_Click);
+            // 
+            // btnClientSetupClear
+            // 
+            this.btnClientSetupClear.Location = new System.Drawing.Point(483, 3);
+            this.btnClientSetupClear.Name = "btnClientSetupClear";
+            this.btnClientSetupClear.Size = new System.Drawing.Size(228, 70);
+            this.btnClientSetupClear.TabIndex = 1;
+            this.btnClientSetupClear.Text = "Clear";
+            this.btnClientSetupClear.UseVisualStyleBackColor = true;
+            this.btnClientSetupClear.Click += new System.EventHandler(this.btnClientSetupClear_Click);
             // 
             // tlpClientSetupDemography
             // 
             this.tlpClientSetupDemography.ColumnCount = 2;
-            this.tlpClientSetupDemography.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 27.99443F));
-            this.tlpClientSetupDemography.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 72.00557F));
+            this.tlpClientSetupDemography.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 29.38719F));
+            this.tlpClientSetupDemography.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 70.61282F));
             this.tlpClientSetupDemography.Controls.Add(this.lblClientSetupCountry, 0, 5);
             this.tlpClientSetupDemography.Controls.Add(this.txtBoxClientSetupLegalName, 1, 0);
             this.tlpClientSetupDemography.Controls.Add(this.lblClientSetupState, 0, 3);
@@ -3889,7 +3907,7 @@
             // 
             this.txtBoxClientSetupLegalName.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.txtBoxClientSetupLegalName.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.125F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtBoxClientSetupLegalName.Location = new System.Drawing.Point(204, 10);
+            this.txtBoxClientSetupLegalName.Location = new System.Drawing.Point(213, 10);
             this.txtBoxClientSetupLegalName.MaxLength = 60;
             this.txtBoxClientSetupLegalName.Name = "txtBoxClientSetupLegalName";
             this.txtBoxClientSetupLegalName.Size = new System.Drawing.Size(494, 38);
@@ -3913,9 +3931,9 @@
             this.lblClientSetupAddressLine.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.125F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblClientSetupAddressLine.Location = new System.Drawing.Point(3, 76);
             this.lblClientSetupAddressLine.Name = "lblClientSetupAddressLine";
-            this.lblClientSetupAddressLine.Size = new System.Drawing.Size(191, 31);
+            this.lblClientSetupAddressLine.Size = new System.Drawing.Size(198, 31);
             this.lblClientSetupAddressLine.TabIndex = 2;
-            this.lblClientSetupAddressLine.Text = "Address Line*:";
+            this.lblClientSetupAddressLine.Text = "Address Line *:";
             // 
             // lblClientSetupLegalName
             // 
@@ -3932,7 +3950,7 @@
             // 
             this.txtBoxClientSetupAddressLine.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.txtBoxClientSetupAddressLine.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.125F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtBoxClientSetupAddressLine.Location = new System.Drawing.Point(204, 72);
+            this.txtBoxClientSetupAddressLine.Location = new System.Drawing.Point(213, 72);
             this.txtBoxClientSetupAddressLine.MaxLength = 60;
             this.txtBoxClientSetupAddressLine.Name = "txtBoxClientSetupAddressLine";
             this.txtBoxClientSetupAddressLine.Size = new System.Drawing.Size(494, 38);
@@ -3953,7 +3971,7 @@
             // 
             this.txtBoxClientSetupState.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.txtBoxClientSetupState.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.125F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtBoxClientSetupState.Location = new System.Drawing.Point(204, 194);
+            this.txtBoxClientSetupState.Location = new System.Drawing.Point(213, 194);
             this.txtBoxClientSetupState.MaxLength = 60;
             this.txtBoxClientSetupState.Name = "txtBoxClientSetupState";
             this.txtBoxClientSetupState.Size = new System.Drawing.Size(494, 38);
@@ -3974,7 +3992,7 @@
             // 
             this.txtBoxClientSetupPostalCode.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.txtBoxClientSetupPostalCode.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.125F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtBoxClientSetupPostalCode.Location = new System.Drawing.Point(204, 250);
+            this.txtBoxClientSetupPostalCode.Location = new System.Drawing.Point(213, 250);
             this.txtBoxClientSetupPostalCode.MaxLength = 60;
             this.txtBoxClientSetupPostalCode.Name = "txtBoxClientSetupPostalCode";
             this.txtBoxClientSetupPostalCode.Size = new System.Drawing.Size(494, 38);
@@ -3984,7 +4002,7 @@
             // 
             this.txtBoxClientSetupCountry.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.txtBoxClientSetupCountry.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.125F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtBoxClientSetupCountry.Location = new System.Drawing.Point(204, 304);
+            this.txtBoxClientSetupCountry.Location = new System.Drawing.Point(213, 304);
             this.txtBoxClientSetupCountry.MaxLength = 60;
             this.txtBoxClientSetupCountry.Name = "txtBoxClientSetupCountry";
             this.txtBoxClientSetupCountry.Size = new System.Drawing.Size(494, 38);
@@ -3994,7 +4012,7 @@
             // 
             this.txtBoxClientSetupCity.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.txtBoxClientSetupCity.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.125F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtBoxClientSetupCity.Location = new System.Drawing.Point(204, 135);
+            this.txtBoxClientSetupCity.Location = new System.Drawing.Point(213, 135);
             this.txtBoxClientSetupCity.MaxLength = 60;
             this.txtBoxClientSetupCity.Name = "txtBoxClientSetupCity";
             this.txtBoxClientSetupCity.Size = new System.Drawing.Size(494, 38);
@@ -4150,6 +4168,42 @@
             this.lblTimer.Size = new System.Drawing.Size(0, 30);
             this.lblTimer.TabIndex = 4;
             // 
+            // tlpClientSetupDataRefresh
+            // 
+            this.tlpClientSetupDataRefresh.ColumnCount = 2;
+            this.tlpClientSetupDataRefresh.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 60.86956F));
+            this.tlpClientSetupDataRefresh.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 39.13044F));
+            this.tlpClientSetupDataRefresh.Controls.Add(this.lblClientSetupDataRefreshInterval, 0, 0);
+            this.tlpClientSetupDataRefresh.Controls.Add(this.txtBoxClientSetupDataRefresh, 1, 0);
+            this.tlpClientSetupDataRefresh.Location = new System.Drawing.Point(795, 60);
+            this.tlpClientSetupDataRefresh.Name = "tlpClientSetupDataRefresh";
+            this.tlpClientSetupDataRefresh.RowCount = 1;
+            this.tlpClientSetupDataRefresh.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tlpClientSetupDataRefresh.Size = new System.Drawing.Size(736, 62);
+            this.tlpClientSetupDataRefresh.TabIndex = 3;
+            // 
+            // lblClientSetupDataRefreshInterval
+            // 
+            this.lblClientSetupDataRefreshInterval.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.lblClientSetupDataRefreshInterval.AutoSize = true;
+            this.lblClientSetupDataRefreshInterval.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.125F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblClientSetupDataRefreshInterval.Location = new System.Drawing.Point(3, 15);
+            this.lblClientSetupDataRefreshInterval.Name = "lblClientSetupDataRefreshInterval";
+            this.lblClientSetupDataRefreshInterval.Size = new System.Drawing.Size(413, 31);
+            this.lblClientSetupDataRefreshInterval.TabIndex = 0;
+            this.lblClientSetupDataRefreshInterval.Text = "Data Refresh Interval (in Hours) :";
+            // 
+            // txtBoxClientSetupDataRefresh
+            // 
+            this.txtBoxClientSetupDataRefresh.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.txtBoxClientSetupDataRefresh.Location = new System.Drawing.Point(450, 9);
+            this.txtBoxClientSetupDataRefresh.MaxLength = 3;
+            this.txtBoxClientSetupDataRefresh.Name = "txtBoxClientSetupDataRefresh";
+            this.txtBoxClientSetupDataRefresh.Size = new System.Drawing.Size(100, 44);
+            this.txtBoxClientSetupDataRefresh.TabIndex = 1;
+            this.txtBoxClientSetupDataRefresh.TextChanged += new System.EventHandler(this.txtBoxClientSetupDataRefresh_TextChanged);
+            this.txtBoxClientSetupDataRefresh.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtBoxClientSetupDataRefresh_KeyPress);
+            // 
             // AFISMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(12F, 25F);
@@ -4258,6 +4312,8 @@
             this.tlpClientSetupDemography.PerformLayout();
             this.menuStrip.ResumeLayout(false);
             this.menuStrip.PerformLayout();
+            this.tlpClientSetupDataRefresh.ResumeLayout(false);
+            this.tlpClientSetupDataRefresh.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -4568,5 +4624,9 @@
         private System.Windows.Forms.Label lblClientSetupStatusMsg;
         private System.Windows.Forms.CheckBox chkBoxUserMgmtClientSetup;
         private System.Windows.Forms.TableLayoutPanel tlpEnrollEnrollButtons;
+        private System.Windows.Forms.Button btnClientSetupUpdate;
+        private System.Windows.Forms.TableLayoutPanel tlpClientSetupDataRefresh;
+        private System.Windows.Forms.Label lblClientSetupDataRefreshInterval;
+        private System.Windows.Forms.TextBox txtBoxClientSetupDataRefresh;
     }
 }

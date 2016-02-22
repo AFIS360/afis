@@ -15,6 +15,7 @@ namespace AFIS360
         private string state;
         private string postalCode;
         private string country;
+        private int dataRefreshInterval;
 
         public string ClientId
         {
@@ -56,6 +57,12 @@ namespace AFIS360
         {
             get { return country; }
             set { country = value; }
+        }
+
+        public int DataRefreshInterval
+        {
+            get { return dataRefreshInterval; }
+            set { dataRefreshInterval = value; }
         }
     }
 }

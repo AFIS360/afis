@@ -31,7 +31,7 @@ namespace AFIS360
         /// </summary>
         public override void DoJob()
         {
-            System.Console.WriteLine(String.Format("This is the execution number \"{0}\" of the Job \"{1}\".", counter.ToString(), this.GetName()));
+            System.Console.WriteLine(String.Format("This is the execution number \"{0}\" of the Job \"{1}\".", counter.ToString(), this.GetName()) + " Current Time: " + DateTime.Now);
             counter++;
 
             //load the all fingerprint templates from the Database
@@ -55,10 +55,24 @@ namespace AFIS360
         /// <returns>1 sec, which is the interval this job is to be
         /// executed repeatadly.</returns>
         public override int GetRepetitionIntervalTime()
-        {  
-            return Convert.ToInt32(ConfigurationManager.AppSettings["FingerprintTemplateLoaderDefaultInterval"]);
+        {
+            int intervalTime = 0;
+            if(AFISMain.clientSetup != null)
+            {
+                intervalTime = AFISMain.clientSetup.DataRefreshInterval;
+                if(intervalTime > 0)
+                {
+                    intervalTime = intervalTime * 3600 * 1000;
+                } else
+                {
+                    intervalTime = Convert.ToInt32(ConfigurationManager.AppSettings["FingerprintTemplateLoaderDefaultInterval"]);
+                }
+            } else
+            {
+                intervalTime = Convert.ToInt32(ConfigurationManager.AppSettings["FingerprintTemplateLoaderDefaultInterval"]);
+            }
+            return intervalTime;
         }
     }
-
 }
 

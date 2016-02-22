@@ -872,7 +872,7 @@ namespace AFIS360
                     clearReportTab();
                     clearFindTab();
                     clearAccessControlsSelection();
-                    clearClientSetupTab();
+                    lblClientSetupStatusMsg.Text = null;
                 }
 
                 Console.WriteLine("User.Id = " + user.getPersonId());
@@ -914,6 +914,27 @@ namespace AFIS360
 
                 //Create the activity log
                 activityLog.setActivity("Successful login. \n");
+
+                //Apply ClientSetup
+                if (clientSetup == null)
+                {
+                    btnClientSetupSave.Enabled = true;
+                    btnClientSetupUpdate.Enabled = false;
+                }
+                else
+                {
+                    btnClientSetupSave.Enabled = false;
+                    btnClientSetupUpdate.Enabled = true;
+                    Console.WriteLine("###-->> Client Setup = " + clientSetup + ", LegalName = " + clientSetup.LegalName);
+                    //populate the Client Setup Tab
+                    txtBoxClientSetupLegalName.Text = clientSetup.LegalName;
+                    txtBoxClientSetupAddressLine.Text = clientSetup.AddressLine;
+                    txtBoxClientSetupCity.Text = clientSetup.City;
+                    txtBoxClientSetupState.Text = clientSetup.State;
+                    txtBoxClientSetupPostalCode.Text = clientSetup.PostalCode;
+                    txtBoxClientSetupCountry.Text = clientSetup.Country;
+                    txtBoxClientSetupDataRefresh.Text = Convert.ToString(clientSetup.DataRefreshInterval);
+                }
             }
             else
             {
@@ -1484,10 +1505,6 @@ namespace AFIS360
             loadAccessControls();
             //load Client Setup
             loadClientSetup();
-
-            //load the all fingerprint templates from the Database
-//            Program.loadFingerptintTemplates();
-
             //Start Scheduler to load fingerprints on an interval
             jobManager = new JobManager();
             jobManager.ExecuteAllJobs();
@@ -1507,12 +1524,31 @@ namespace AFIS360
         {
             DataAccess dataAccess = new DataAccess();
             clientSetup = dataAccess.getClientSetup();
+            Console.WriteLine("###-->> Client Setup = " + clientSetup);
+
+            if (clientSetup == null)
+            {
+                btnClientSetupSave.Enabled = true;
+                btnClientSetupUpdate.Enabled = false;
+            } else
+            {
+                btnClientSetupSave.Enabled = false;
+                btnClientSetupUpdate.Enabled = true;
+                Console.WriteLine("###-->> Client Setup = " + clientSetup + ", LegalName = " + clientSetup.LegalName);
+                //populate the Client Setup Tab
+                txtBoxClientSetupLegalName.Text = clientSetup.LegalName;
+                txtBoxClientSetupAddressLine.Text = clientSetup.AddressLine;
+                txtBoxClientSetupCity.Text = clientSetup.City;
+                txtBoxClientSetupState.Text = clientSetup.State;
+                txtBoxClientSetupPostalCode.Text = clientSetup.PostalCode;
+                txtBoxClientSetupCountry.Text = clientSetup.Country;
+                txtBoxClientSetupDataRefresh.Text = Convert.ToString(clientSetup.DataRefreshInterval);
+            }
         }
 
 
         private void AFISMain_FormClosed(object sender, FormClosedEventArgs e)
         {
-
             if(activityLog != null)
             {
                 activityLog.setActivity("Gracefully closed the AFIS. \n");
@@ -1521,7 +1557,6 @@ namespace AFIS360
                 Status status = dataAccess.updateUserAuditLog(user, DateTime.Now, 0, activityLog);
                 Console.WriteLine("####-->> Status code = " + status.getStatusCode());
             }
-
             //Stop the loading of the Fingerprint templates
             jobManager.KillAllJobs();
         }
@@ -2100,7 +2135,7 @@ namespace AFIS360
                 }
 
                 Console.WriteLine("###-->> Adding Client Setup Record....");
-                ClientSetup clientSetup = new ClientSetup();
+                clientSetup = new ClientSetup();
                 clientSetup.ClientId = txtBoxClientSetupLegalName.Text + DateTime.Now.ToString("yyyy-dd-MM");
                 clientSetup.LegalName = txtBoxClientSetupLegalName.Text;
                 clientSetup.AddressLine = txtBoxClientSetupAddressLine.Text;
@@ -2108,6 +2143,7 @@ namespace AFIS360
                 clientSetup.State = txtBoxClientSetupState.Text;
                 clientSetup.PostalCode = txtBoxClientSetupPostalCode.Text;
                 clientSetup.Country = txtBoxClientSetupCountry.Text;
+                clientSetup.DataRefreshInterval = !string.IsNullOrEmpty(txtBoxClientSetupDataRefresh.Text) ? Convert.ToInt32(txtBoxClientSetupDataRefresh.Text) : 0;
                 clientSetup.CreatedBy = AFISMain.user.getPersonId();
                 clientSetup.CreationDateTime = DateTime.Now;
                 clientSetup.UpdatedBy = null;
@@ -2154,6 +2190,74 @@ namespace AFIS360
             txtBoxClientSetupPostalCode.Text = null;
             txtBoxClientSetupCountry.Text = null;
             lblClientSetupStatusMsg.Text = null;
+            txtBoxClientSetupDataRefresh.Text = null;
+        }
+
+        private void btnClientSetupUpdate_Click(object sender, EventArgs e)
+        {
+            Status status = null;
+
+            try
+            {
+                if (string.IsNullOrEmpty(txtBoxClientSetupLegalName.Text))
+                {
+                    MessageBox.Show("Client's Legal name field is required, cannot be empty.", "Warning Message", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
+
+                Console.WriteLine("###-->> Updating Client Setup Record....");
+                clientSetup = new ClientSetup();
+                clientSetup.ClientId = txtBoxClientSetupLegalName.Text + DateTime.Now.ToString("yyyy-dd-MM");
+                clientSetup.LegalName = txtBoxClientSetupLegalName.Text;
+                clientSetup.AddressLine = txtBoxClientSetupAddressLine.Text;
+                clientSetup.City = txtBoxClientSetupCity.Text;
+                clientSetup.State = txtBoxClientSetupState.Text;
+                clientSetup.PostalCode = txtBoxClientSetupPostalCode.Text;
+                clientSetup.Country = txtBoxClientSetupCountry.Text;
+                clientSetup.DataRefreshInterval = !string.IsNullOrEmpty(txtBoxClientSetupDataRefresh.Text) ? Convert.ToInt32(txtBoxClientSetupDataRefresh.Text) : 0;
+                clientSetup.CreatedBy = null;
+                clientSetup.CreationDateTime = null;
+                clientSetup.UpdatedBy = AFISMain.user.getPersonId(); ;
+                clientSetup.UpdateDateTime = DateTime.Now;
+
+                DataAccess dataAccess = new DataAccess();
+                status = dataAccess.updateClientSetup(clientSetup);
+
+                Console.WriteLine("###-->> Status = " + status.getStatusDesc());
+
+                if (status.getStatusCode().Equals(Status.STATUS_SUCCESSFUL))
+                {
+                    lblClientSetupStatusMsg.ForeColor = System.Drawing.Color.Green;
+                    activityLog.setActivity(status.getStatusDesc() + "\n");
+                }
+                else
+                {
+                    activityLog.setActivity(status.getStatusDesc() + "\n");
+                    lblClientSetupStatusMsg.ForeColor = System.Drawing.Color.Red;
+                }
+
+                lblClientSetupStatusMsg.Text = status.getStatusDesc();
+            }
+            catch (Exception exp)
+            {
+                activityLog.setActivity(status.getStatusDesc() + "\n");
+                lblClientSetupStatusMsg.ForeColor = System.Drawing.Color.Red;
+                Console.WriteLine(exp);
+            }
+        }
+
+        private void txtBoxClientSetupDataRefresh_TextChanged(object sender, EventArgs e)
+        {
+            if (!System.Text.RegularExpressions.Regex.IsMatch(txtBoxClientSetupDataRefresh.Text, "^[0-9]{0,2}?$"))
+            {
+                MessageBox.Show("Please enter a valid number between 0-99 only.", "Warning Message", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                txtBoxClientSetupDataRefresh.Text.Remove(txtBoxClientSetupDataRefresh.Text.Length - 1);
+            }
+        }
+
+        private void txtBoxClientSetupDataRefresh_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            e.Handled = !char.IsDigit(e.KeyChar) && !char.IsControl(e.KeyChar);
         }
     }
 }

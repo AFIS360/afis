@@ -321,8 +321,8 @@ namespace AFIS360
             try
             {
                 cmd = conn.CreateCommand();
-                cmd.CommandText = "INSERT INTO client_setup(client_id, legal_name, addr_line, city, state, postal_code, country, created_by, creation_date, updated_by, update_date) VALUES " +
-                                  "(@client_id, @legal_name, @addr_line, @city, @state, @postal_code, @country, @created_by, @creation_date, @updated_by, @update_date)";
+                cmd.CommandText = "INSERT INTO client_setup(client_id, legal_name, addr_line, city, state, postal_code, country, refresh_intrvl, created_by, creation_date, updated_by, update_date) VALUES " +
+                                  "(@client_id, @legal_name, @addr_line, @city, @state, @postal_code, @country, @refresh_intrvl, @created_by, @creation_date, @updated_by, @update_date)";
 
                 cmd.Parameters.AddWithValue("@client_id", clientSetup.ClientId);
                 cmd.Parameters.AddWithValue("@legal_name", clientSetup.LegalName);
@@ -331,6 +331,7 @@ namespace AFIS360
                 cmd.Parameters.AddWithValue("@state", clientSetup.State);
                 cmd.Parameters.AddWithValue("@postal_code", clientSetup.PostalCode);
                 cmd.Parameters.AddWithValue("@country", clientSetup.Country);
+                cmd.Parameters.AddWithValue("@refresh_intrvl", clientSetup.DataRefreshInterval);
                 cmd.Parameters.AddWithValue("@created_by", clientSetup.CreatedBy);
                 cmd.Parameters.AddWithValue("@creation_date", clientSetup.CreationDateTime);
                 cmd.Parameters.AddWithValue("@updated_by", clientSetup.UpdatedBy);
@@ -438,7 +439,6 @@ namespace AFIS360
             conn.Open();
             try
             {
-                clientSetup = new ClientSetup();
                 cmd = conn.CreateCommand();
 
                 cmd.CommandText = "SELECT * FROM afis.client_setup";
@@ -456,6 +456,7 @@ namespace AFIS360
                     string state = (string)ds.Rows[0]["state"];
                     string postal_code = (string)ds.Rows[0]["postal_code"];
                     string country = (string)ds.Rows[0]["country"];
+                    int refresh_intrvl = (int)ds.Rows[0]["refresh_intrvl"];
 
                     clientSetup = new ClientSetup();
                     clientSetup.ClientId = client_id;
@@ -465,11 +466,12 @@ namespace AFIS360
                     clientSetup.State = state;
                     clientSetup.PostalCode = postal_code;
                     clientSetup.Country = country;
+                    clientSetup.DataRefreshInterval = refresh_intrvl;
                 }
             }
-            catch (Exception)
+            catch (Exception exp)
             {
-                throw;
+                Console.WriteLine("###-->> Exception = " + exp);
             }
             finally
             {
@@ -1948,9 +1950,9 @@ namespace AFIS360
                 }
 
             }
-            catch (Exception)
+            catch (Exception exp)
             {
-                throw;
+                Console.WriteLine("###-->> Exception = " + exp);
             }
             finally
             {
@@ -2019,9 +2021,9 @@ namespace AFIS360
                 }
 
             }
-            catch (Exception)
+            catch (Exception exp)
             {
-                throw;
+                Console.WriteLine("###-->> Exception = " + exp);
             }
             finally
             {
@@ -2303,6 +2305,58 @@ namespace AFIS360
             }
             return status;
         }
+
+        public Status updateClientSetup(ClientSetup clientSetup)
+        {
+            string connStr = getConnectionStringByName("MySQL_AFIS_conn");
+            MySqlConnection conn = new MySqlConnection(connStr);
+            MySqlCommand cmd;
+            Status status = null;
+            conn.Open();
+            try
+            {
+                cmd = conn.CreateCommand();
+                cmd.CommandText = "UPDATE client_setup SET client_id = @client_id, legal_name = @legal_name, addr_line = @addr_line, city = @city, " +
+                                  "state = @state, postal_code = @postal_code, country = @country, refresh_intrvl = @refresh_intrvl, updated_by = @updated_by, update_date = @update_date";
+
+                cmd.Parameters.AddWithValue("@client_id", clientSetup.ClientId);
+                cmd.Parameters.AddWithValue("@legal_name", clientSetup.LegalName);
+                cmd.Parameters.AddWithValue("@addr_line", clientSetup.AddressLine);
+                cmd.Parameters.AddWithValue("@city", clientSetup.City);
+                cmd.Parameters.AddWithValue("@state", clientSetup.State);
+                cmd.Parameters.AddWithValue("@postal_code", clientSetup.PostalCode);
+                cmd.Parameters.AddWithValue("@country", clientSetup.Country);
+                cmd.Parameters.AddWithValue("@refresh_intrvl", clientSetup.DataRefreshInterval);
+                cmd.Parameters.AddWithValue("@updated_by", clientSetup.UpdatedBy);
+                cmd.Parameters.AddWithValue("@update_date", clientSetup.UpdateDateTime);
+
+                cmd.ExecuteNonQuery();
+
+                //Successful status
+                status = new Status();
+                status.setStatusCode(Status.STATUS_SUCCESSFUL);
+                status.setStatusDesc("Client Setup Record (Client Id = " + clientSetup.ClientId + ") is updated successfully.");
+            }
+            catch (Exception exp)
+            {
+                //Successful status
+                status = new Status();
+                status.setStatusCode(Status.STATUS_FAILURE);
+                status.setStatusDesc("Failed to update Client Setup Record (Case Id = " + clientSetup.ClientId + "). Reason is - " + exp.Message + ".");
+                Console.WriteLine("###--->> Exception = " + exp);
+            }
+            finally
+            {
+                if (conn.State == System.Data.ConnectionState.Open)
+                {
+                    conn.Close();
+                }
+            }
+
+            return status;
+        }//end updateClientSetup
+
+
 
         public Status updateAFISUserPassword(string username, string current_password, string new_password)
         {
@@ -2727,8 +2781,7 @@ namespace AFIS360
             string connStr = getConnectionStringByName("MySQL_AFIS_conn");
             MySqlConnection conn = new MySqlConnection(connStr);
             MySqlCommand cmd;
-            DataTable ds;
-            Int32 personCount;
+            Int32 personCount = 0;
             conn.Open();
 
             try
@@ -2737,10 +2790,9 @@ namespace AFIS360
                 cmd.CommandText = "SELECT count(*) FROM afis.person";
                 personCount = Convert.ToInt32(cmd.ExecuteScalar());
             }
-            catch (Exception e)
+            catch (Exception exp)
             {
-                Console.WriteLine(e.StackTrace);
-                throw e;
+                Console.WriteLine("###-->> Exception = " + exp);
             }
             finally
             {
@@ -2750,6 +2802,7 @@ namespace AFIS360
                 }
             }
             return personCount;
+
         }//end getPersonCount
 
 
@@ -2943,9 +2996,9 @@ namespace AFIS360
 
                 Console.WriteLine("###--->> Id from File = " + person.Id);
             }
-            catch (Exception)
+            catch (Exception exp)
             {
-                throw;
+                Console.WriteLine("###-->> Exception = " + exp);
             }
 
             return person;
