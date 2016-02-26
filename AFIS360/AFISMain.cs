@@ -41,8 +41,9 @@ namespace AFIS360
             tabControlAFIS.TabPages.Remove(tabClientSetup);
             menuStrip.Visible = true;
             btnUserMgmtUpdate.Enabled = false;
-            //set the default image for match picBox
+            //set the default image for Match picBox
             if (picMatch.Image == null) picMatch.Image = System.Drawing.Image.FromFile(ConfigurationManager.AppSettings["defaultImageForMatch"]);
+//            pictBoxLoginCompanyLogo.Image = System.Drawing.Image.FromFile(ConfigurationManager.AppSettings["DefaultCompanyLogo"]);
         }
 
 
@@ -1530,7 +1531,10 @@ namespace AFIS360
             {
                 btnClientSetupSave.Enabled = true;
                 btnClientSetupUpdate.Enabled = false;
-            } else
+                //set the default image for Login picBox
+                pictBoxLoginCompanyLogo.Image = System.Drawing.Image.FromFile(ConfigurationManager.AppSettings["DefaultCompanyLogo"]);
+            }
+            else
             {
                 btnClientSetupSave.Enabled = false;
                 btnClientSetupUpdate.Enabled = true;
@@ -1543,7 +1547,19 @@ namespace AFIS360
                 txtBoxClientSetupPostalCode.Text = clientSetup.PostalCode;
                 txtBoxClientSetupCountry.Text = clientSetup.Country;
                 txtBoxClientSetupDataRefresh.Text = Convert.ToString(clientSetup.DataRefreshInterval);
-            }
+                picBoxClientSetupCompanyLogo.Image = clientSetup.CompanyLogo;
+                picBoxClientSetupCompanyLogo.SizeMode = PictureBoxSizeMode.StretchImage;
+                //set the default image for Login picBox
+                if(clientSetup.CompanyLogo != null)
+                {
+                    pictBoxLoginCompanyLogo.Image = clientSetup.CompanyLogo;
+                    pictBoxLoginCompanyLogo.SizeMode = PictureBoxSizeMode.StretchImage;
+                }
+                else
+                {
+                    pictBoxLoginCompanyLogo.Image = System.Drawing.Image.FromFile(ConfigurationManager.AppSettings["DefaultCompanyLogo"]);
+                }
+            }//end else
         }
 
 
@@ -2144,6 +2160,7 @@ namespace AFIS360
                 clientSetup.PostalCode = txtBoxClientSetupPostalCode.Text;
                 clientSetup.Country = txtBoxClientSetupCountry.Text;
                 clientSetup.DataRefreshInterval = !string.IsNullOrEmpty(txtBoxClientSetupDataRefresh.Text) ? Convert.ToInt32(txtBoxClientSetupDataRefresh.Text) : 0;
+                clientSetup.CompanyLogo = picBoxClientSetupCompanyLogo.Image;
                 clientSetup.CreatedBy = AFISMain.user.getPersonId();
                 clientSetup.CreationDateTime = DateTime.Now;
                 clientSetup.UpdatedBy = null;
@@ -2215,6 +2232,7 @@ namespace AFIS360
                 clientSetup.PostalCode = txtBoxClientSetupPostalCode.Text;
                 clientSetup.Country = txtBoxClientSetupCountry.Text;
                 clientSetup.DataRefreshInterval = !string.IsNullOrEmpty(txtBoxClientSetupDataRefresh.Text) ? Convert.ToInt32(txtBoxClientSetupDataRefresh.Text) : 0;
+                clientSetup.CompanyLogo = picBoxClientSetupCompanyLogo.Image;
                 clientSetup.CreatedBy = null;
                 clientSetup.CreationDateTime = null;
                 clientSetup.UpdatedBy = AFISMain.user.getPersonId(); ;
@@ -2237,6 +2255,11 @@ namespace AFIS360
                 }
 
                 lblClientSetupStatusMsg.Text = status.getStatusDesc();
+
+                //Apply the new Data Refresh Interval
+                //Start Scheduler to load fingerprints on an interval
+                jobManager.KillAllJobs(); //first kill all exiting jobs
+                jobManager.ExecuteAllJobs();
             }
             catch (Exception exp)
             {
@@ -2248,9 +2271,9 @@ namespace AFIS360
 
         private void txtBoxClientSetupDataRefresh_TextChanged(object sender, EventArgs e)
         {
-            if (!System.Text.RegularExpressions.Regex.IsMatch(txtBoxClientSetupDataRefresh.Text, "^[0-9]{0,2}?$"))
+            if (!System.Text.RegularExpressions.Regex.IsMatch(txtBoxClientSetupDataRefresh.Text, "^[0-9]{0,3}?$"))
             {
-                MessageBox.Show("Please enter a valid number between 0-99 only.", "Warning Message", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show("Please enter a valid number between 0-999 only.", "Warning Message", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 txtBoxClientSetupDataRefresh.Text.Remove(txtBoxClientSetupDataRefresh.Text.Length - 1);
             }
         }
@@ -2258,6 +2281,19 @@ namespace AFIS360
         private void txtBoxClientSetupDataRefresh_KeyPress(object sender, KeyPressEventArgs e)
         {
             e.Handled = !char.IsDigit(e.KeyChar) && !char.IsControl(e.KeyChar);
+        }
+
+        private void picBoxClientSetupCompanyLogo_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog ofd = new OpenFileDialog();
+            ofd.Filter = "Image Files|*.jpg;*.jpeg;*.png;*.gif;*.bmp;*.tif;...";
+            if (ofd.ShowDialog() == DialogResult.OK)
+            {
+                string companyLogoImagePath = ofd.FileName;
+                System.Drawing.Image fingerImage = System.Drawing.Image.FromStream(new MemoryStream(File.ReadAllBytes(companyLogoImagePath)));
+                picBoxClientSetupCompanyLogo.Image = fingerImage;
+                picBoxClientSetupCompanyLogo.SizeMode = PictureBoxSizeMode.StretchImage;
+            }
         }
     }
 }

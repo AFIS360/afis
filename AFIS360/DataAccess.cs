@@ -317,12 +317,13 @@ namespace AFIS360
             MySqlConnection conn = new MySqlConnection(connStr);
             MySqlCommand cmd;
             Status status = null;
+            byte[] oSerializedCompanyLogo;
             conn.Open();
             try
             {
                 cmd = conn.CreateCommand();
-                cmd.CommandText = "INSERT INTO client_setup(client_id, legal_name, addr_line, city, state, postal_code, country, refresh_intrvl, created_by, creation_date, updated_by, update_date) VALUES " +
-                                  "(@client_id, @legal_name, @addr_line, @city, @state, @postal_code, @country, @refresh_intrvl, @created_by, @creation_date, @updated_by, @update_date)";
+                cmd.CommandText = "INSERT INTO client_setup(client_id, legal_name, addr_line, city, state, postal_code, country, refresh_intrvl, company_logo, created_by, creation_date, updated_by, update_date) VALUES " +
+                                  "(@client_id, @legal_name, @addr_line, @city, @state, @postal_code, @country, @refresh_intrvl, @company_logo, @created_by, @creation_date, @updated_by, @update_date)";
 
                 cmd.Parameters.AddWithValue("@client_id", clientSetup.ClientId);
                 cmd.Parameters.AddWithValue("@legal_name", clientSetup.LegalName);
@@ -332,6 +333,21 @@ namespace AFIS360
                 cmd.Parameters.AddWithValue("@postal_code", clientSetup.PostalCode);
                 cmd.Parameters.AddWithValue("@country", clientSetup.Country);
                 cmd.Parameters.AddWithValue("@refresh_intrvl", clientSetup.DataRefreshInterval);
+
+                if (clientSetup.CompanyLogo != null)
+                {
+                    using (MemoryStream stream = new MemoryStream())
+                    {
+                        BinaryFormatter oBFormatter = new BinaryFormatter();
+                        oBFormatter.Serialize(stream, clientSetup.CompanyLogo);
+                        oSerializedCompanyLogo = stream.ToArray();
+                    }
+                    cmd.Parameters.AddWithValue("@company_logo", oSerializedCompanyLogo);
+                }
+                else {
+                    cmd.Parameters.AddWithValue("@company_logo", null);
+                }
+
                 cmd.Parameters.AddWithValue("@created_by", clientSetup.CreatedBy);
                 cmd.Parameters.AddWithValue("@creation_date", clientSetup.CreationDateTime);
                 cmd.Parameters.AddWithValue("@updated_by", clientSetup.UpdatedBy);
@@ -436,6 +452,7 @@ namespace AFIS360
             MySqlCommand cmd;
             ClientSetup clientSetup = null;
             DataTable ds;
+            System.Drawing.Image companyLogo = null;
             conn.Open();
             try
             {
@@ -458,6 +475,14 @@ namespace AFIS360
                     string country = (string)ds.Rows[0]["country"];
                     int refresh_intrvl = (int)ds.Rows[0]["refresh_intrvl"];
 
+                    using (MemoryStream oStr = new MemoryStream((byte[])ds.Rows[0]["company_logo"]))
+                    {
+                        BinaryFormatter oBFormatter = new BinaryFormatter();
+                        oStr.Position = 0;
+                        companyLogo = (System.Drawing.Image)oBFormatter.Deserialize(oStr);
+                    }
+
+
                     clientSetup = new ClientSetup();
                     clientSetup.ClientId = client_id;
                     clientSetup.LegalName = legal_name;
@@ -467,6 +492,7 @@ namespace AFIS360
                     clientSetup.PostalCode = postal_code;
                     clientSetup.Country = country;
                     clientSetup.DataRefreshInterval = refresh_intrvl;
+                    clientSetup.CompanyLogo = companyLogo;
                 }
             }
             catch (Exception exp)
@@ -2312,12 +2338,13 @@ namespace AFIS360
             MySqlConnection conn = new MySqlConnection(connStr);
             MySqlCommand cmd;
             Status status = null;
+            byte[] oSerializedCompanyLogo;
             conn.Open();
             try
             {
                 cmd = conn.CreateCommand();
                 cmd.CommandText = "UPDATE client_setup SET client_id = @client_id, legal_name = @legal_name, addr_line = @addr_line, city = @city, " +
-                                  "state = @state, postal_code = @postal_code, country = @country, refresh_intrvl = @refresh_intrvl, updated_by = @updated_by, update_date = @update_date";
+                                  "state = @state, postal_code = @postal_code, country = @country, refresh_intrvl = @refresh_intrvl, company_logo = @company_logo, updated_by = @updated_by, update_date = @update_date";
 
                 cmd.Parameters.AddWithValue("@client_id", clientSetup.ClientId);
                 cmd.Parameters.AddWithValue("@legal_name", clientSetup.LegalName);
@@ -2327,6 +2354,20 @@ namespace AFIS360
                 cmd.Parameters.AddWithValue("@postal_code", clientSetup.PostalCode);
                 cmd.Parameters.AddWithValue("@country", clientSetup.Country);
                 cmd.Parameters.AddWithValue("@refresh_intrvl", clientSetup.DataRefreshInterval);
+
+                if (clientSetup.CompanyLogo != null)
+                {
+                    using (MemoryStream stream = new MemoryStream())
+                    {
+                        BinaryFormatter oBFormatter = new BinaryFormatter();
+                        oBFormatter.Serialize(stream, clientSetup.CompanyLogo);
+                        oSerializedCompanyLogo = stream.ToArray();
+                    }
+                    cmd.Parameters.AddWithValue("@company_logo", oSerializedCompanyLogo);
+                }
+                else {
+                    cmd.Parameters.AddWithValue("@company_logo", null);
+                }
                 cmd.Parameters.AddWithValue("@updated_by", clientSetup.UpdatedBy);
                 cmd.Parameters.AddWithValue("@update_date", clientSetup.UpdateDateTime);
 

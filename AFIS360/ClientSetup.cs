@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -16,6 +17,7 @@ namespace AFIS360
         private string postalCode;
         private string country;
         private int dataRefreshInterval;
+        private Image companyLogo;
 
         public string ClientId
         {
@@ -63,6 +65,12 @@ namespace AFIS360
         {
             get { return dataRefreshInterval; }
             set { dataRefreshInterval = value; }
+        }
+
+        public Image CompanyLogo
+        {
+            get { return companyLogo; }
+            set { companyLogo = value; }
         }
     }
 }

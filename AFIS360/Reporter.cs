@@ -38,11 +38,27 @@ namespace AFIS360
             doc.AddTitle("Person Detail Report");
             doc.AddHeader("Person Detail Report", "Person Detail Report");
 
-            Paragraph paragraphCompanyInfo = new Paragraph(AFISMain.clientSetup.LegalName +  "\n", paragraphTitleFont);
-            paragraphCompanyInfo.Add(AFISMain.clientSetup.AddressLine + "\n");
-            paragraphCompanyInfo.Add(AFISMain.clientSetup.City + ", " + AFISMain.clientSetup.State + " " + AFISMain.clientSetup.PostalCode + "\n");
-            paragraphCompanyInfo.Add(AFISMain.clientSetup.Country + "\n");
-            paragraphCompanyInfo.Alignment = Element.ALIGN_LEFT;
+            //Add Company Logo & Company Name
+            PdfPTable logoAndTitle = new PdfPTable(2);
+            float[] cellWidths = new float[] { 100f, 100f};
+            logoAndTitle.SetWidths(cellWidths);
+            iTextSharp.text.Image iTextCompanyLogoImage = null;
+            if (AFISMain.clientSetup != null)
+            {
+                if(AFISMain.clientSetup.CompanyLogo != null)
+                {
+                    iTextCompanyLogoImage = iTextSharp.text.Image.GetInstance(AFISMain.clientSetup.CompanyLogo, System.Drawing.Imaging.ImageFormat.Bmp);
+                    iTextCompanyLogoImage.ScaleAbsolute(60f, 60f);
+                }
+            } else
+            {
+                //Default image in case, image is not available
+                iTextCompanyLogoImage = iTextSharp.text.Image.GetInstance(ConfigurationManager.AppSettings["DefaultCompanyLogo"]);
+            }
+            logoAndTitle.AddCell(new PdfPCell(iTextCompanyLogoImage));
+            string titleStr = AFISMain.clientSetup.LegalName + "\n" + AFISMain.clientSetup.AddressLine + "\n" + AFISMain.clientSetup.City + ", " + AFISMain.clientSetup.State + " " + AFISMain.clientSetup.PostalCode + "\n" + AFISMain.clientSetup.Country + "\n";
+            logoAndTitle.AddCell(new PdfPCell(new Phrase(titleStr, paragraphTitleFont)));
+            doc.Add(logoAndTitle);
 
             iTextSharp.text.Font contentFont = iTextSharp.text.FontFactory.GetFont("Webdings", 20, iTextSharp.text.Font.BOLD);
             Paragraph paragraphReportTitle = new Paragraph("Person Detail Report\n", contentFont);
@@ -53,7 +69,6 @@ namespace AFIS360
             paragraphReportSubTitle.Add("At: " + DateTime.Now.ToString() + "\n");
             paragraphReportSubTitle.Alignment = Element.ALIGN_CENTER;
 
-            doc.Add(paragraphCompanyInfo);
             doc.Add(paragraphReportTitle);
             doc.Add(paragraphReportSubTitle);
 
@@ -437,12 +452,28 @@ namespace AFIS360
             doc.AddTitle("User Access Report");
             doc.AddHeader("Daily Report", "User Access Report");
 
-            Paragraph paragraphCompanyInfo = new Paragraph(AFISMain.clientSetup.LegalName + "\n", paragraphTitleFont);
-            paragraphCompanyInfo.Add(AFISMain.clientSetup.AddressLine + "\n");
-            paragraphCompanyInfo.Add(AFISMain.clientSetup.City + ", " + AFISMain.clientSetup.State + " " + AFISMain.clientSetup.PostalCode + "\n");
-            paragraphCompanyInfo.Add(AFISMain.clientSetup.Country + "\n");
-            paragraphCompanyInfo.Alignment = Element.ALIGN_LEFT;
-
+            //Logo & Company Name
+            PdfPTable logoAndTitle = new PdfPTable(2);
+            float[] cellWidths = new float[] { 100f, 100f };
+            logoAndTitle.SetWidths(cellWidths);
+            iTextSharp.text.Image iTextCompanyLogoImage = null;
+            if (AFISMain.clientSetup != null)
+            {
+                if (AFISMain.clientSetup.CompanyLogo != null)
+                {
+                    iTextCompanyLogoImage = iTextSharp.text.Image.GetInstance(AFISMain.clientSetup.CompanyLogo, System.Drawing.Imaging.ImageFormat.Bmp);
+                    iTextCompanyLogoImage.ScaleAbsolute(60f, 60f);
+                }
+            }
+            else
+            {
+                //Default image in case, image is not available
+                iTextCompanyLogoImage = iTextSharp.text.Image.GetInstance(ConfigurationManager.AppSettings["DefaultCompanyLogo"]);
+            }
+            logoAndTitle.AddCell(new PdfPCell(iTextCompanyLogoImage));
+            string titleStr = AFISMain.clientSetup.LegalName + "\n" + AFISMain.clientSetup.AddressLine + "\n" + AFISMain.clientSetup.City + ", " + AFISMain.clientSetup.State + " " + AFISMain.clientSetup.PostalCode + "\n" + AFISMain.clientSetup.Country + "\n";
+            logoAndTitle.AddCell(new PdfPCell(new Phrase(titleStr, paragraphTitleFont)));
+            doc.Add(logoAndTitle);
 
             iTextSharp.text.Font contentFont = iTextSharp.text.FontFactory.GetFont("Webdings", 20, iTextSharp.text.Font.BOLD);
             Paragraph paragraphReportTitle = new Paragraph("Login Access Report\n", contentFont);
@@ -453,7 +484,6 @@ namespace AFIS360
             paragraphReportSubTitle.Add("At: " + DateTime.Now.ToString() + "\n\n");
             paragraphReportSubTitle.Alignment = Element.ALIGN_CENTER;
 
-            doc.Add(paragraphCompanyInfo);
             doc.Add(paragraphReportTitle);
             doc.Add(paragraphReportSubTitle);
 
@@ -551,11 +581,28 @@ namespace AFIS360
             doc.AddTitle("Duplicate Fingerprint Report");
             doc.AddHeader("Monthly Report", "Duplicate Fingerprint Report");
 
-            Paragraph paragraphCompanyInfo = new Paragraph(AFISMain.clientSetup.LegalName + "\n", paragraphTitleFont);
-            paragraphCompanyInfo.Add(AFISMain.clientSetup.AddressLine + "\n");
-            paragraphCompanyInfo.Add(AFISMain.clientSetup.City + ", " + AFISMain.clientSetup.State + " " + AFISMain.clientSetup.PostalCode + "\n");
-            paragraphCompanyInfo.Add(AFISMain.clientSetup.Country + "\n");
-            paragraphCompanyInfo.Alignment = Element.ALIGN_LEFT;
+            //Add Company Logo & Company Name
+            PdfPTable logoAndTitle = new PdfPTable(2);
+            float[] cellWidths = new float[] { 100f, 100f };
+            logoAndTitle.SetWidths(cellWidths);
+            iTextSharp.text.Image iTextCompanyLogoImage = null;
+            if (AFISMain.clientSetup != null)
+            {
+                if (AFISMain.clientSetup.CompanyLogo != null)
+                {
+                    iTextCompanyLogoImage = iTextSharp.text.Image.GetInstance(AFISMain.clientSetup.CompanyLogo, System.Drawing.Imaging.ImageFormat.Bmp);
+                    iTextCompanyLogoImage.ScaleAbsolute(60f, 60f);
+                }
+            }
+            else
+            {
+                //Default image in case, image is not available
+                iTextCompanyLogoImage = iTextSharp.text.Image.GetInstance(ConfigurationManager.AppSettings["DefaultCompanyLogo"]);
+            }
+            logoAndTitle.AddCell(new PdfPCell(iTextCompanyLogoImage));
+            string titleStr = AFISMain.clientSetup.LegalName + "\n" + AFISMain.clientSetup.AddressLine + "\n" + AFISMain.clientSetup.City + ", " + AFISMain.clientSetup.State + " " + AFISMain.clientSetup.PostalCode + "\n" + AFISMain.clientSetup.Country + "\n";
+            logoAndTitle.AddCell(new PdfPCell(new Phrase(titleStr, paragraphTitleFont)));
+            doc.Add(logoAndTitle);
 
             iTextSharp.text.Font contentFont = iTextSharp.text.FontFactory.GetFont("Webdings", 20, iTextSharp.text.Font.BOLD);
             Paragraph paragraphReportTitle = new Paragraph("Duplicate Fingerprint Report\n", contentFont);
@@ -566,7 +613,6 @@ namespace AFIS360
             paragraphReportSubTitle.Add("At: " + DateTime.Now.ToString() + "\n\n");
             paragraphReportSubTitle.Alignment = Element.ALIGN_CENTER;
 
-            doc.Add(paragraphCompanyInfo);
             doc.Add(paragraphReportTitle);
             doc.Add(paragraphReportSubTitle);
 

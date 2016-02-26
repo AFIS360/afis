@@ -62,7 +62,7 @@ namespace AFIS360
                 intervalTime = AFISMain.clientSetup.DataRefreshInterval;
                 if(intervalTime > 0)
                 {
-                    intervalTime = intervalTime * 3600 * 1000;
+                    intervalTime = intervalTime * 60 * 1000;
                 } else
                 {
                     intervalTime = Convert.ToInt32(ConfigurationManager.AppSettings["FingerprintTemplateLoaderDefaultInterval"]);
