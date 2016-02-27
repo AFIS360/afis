@@ -16,6 +16,7 @@ using System.Text.RegularExpressions;
 using System.Threading;
 using CsvFile;
 using AFIS360.Scheduler;
+using AFIS360Common;
 
 namespace AFIS360
 {
@@ -43,7 +44,7 @@ namespace AFIS360
             btnUserMgmtUpdate.Enabled = false;
             //set the default image for Match picBox
             if (picMatch.Image == null) picMatch.Image = System.Drawing.Image.FromFile(ConfigurationManager.AppSettings["defaultImageForMatch"]);
-//            pictBoxLoginCompanyLogo.Image = System.Drawing.Image.FromFile(ConfigurationManager.AppSettings["DefaultCompanyLogo"]);
+            Console.WriteLine("###-->> Get User = " + new DataAccess().getUser().getFirstName() + " " + new DataAccess().getUser().getLastName());
         }
 
 
@@ -1424,7 +1425,7 @@ namespace AFIS360
             string personId = txtUserMgmtId.Text;
             //check user already exists to update
             DataAccess dataAccess = new DataAccess();
-            User user = dataAccess.getUser(personId);
+            AFIS360Common.User user = dataAccess.getUser(personId);
             if (user != null)
             {
                 User updatedUser = new User();
@@ -1647,7 +1648,6 @@ namespace AFIS360
             string homePhoneNbr = txtEnrollHomePNbr.Text != null ? Regex.Replace(txtEnrollHomePNbr.Text, @"\D", "") : null;
             string email = txtEnrollEmail.Text;
             System.Drawing.Image passportPhoto = picEnrollPassportPhoto.Image;
-            //            string status = null;
             Status status = null;
             MyPerson person = null;
 
