@@ -5,7 +5,7 @@ using System.Text;
 using SourceAFIS.Simple; // import namespace SourceAFIS.Simple
 
 
-namespace AFIS360
+namespace AFIS360Common
 {
     // Inherit from Person in order to add Name field
     [Serializable]

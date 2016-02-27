@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 
 
-namespace AFIS360
+namespace AFIS360Common
 {
     public class PersonDetail
     {
