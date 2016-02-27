@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace AFIS360
+namespace AFIS360Common
 {
     public class AppConfig
     {

@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 
 
-namespace AFIS360
+namespace AFIS360Common
 {
     [Serializable]
     public class ActivityLog

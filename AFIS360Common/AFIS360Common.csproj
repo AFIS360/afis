@@ -44,7 +44,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AccessControl.cs" />
+    <Compile Include="ActivityLog.cs" />
+    <Compile Include="AppConfig.cs" />
+    <Compile Include="AuditLog.cs" />
+    <Compile Include="ClientSetup.cs" />
+    <Compile Include="CriminalRecord.cs" />
     <Compile Include="DataObject.cs" />
+    <Compile Include="Match.cs" />
     <Compile Include="MyFingerprint.cs" />
     <Compile Include="MyPerson.cs" />
     <Compile Include="PersonDetail.cs" />

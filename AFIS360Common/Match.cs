@@ -5,9 +5,9 @@ using System.Linq;
 using System.Text;
 
 
-namespace AFIS360
+namespace AFIS360Common
 {
-    class Match
+    public class Match
     {
         private MyPerson matchedPerson = null;
         private MyPerson probe = null;
