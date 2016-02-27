@@ -14,7 +14,8 @@ using System.Security.Cryptography;
 using System.Drawing.Imaging;
 using System.Drawing;
 using System.Configuration;
-
+using AFIS360Common;
+using AFIS360ommon;
 
 namespace AFIS360
 {
@@ -680,82 +681,6 @@ namespace AFIS360
             return status;
         }//end storeFingerprints
 
-        /*
-                public void storeFingerprints(MyPerson person)
-                {
-                    string connStr = getConnectionStringByName("MySQL_AFIS_conn");
-                    MySqlConnection conn = new MySqlConnection(connStr);
-                    MySqlCommand cmd;
-                    byte[] oSerializedFpImages;
-                    conn.Open();
-                    try
-                    {
-                        using (MemoryStream stream = new MemoryStream())
-                        {
-                            BinaryFormatter oBFormatter = new BinaryFormatter();
-                            oBFormatter.Serialize(stream, person);
-                            oSerializedFpImages = stream.ToArray();
-                        }
-
-                        cmd = conn.CreateCommand();
-                        cmd.CommandText = "INSERT INTO fingerprint(person_id,image,name) VALUES(@person_id,@image,@name)";
-                        cmd.Parameters.AddWithValue("@person_id", person.PersonId);
-                        cmd.Parameters.AddWithValue("@image", oSerializedFpImages);
-                        cmd.Parameters.AddWithValue("@name", person.Name);
-                        cmd.ExecuteNonQuery();
-                    }
-                    catch (Exception)
-                    {
-                        throw;
-                    }
-                    finally
-                    {
-                        if (conn.State == System.Data.ConnectionState.Open)
-                        {
-                            conn.Close();
-                        }
-                    }
-                }//end storeFingerprints
-
-                public void storeFingerprintTemplates(MyPerson person)
-                {
-                    string connStr = getConnectionStringByName("MySQL_AFIS_conn");
-                    MySqlConnection conn = new MySqlConnection(connStr);
-                    MySqlCommand cmd;
-                    byte[] oSerializedFpImages;
-                    conn.Open();
-                    try
-                    {
-                        //first remove the fingerprint images from MyPerson object
-                        removeFingerptintImages(person);
-
-                        using (MemoryStream stream = new MemoryStream())
-                        {
-                            BinaryFormatter oBFormatter = new BinaryFormatter();
-                            oBFormatter.Serialize(stream, person);
-                            oSerializedFpImages = stream.ToArray();
-                        }
-
-                        cmd = conn.CreateCommand();
-                        cmd.CommandText = "INSERT INTO fp_template(person_id,template,name) VALUES(@person_id,@template,@name)";
-                        cmd.Parameters.AddWithValue("@person_id", person.PersonId);
-                        cmd.Parameters.AddWithValue("@template", oSerializedFpImages);
-                        cmd.Parameters.AddWithValue("@name", person.Name);
-                        cmd.ExecuteNonQuery();
-                    }
-                    catch (Exception)
-                    {
-                        throw;
-                    }
-                    finally
-                    {
-                        if (conn.State == System.Data.ConnectionState.Open)
-                        {
-                            conn.Close();
-                        }
-                    }
-                }//end storeFingerprintTemplates
-        */
 
         //Remove fingerprint images from Person
         private static void removeFingerptintImages(MyPerson person)
@@ -3061,5 +2986,12 @@ namespace AFIS360
             }
         }
 
+        public User getUser()
+        {
+            User user = new User();
+            user.setFirstName("Mohammad");
+            user.setLastName("Mohsin");
+            return user;
+        }
     }
 }
