@@ -87,55 +87,10 @@ namespace AFIS360
             return person;
         }//Enroll
 
-        /*
-                // Take fingerprint image file and create Person object from the image
-                public static MyPerson Enroll(ICollection<KeyValuePair<String, String>> imgFilePaths, string name, string id)
-                {
 
-                    // Initialize empty person object and set its properties
-                    MyPerson person = new MyPerson();
-                    person.Name = name;
-                    person.PersonId = id;
-                    MyFingerprint fp = null;
-
-                    foreach (KeyValuePair<string, string> element in imgFilePaths)
-                    {
-                        string fingerImagePathKey = element.Key;
-                        string fingerImangePath = element.Value;
-
-                        Console.WriteLine("{0}, {1}", fingerImagePathKey, fingerImangePath);
-
-                        Console.WriteLine("Enrolling {0}...", name);
-
-                        // Initialize empty fingerprint object and set properties
-                        fp = new MyFingerprint();
-                        fp.Filename = fingerImangePath;
-                        setFingername(fp, fingerImagePathKey);
-
-                        // Load image from the file                
-                        Console.WriteLine(" Loading image from {0}...", fingerImangePath);
-                        BitmapImage image = new BitmapImage(new Uri(fingerImangePath, UriKind.RelativeOrAbsolute));
-                        fp.AsBitmapSource = image;
-                        // Above update of fp.AsBitmapSource initialized also raw image in fp.Image
-                        // Check raw image dimensions, Y axis is first, X axis is second
-                        Console.WriteLine(" Image size = {0} x {1} (width x height)", fp.Image.GetLength(1), fp.Image.GetLength(0));
-                        // Add fingerprint to the person
-                        person.Fingerprints.Add(fp);
-                    }
-
-                    // Execute extraction in order to initialize fp.Template
-                    Afis.Extract(person);
-                    // Check template size
-                    Console.WriteLine(" Template size = {0} bytes", fp.Template.Length);
-
-                    return person;
-                }//Enroll
-
-        */
         // Take fingerprint image file and create Person object from the image
         public static MyPerson Enroll(ICollection<KeyValuePair<String, System.Drawing.Image>> imgsFromPicBox, string name, string id)
         {
-
             // Initialize empty person object and set its properties
             MyPerson person = new MyPerson();
             person.Name = name;

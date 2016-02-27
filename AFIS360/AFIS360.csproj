@@ -69,8 +69,6 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AccessControl.cs" />
-    <Compile Include="ActivityLog.cs" />
     <Compile Include="AdvancedMatcher.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -83,22 +81,18 @@
     <Compile Include="AFISMain.Designer.cs">
       <DependentUpon>AFISMain.cs</DependentUpon>
     </Compile>
-    <Compile Include="AppConfig.cs" />
-    <Compile Include="AuditLog.cs" />
     <Compile Include="BatchExport.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="BatchExport.Designer.cs">
       <DependentUpon>BatchExport.cs</DependentUpon>
     </Compile>
-    <Compile Include="ClientSetup.cs" />
     <Compile Include="ConvertToFromWSQ.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="ConvertToFromWSQ.Designer.cs">
       <DependentUpon>ConvertToFromWSQ.cs</DependentUpon>
     </Compile>
-    <Compile Include="CriminalRecord.cs" />
     <Compile Include="CriminalRecordForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -119,7 +113,6 @@
     <Compile Include="ImportData.Designer.cs">
       <DependentUpon>ImportData.cs</DependentUpon>
     </Compile>
-    <Compile Include="Match.cs" />
     <Compile Include="obj\Debug\TemporaryGeneratedFile_036C0B5B-1481-4323-8D20-8F5ADCB23D92.cs" />
     <Compile Include="obj\Debug\TemporaryGeneratedFile_5937a670-0e60-4077-877b-f7221da3dda1.cs" />
     <Compile Include="obj\Debug\TemporaryGeneratedFile_E7A71F73-0F8D-4B9B-B56E-8E70B10BC5D3.cs" />

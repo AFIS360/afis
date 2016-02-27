@@ -180,7 +180,7 @@ namespace AFIS360
             //Set Serach status
             lblMatchProgressStatus.Text = "Searching....";
 
-            Match match = Program.getMatch(fpPath, "[Unknown Identity]", matchingThreshold);
+            AFIS360Common.Match match = Program.getMatch(fpPath, "[Unknown Identity]", matchingThreshold);
             MyPerson matchedPerson = match.getMatchedPerson();
 
             //clear the Matched Result section before populating
@@ -284,7 +284,7 @@ namespace AFIS360
 
         private void doDuplicateCheck(string fingerName, System.Drawing.Image fingerImage, PictureBox picBox)
         {
-            Match match = Program.getMatch(fingerName, fingerImage, "[Unknown]", 60);
+            AFIS360Common.Match match = Program.getMatch(fingerName, fingerImage, "[Unknown]", 60);
             if (match.getStatus())
             {
                 DialogResult dr = MessageBox.Show("Duplicate fingerprint found that belongs to a Person with Person Id = " + match.getMatchedPerson().PersonId + ". Do you want to continue?", "Warning Message", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
