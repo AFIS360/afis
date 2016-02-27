@@ -13,7 +13,7 @@ using Wsqm;
 using System.Configuration;
 using System.Drawing.Imaging;
 using AFIS360.Scheduler;
-
+using AFIS360Common;
 
 namespace AFIS360
 {

@@ -1,4 +1,5 @@
-﻿using iTextSharp.text;
+﻿using AFIS360Common;
+using iTextSharp.text;
 using iTextSharp.text.pdf;
 using SourceAFIS.Simple;
 using System;

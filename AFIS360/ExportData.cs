@@ -1,4 +1,5 @@
-﻿using CsvFile;
+﻿using AFIS360Common;
+using CsvFile;
 using SourceAFIS.Simple;
 using System;
 using System.Collections.Generic;
