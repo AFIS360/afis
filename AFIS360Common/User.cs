@@ -1,14 +1,12 @@
-﻿using System;
+﻿using SourceAFIS.Simple;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using SourceAFIS.Simple; // import namespace SourceAFIS.Simpl
+using System.Threading.Tasks;
 
-
-namespace AFIS360
+namespace AFIS360Common
 {
-    // Inherit from Person in order to add Name field
-    [Serializable]
     public class User : Person
     {
         long id;

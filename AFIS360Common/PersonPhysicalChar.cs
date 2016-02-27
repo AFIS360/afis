@@ -1,10 +1,11 @@
-﻿using System;
+﻿using AFIS360Common;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace AFIS360
+namespace AFIS360ommon
 {
     public class PersonPhysicalChar : DataObject
     {
