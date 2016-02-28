@@ -14,6 +14,7 @@ using System.Configuration;
 using System.Drawing.Imaging;
 using AFIS360.Scheduler;
 using AFIS360Common;
+using AFIS360Common.dao;
 
 namespace AFIS360
 {

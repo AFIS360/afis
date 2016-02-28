@@ -1,4 +1,5 @@
 ﻿using AFIS360Common;
+using AFIS360Common.dao;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;

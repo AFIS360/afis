@@ -99,7 +99,6 @@
     <Compile Include="CriminalRecordForm.Designer.cs">
       <DependentUpon>CriminalRecordForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="DataAccess.cs" />
     <Compile Include="ExportData.cs">
       <SubType>Form</SubType>
     </Compile>

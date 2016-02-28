@@ -1,4 +1,5 @@
 ﻿using AFIS360Common;
+using AFIS360Common.dao;
 using CsvFile;
 using SourceAFIS.Simple;
 using System;
