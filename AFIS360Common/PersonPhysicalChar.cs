@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace AFIS360ommon
+namespace AFIS360Common
 {
     public class PersonPhysicalChar : DataObject
     {
