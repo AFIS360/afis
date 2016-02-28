@@ -9,7 +9,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using AFIS360Common;
-using AFIS360ommon;
 using AFIS360Common.dao;
 
 namespace AFIS360

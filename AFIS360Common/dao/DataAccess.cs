@@ -15,7 +15,6 @@ using System.Drawing.Imaging;
 using System.Drawing;
 using System.Configuration;
 using AFIS360Common;
-using AFIS360ommon;
 
 namespace AFIS360Common.dao
 {

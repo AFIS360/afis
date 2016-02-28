@@ -45,7 +45,6 @@ namespace AFIS360
             btnUserMgmtUpdate.Enabled = false;
             //set the default image for Match picBox
             if (picMatch.Image == null) picMatch.Image = System.Drawing.Image.FromFile(ConfigurationManager.AppSettings["defaultImageForMatch"]);
-            Console.WriteLine("###-->> Get User = " + new DataAccess().getUser().getFirstName() + " " + new DataAccess().getUser().getLastName());
         }
 
 
