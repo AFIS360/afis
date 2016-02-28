@@ -8,7 +8,7 @@ using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
 using static System.Net.Mime.MediaTypeNames;
 using SourceAFIS.Simple;
-using System.Windows.Media.Imaging;
+//using System.Windows.Media.Imaging;
 using System.Collections;
 using System.Security.Cryptography;
 using System.Drawing.Imaging;
@@ -17,7 +17,7 @@ using System.Configuration;
 using AFIS360Common;
 using AFIS360ommon;
 
-namespace AFIS360
+namespace AFIS360Common.dao
 {
     public class DataAccess
     {
