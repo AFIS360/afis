@@ -2985,13 +2985,5 @@ namespace AFIS360Common.dao
                 throw;
             }
         }
-
-        public User getUser()
-        {
-            User user = new User();
-            user.setFirstName("Mohammad");
-            user.setLastName("Mohsin");
-            return user;
-        }
     }
 }
