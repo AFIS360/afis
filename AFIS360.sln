@@ -13,6 +13,11 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AFIS360Common", "AFIS360Com
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AFIS360Webservice", "AFIS360Webservice\AFIS360Webservice.csproj", "{7F67B97D-937C-4A95-9C73-0E86ABF8AC22}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AFIS360WebApp", "AFIS360WebApp\AFIS360WebApp.csproj", "{120F6BA4-AAA8-43D4-9F5F-B7EB4B581D4A}"
+	ProjectSection(ProjectDependencies) = postProject
+		{7F67B97D-937C-4A95-9C73-0E86ABF8AC22} = {7F67B97D-937C-4A95-9C73-0E86ABF8AC22}
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,6 +44,10 @@ Global
 		{7F67B97D-937C-4A95-9C73-0E86ABF8AC22}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7F67B97D-937C-4A95-9C73-0E86ABF8AC22}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7F67B97D-937C-4A95-9C73-0E86ABF8AC22}.Release|Any CPU.Build.0 = Release|Any CPU
+		{120F6BA4-AAA8-43D4-9F5F-B7EB4B581D4A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{120F6BA4-AAA8-43D4-9F5F-B7EB4B581D4A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{120F6BA4-AAA8-43D4-9F5F-B7EB4B581D4A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{120F6BA4-AAA8-43D4-9F5F-B7EB4B581D4A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
