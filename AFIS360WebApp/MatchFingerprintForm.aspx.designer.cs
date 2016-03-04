@@ -10,7 +10,7 @@
 namespace AFIS360WebApp {
     
     
-    public partial class PersonDetailForm {
+    public partial class MatchFingerprintForm {
         
         /// <summary>
         /// form1 control.
@@ -22,66 +22,48 @@ namespace AFIS360WebApp {
         protected global::System.Web.UI.HtmlControls.HtmlForm form1;
         
         /// <summary>
-        /// TablePersonDetailSearch control.
+        /// FileUploadMatchFpUpload control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Table TablePersonDetailSearch;
+        protected global::System.Web.UI.WebControls.FileUpload FileUploadMatchFpUpload;
         
         /// <summary>
-        /// txtBoxPersonId control.
+        /// BtnMatchLoadFp control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtBoxPersonId;
+        protected global::System.Web.UI.WebControls.Button BtnMatchLoadFp;
         
         /// <summary>
-        /// btnSubmit control.
+        /// TextBox1 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnSubmit;
+        protected global::System.Web.UI.WebControls.TextBox TextBox1;
         
         /// <summary>
-        /// TablePersonDetail control.
+        /// fingerprintImage control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Table TablePersonDetail;
+        protected global::System.Web.UI.WebControls.Image fingerprintImage;
         
         /// <summary>
-        /// passportPhoto control.
+        /// BtnMatchFingerprint control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Image passportPhoto;
-        
-        /// <summary>
-        /// lblFirstName control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblFirstName;
-        
-        /// <summary>
-        /// lblLastName control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblLastName;
+        protected global::System.Web.UI.WebControls.Button BtnMatchFingerprint;
     }
 }

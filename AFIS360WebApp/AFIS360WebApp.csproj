@@ -109,24 +109,69 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Global.asax" />
+    <Content Include="images\davidLI.tif" />
+    <Content Include="images\prueba1.tif" />
+    <Content Include="images\prueba2.bmp" />
+    <Content Include="images\ShafiqLI.bmp" />
+    <Content Include="LoginForm.aspx" />
+    <Content Include="MatchFingerprintForm.aspx" />
     <Content Include="PersonDetailForm.aspx" />
     <Content Include="scripts\ai.0.15.0-build58334.js" />
     <Content Include="scripts\ai.0.15.0-build58334.min.js" />
+    <Content Include="scripts\jquery-1.12.1.js" />
+    <Content Include="Service References\GetMatchServiceRef\AFIS360WebApp.GetMatchServiceRef.Match.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <None Include="Service References\GetMatchServiceRef\configuration91.svcinfo" />
+    <None Include="Service References\GetMatchServiceRef\configuration.svcinfo" />
+    <None Include="Service References\GetMatchServiceRef\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
     <Content Include="Service References\GetPersonServiceRef\AFIS360WebApp.GetPersonServiceRef.PersonDetail.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Content>
     <Content Include="Service References\GetPersonServiceRef\AFIS360WebApp.GetPersonServiceRef.getPersonResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Content>
+    <None Include="Service References\GetMatchServiceRef\MatchFingerprint.wsdl" />
     <None Include="Service References\GetPersonServiceRef\configuration91.svcinfo" />
     <None Include="Service References\GetPersonServiceRef\configuration.svcinfo" />
     <None Include="Service References\GetPersonServiceRef\Reference.svcmap">
       <Generator>WCF Proxy Generator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
+    <Content Include="Service References\ValidateUserServiceRef\AFIS360WebApp.ValidateUserServiceRef.User.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <None Include="Service References\ValidateUserServiceRef\configuration91.svcinfo" />
+    <None Include="Service References\ValidateUserServiceRef\configuration.svcinfo" />
+    <None Include="Service References\ValidateUserServiceRef\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
     <Content Include="Web.config" />
+    <None Include="Service References\ValidateUserServiceRef\ValidateUser.wsdl" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Global.asax.cs">
+      <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="LoginForm.aspx.cs">
+      <DependentUpon>LoginForm.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="LoginForm.aspx.designer.cs">
+      <DependentUpon>LoginForm.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="MatchFingerprintForm.aspx.cs">
+      <DependentUpon>MatchFingerprintForm.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="MatchFingerprintForm.aspx.designer.cs">
+      <DependentUpon>MatchFingerprintForm.aspx</DependentUpon>
+    </Compile>
     <Compile Include="PersonDetailForm.aspx.cs">
       <DependentUpon>PersonDetailForm.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -135,7 +180,17 @@
       <DependentUpon>PersonDetailForm.aspx</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Service References\GetMatchServiceRef\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
     <Compile Include="Service References\GetPersonServiceRef\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
+    <Compile Include="Service References\ValidateUserServiceRef\Reference.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.svcmap</DependentUpon>
@@ -145,8 +200,11 @@
     <WCFMetadata Include="Service References\" />
   </ItemGroup>
   <ItemGroup>
+    <WCFMetadataStorage Include="Service References\GetMatchServiceRef\" />
     <WCFMetadataStorage Include="Service References\GetPersonServiceRef\" />
+    <WCFMetadataStorage Include="Service References\ValidateUserServiceRef\" />
   </ItemGroup>
+  <ItemGroup />
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>

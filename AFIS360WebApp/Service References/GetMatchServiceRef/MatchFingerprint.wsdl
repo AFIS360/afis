@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://localhost/AFIS360Webservice" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" targetNamespace="http://localhost/AFIS360Webservice" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://localhost/AFIS360Webservice">
+      <s:element name="GetMatch">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="fingerName" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="fingerprintBase64Str" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="visitorId" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="threshold" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetMatchResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetMatchResult" type="tns:Match" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="Match">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="MatchedPerson" type="tns:MyPerson" />
+          <s:element minOccurs="0" maxOccurs="1" name="Probe" type="tns:MyPerson" />
+          <s:element minOccurs="1" maxOccurs="1" name="Score" type="s:float" />
+          <s:element minOccurs="1" maxOccurs="1" name="Status" type="s:boolean" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="MyPerson">
+        <s:complexContent mixed="false">
+          <s:extension base="tns:Person">
+            <s:sequence>
+              <s:element minOccurs="0" maxOccurs="1" name="Name" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="PersonId" type="s:string" />
+            </s:sequence>
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+      <s:complexType name="Person">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="Fingerprints" type="tns:ArrayOfFingerprint" />
+        </s:sequence>
+        <s:attribute name="Id" type="s:int" use="required" />
+      </s:complexType>
+      <s:complexType name="ArrayOfFingerprint">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="Fingerprint" nillable="true" type="tns:Fingerprint" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="Fingerprint">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="AsImageData" type="s:base64Binary" />
+          <s:element minOccurs="0" maxOccurs="1" name="Template" type="s:base64Binary" />
+        </s:sequence>
+        <s:attribute name="Finger" type="tns:Finger" use="required" />
+      </s:complexType>
+      <s:simpleType name="Finger">
+        <s:restriction base="s:string">
+          <s:enumeration value="Any" />
+          <s:enumeration value="RightThumb" />
+          <s:enumeration value="LeftThumb" />
+          <s:enumeration value="RightIndex" />
+          <s:enumeration value="LeftIndex" />
+          <s:enumeration value="RightMiddle" />
+          <s:enumeration value="LeftMiddle" />
+          <s:enumeration value="RightRing" />
+          <s:enumeration value="LeftRing" />
+          <s:enumeration value="RightLittle" />
+          <s:enumeration value="LeftLittle" />
+        </s:restriction>
+      </s:simpleType>
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="GetMatchSoapIn">
+    <wsdl:part name="parameters" element="tns:GetMatch" />
+  </wsdl:message>
+  <wsdl:message name="GetMatchSoapOut">
+    <wsdl:part name="parameters" element="tns:GetMatchResponse" />
+  </wsdl:message>
+  <wsdl:portType name="MatchFingerprintSoap">
+    <wsdl:operation name="GetMatch">
+      <wsdl:input message="tns:GetMatchSoapIn" />
+      <wsdl:output message="tns:GetMatchSoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="MatchFingerprintSoap" type="tns:MatchFingerprintSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="GetMatch">
+      <soap:operation soapAction="http://localhost/AFIS360Webservice/GetMatch" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="MatchFingerprintSoap12" type="tns:MatchFingerprintSoap">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="GetMatch">
+      <soap12:operation soapAction="http://localhost/AFIS360Webservice/GetMatch" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="MatchFingerprint">
+    <wsdl:port name="MatchFingerprintSoap" binding="tns:MatchFingerprintSoap">
+      <soap:address location="http://localhost:60531/MatchFingerprint.asmx" />
+    </wsdl:port>
+    <wsdl:port name="MatchFingerprintSoap12" binding="tns:MatchFingerprintSoap12">
+      <soap12:address location="http://localhost:60531/MatchFingerprint.asmx" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>
