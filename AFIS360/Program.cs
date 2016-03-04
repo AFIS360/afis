@@ -381,7 +381,6 @@ namespace AFIS360
             Afis = new AfisEngine();
             AFISMain afis = new AFISMain();
             afis.ShowDialog();
-
         }// end Main
 
     }//end Program
