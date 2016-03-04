@@ -79,6 +79,7 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="PresentationCore" />
     <Reference Include="SourceAFIS">
       <HintPath>..\AFIS360\dll\SourceAFIS.dll</HintPath>
     </Reference>
@@ -98,6 +99,7 @@
     <Reference Include="System.Configuration" />
     <Reference Include="System.Web.Services" />
     <Reference Include="System.EnterpriseServices" />
+    <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
@@ -113,17 +115,30 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="GetPerson.asmx" />
+    <Content Include="MatchFingerprint.asmx" />
     <Content Include="scripts\ai.0.15.0-build58334.js" />
     <Content Include="scripts\ai.0.15.0-build58334.min.js" />
+    <Content Include="ValidateUser.asmx" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="controller\FingerprintMatcher.cs" />
     <Compile Include="GetPerson.asmx.cs">
       <DependentUpon>GetPerson.asmx</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="MatchFingerprint.asmx.cs">
+      <DependentUpon>MatchFingerprint.asmx</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ValidateUser.asmx.cs">
+      <DependentUpon>ValidateUser.asmx</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="webobj\Match.cs" />
     <Compile Include="webobj\PersonDetail.cs" />
+    <Compile Include="webobj\User.cs" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
