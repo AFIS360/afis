@@ -1,23 +1,72 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="MatchFingerprintForm.aspx.cs" Inherits="AFIS360WebApp.MatchFingerprintForm" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="MatchFingerprintForm.aspx.cs" Inherits="AFIS360WebApp.MatchFingerprintForm" Trace="False" %>
 
 <!DOCTYPE html>
 
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
-    <title></title>
+    <title>Fingerprint Match</title>
 </head>
 <body>
-    <form id="form1" runat="server">
+    <form id="FingerprintMatchForm" runat="server">
     <div>
-    
-        <asp:FileUpload ID="FileUploadMatchFpUpload" runat="server" />
+        <asp:Table ID="TableMain" runat="server">
+
+            <asp:TableHeaderRow>
+                <asp:TableHeaderCell>
+                        <asp:Panel ID="PanelLoginAs" runat="server" BorderStyle="Solid">
+                            <asp:Label ID="LabelLoginAS" runat="server" Text="Login As:"></asp:Label>
+                            <asp:Label ID="LabelLoginUserInfo" runat="server"></asp:Label>
+                       </asp:Panel>
+                </asp:TableHeaderCell>
+            </asp:TableHeaderRow>
+
+            <asp:TableRow>
+                <asp:TableCell>
+                      <asp:Panel ID="PanelFingerprintMatchControls" runat="server" BorderStyle="Solid" Width="819px">                            
+                          <asp:Table ID="TableFingerprintMatch" runat="server" Height="96px" Width="434px">
+                                <asp:TableRow>
+                                    <asp:TableCell><asp:FileUpload ID="FileUploadMatchFpUpload" runat="server"  /></asp:TableCell>
+                                </asp:TableRow>
+                                <asp:TableRow>
+                                    <asp:TableCell><asp:Button ID="BtnMatchLoadFp" runat="server" OnClick="BtnMatchLoadFp_Click" Text="Load Fingerprint" /></asp:TableCell>
+                                </asp:TableRow>
+                                <asp:TableRow>
+                                    <asp:TableCell><asp:Button ID="BtnMatchFingerprint" runat="server" OnClick="BtnMatchFingerprint_Click" Text="Match Fingerprint" /></asp:TableCell>
+                                </asp:TableRow>
+                        </asp:Table>
+                    </asp:Panel>
+                </asp:TableCell>
+
+                <asp:TableCell>
+                    <asp:Panel ID="PanelFingerprintImageView" runat="server">
+                        <asp:Image ID="FingerprintImage" runat="server" BorderStyle="Solid" Height="100" Width="100" />
+                    </asp:Panel>
+                </asp:TableCell>
+            </asp:TableRow>
+
+            <asp:TableRow>
+                <asp:TableCell><asp:Image ID="PassportPhoto" runat="server" /></asp:TableCell>
+            </asp:TableRow>
+            <asp:TableRow>
+                <asp:TableCell>
+                    <asp:Panel ID="PanelPersonDetail" runat="server" BorderStyle="Solid">
+                        <asp:Table ID="TablePersonDetail" runat="server">
+                            <asp:TableRow>
+                                <asp:TableCell Width="100"><asp:Label ID="LabelPersonID" runat="server"></asp:Label></asp:TableCell>
+                                <asp:TableCell Width="100"><asp:Label ID="LabelPersonName" runat="server"></asp:Label></asp:TableCell>
+                            </asp:TableRow>
+                            <asp:TableRow>
+                                <asp:TableCell Width="200"><asp:Label ID="LabelAddress" runat="server"></asp:Label></asp:TableCell>
+                            </asp:TableRow>
+                        </asp:Table>
+                    </asp:Panel>
+                </asp:TableCell>
+                
+            </asp:TableRow>
+
+        </asp:Table>
+
     </div>
-        <asp:Button ID="BtnMatchLoadFp" runat="server" OnClick="BtnMatchLoadFp_Click" Text="Load Fingerprint" />
-        <asp:TextBox ID="TextBox1" runat="server"></asp:TextBox>
-        <asp:Image ID="fingerprintImage" runat="server" />
-        <p>
-            <asp:Button ID="BtnMatchFingerprint" runat="server" OnClick="BtnMatchFingerprint_Click" Text="Match Fingerprint" />
-        </p>
     </form>
 </body>
 </html>

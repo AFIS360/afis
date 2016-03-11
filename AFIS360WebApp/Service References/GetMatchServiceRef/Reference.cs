@@ -183,6 +183,7 @@ namespace AFIS360WebApp.GetMatchServiceRef {
     }
     
     /// <remarks/>
+    [System.Xml.Serialization.XmlIncludeAttribute(typeof(MyFingerprint))]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.6.1064.2")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
@@ -280,6 +281,43 @@ namespace AFIS360WebApp.GetMatchServiceRef {
         
         /// <remarks/>
         LeftLittle,
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.6.1064.2")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://localhost/AFIS360Webservice")]
+    public partial class MyFingerprint : Fingerprint {
+        
+        private string filenameField;
+        
+        private string fingernameField;
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=0)]
+        public string Filename {
+            get {
+                return this.filenameField;
+            }
+            set {
+                this.filenameField = value;
+                this.RaisePropertyChanged("Filename");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=1)]
+        public string Fingername {
+            get {
+                return this.fingernameField;
+            }
+            set {
+                this.fingernameField = value;
+                this.RaisePropertyChanged("Fingername");
+            }
+        }
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]

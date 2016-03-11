@@ -96,10 +96,22 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="AccessErrorPage.aspx" />
+    <Content Include="images\CompanyLogo.jpg" />
+    <Content Include="images\Fingerprint.png" />
+    <Content Include="images\SearchIcon.png" />
+    <Content Include="MenuPage.aspx" />
     <Content Include="packages.config" />
     <Content Include="ApplicationInsights.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="Service References\UserAccessControlServiceRef\AFIS360WebApp.UserAccessControlServiceRef.AccessControl.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\UserAccessControlServiceRef\AFIS360WebApp.UserAccessControlServiceRef.getAccessControlResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <None Include="Service References\UserAccessControlServiceRef\UserAccessControl.wsdl" />
     <None Include="Service References\GetPersonServiceRef\GetPerson.wsdl" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -120,6 +132,12 @@
     <Content Include="scripts\ai.0.15.0-build58334.js" />
     <Content Include="scripts\ai.0.15.0-build58334.min.js" />
     <Content Include="scripts\jquery-1.12.1.js" />
+    <None Include="Service References\UserAccessControlServiceRef\configuration91.svcinfo" />
+    <None Include="Service References\UserAccessControlServiceRef\configuration.svcinfo" />
+    <None Include="Service References\UserAccessControlServiceRef\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
     <Content Include="Service References\GetMatchServiceRef\AFIS360WebApp.GetMatchServiceRef.Match.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Content>
@@ -155,6 +173,13 @@
     <None Include="Service References\ValidateUserServiceRef\ValidateUser.wsdl" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AccessErrorPage.aspx.cs">
+      <DependentUpon>AccessErrorPage.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="AccessErrorPage.aspx.designer.cs">
+      <DependentUpon>AccessErrorPage.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -172,6 +197,13 @@
     <Compile Include="MatchFingerprintForm.aspx.designer.cs">
       <DependentUpon>MatchFingerprintForm.aspx</DependentUpon>
     </Compile>
+    <Compile Include="MenuPage.aspx.cs">
+      <DependentUpon>MenuPage.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="MenuPage.aspx.designer.cs">
+      <DependentUpon>MenuPage.aspx</DependentUpon>
+    </Compile>
     <Compile Include="PersonDetailForm.aspx.cs">
       <DependentUpon>PersonDetailForm.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -180,6 +212,11 @@
       <DependentUpon>PersonDetailForm.aspx</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Service References\UserAccessControlServiceRef\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
     <Compile Include="Service References\GetMatchServiceRef\Reference.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -200,6 +237,7 @@
     <WCFMetadata Include="Service References\" />
   </ItemGroup>
   <ItemGroup>
+    <WCFMetadataStorage Include="Service References\UserAccessControlServiceRef\" />
     <WCFMetadataStorage Include="Service References\GetMatchServiceRef\" />
     <WCFMetadataStorage Include="Service References\GetPersonServiceRef\" />
     <WCFMetadataStorage Include="Service References\ValidateUserServiceRef\" />

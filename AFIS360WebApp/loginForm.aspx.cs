@@ -1,8 +1,10 @@
-﻿using AFIS360WebApp.ValidateUserServiceRef;
+﻿using AFIS360WebApp.UserAccessControlServiceRef;
+using AFIS360WebApp.ValidateUserServiceRef;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using System.Web.Security;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 
@@ -15,15 +17,17 @@ namespace AFIS360WebApp
 
         }
 
-        protected void Login1_Authenticate(object sender, AuthenticateEventArgs e)
+        protected void UserLogin_Authenticate(object sender, AuthenticateEventArgs e)
         {
-            string userName = Login1.UserName;
-            string password = Login1.Password;
+            string userName = UserLogin.UserName;
+            string password = UserLogin.Password;
+//            FormsAuthentication.RedirectFromLoginPage(userName, UserLogin.RememberMeSet); 
 
             bool validUser = IsValidUser(userName, password);
             if (validUser)
             {
                 e.Authenticated = true;
+
             } else
             {
                 e.Authenticated = false;
@@ -35,12 +39,17 @@ namespace AFIS360WebApp
             bool isValidUser = false;
             ValidateUserSoapClient validUserSoapClient = new ValidateUserSoapClient();
             User validUser = validUserSoapClient.getValidUser(id, password);
+            
             if(validUser != null)
             {
                 isValidUser = true;
-                Session["CurrentUser"] = validUser.FirstName + " " + validUser.LastName;
-            } 
-                
+                Session["CurrentUser"] = validUser.FirstName + " " + validUser.LastName + " (" +validUser.UserRole + ")";
+                //get the user role
+                UserAccessControlSoapClient userAccessControlSoapClient = new UserAccessControlSoapClient();
+                AccessControl accessCntrl = userAccessControlSoapClient.getAccessControl(validUser.UserRole);
+                Session["CurrentUserRole"] = accessCntrl;
+            }
+
             return isValidUser;
         }
     }

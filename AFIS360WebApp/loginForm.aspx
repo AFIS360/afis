@@ -4,16 +4,18 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
-    <title></title>
+    <title>Log In</title>
     <script src="scripts/jquery-1.12.1.js"></script>
 </head>
 <body>
-    <form id="form1" runat="server">
+    <form id="UserLoginForm" runat="server">
     <div>
-    
-        <asp:Login ID="Login1" runat="server" DestinationPageUrl="~/PersonDetailForm.aspx" OnAuthenticate="Login1_Authenticate">
-        </asp:Login>
-    
+        <asp:Panel ID="PanelCompanyLogo" runat="server" Width="475px">
+            <asp:Image ID="ImageComapnyLogo" runat="server" ImageUrl="~/images/CompanyLogo.jpg" />
+        </asp:Panel>
+        <asp:Panel ID="PanelUserLoginPanel" runat="server" Width="475px">
+            <asp:Login ID="UserLogin" runat="server" DestinationPageUrl="~/MenuPage.aspx" OnAuthenticate="UserLogin_Authenticate"  BorderColor="Black" BorderStyle="Solid"></asp:Login>
+        </asp:Panel>
     </div>
     </form>
 </body>

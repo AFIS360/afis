@@ -1,4 +1,5 @@
 ﻿using AFIS360WebApp.GetPersonServiceRef;
+using AFIS360WebApp.UserAccessControlServiceRef;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -14,6 +15,8 @@ namespace AFIS360WebApp
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+            AccessControl accessCntrl = (AccessControl)Session["CurrentUserRole"];
+            if (accessCntrl.AccessEnrollment == "N") Response.Redirect("/AccessErrorPage.aspx");
         }
 
         protected void Button1_Click(object sender, EventArgs e)
