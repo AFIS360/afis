@@ -22,6 +22,7 @@ namespace AFIS360Webservice
     {
 
         [WebMethod]
+        [System.Xml.Serialization.XmlInclude(typeof(AFIS360Common.MyFingerprint))]
         public AFIS360Webservice.webobj.Match GetMatch(string fingerName, string fingerprintBase64Str, string visitorId, Int32 threshold)
         {
             Image fingerprintImage = Converter.Base64ToImage(fingerprintBase64Str);
