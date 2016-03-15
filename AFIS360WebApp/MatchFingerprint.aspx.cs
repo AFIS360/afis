@@ -11,14 +11,12 @@ using System.Web.UI.WebControls;
 
 namespace AFIS360WebApp
 {
-    public partial class MatchFingerprintForm : System.Web.UI.Page
+    public partial class WebForm5 : System.Web.UI.Page
     {
         protected void Page_Load(object sender, EventArgs e)
         {
             AccessControl accessCntrl = (AccessControl)Session["CurrentUserRole"];
             if (accessCntrl.AccessFingerprintMatching == "N") Response.Redirect("/AccessErrorPage.aspx");
-
-            LabelLoginUserInfo.Text = Session["CurrentUser"].ToString();
             ClearFields();
         }
 
@@ -34,7 +32,7 @@ namespace AFIS360WebApp
             string imgBase64String = EncodeFile(Server.MapPath(@FingerprintImage.ImageUrl));
             MatchFingerprintSoapClient matchFpSoapClient = new MatchFingerprintSoapClient();
             Match match = matchFpSoapClient.GetMatch(FingerprintImage.ImageUrl, imgBase64String, "[Unknown]", 60);
-            if(match != null && match.MatchedPerson != null)
+            if (match != null && match.MatchedPerson != null)
             {
                 LabelPersonID.Text = "Person ID: " + match.MatchedPerson.PersonId + "  ";
 
@@ -43,7 +41,8 @@ namespace AFIS360WebApp
                 LabelPersonName.Text = "Name: " + personDetail.FirstName + " " + personDetail.LastName;
                 PassportPhoto.ImageUrl = "data:image/png;base64," + personDetail.PassportPhoto;
                 LabelAddress.Text = "Address: " + personDetail.StreetAddress + ", " + personDetail.City + ", " + personDetail.State + ", " + personDetail.PostalCode + ", " + personDetail.Country;
-            } else
+            }
+            else
             {
                 LabelPersonName.Text = "No match found.";
             }
@@ -60,7 +59,8 @@ namespace AFIS360WebApp
             LabelPersonName.Text = null;
             LabelAddress.Text = null;
             PassportPhoto.ImageUrl = null;
-//            FingerprintImage.ImageUrl = null;
+            //            FingerprintImage.ImageUrl = null;
         }
+
     }
 }

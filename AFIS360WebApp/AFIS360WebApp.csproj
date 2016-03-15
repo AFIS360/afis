@@ -99,20 +99,29 @@
     <Content Include="AccessErrorPage.aspx" />
     <Content Include="images\CompanyLogo.jpg" />
     <Content Include="images\Fingerprint.png" />
+    <Content Include="images\logout.jpg" />
     <Content Include="images\SearchIcon.png" />
     <Content Include="MenuPage.aspx" />
     <Content Include="packages.config" />
     <Content Include="ApplicationInsights.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="scripts\AFIS360JavaScript.js" />
     <Content Include="Service References\UserAccessControlServiceRef\AFIS360WebApp.UserAccessControlServiceRef.AccessControl.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Content>
     <Content Include="Service References\UserAccessControlServiceRef\AFIS360WebApp.UserAccessControlServiceRef.getAccessControlResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Content>
+    <Content Include="Login.aspx" />
+    <Content Include="MainMenu.aspx" />
+    <Content Include="Logout.aspx" />
+    <Content Include="PersonDetail.aspx" />
+    <Content Include="MatchFingerprint.aspx" />
     <None Include="Service References\UserAccessControlServiceRef\UserAccessControl.wsdl" />
     <None Include="Service References\GetPersonServiceRef\GetPerson.wsdl" />
+    <Content Include="Site.Master" />
+    <Content Include="SiteLogin.Master" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -127,8 +136,6 @@
     <Content Include="images\prueba2.bmp" />
     <Content Include="images\ShafiqLI.bmp" />
     <Content Include="LoginForm.aspx" />
-    <Content Include="MatchFingerprintForm.aspx" />
-    <Content Include="PersonDetailForm.aspx" />
     <Content Include="scripts\ai.0.15.0-build58334.js" />
     <Content Include="scripts\ai.0.15.0-build58334.min.js" />
     <Content Include="scripts\jquery-1.12.1.js" />
@@ -190,26 +197,12 @@
     <Compile Include="LoginForm.aspx.designer.cs">
       <DependentUpon>LoginForm.aspx</DependentUpon>
     </Compile>
-    <Compile Include="MatchFingerprintForm.aspx.cs">
-      <DependentUpon>MatchFingerprintForm.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="MatchFingerprintForm.aspx.designer.cs">
-      <DependentUpon>MatchFingerprintForm.aspx</DependentUpon>
-    </Compile>
     <Compile Include="MenuPage.aspx.cs">
       <DependentUpon>MenuPage.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="MenuPage.aspx.designer.cs">
       <DependentUpon>MenuPage.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="PersonDetailForm.aspx.cs">
-      <DependentUpon>PersonDetailForm.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="PersonDetailForm.aspx.designer.cs">
-      <DependentUpon>PersonDetailForm.aspx</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Service References\UserAccessControlServiceRef\Reference.cs">
@@ -231,6 +224,55 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
+    <Compile Include="Site.Master.cs">
+      <DependentUpon>Site.Master</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Site.Master.designer.cs">
+      <DependentUpon>Site.Master</DependentUpon>
+    </Compile>
+    <Compile Include="Login.aspx.cs">
+      <DependentUpon>Login.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Login.aspx.designer.cs">
+      <DependentUpon>Login.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="MainMenu.aspx.cs">
+      <DependentUpon>MainMenu.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="MainMenu.aspx.designer.cs">
+      <DependentUpon>MainMenu.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Logout.aspx.cs">
+      <DependentUpon>Logout.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Logout.aspx.designer.cs">
+      <DependentUpon>Logout.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="PersonDetail.aspx.cs">
+      <DependentUpon>PersonDetail.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="PersonDetail.aspx.designer.cs">
+      <DependentUpon>PersonDetail.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="SiteLogin.Master.cs">
+      <DependentUpon>SiteLogin.Master</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="SiteLogin.Master.designer.cs">
+      <DependentUpon>SiteLogin.Master</DependentUpon>
+    </Compile>
+    <Compile Include="MatchFingerprint.aspx.cs">
+      <DependentUpon>MatchFingerprint.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="MatchFingerprint.aspx.designer.cs">
+      <DependentUpon>MatchFingerprint.aspx</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>

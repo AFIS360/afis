@@ -22,13 +22,76 @@ namespace AFIS360WebApp {
         protected global::System.Web.UI.HtmlControls.HtmlForm MenuPageForm;
         
         /// <summary>
-        /// PanelLoginUserInfo control.
+        /// HeaderTableCompanyLogo control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Panel PanelLoginUserInfo;
+        protected global::System.Web.UI.WebControls.Table HeaderTableCompanyLogo;
+        
+        /// <summary>
+        /// LabelCompanyLogo control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label LabelCompanyLogo;
+        
+        /// <summary>
+        /// HeaderTableDateTime control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Table HeaderTableDateTime;
+        
+        /// <summary>
+        /// LabelToday control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label LabelToday;
+        
+        /// <summary>
+        /// LabelDate control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label LabelDate;
+        
+        /// <summary>
+        /// LabelLocalTime control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label LabelLocalTime;
+        
+        /// <summary>
+        /// LabelClock control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label LabelClock;
+        
+        /// <summary>
+        /// LabelLoginAs control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label LabelLoginAs;
         
         /// <summary>
         /// LabelLoginUserInfo control.
@@ -83,5 +146,23 @@ namespace AFIS360WebApp {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.HyperLink HyperLinkMatchFingerprint;
+        
+        /// <summary>
+        /// ImageLogoutIcon control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Image ImageLogoutIcon;
+        
+        /// <summary>
+        /// HyperLinkLogout control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HyperLink HyperLinkLogout;
     }
 }

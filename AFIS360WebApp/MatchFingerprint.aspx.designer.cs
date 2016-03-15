@@ -10,16 +10,7 @@
 namespace AFIS360WebApp {
     
     
-    public partial class MatchFingerprintForm {
-        
-        /// <summary>
-        /// FingerprintMatchForm control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlForm FingerprintMatchForm;
+    public partial class WebForm5 {
         
         /// <summary>
         /// TableMain control.
@@ -29,33 +20,6 @@ namespace AFIS360WebApp {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Table TableMain;
-        
-        /// <summary>
-        /// PanelLoginAs control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Panel PanelLoginAs;
-        
-        /// <summary>
-        /// LabelLoginAS control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label LabelLoginAS;
-        
-        /// <summary>
-        /// LabelLoginUserInfo control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label LabelLoginUserInfo;
         
         /// <summary>
         /// PanelFingerprintMatchControls control.

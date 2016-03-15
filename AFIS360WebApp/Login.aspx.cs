@@ -4,17 +4,15 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
-using System.Web.Security;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 
 namespace AFIS360WebApp
 {
-    public partial class loginForm : System.Web.UI.Page
+    public partial class WebForm1 : System.Web.UI.Page
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            LabelLoginUserInfo.Text = "N/A";
         }
 
         protected void UserLogin_Authenticate(object sender, AuthenticateEventArgs e)
@@ -27,7 +25,8 @@ namespace AFIS360WebApp
             {
                 e.Authenticated = true;
 
-            } else
+            }
+            else
             {
                 e.Authenticated = false;
             }
@@ -38,11 +37,11 @@ namespace AFIS360WebApp
             bool isValidUser = false;
             ValidateUserSoapClient validUserSoapClient = new ValidateUserSoapClient();
             User validUser = validUserSoapClient.getValidUser(id, password);
-            
-            if(validUser != null)
+
+            if (validUser != null)
             {
                 isValidUser = true;
-                Session["CurrentUser"] = validUser.FirstName + " " + validUser.LastName + " (" +validUser.UserRole + ")";
+                Session["CurrentUser"] = validUser.FirstName + " " + validUser.LastName + " (" + validUser.UserRole + ")";
                 //get the user role
                 UserAccessControlSoapClient userAccessControlSoapClient = new UserAccessControlSoapClient();
                 AccessControl accessCntrl = userAccessControlSoapClient.getAccessControl(validUser.UserRole);
