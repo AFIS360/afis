@@ -7,7 +7,7 @@
         <table>
             <tr>
                 <td style="width: 1000px;">
-                    <asp:Image ID="ImageComapnyLogo" runat="server" ImageUrl="~/images/CompanyLogo.jpg" Height="157px" />
+                    <asp:Image ID="ImageComapnyLogo" runat="server" Height="157px" />
                 </td>
             </tr>
             <tr>

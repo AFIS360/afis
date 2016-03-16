@@ -101,12 +101,20 @@
     <Content Include="images\Fingerprint.png" />
     <Content Include="images\logout.jpg" />
     <Content Include="images\SearchIcon.png" />
-    <Content Include="MenuPage.aspx" />
     <Content Include="packages.config" />
     <Content Include="ApplicationInsights.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="scripts\AFIS360JavaScript.js" />
+    <Content Include="Service References\ClientSetupServiceRef\AFIS360WebApp.ClientSetupServiceRef.ClientSetupInfo.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <None Include="Service References\ClientSetupServiceRef\configuration91.svcinfo" />
+    <None Include="Service References\ClientSetupServiceRef\configuration.svcinfo" />
+    <None Include="Service References\ClientSetupServiceRef\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
     <Content Include="Service References\UserAccessControlServiceRef\AFIS360WebApp.UserAccessControlServiceRef.AccessControl.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Content>
@@ -118,6 +126,7 @@
     <Content Include="Logout.aspx" />
     <Content Include="PersonDetail.aspx" />
     <Content Include="MatchFingerprint.aspx" />
+    <None Include="Service References\ClientSetupServiceRef\ClientSetupService.wsdl" />
     <None Include="Service References\UserAccessControlServiceRef\UserAccessControl.wsdl" />
     <None Include="Service References\GetPersonServiceRef\GetPerson.wsdl" />
     <Content Include="Site.Master" />
@@ -197,14 +206,12 @@
     <Compile Include="LoginForm.aspx.designer.cs">
       <DependentUpon>LoginForm.aspx</DependentUpon>
     </Compile>
-    <Compile Include="MenuPage.aspx.cs">
-      <DependentUpon>MenuPage.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="MenuPage.aspx.designer.cs">
-      <DependentUpon>MenuPage.aspx</DependentUpon>
-    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Service References\ClientSetupServiceRef\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
     <Compile Include="Service References\UserAccessControlServiceRef\Reference.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -279,6 +286,7 @@
     <WCFMetadata Include="Service References\" />
   </ItemGroup>
   <ItemGroup>
+    <WCFMetadataStorage Include="Service References\ClientSetupServiceRef\" />
     <WCFMetadataStorage Include="Service References\UserAccessControlServiceRef\" />
     <WCFMetadataStorage Include="Service References\GetMatchServiceRef\" />
     <WCFMetadataStorage Include="Service References\GetPersonServiceRef\" />

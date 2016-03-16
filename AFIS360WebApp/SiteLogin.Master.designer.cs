@@ -31,6 +31,15 @@ namespace AFIS360WebApp {
         protected global::System.Web.UI.HtmlControls.HtmlForm formMasterLogon;
         
         /// <summary>
+        /// LabelCompanyName control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label LabelCompanyName;
+        
+        /// <summary>
         /// HeaderTableCompanyLogo control.
         /// </summary>
         /// <remarks>

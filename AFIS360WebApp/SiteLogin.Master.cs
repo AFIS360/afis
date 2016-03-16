@@ -1,4 +1,5 @@
-﻿using AFIS360WebApp.UserAccessControlServiceRef;
+﻿using AFIS360WebApp.ClientSetupServiceRef;
+using AFIS360WebApp.UserAccessControlServiceRef;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,6 +13,10 @@ namespace AFIS360WebApp
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+            ClientSetupServiceSoapClient clientSetupServiceSoapClient = new ClientSetupServiceSoapClient();
+            ClientSetup clientSeup = clientSetupServiceSoapClient.GetClientSetup();
+            LabelCompanyName.Text = clientSeup.LegalName;
+
             if (Session["CurrentUser"] != null)
             {
                 AccessControl accessCntrl = (AccessControl)Session["CurrentUserRole"];

@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://localhost/AFIS360Webservice" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" targetNamespace="http://localhost/AFIS360Webservice" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://localhost/AFIS360Webservice">
+      <s:element name="GetClientSetup">
+        <s:complexType />
+      </s:element>
+      <s:element name="GetClientSetupResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetClientSetupResult" type="tns:ClientSetupInfo" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ClientSetupInfo">
+        <s:complexContent mixed="false">
+          <s:extension base="tns:ClientSetup">
+            <s:sequence>
+              <s:element minOccurs="0" maxOccurs="1" name="CompanyLogoBase64Str" type="s:string" />
+            </s:sequence>
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+      <s:complexType name="ClientSetup">
+        <s:complexContent mixed="false">
+          <s:extension base="tns:DataObject">
+            <s:sequence>
+              <s:element minOccurs="0" maxOccurs="1" name="ClientId" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="LegalName" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="AddressLine" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="City" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="State" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="PostalCode" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="Country" type="s:string" />
+              <s:element minOccurs="1" maxOccurs="1" name="DataRefreshInterval" type="s:int" />
+              <s:element minOccurs="0" maxOccurs="1" name="CompanyLogo" type="tns:Image" />
+            </s:sequence>
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+      <s:complexType name="DataObject">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="CreatedBy" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="CreationDateTime" nillable="true" type="s:dateTime" />
+          <s:element minOccurs="0" maxOccurs="1" name="UpdatedBy" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="UpdateDateTime" nillable="true" type="s:dateTime" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="Image" abstract="true">
+        <s:complexContent mixed="false">
+          <s:extension base="tns:MarshalByRefObject">
+            <s:sequence>
+              <s:element minOccurs="0" maxOccurs="1" name="Tag" />
+              <s:element minOccurs="0" maxOccurs="1" name="Palette" type="tns:ColorPalette" />
+            </s:sequence>
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+      <s:complexType name="MarshalByRefObject" abstract="true" />
+      <s:complexType name="ColorPalette" />
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="GetClientSetupSoapIn">
+    <wsdl:part name="parameters" element="tns:GetClientSetup" />
+  </wsdl:message>
+  <wsdl:message name="GetClientSetupSoapOut">
+    <wsdl:part name="parameters" element="tns:GetClientSetupResponse" />
+  </wsdl:message>
+  <wsdl:portType name="ClientSetupServiceSoap">
+    <wsdl:operation name="GetClientSetup">
+      <wsdl:input message="tns:GetClientSetupSoapIn" />
+      <wsdl:output message="tns:GetClientSetupSoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="ClientSetupServiceSoap" type="tns:ClientSetupServiceSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="GetClientSetup">
+      <soap:operation soapAction="http://localhost/AFIS360Webservice/GetClientSetup" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="ClientSetupServiceSoap12" type="tns:ClientSetupServiceSoap">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="GetClientSetup">
+      <soap12:operation soapAction="http://localhost/AFIS360Webservice/GetClientSetup" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="ClientSetupService">
+    <wsdl:port name="ClientSetupServiceSoap" binding="tns:ClientSetupServiceSoap">
+      <soap:address location="http://localhost:60531/ClientSetupService.asmx" />
+    </wsdl:port>
+    <wsdl:port name="ClientSetupServiceSoap12" binding="tns:ClientSetupServiceSoap12">
+      <soap12:address location="http://localhost:60531/ClientSetupService.asmx" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

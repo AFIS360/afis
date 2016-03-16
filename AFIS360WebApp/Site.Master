@@ -36,7 +36,7 @@
         <table style="font-family: Arial">
             <tr>
                 <td colspan="2" style="width: 1200px; height: 80px; background-color: #C0C0C0; text-align: center;">
-                    <h1>AFIS/360 Online</h1>
+                    <asp:Label ID="LabelCompanyName" runat="server" Font-Size="XX-Large"></asp:Label>
                     <asp:Table ID="HeaderTableCompanyLogo" runat="server" HorizontalAlign="Left" Width="40%" BorderStyle="Solid">
                         <asp:TableRow>
                             <asp:TableCell HorizontalAlign="Left" Font-Italic="True">

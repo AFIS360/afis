@@ -10,16 +10,34 @@
 namespace AFIS360WebApp {
     
     
-    public partial class MenuPage {
+    public partial class Site {
         
         /// <summary>
-        /// MenuPageForm control.
+        /// head control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlForm MenuPageForm;
+        protected global::System.Web.UI.WebControls.ContentPlaceHolder head;
+        
+        /// <summary>
+        /// formMaster control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlForm formMaster;
+        
+        /// <summary>
+        /// LabelCompanyName control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label LabelCompanyName;
         
         /// <summary>
         /// HeaderTableCompanyLogo control.
@@ -103,6 +121,15 @@ namespace AFIS360WebApp {
         protected global::System.Web.UI.WebControls.Label LabelLoginUserInfo;
         
         /// <summary>
+        /// ContentPlaceHolderMenu control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.ContentPlaceHolder ContentPlaceHolderMenu;
+        
+        /// <summary>
         /// MenuTable control.
         /// </summary>
         /// <remarks>
@@ -164,5 +191,14 @@ namespace AFIS360WebApp {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.HyperLink HyperLinkLogout;
+        
+        /// <summary>
+        /// MainContentPlaceHolder control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.ContentPlaceHolder MainContentPlaceHolder;
     }
 }

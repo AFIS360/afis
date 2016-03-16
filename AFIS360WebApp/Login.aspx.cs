@@ -1,4 +1,5 @@
-﻿using AFIS360WebApp.UserAccessControlServiceRef;
+﻿using AFIS360WebApp.ClientSetupServiceRef;
+using AFIS360WebApp.UserAccessControlServiceRef;
 using AFIS360WebApp.ValidateUserServiceRef;
 using System;
 using System.Collections.Generic;
@@ -13,6 +14,9 @@ namespace AFIS360WebApp
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+            ClientSetupServiceSoapClient clientSetupServiceSoapClient = new ClientSetupServiceSoapClient();
+            ClientSetupInfo clientSetupInfo = clientSetupServiceSoapClient.GetClientSetup();
+            ImageComapnyLogo.ImageUrl = "data:image/png;base64," + clientSetupInfo.CompanyLogoBase64Str;
         }
 
         protected void UserLogin_Authenticate(object sender, AuthenticateEventArgs e)
