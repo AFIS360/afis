@@ -102,6 +102,7 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="ClientSetupService.asmx" />
     <Content Include="packages.config" />
     <Content Include="ApplicationInsights.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
@@ -123,6 +124,10 @@
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ClientSetupService.asmx.cs">
+      <DependentUpon>ClientSetupService.asmx</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="controller\FingerprintMatcher.cs" />
     <Compile Include="GetPerson.asmx.cs">
       <DependentUpon>GetPerson.asmx</DependentUpon>
@@ -144,6 +149,7 @@
     <Compile Include="webobj\AccessControl.cs" />
     <Compile Include="webobj\Match.cs" />
     <Compile Include="webobj\PersonDetail.cs" />
+    <Compile Include="webobj\ClientSetup.cs" />
     <Compile Include="webobj\User.cs" />
   </ItemGroup>
   <PropertyGroup>
