@@ -13,19 +13,19 @@ namespace AFIS360Common
         private double height;
         private double weight;
         private string eyeColor;
+        private string idMark;
+        private string gender;
+        private DateTime dod;
+        private string hairColor;
+        private string complexion;
+        private string buildType;
+        private string birthMark;
+
         public string PersonId
         {
             get { return personId; }
             set { personId = value; }
         }
-        private string idMark;
-        private string gender;
-        private DateTime dod;
-
-        private string hairColor;
-        private string complexion;
-        private string buildType;
-        private string birthMark;
 
         public double Height
         {

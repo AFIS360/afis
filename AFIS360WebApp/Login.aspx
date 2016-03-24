@@ -5,14 +5,16 @@
 <asp:Content ID="ContentMain" ContentPlaceHolderID="MainContentPlaceHolder" runat="server">
     <div>
         <table>
-            <tr>
-                <td style="width: 1000px;">
-                    <asp:Image ID="ImageComapnyLogo" runat="server" Height="157px" />
+            <tr style="text-align: center">
+                <td><h1>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</h1></td>
+                <td>
+                    <asp:Image ID="ImageComapnyLogo" runat="server" Height="200" Width="200"/>
                 </td>
             </tr>
             <tr>
-                <td style="width: 1000px;" colspan="1">
-                    <asp:Login ID="UserLogin" runat="server" DestinationPageUrl="~/MainMenu.aspx" OnAuthenticate="UserLogin_Authenticate" BorderColor="#CCCC99" BorderStyle="Solid" BackColor="#F7F7DE" BorderWidth="1px" Font-Names="Verdana" Font-Size="10pt">
+                <td><h1>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</h1></td>
+                <td>
+                    <asp:Login ID="UserLogin" runat="server" DestinationPageUrl="~/MainMenu.aspx" OnAuthenticate="UserLogin_Authenticate" BorderColor="#CCCC99" BorderStyle="Solid" BackColor="White" BorderWidth="1px" Font-Names="Verdana" Font-Size="10pt">
                         <TitleTextStyle BackColor="#6B696B" Font-Bold="True" ForeColor="#FFFFFF" />
                     </asp:Login>
                 </td>

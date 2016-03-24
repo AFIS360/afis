@@ -117,6 +117,8 @@
   <ItemGroup>
     <Content Include="GetPerson.asmx" />
     <Content Include="MatchFingerprint.asmx" />
+    <Content Include="PersonCriminalRecordService.asmx" />
+    <Content Include="PersonPhysicalCharService.asmx" />
     <Content Include="scripts\ai.0.15.0-build58334.js" />
     <Content Include="scripts\ai.0.15.0-build58334.min.js" />
     <Content Include="UserAccessControl.asmx" />
@@ -135,6 +137,14 @@
     </Compile>
     <Compile Include="MatchFingerprint.asmx.cs">
       <DependentUpon>MatchFingerprint.asmx</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="PersonCriminalRecordService.asmx.cs">
+      <DependentUpon>PersonCriminalRecordService.asmx</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="PersonPhysicalCharService.asmx.cs">
+      <DependentUpon>PersonPhysicalCharService.asmx</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />

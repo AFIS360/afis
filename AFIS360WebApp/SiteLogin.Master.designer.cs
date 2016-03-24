@@ -103,6 +103,15 @@ namespace AFIS360WebApp {
         protected global::System.Web.UI.WebControls.Label LabelClock;
         
         /// <summary>
+        /// HeaderTableLoginAs control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Table HeaderTableLoginAs;
+        
+        /// <summary>
         /// LabelLoginAs control.
         /// </summary>
         /// <remarks>

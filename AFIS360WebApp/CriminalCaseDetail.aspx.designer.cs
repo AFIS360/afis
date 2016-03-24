@@ -10,204 +10,231 @@
 namespace AFIS360WebApp {
     
     
-    public partial class Site {
+    public partial class WebForm6 {
         
         /// <summary>
-        /// head control.
+        /// TableCriminalCaseDetail control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.ContentPlaceHolder head;
+        protected global::System.Web.UI.WebControls.Table TableCriminalCaseDetail;
         
         /// <summary>
-        /// formMaster control.
+        /// lblCrimeRecord control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlForm formMaster;
+        protected global::System.Web.UI.WebControls.Label lblCrimeRecord;
         
         /// <summary>
-        /// LabelCompanyName control.
+        /// lblCaseID control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label LabelCompanyName;
+        protected global::System.Web.UI.WebControls.Label lblCaseID;
         
         /// <summary>
-        /// HeaderTableCompanyLogo control.
+        /// lblCrimeLoc control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Table HeaderTableCompanyLogo;
+        protected global::System.Web.UI.WebControls.Label lblCrimeLoc;
         
         /// <summary>
-        /// LabelCompanyLogo control.
+        /// lblCrimeDate control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label LabelCompanyLogo;
+        protected global::System.Web.UI.WebControls.Label lblCrimeDate;
         
         /// <summary>
-        /// HeaderTableDateTime control.
+        /// TableCourtAndStatute control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Table HeaderTableDateTime;
+        protected global::System.Web.UI.WebControls.Table TableCourtAndStatute;
         
         /// <summary>
-        /// LabelToday control.
+        /// lblCourtAndStatute control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label LabelToday;
+        protected global::System.Web.UI.WebControls.Label lblCourtAndStatute;
         
         /// <summary>
-        /// LabelDate control.
+        /// lblCourtType control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label LabelDate;
+        protected global::System.Web.UI.WebControls.Label lblCourtType;
         
         /// <summary>
-        /// LabelLocalTime control.
+        /// lblCourtAddress control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label LabelLocalTime;
+        protected global::System.Web.UI.WebControls.Label lblCourtAddress;
         
         /// <summary>
-        /// LabelClock control.
+        /// lblStatute control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label LabelClock;
+        protected global::System.Web.UI.WebControls.Label lblStatute;
         
         /// <summary>
-        /// HeaderTableLoginAs control.
+        /// TableArrestAndSentence control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Table HeaderTableLoginAs;
+        protected global::System.Web.UI.WebControls.Table TableArrestAndSentence;
         
         /// <summary>
-        /// LabelLoginAs control.
+        /// lblArrestAndSentence control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label LabelLoginAs;
+        protected global::System.Web.UI.WebControls.Label lblArrestAndSentence;
         
         /// <summary>
-        /// LabelLoginUserInfo control.
+        /// lblArrestDate control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label LabelLoginUserInfo;
+        protected global::System.Web.UI.WebControls.Label lblArrestDate;
         
         /// <summary>
-        /// ContentPlaceHolderMenu control.
+        /// lblArrestAgency control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.ContentPlaceHolder ContentPlaceHolderMenu;
+        protected global::System.Web.UI.WebControls.Label lblArrestAgency;
         
         /// <summary>
-        /// MenuTable control.
+        /// lblSentenceDate control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Table MenuTable;
+        protected global::System.Web.UI.WebControls.Label lblSentenceDate;
         
         /// <summary>
-        /// ImageSearchIcon control.
+        /// lblReleaseDate control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Image ImageSearchIcon;
+        protected global::System.Web.UI.WebControls.Label lblReleaseDate;
         
         /// <summary>
-        /// HyperLinkSearhPerson control.
+        /// lblParoleDate control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.HyperLink HyperLinkSearhPerson;
+        protected global::System.Web.UI.WebControls.Label lblParoleDate;
         
         /// <summary>
-        /// ImageFingerprintMatchIcon control.
+        /// lblCurrentStatus control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Image ImageFingerprintMatchIcon;
+        protected global::System.Web.UI.WebControls.Label lblCurrentStatus;
         
         /// <summary>
-        /// HyperLinkMatchFingerprint control.
+        /// TableAlertNote control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.HyperLink HyperLinkMatchFingerprint;
+        protected global::System.Web.UI.WebControls.Table TableAlertNote;
         
         /// <summary>
-        /// ImageLogoutIcon control.
+        /// lblAlertNote control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Image ImageLogoutIcon;
+        protected global::System.Web.UI.WebControls.Label lblAlertNote;
         
         /// <summary>
-        /// HyperLinkLogout control.
+        /// lblAlertLevel control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.HyperLink HyperLinkLogout;
+        protected global::System.Web.UI.WebControls.Label lblAlertLevel;
         
         /// <summary>
-        /// MainContentPlaceHolder control.
+        /// lblAlertMessage control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.ContentPlaceHolder MainContentPlaceHolder;
+        protected global::System.Web.UI.WebControls.Label lblAlertMessage;
+        
+        /// <summary>
+        /// TableCrimeDetail control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Table TableCrimeDetail;
+        
+        /// <summary>
+        /// lblCrimeDescription control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblCrimeDescription;
+        
+        /// <summary>
+        /// lblCrimeDescriptionText control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblCrimeDescriptionText;
     }
 }

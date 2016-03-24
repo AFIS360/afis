@@ -26,32 +26,37 @@ namespace AFIS360Webservice
         [WebMethod]
         public webobj.PersonDetail getPerson(string personId)
         {
+            PersonDetail personDetail = null;
+            webobj.PersonDetail webPersonDetail = null;
             DataAccess dataAccess = new DataAccess();
             List<PersonDetail> persons = dataAccess.retrievePersonDetail(personId);
-            PersonDetail personDetail = persons.FirstOrDefault();
-            webobj.PersonDetail webPersonDetail = new webobj.PersonDetail();
-            webPersonDetail.PersonId = personDetail.getPersonId();
-            webPersonDetail.FirstName = personDetail.getFirstName();
-            webPersonDetail.LastName = personDetail.getLastName();
-            webPersonDetail.MiddleName = personDetail.getMiddleName();
-            webPersonDetail.Prefix = personDetail.getPrefix();
-            webPersonDetail.Suffix = personDetail.getSuffix();
-            webPersonDetail.LastName = personDetail.getLastName();
-            webPersonDetail.DateOfBirth = personDetail.getDOB();
-            webPersonDetail.DateOfBirthText = personDetail.getDOBText();
-            webPersonDetail.StreetAddress = personDetail.getStreetAddress();
-            webPersonDetail.City = personDetail.getCity();
-            webPersonDetail.State = personDetail.getState();
-            webPersonDetail.PostalCode = personDetail.getPostalCode();
-            webPersonDetail.Country = personDetail.getCountry();
-            webPersonDetail.Profession = personDetail.getProfession();
-            webPersonDetail.FatherName = personDetail.getFatherName();
-            webPersonDetail.CellNbr = personDetail.getCellNbr();
-            webPersonDetail.HomePhoneNbr = personDetail.getHomePhoneNbr();
-            webPersonDetail.WorkPhoneNbr = personDetail.getWorkPhoneNbr();
-            webPersonDetail.Email = personDetail.getEmail();
-            webPersonDetail.PassportPhoto = personDetail.getPassportPhoto() != null ? Converter.ImageToBase64(personDetail.getPassportPhoto(), System.Drawing.Imaging.ImageFormat.Bmp) : "";
 
+            if(persons != null && persons.Count > 0)
+            {
+                personDetail = persons.FirstOrDefault();
+                webPersonDetail = new webobj.PersonDetail();
+                webPersonDetail.PersonId = personDetail.getPersonId();
+                webPersonDetail.FirstName = personDetail.getFirstName();
+                webPersonDetail.LastName = personDetail.getLastName();
+                webPersonDetail.MiddleName = personDetail.getMiddleName();
+                webPersonDetail.Prefix = personDetail.getPrefix();
+                webPersonDetail.Suffix = personDetail.getSuffix();
+                webPersonDetail.LastName = personDetail.getLastName();
+                webPersonDetail.DateOfBirth = personDetail.getDOB();
+                webPersonDetail.DateOfBirthText = personDetail.getDOBText();
+                webPersonDetail.StreetAddress = personDetail.getStreetAddress();
+                webPersonDetail.City = personDetail.getCity();
+                webPersonDetail.State = personDetail.getState();
+                webPersonDetail.PostalCode = personDetail.getPostalCode();
+                webPersonDetail.Country = personDetail.getCountry();
+                webPersonDetail.Profession = personDetail.getProfession();
+                webPersonDetail.FatherName = personDetail.getFatherName();
+                webPersonDetail.CellNbr = personDetail.getCellNbr();
+                webPersonDetail.HomePhoneNbr = personDetail.getHomePhoneNbr();
+                webPersonDetail.WorkPhoneNbr = personDetail.getWorkPhoneNbr();
+                webPersonDetail.Email = personDetail.getEmail();
+                webPersonDetail.PassportPhoto = personDetail.getPassportPhoto() != null ? Converter.ImageToBase64(personDetail.getPassportPhoto(), System.Drawing.Imaging.ImageFormat.Bmp) : "";
+            }
             return webPersonDetail;
         }
 

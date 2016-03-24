@@ -13,31 +13,13 @@ namespace AFIS360WebApp {
     public partial class WebForm5 {
         
         /// <summary>
-        /// TableMain control.
+        /// TableFileUpload control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Table TableMain;
-        
-        /// <summary>
-        /// PanelFingerprintMatchControls control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Panel PanelFingerprintMatchControls;
-        
-        /// <summary>
-        /// TableFingerprintMatch control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Table TableFingerprintMatch;
+        protected global::System.Web.UI.WebControls.Table TableFileUpload;
         
         /// <summary>
         /// FileUploadMatchFpUpload control.
@@ -67,13 +49,13 @@ namespace AFIS360WebApp {
         protected global::System.Web.UI.WebControls.Button BtnMatchFingerprint;
         
         /// <summary>
-        /// PanelFingerprintImageView control.
+        /// TableFingerptint control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Panel PanelFingerprintImageView;
+        protected global::System.Web.UI.WebControls.Table TableFingerptint;
         
         /// <summary>
         /// FingerprintImage control.
@@ -85,6 +67,15 @@ namespace AFIS360WebApp {
         protected global::System.Web.UI.WebControls.Image FingerprintImage;
         
         /// <summary>
+        /// TablePersonDemography control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Table TablePersonDemography;
+        
+        /// <summary>
         /// PassportPhoto control.
         /// </summary>
         /// <remarks>
@@ -94,22 +85,13 @@ namespace AFIS360WebApp {
         protected global::System.Web.UI.WebControls.Image PassportPhoto;
         
         /// <summary>
-        /// PanelPersonDetail control.
+        /// TablePersonIdentity control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Panel PanelPersonDetail;
-        
-        /// <summary>
-        /// TablePersonDetail control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Table TablePersonDetail;
+        protected global::System.Web.UI.WebControls.Table TablePersonIdentity;
         
         /// <summary>
         /// LabelPersonID control.

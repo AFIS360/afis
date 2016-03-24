@@ -35,49 +35,67 @@
     <form id="formMasterLogon" runat="server">
         <table style="font-family: Arial">
             <tr>
-                <td colspan="2" style="width: 1200px; height: 80px; background-color: #C0C0C0; text-align: center;">
-                    <asp:Label ID="LabelCompanyName" runat="server" Font-Size="XX-Large"></asp:Label>
-                    <asp:Table ID="HeaderTableCompanyLogo" runat="server" HorizontalAlign="Left" Width="40%" BorderStyle="Solid">
-                        <asp:TableRow>
-                            <asp:TableCell HorizontalAlign="Left" Font-Italic="True">
-                                <asp:Label ID="LabelCompanyLogo" runat="server" Text="AFIS/360 powered by Lakers Tek USA"></asp:Label>
-                            </asp:TableCell>
-                        </asp:TableRow>
-                    </asp:Table>
-                    <asp:Table ID="HeaderTableDateTime" runat="server" HorizontalAlign="Center" Width="60%" BorderStyle="Solid">
-                        <asp:TableRow>
-                            <asp:TableCell HorizontalAlign="Right">
-                                <asp:Label ID="LabelToday" runat="server" Text="Today: "></asp:Label>
-                            </asp:TableCell>
-                            <asp:TableCell HorizontalAlign="Left" Font-Bold="True">
-                                <asp:Label ID="LabelDate" runat="server"></asp:Label>
-                            </asp:TableCell>
-                            <asp:TableCell HorizontalAlign="Right">
-                                <asp:Label ID="LabelLocalTime" runat="server" Text="Local Time: "></asp:Label>
-                            </asp:TableCell>
-                            <asp:TableCell HorizontalAlign="Left">
-                                <asp:Label ID="LabelClock" runat="server" Font-Bold="True"></asp:Label>
-                            </asp:TableCell>
-                            <asp:TableCell HorizontalAlign="Right">
-                                <asp:Label ID="LabelLoginAs" runat="server" Text="Login As:"></asp:Label>
-                            </asp:TableCell>
-                            <asp:TableCell HorizontalAlign="Left" Font-Bold="True">
-                                <asp:Label ID="LabelLoginUserInfo" runat="server"></asp:Label>
-                            </asp:TableCell>
-                        </asp:TableRow>
-                    </asp:Table>
+                <td colspan="2" style="width: 1200px; height: 80px; background-color: #E9E9E9; text-align: center;">
+                    <table style="width: 100%;">
+                        <tr>
+                            <td colspan="3">
+                                <asp:Label ID="LabelCompanyName" runat="server" Font-Size="XX-Large"></asp:Label>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <asp:Table ID="HeaderTableCompanyLogo" runat="server" HorizontalAlign="Left" BorderStyle="None">
+                                    <asp:TableRow>
+                                        <asp:TableCell HorizontalAlign="Left" Font-Italic="True">
+                                            <asp:Label ID="LabelCompanyLogo" runat="server" Text="AFIS/360 powered by Lakers Tek USA"></asp:Label>
+                                        </asp:TableCell>
+                                    </asp:TableRow>
+                                </asp:Table>
+                            </td>
+                            <td>
+                                <asp:Table ID="HeaderTableDateTime" runat="server" HorizontalAlign="Center" BorderStyle="None">
+                                    <asp:TableRow>
+                                        <asp:TableCell HorizontalAlign="Right">
+                                            <asp:Label ID="LabelToday" runat="server" Text="Today: "></asp:Label>
+                                        </asp:TableCell>
+                                        <asp:TableCell HorizontalAlign="Left" Font-Bold="True">
+                                            <asp:Label ID="LabelDate" runat="server"></asp:Label>
+                                        </asp:TableCell>
+                                        <asp:TableCell HorizontalAlign="Right">
+                                            <asp:Label ID="LabelLocalTime" runat="server" Text="Local Time: "></asp:Label>
+                                        </asp:TableCell>
+                                        <asp:TableCell HorizontalAlign="Left">
+                                            <asp:Label ID="LabelClock" runat="server" Font-Bold="True"></asp:Label>
+                                        </asp:TableCell>
+                                    </asp:TableRow>
+                                </asp:Table>
+                            </td>
+                            <td>
+                                <asp:Table ID="HeaderTableLoginAs" runat="server" HorizontalAlign="Right" BorderStyle="None">
+                                    <asp:TableRow>                                     
+                                        <asp:TableCell HorizontalAlign="Right">
+                                            <asp:Label ID="LabelLoginAs" runat="server" Text="Login As:"></asp:Label>
+                                        </asp:TableCell>
+                                        <asp:TableCell HorizontalAlign="Left" Font-Bold="True">
+                                            <asp:Label ID="LabelLoginUserInfo" runat="server"></asp:Label>
+                                        </asp:TableCell>
+                                    </asp:TableRow>
+                                </asp:Table>
+                            </td>
+                        </tr>
+                    </table>
 
                 </td>
             </tr>
             <tr>
-                <td style="width: 200px; height: 500px; background-color: #C0C0C0;">
+                <td style="width: 200px; height: 500px; background-color: #E9E9E9;">
 
                     <asp:ContentPlaceHolder ID="ContentPlaceHolderMenu" runat="server">
                         <h2>Main Menu</h2>
                     </asp:ContentPlaceHolder>
 
                 </td>
-                <td style="width: 1000px; height: 500px; background-color: #C0C0C0">
+                <td style="width: 1000px; height: 500px; background-color: #FDFDFD; vertical-align: top;">
                     <asp:ContentPlaceHolder ID="MainContentPlaceHolder" runat="server">
                         <h2>This section changes on a page by page bassis </h2>
                     </asp:ContentPlaceHolder>
@@ -85,7 +103,7 @@
                 </td>
             </tr>
             <tr>
-                <td colspan="2" style="background-color: #C0C0C0; text-align: center">
+                <td colspan="2" style="background-color: #E9E9E9; text-align: center">
                     <b>Copyright @ Lakers Tek USA</b>
                 </td>
             </tr>

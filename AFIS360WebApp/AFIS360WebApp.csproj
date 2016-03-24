@@ -109,9 +109,35 @@
     <Content Include="Service References\ClientSetupServiceRef\AFIS360WebApp.ClientSetupServiceRef.ClientSetupInfo.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Content>
+    <Content Include="CriminalCaseDetail.aspx" />
     <None Include="Service References\ClientSetupServiceRef\configuration91.svcinfo" />
     <None Include="Service References\ClientSetupServiceRef\configuration.svcinfo" />
     <None Include="Service References\ClientSetupServiceRef\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <Content Include="Service References\PersonCriminalRecordServiceRef\AFIS360WebApp.PersonCriminalRecordServiceRef.CriminalRecord.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\PersonCriminalRecordServiceRef\AFIS360WebApp.PersonCriminalRecordServiceRef.GetCriminalRecordsResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <None Include="Service References\PersonCriminalRecordServiceRef\configuration91.svcinfo" />
+    <None Include="Service References\PersonCriminalRecordServiceRef\configuration.svcinfo" />
+    <None Include="Service References\PersonCriminalRecordServiceRef\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <Content Include="Service References\PersonPhysicalCharServiceRef\AFIS360WebApp.PersonPhysicalCharServiceRef.GetPersonPhysicalCharResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\PersonPhysicalCharServiceRef\AFIS360WebApp.PersonPhysicalCharServiceRef.PersonPhysicalChar.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <None Include="Service References\PersonCriminalRecordServiceRef\PersonCriminalRecordService.wsdl" />
+    <None Include="Service References\PersonPhysicalCharServiceRef\configuration91.svcinfo" />
+    <None Include="Service References\PersonPhysicalCharServiceRef\configuration.svcinfo" />
+    <None Include="Service References\PersonPhysicalCharServiceRef\Reference.svcmap">
       <Generator>WCF Proxy Generator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
@@ -127,6 +153,7 @@
     <Content Include="PersonDetail.aspx" />
     <Content Include="MatchFingerprint.aspx" />
     <None Include="Service References\ClientSetupServiceRef\ClientSetupService.wsdl" />
+    <None Include="Service References\PersonPhysicalCharServiceRef\PersonPhysicalCharService.wsdl" />
     <None Include="Service References\UserAccessControlServiceRef\UserAccessControl.wsdl" />
     <None Include="Service References\GetPersonServiceRef\GetPerson.wsdl" />
     <Content Include="Site.Master" />
@@ -144,7 +171,6 @@
     <Content Include="images\prueba1.tif" />
     <Content Include="images\prueba2.bmp" />
     <Content Include="images\ShafiqLI.bmp" />
-    <Content Include="LoginForm.aspx" />
     <Content Include="scripts\ai.0.15.0-build58334.js" />
     <Content Include="scripts\ai.0.15.0-build58334.min.js" />
     <Content Include="scripts\jquery-1.12.1.js" />
@@ -199,15 +225,18 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="LoginForm.aspx.cs">
-      <DependentUpon>LoginForm.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="LoginForm.aspx.designer.cs">
-      <DependentUpon>LoginForm.aspx</DependentUpon>
-    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Service References\ClientSetupServiceRef\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
+    <Compile Include="Service References\PersonCriminalRecordServiceRef\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
+    <Compile Include="Service References\PersonPhysicalCharServiceRef\Reference.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.svcmap</DependentUpon>
@@ -281,12 +310,21 @@
     <Compile Include="MatchFingerprint.aspx.designer.cs">
       <DependentUpon>MatchFingerprint.aspx</DependentUpon>
     </Compile>
+    <Compile Include="CriminalCaseDetail.aspx.cs">
+      <DependentUpon>CriminalCaseDetail.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="CriminalCaseDetail.aspx.designer.cs">
+      <DependentUpon>CriminalCaseDetail.aspx</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <WCFMetadata Include="Service References\" />
   </ItemGroup>
   <ItemGroup>
     <WCFMetadataStorage Include="Service References\ClientSetupServiceRef\" />
+    <WCFMetadataStorage Include="Service References\PersonCriminalRecordServiceRef\" />
+    <WCFMetadataStorage Include="Service References\PersonPhysicalCharServiceRef\" />
     <WCFMetadataStorage Include="Service References\UserAccessControlServiceRef\" />
     <WCFMetadataStorage Include="Service References\GetMatchServiceRef\" />
     <WCFMetadataStorage Include="Service References\GetPersonServiceRef\" />

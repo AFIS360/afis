@@ -15,9 +15,15 @@ namespace AFIS360WebApp
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            AccessControl accessCntrl = (AccessControl)Session["CurrentUserRole"];
-            if (accessCntrl.AccessFingerprintMatching == "N") Response.Redirect("/AccessErrorPage.aspx");
-            ClearFields();
+            if(Session["CurrentUserRole"] != null)
+            {
+                AccessControl accessCntrl = (AccessControl)Session["CurrentUserRole"];
+                if (accessCntrl.AccessFingerprintMatching == "N") Response.Redirect("/AccessErrorPage.aspx");
+                ClearFields();
+            } else
+            {
+                Response.Redirect("/Login.aspx");
+            }
         }
 
         protected void BtnMatchLoadFp_Click(object sender, EventArgs e)

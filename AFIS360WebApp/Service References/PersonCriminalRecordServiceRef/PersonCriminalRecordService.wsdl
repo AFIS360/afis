@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://localhost/AFIS360Webservice" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" targetNamespace="http://localhost/AFIS360Webservice" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://localhost/AFIS360Webservice">
+      <s:element name="GetCriminalRecords">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="personId" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetCriminalRecordsResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetCriminalRecordsResult" type="tns:ArrayOfCriminalRecord" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfCriminalRecord">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="CriminalRecord" nillable="true" type="tns:CriminalRecord" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="CriminalRecord">
+        <s:complexContent mixed="false">
+          <s:extension base="tns:DataObject">
+            <s:sequence>
+              <s:element minOccurs="0" maxOccurs="1" name="PersonId" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="CrimeDetail" type="s:string" />
+              <s:element minOccurs="1" maxOccurs="1" name="CrimeDate" type="s:dateTime" />
+              <s:element minOccurs="0" maxOccurs="1" name="CrimeLocation" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="Court" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="Statute" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="CourtAddress" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="CaseId" type="s:string" />
+              <s:element minOccurs="1" maxOccurs="1" name="SentencedDate" type="s:dateTime" />
+              <s:element minOccurs="1" maxOccurs="1" name="ReleaseDate" type="s:dateTime" />
+              <s:element minOccurs="1" maxOccurs="1" name="ArrestDate" type="s:dateTime" />
+              <s:element minOccurs="0" maxOccurs="1" name="ArrestAgency" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="Status" type="s:string" />
+              <s:element minOccurs="1" maxOccurs="1" name="ParoleDate" type="s:dateTime" />
+              <s:element minOccurs="0" maxOccurs="1" name="CriminalAlertLevel" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="CriminalAlertMsg" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="RefDocLocation" type="s:string" />
+            </s:sequence>
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+      <s:complexType name="DataObject">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="CreatedBy" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="CreationDateTime" nillable="true" type="s:dateTime" />
+          <s:element minOccurs="0" maxOccurs="1" name="UpdatedBy" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="UpdateDateTime" nillable="true" type="s:dateTime" />
+        </s:sequence>
+      </s:complexType>
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="GetCriminalRecordsSoapIn">
+    <wsdl:part name="parameters" element="tns:GetCriminalRecords" />
+  </wsdl:message>
+  <wsdl:message name="GetCriminalRecordsSoapOut">
+    <wsdl:part name="parameters" element="tns:GetCriminalRecordsResponse" />
+  </wsdl:message>
+  <wsdl:portType name="PersonCriminalRecordServiceSoap">
+    <wsdl:operation name="GetCriminalRecords">
+      <wsdl:input message="tns:GetCriminalRecordsSoapIn" />
+      <wsdl:output message="tns:GetCriminalRecordsSoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="PersonCriminalRecordServiceSoap" type="tns:PersonCriminalRecordServiceSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="GetCriminalRecords">
+      <soap:operation soapAction="http://localhost/AFIS360Webservice/GetCriminalRecords" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="PersonCriminalRecordServiceSoap12" type="tns:PersonCriminalRecordServiceSoap">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="GetCriminalRecords">
+      <soap12:operation soapAction="http://localhost/AFIS360Webservice/GetCriminalRecords" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="PersonCriminalRecordService">
+    <wsdl:port name="PersonCriminalRecordServiceSoap" binding="tns:PersonCriminalRecordServiceSoap">
+      <soap:address location="http://localhost:60531/PersonCriminalRecordService.asmx" />
+    </wsdl:port>
+    <wsdl:port name="PersonCriminalRecordServiceSoap12" binding="tns:PersonCriminalRecordServiceSoap12">
+      <soap12:address location="http://localhost:60531/PersonCriminalRecordService.asmx" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>
