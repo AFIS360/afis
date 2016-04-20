@@ -102,6 +102,7 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="AuditLogService.asmx" />
     <Content Include="ClientSetupService.asmx" />
     <Content Include="packages.config" />
     <Content Include="ApplicationInsights.config">
@@ -123,9 +124,15 @@
     <Content Include="scripts\ai.0.15.0-build58334.min.js" />
     <Content Include="UserAccessControl.asmx" />
     <Content Include="ValidateUser.asmx" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AuditLogService.asmx.cs">
+      <DependentUpon>AuditLogService.asmx</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="ClientSetupService.asmx.cs">
       <DependentUpon>ClientSetupService.asmx</DependentUpon>
       <SubType>Component</SubType>
@@ -157,9 +164,11 @@
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="webobj\AccessControl.cs" />
+    <Compile Include="webobj\ActivityLog.cs" />
     <Compile Include="webobj\Match.cs" />
     <Compile Include="webobj\PersonDetail.cs" />
     <Compile Include="webobj\ClientSetup.cs" />
+    <Compile Include="webobj\Status.cs" />
     <Compile Include="webobj\User.cs" />
   </ItemGroup>
   <PropertyGroup>
