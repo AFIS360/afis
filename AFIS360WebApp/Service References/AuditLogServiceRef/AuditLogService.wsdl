@@ -1,0 +1,180 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://localhost/AFIS360Webservice" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" targetNamespace="http://localhost/AFIS360Webservice" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://localhost/AFIS360Webservice">
+      <s:element name="updateAuditLog">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="webUser" type="tns:User" />
+            <s:element minOccurs="0" maxOccurs="1" name="webActivityLog" type="tns:ActivityLog" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="User">
+        <s:complexContent mixed="false">
+          <s:extension base="tns:Person">
+            <s:sequence>
+              <s:element minOccurs="1" maxOccurs="1" name="ID" type="s:long" />
+              <s:element minOccurs="0" maxOccurs="1" name="PersonId" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="FirstName" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="LastName" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="Username" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="Password" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="UserRole" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="StationId" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="StationedAddress" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="StationedCity" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="StationedCountry" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="ActiveStatus" type="s:string" />
+              <s:element minOccurs="1" maxOccurs="1" name="ServiceStartDate" type="s:dateTime" />
+              <s:element minOccurs="1" maxOccurs="1" name="ServiceEndDate" type="s:dateTime" />
+            </s:sequence>
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+      <s:complexType name="Person">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="Fingerprints" type="tns:ArrayOfFingerprint" />
+        </s:sequence>
+        <s:attribute name="Id" type="s:int" use="required" />
+      </s:complexType>
+      <s:complexType name="ArrayOfFingerprint">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="Fingerprint" nillable="true" type="tns:Fingerprint" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="Fingerprint">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="AsImageData" type="s:base64Binary" />
+          <s:element minOccurs="0" maxOccurs="1" name="Template" type="s:base64Binary" />
+        </s:sequence>
+        <s:attribute name="Finger" type="tns:Finger" use="required" />
+      </s:complexType>
+      <s:simpleType name="Finger">
+        <s:restriction base="s:string">
+          <s:enumeration value="Any" />
+          <s:enumeration value="RightThumb" />
+          <s:enumeration value="LeftThumb" />
+          <s:enumeration value="RightIndex" />
+          <s:enumeration value="LeftIndex" />
+          <s:enumeration value="RightMiddle" />
+          <s:enumeration value="LeftMiddle" />
+          <s:enumeration value="RightRing" />
+          <s:enumeration value="LeftRing" />
+          <s:enumeration value="RightLittle" />
+          <s:enumeration value="LeftLittle" />
+        </s:restriction>
+      </s:simpleType>
+      <s:complexType name="ActivityLog">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="Activity" type="tns:ArrayOfString" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfString">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="string" nillable="true" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="updateAuditLogResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="updateAuditLogResult" type="tns:Status" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="Status">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="StatusCode" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="StatusDesc" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="AuditLogId" type="s:long" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="createAuditLog">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="webUser" type="tns:User" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="createAuditLogResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="createAuditLogResult" type="tns:Status" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="updateAuditLogSoapIn">
+    <wsdl:part name="parameters" element="tns:updateAuditLog" />
+  </wsdl:message>
+  <wsdl:message name="updateAuditLogSoapOut">
+    <wsdl:part name="parameters" element="tns:updateAuditLogResponse" />
+  </wsdl:message>
+  <wsdl:message name="createAuditLogSoapIn">
+    <wsdl:part name="parameters" element="tns:createAuditLog" />
+  </wsdl:message>
+  <wsdl:message name="createAuditLogSoapOut">
+    <wsdl:part name="parameters" element="tns:createAuditLogResponse" />
+  </wsdl:message>
+  <wsdl:portType name="AuditLogServiceSoap">
+    <wsdl:operation name="updateAuditLog">
+      <wsdl:input message="tns:updateAuditLogSoapIn" />
+      <wsdl:output message="tns:updateAuditLogSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="createAuditLog">
+      <wsdl:input message="tns:createAuditLogSoapIn" />
+      <wsdl:output message="tns:createAuditLogSoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="AuditLogServiceSoap" type="tns:AuditLogServiceSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="updateAuditLog">
+      <soap:operation soapAction="http://localhost/AFIS360Webservice/updateAuditLog" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="createAuditLog">
+      <soap:operation soapAction="http://localhost/AFIS360Webservice/createAuditLog" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="AuditLogServiceSoap12" type="tns:AuditLogServiceSoap">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="updateAuditLog">
+      <soap12:operation soapAction="http://localhost/AFIS360Webservice/updateAuditLog" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="createAuditLog">
+      <soap12:operation soapAction="http://localhost/AFIS360Webservice/createAuditLog" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="AuditLogService">
+    <wsdl:port name="AuditLogServiceSoap" binding="tns:AuditLogServiceSoap">
+      <soap:address location="http://localhost:60531/AuditLogService.asmx" />
+    </wsdl:port>
+    <wsdl:port name="AuditLogServiceSoap12" binding="tns:AuditLogServiceSoap12">
+      <soap12:address location="http://localhost:60531/AuditLogService.asmx" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

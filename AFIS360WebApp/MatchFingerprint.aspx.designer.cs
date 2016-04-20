@@ -67,6 +67,24 @@ namespace AFIS360WebApp {
         protected global::System.Web.UI.WebControls.Image FingerprintImage;
         
         /// <summary>
+        /// TableStatusMsg control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Table TableStatusMsg;
+        
+        /// <summary>
+        /// lblSatusMsg control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblSatusMsg;
+        
+        /// <summary>
         /// TablePersonDemography control.
         /// </summary>
         /// <remarks>
@@ -94,30 +112,30 @@ namespace AFIS360WebApp {
         protected global::System.Web.UI.WebControls.Table TablePersonIdentity;
         
         /// <summary>
-        /// LabelPersonID control.
+        /// lblPersonID control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label LabelPersonID;
+        protected global::System.Web.UI.WebControls.Label lblPersonID;
         
         /// <summary>
-        /// LabelPersonName control.
+        /// lblPersonName control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label LabelPersonName;
+        protected global::System.Web.UI.WebControls.Label lblPersonName;
         
         /// <summary>
-        /// LabelAddress control.
+        /// lblAddress control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label LabelAddress;
+        protected global::System.Web.UI.WebControls.Label lblAddress;
     }
 }

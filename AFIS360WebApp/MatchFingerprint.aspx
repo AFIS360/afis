@@ -38,27 +38,34 @@
         </tr>
         <tr>
             <td class="auto-style1" colspan="2">
+                <asp:Table ID="TableStatusMsg" runat="server">
+                    <asp:TableRow>
+                        <asp:TableCell HorizontalAlign="Left">
+                            <asp:Label ID="lblSatusMsg" runat="server" Font-Bold="True" ForeColor="Red"></asp:Label>
+                        </asp:TableCell>
+                    </asp:TableRow>
+                </asp:Table>
                 <asp:Table ID="TablePersonDemography" runat="server">
                     <asp:TableRow>
                         <asp:TableCell>
-                            <asp:Image ID="PassportPhoto" runat="server" />
+                            <asp:Image ID="PassportPhoto" runat="server" Height="150" Width="150" />
                         </asp:TableCell>
                     </asp:TableRow>
                 </asp:Table>
                 <asp:Table ID="TablePersonIdentity" runat="server">
                     <asp:TableRow>
-                        <asp:TableCell HorizontalAlign="Left" Font-Bold="True">
-                            <asp:Label ID="LabelPersonID" runat="server"></asp:Label>
+                        <asp:TableCell HorizontalAlign="Left">
+                            Person ID: <asp:Label ID="lblPersonID" runat="server" Font-Bold="True"></asp:Label>
                         </asp:TableCell>
                     </asp:TableRow>
                     <asp:TableRow>
                         <asp:TableCell HorizontalAlign="Left">
-                            <asp:Label ID="LabelPersonName" runat="server"></asp:Label>
+                            Name: <asp:Label ID="lblPersonName" runat="server"></asp:Label>
                         </asp:TableCell>
                     </asp:TableRow>
                     <asp:TableRow>
                         <asp:TableCell HorizontalAlign="Left">
-                            <asp:Label ID="LabelAddress" runat="server"></asp:Label>
+                            Address: <asp:Label ID="lblAddress" runat="server"></asp:Label>
                         </asp:TableCell>
                     </asp:TableRow>
                 </asp:Table>

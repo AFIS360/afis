@@ -106,10 +106,20 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="scripts\AFIS360JavaScript.js" />
+    <Content Include="Service References\AuditLogServiceRef\AFIS360WebApp.AuditLogServiceRef.Status.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <None Include="Service References\AuditLogServiceRef\configuration91.svcinfo" />
+    <None Include="Service References\AuditLogServiceRef\configuration.svcinfo" />
+    <None Include="Service References\AuditLogServiceRef\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
     <Content Include="Service References\ClientSetupServiceRef\AFIS360WebApp.ClientSetupServiceRef.ClientSetupInfo.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Content>
     <Content Include="CriminalCaseDetail.aspx" />
+    <None Include="Service References\AuditLogServiceRef\AuditLogService.wsdl" />
     <None Include="Service References\ClientSetupServiceRef\configuration91.svcinfo" />
     <None Include="Service References\ClientSetupServiceRef\configuration.svcinfo" />
     <None Include="Service References\ClientSetupServiceRef\Reference.svcmap">
@@ -226,6 +236,11 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Service References\AuditLogServiceRef\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
     <Compile Include="Service References\ClientSetupServiceRef\Reference.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -322,6 +337,7 @@
     <WCFMetadata Include="Service References\" />
   </ItemGroup>
   <ItemGroup>
+    <WCFMetadataStorage Include="Service References\AuditLogServiceRef\" />
     <WCFMetadataStorage Include="Service References\ClientSetupServiceRef\" />
     <WCFMetadataStorage Include="Service References\PersonCriminalRecordServiceRef\" />
     <WCFMetadataStorage Include="Service References\PersonPhysicalCharServiceRef\" />

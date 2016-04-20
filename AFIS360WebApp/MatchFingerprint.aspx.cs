@@ -20,6 +20,9 @@ namespace AFIS360WebApp
                 AccessControl accessCntrl = (AccessControl)Session["CurrentUserRole"];
                 if (accessCntrl.AccessFingerprintMatching == "N") Response.Redirect("/AccessErrorPage.aspx");
                 ClearFields();
+                TablePersonDemography.Visible = false;
+                TablePersonIdentity.Visible = false;
+                lblSatusMsg.Visible = false;
             } else
             {
                 Response.Redirect("/Login.aspx");
@@ -29,28 +32,37 @@ namespace AFIS360WebApp
         protected void BtnMatchLoadFp_Click(object sender, EventArgs e)
         {
             string fpPath = FileUploadMatchFpUpload.FileName;
-            FingerprintImage.ImageUrl = "/images/" + fpPath;
-            FileUploadMatchFpUpload.SaveAs(Server.MapPath(@FingerprintImage.ImageUrl));
+            if(!string.IsNullOrEmpty(fpPath))
+            {
+                FingerprintImage.ImageUrl = "/images/" + fpPath;
+                FileUploadMatchFpUpload.SaveAs(Server.MapPath(@FingerprintImage.ImageUrl));
+            }
         }
 
         protected void BtnMatchFingerprint_Click(object sender, EventArgs e)
         {
-            string imgBase64String = EncodeFile(Server.MapPath(@FingerprintImage.ImageUrl));
-            MatchFingerprintSoapClient matchFpSoapClient = new MatchFingerprintSoapClient();
-            Match match = matchFpSoapClient.GetMatch(FingerprintImage.ImageUrl, imgBase64String, "[Unknown]", 60);
-            if (match != null && match.MatchedPerson != null)
+            if(!string.IsNullOrEmpty(FingerprintImage.ImageUrl))
             {
-                LabelPersonID.Text = "Person ID: " + match.MatchedPerson.PersonId + "  ";
+                string imgBase64String = EncodeFile(Server.MapPath(@FingerprintImage.ImageUrl));
+                MatchFingerprintSoapClient matchFpSoapClient = new MatchFingerprintSoapClient();
+                Match match = matchFpSoapClient.GetMatch(FingerprintImage.ImageUrl, imgBase64String, "[Unknown]", 60);
+                if (match != null && match.MatchedPerson != null)
+                {
+                    TablePersonDemography.Visible = true;
+                    TablePersonIdentity.Visible = true;
 
-                GetPersonSoapClient getPerson = new GetPersonSoapClient();
-                PersonDetail personDetail = getPerson.getPerson(match.MatchedPerson.PersonId);
-                LabelPersonName.Text = "Name: " + personDetail.FirstName + " " + personDetail.LastName;
-                PassportPhoto.ImageUrl = "data:image/png;base64," + personDetail.PassportPhoto;
-                LabelAddress.Text = "Address: " + personDetail.StreetAddress + ", " + personDetail.City + ", " + personDetail.State + ", " + personDetail.PostalCode + ", " + personDetail.Country;
-            }
-            else
-            {
-                LabelPersonName.Text = "No match found.";
+                    lblPersonID.Text = match.MatchedPerson.PersonId;
+                    GetPersonSoapClient getPerson = new GetPersonSoapClient();
+                    PersonDetail personDetail = getPerson.getPerson(match.MatchedPerson.PersonId);
+                    lblPersonName.Text =  personDetail.FirstName + " " + personDetail.LastName;
+                    PassportPhoto.ImageUrl = "data:image/png;base64," + personDetail.PassportPhoto;
+                    lblAddress.Text = personDetail.StreetAddress + ", " + personDetail.City + ", " + personDetail.State + ", " + personDetail.PostalCode + ", " + personDetail.Country;
+                }
+                else
+                {
+                    lblSatusMsg.Visible = true;
+                    lblSatusMsg.Text = "No match found.";
+                }
             }
         }
 
@@ -61,12 +73,10 @@ namespace AFIS360WebApp
 
         private void ClearFields()
         {
-            LabelPersonID.Text = null;
-            LabelPersonName.Text = null;
-            LabelAddress.Text = null;
+            lblPersonID.Text = null;
+            lblPersonName.Text = null;
+            lblAddress.Text = null;
             PassportPhoto.ImageUrl = null;
-            //            FingerprintImage.ImageUrl = null;
         }
-
     }
 }
